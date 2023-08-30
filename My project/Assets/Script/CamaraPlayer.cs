@@ -12,4 +12,5 @@ public class CamaraPlayer : MonoBehaviour
         // ตำแหน่งของกล้อง = ตำแหน่งของผู้เล่น + offset
         transform.position = player.transform.position + offset;
     }
+    
 }

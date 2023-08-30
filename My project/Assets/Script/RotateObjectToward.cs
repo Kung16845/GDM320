@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class RotateObjectToward : MonoBehaviour
 {
-
     public float speedRorate;
     private void Update() 
     {
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(direction.y,direction.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);   
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speedRorate * Time.deltaTime); 
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+
+        transform.up = direction;
     }
 }

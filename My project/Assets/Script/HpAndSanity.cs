@@ -6,10 +6,9 @@ using TMPro;
 public class HpAndSanity : MonoBehaviour
 {
     public float hp;
-    public float currunthp;
-    
+    public float currenthp;
     public float sanity;
-    public float curruntsanity;
+    public float currentsanity;
 
     public float SanityResistance;
     public TextMeshProUGUI healthText;
@@ -17,8 +16,9 @@ public class HpAndSanity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currunthp = hp;
-        curruntsanity = sanity;
+        currenthp = hp;
+        currentsanity = sanity;
+        
     }
 
     // Update is called once per frame
@@ -29,9 +29,9 @@ public class HpAndSanity : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        if(currunthp > 0)
+        if(currenthp > 0)
         {
-            currunthp -= damage; 
+            currenthp -= damage * RatioDamageAndSanity(currentsanity); 
         }     
         else
         {
@@ -40,26 +40,35 @@ public class HpAndSanity : MonoBehaviour
     }
     public void TakeSanity(float sanitydamage)
     {
-        curruntsanity -= sanitydamage; 
-        if(curruntsanity <= 0) 
+        currentsanity -= sanitydamage; 
+        if(currentsanity <= 0) 
         {
-           curruntsanity = 1;
+           currentsanity = 1;
         }
     }
     public void HealSanity(float sanitydamage)
     {
-        curruntsanity += sanitydamage; 
-        if(curruntsanity > sanity)
+        currentsanity += sanitydamage; 
+        if(currentsanity > sanity)
         {
-            curruntsanity = sanity;
+            currentsanity = sanity;
         }
     }
     void UpdateHealthText()
     {
-        healthText.text = "HP: " + currunthp.ToString();
+        healthText.text = "HP: " + currenthp.ToString("F2");
     }
     void UpdateSanityText()
     {
-        sanityText.text = "Sanity: " + curruntsanity.ToString();
+        sanityText.text = "Sanity: " + currentsanity.ToString("F2");
+    }
+    public float RatioDamageAndSanity(float sanity)
+    {
+        if(sanity >= 20)
+            return 1.0f;
+        else if(sanity > 1 && sanity < 20)
+            return 1.1f;
+        else 
+            return 1000.0f;
     }
 }
