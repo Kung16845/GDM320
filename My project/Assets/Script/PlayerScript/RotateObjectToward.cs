@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class RotateObjectToward : MonoBehaviour
 {
-    public float speedRorate;
     private void Update() 
-    {
+    {   
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 

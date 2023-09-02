@@ -9,7 +9,6 @@ public class HpAndSanity : MonoBehaviour
     public float currenthp;
     public float sanity;
     public float currentsanity;
-
     public float SanityResistance;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI sanityText;
