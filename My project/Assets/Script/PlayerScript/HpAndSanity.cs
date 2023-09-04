@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 public class HpAndSanity : MonoBehaviour
 {
-    public float hp;
+    public float maxhp;
     public float currenthp;
-    public float sanity;
+    public float maxsanity;
     public float currentsanity;
     public float SanityResistance;
     public TextMeshProUGUI healthText;
@@ -15,9 +16,8 @@ public class HpAndSanity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currenthp = hp;
-        currentsanity = sanity;
-        
+        currenthp = maxhp;
+        currentsanity = maxsanity;     
     }
 
     // Update is called once per frame
@@ -45,14 +45,24 @@ public class HpAndSanity : MonoBehaviour
            currentsanity = 1;
         }
     }
+
     public void HealSanity(float sanitydamage)
     {
         currentsanity += sanitydamage; 
-        if(currentsanity > sanity)
+        if(currentsanity > maxsanity)
         {
-            currentsanity = sanity;
+            currentsanity = maxsanity;
         }
     }
+    public void HealHp(float HealHp)
+    {
+        currenthp += HealHp; 
+        if(currenthp > maxhp)
+        {
+            currenthp = maxhp;
+        }
+    }
+
     void UpdateHealthText()
     {
         healthText.text = "HP: " + currenthp.ToString("F2");
@@ -70,4 +80,5 @@ public class HpAndSanity : MonoBehaviour
         else 
             return 1000.0f;
     }
+
 }
