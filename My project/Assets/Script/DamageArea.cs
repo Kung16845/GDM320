@@ -6,8 +6,7 @@ public class DamageArea : MonoBehaviour
 {
     public float damageInterval; // เวลาต่อครั้งที่จะทำดาเมจ (วินาที)
     public float damageAmount; // จำนวนดาเมจที่จะทำต่อครั้ง
-    bool isStay = false;
-
+    private bool isTakingDamage = false;
     public HpAndSanity hpAndSanity = new HpAndSanity();
 
     public GameManager gameManager = new GameManager();
@@ -16,25 +15,25 @@ public class DamageArea : MonoBehaviour
     {
         Debug.Log(hpAndSanity.SanityResistance);
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other) 
     {
-        isStay = true;
-        if (other.CompareTag("Player")) // ตรวจสอบว่าที่เข้ามาในพื้นที่คือ Player หรือไม่
+        if(other.CompareTag("Player"))
         {
-            StartCoroutine(DamageRoutine(other.gameObject));
-        } 
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        isStay = false;
-        if (other.CompareTag("Player"))
-        {
-            StopCoroutine(DamageRoutine(other.gameObject));
+            if(other.GetComponent<OnOffLight>().checkLight == false && !isTakingDamage)
+            {
+                isTakingDamage= true;
+                StartCoroutine(DamageRoutine(other.gameObject)); 
+            }
+            else if(other.GetComponent<OnOffLight>().checkLight == true && isTakingDamage) 
+            {
+                isTakingDamage = false; 
+                StopCoroutine(DamageRoutine(other.gameObject));
+            }
         }
     }
     private System.Collections.IEnumerator DamageRoutine(GameObject player)
     {
-        while (isStay)
+        while (isTakingDamage)
         {
             player.GetComponent<HpAndSanity>().TakeSanity(damageAmount * gameManager.gamedificulty - hpAndSanity.SanityResistance); 
             yield return new WaitForSeconds(damageInterval);
