@@ -31,6 +31,10 @@ public class DamageArea : MonoBehaviour
             }
         }
     }
+    private void OnTriggerExit2D(Collider2D other) 
+    {
+        StopCoroutine(DamageRoutine(other.gameObject));
+    }
     private System.Collections.IEnumerator DamageRoutine(GameObject player)
     {
         while (isTakingDamage)
