@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate() 
-    {
+    {   
         SetPlayerVelocity();
         RotateInDirecttionOfInput();
     }
@@ -28,15 +28,15 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.velocity = _smoothedMoveInput * _speed;
     }
    private void RotateInDirecttionOfInput()
-{
-    if (_movementInput != Vector2.zero)
     {
-        Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _smoothedMoveInput);
-        Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeedl * Time.deltaTime);
+        if (_movementInput != Vector2.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _smoothedMoveInput);
+            Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeedl * Time.deltaTime);
 
-        _rigidbody.MoveRotation(rotation);
+            _rigidbody.MoveRotation(rotation);
+        }
     }
-}
 
     private void OnMove(InputValue inputValue)
     {
