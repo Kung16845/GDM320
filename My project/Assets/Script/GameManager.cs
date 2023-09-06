@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float gamedificulty = 1.0f;
+    public float gameDifficulty = 1.0f;
     // Start is called before the first frame update
     void Start()
     {

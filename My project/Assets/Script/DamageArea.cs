@@ -1,72 +1,117 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageArea : MonoBehaviour
 {
-    public float damageInterval; // เวลาต่อครั้งที่จะทำดาเมจ (วินาที)
-    public float damageAmount; // จำนวนดาเมจที่จะทำต่อครั้ง
-    public float beforetakedamage;
-    public bool StartDamage = false;
-    public bool isTakingDamage = false;
-    public HpAndSanity hpAndSanity = new HpAndSanity();
+    [Header("Damage Settings")]
+    public float damageInterval;
+    public float damageAmount;
+    public float delayBeforeTakingDamage;
 
-    public GameManager gameManager = new GameManager();
+    [Header("Dependencies")]
+    public HpAndSanity playerSanity;
+    public GameManager gameManager;
 
-    void Start ()
+    private bool isReadyToDamage = false;
+    private bool isPlayerInsideArea = false;
+    private bool isDamageRoutineRunning = false;
+
+    private void Start()
     {
-        Debug.Log(hpAndSanity.SanityResistance);
+        Debug.Log(playerSanity.SanityResistance);
     }
-    
-    private void OnTriggerStay2D(Collider2D other) 
+
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (IsPlayer(other))
         {
-            if(other.GetComponent<OnOffLight>().checkLight == false && !isTakingDamage)
+            if (ShouldStartDamageRoutine(other))
             {
-                isTakingDamage= true;
-                StartDamage = false;
-                StartCoroutine(DamageRoutine(other.gameObject)); 
+                StartDamageRoutine(other.gameObject);
             }
-            else if(other.GetComponent<OnOffLight>().checkLight == true && isTakingDamage) 
+            else if (ShouldStopDamageRoutine(other))
             {
-                isTakingDamage = false; 
-                StartDamage = false;
-                StopCoroutine(DamageRoutine(other.gameObject));
+                StopDamageRoutine(other.gameObject);
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (IsPlayer(other) && !isDamageRoutineRunning && !IsPlayerLightOn(other))
         {
-            // isStay = true;
-            isTakingDamage= true;
-            StartCoroutine(DamageRoutine(other.gameObject));
+            StartDamageRoutine(other.gameObject);
         }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (IsPlayer(other))
         {
-            // isStay = false;
-            isTakingDamage = false;
-            StopCoroutine(DamageRoutine(other.gameObject));
+            StopDamageRoutine(other.gameObject);
         }
     }
-    private System.Collections.IEnumerator DamageRoutine(GameObject player)
+
+    private bool IsPlayer(Collider2D collider)
     {
-        if(!StartDamage)
+        return collider.CompareTag("Player");
+    }
+
+    private bool ShouldStartDamageRoutine(Collider2D other)
+    {
+        return !IsPlayerLightOn(other) && !isPlayerInsideArea && !isDamageRoutineRunning;
+    }
+
+    private bool ShouldStopDamageRoutine(Collider2D other)
+    {
+        return IsPlayerLightOn(other) && isPlayerInsideArea;
+    }
+
+    private bool IsPlayerLightOn(Collider2D other)
+    {
+        var lightComponent = other.GetComponent<OnOffLight>();
+        return lightComponent != null && lightComponent.checkLight;
+    }
+
+    private void StartDamageRoutine(GameObject player)
+    {
+        isPlayerInsideArea = true;
+        StartCoroutine(DamageRoutine(player));
+    }
+
+    private void StopDamageRoutine(GameObject player)
+    {
+        isPlayerInsideArea = false;
+        StopCoroutine(DamageRoutine(player));
+    }
+
+    private IEnumerator DamageRoutine(GameObject player)
+    {
+        isDamageRoutineRunning = true;
+
+        if (!isReadyToDamage)
         {
-             yield return new WaitForSeconds(beforetakedamage);
-             StartDamage = true;
+            yield return new WaitForSeconds(delayBeforeTakingDamage);
+            isReadyToDamage = true;
         }
-           
-        while (isTakingDamage && StartDamage)
-        {   
-            player.GetComponent<HpAndSanity>().TakeSanity(damageAmount * gameManager.gamedificulty - hpAndSanity.SanityResistance); 
+
+        while (isPlayerInsideArea && isReadyToDamage)
+        {
+            ApplyDamageToPlayer(player);
             yield return new WaitForSeconds(damageInterval);
         }
+
+        isDamageRoutineRunning = false;
+    }
+
+    private void ApplyDamageToPlayer(GameObject player)
+    {
+        var damage = CalculateDamage();
+        player.GetComponent<HpAndSanity>().TakeSanity(damage);
+    }
+
+    private float CalculateDamage()
+    {
+        return (damageAmount * gameManager.gameDifficulty) - playerSanity.SanityResistance;
     }
 }
