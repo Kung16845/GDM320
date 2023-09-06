@@ -7,20 +7,20 @@ public class HealAreaSanity : MonoBehaviour
     public float HealInterval ; // เวลาต่อครั้งที่จะทำฟื้นฟู (วินาที)
     public float HealAmount ; // จำนวนฟื้นฟูที่จะทำต่อครั้ง
     bool isStay = false;
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D player)
     {
         isStay = true;
-        if (other.CompareTag("Player")) // ตรวจสอบว่าที่เข้ามาในพื้นที่คือ Player หรือไม่
+        if (player.GetComponent<HpAndSanity>() != null) 
         {
-            StartCoroutine(DamageRoutine(other.gameObject));
+            StartCoroutine(DamageRoutine(player.gameObject));
         } 
     }
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D player)
     {
         isStay = false;
-        if (other.CompareTag("Player"))
+        if (player.GetComponent<HpAndSanity>() != null)
         {
-            StopCoroutine(DamageRoutine(other.gameObject));
+            StopCoroutine(DamageRoutine(player.gameObject));
         }
     }
     private System.Collections.IEnumerator DamageRoutine(GameObject player)

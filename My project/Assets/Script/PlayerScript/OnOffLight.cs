@@ -6,7 +6,6 @@ public class OnOffLight : MonoBehaviour
 {
     
     public GameObject Light;
-    public GameObject player;
     public bool checkLight = false;
     public bool isHave = false;
 
@@ -30,16 +29,6 @@ public class OnOffLight : MonoBehaviour
                 checkLight = true;
             } 
         }
-        
     }
-    private void OnTriggerEnter2D(Collider2D other) 
-    {
-        
-        if(other.gameObject.tag == "Light")
-        {
-            isHave = true;
-            // Instantiate(other.transform,player.transform.parent,true);
-            Destroy(other.gameObject);
-        }
-    }
+    
 }

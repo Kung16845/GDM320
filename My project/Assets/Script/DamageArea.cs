@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class DamageArea : MonoBehaviour
-{
+{   
     public float damageInterval;
     public float damageAmount;
     public float delayBeforeTakingDamage;
@@ -22,33 +22,34 @@ public class DamageArea : MonoBehaviour
         HandlePlayerCollision(other);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D player)
     {
-        if (IsPlayer(other) && !isDamageRoutineRunning)
+        if (!CheckLightPlayer(player) && !isDamageRoutineRunning)
         {
-            StartCoroutine(DamageRoutine(other));
+            StartCoroutine(DamageRoutine(player));
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D player)
     {
-        if (IsPlayer(other))
+        if (CheckLightPlayer(player) || !CheckLightPlayer(player))
         {
-            StopCoroutine(DamageRoutine(other));
+            isDamageRoutineRunning = false;
+            Debug.Log(isDamageRoutineRunning);
+            StopCoroutine(DamageRoutine(player));
         }
     }
 
     private void HandlePlayerCollision(Collider2D player)
     {
-
-        if (IsPlayer(player))
+        if (player.GetComponent<OnOffLight>() != null)  
         {
-            if (CheckLightPlayer(player)  && !isDamageRoutineRunning)
-            {
+            if (!CheckLightPlayer(player)  && !isDamageRoutineRunning)
+            {     
                 StartCoroutine(DamageRoutine(player));
             }
             else if (CheckLightPlayer(player))
-            {
+            { 
                 StopCoroutine(DamageRoutine(player));
             }
         }
@@ -56,25 +57,21 @@ public class DamageArea : MonoBehaviour
     private IEnumerator DamageRoutine(Collider2D player)
     {
         isDamageRoutineRunning = true;
-
         yield return new WaitForSeconds(delayBeforeTakingDamage);
-
-        while (CheckLightPlayer(player) == false)
+        
+        while (!CheckLightPlayer(player) && isDamageRoutineRunning)
         {
             var damage = (damageAmount * gameManager.gameDifficulty) - playerSanity.SanityResistance;
             player.GetComponent<HpAndSanity>().TakeSanity(damage);
+            Debug.Log("TakingDamge");
             yield return new WaitForSeconds(damageInterval);
         }
+
         isDamageRoutineRunning = false;
     }
 
     private bool CheckLightPlayer(Collider2D player)
     {
         return player.GetComponent<OnOffLight>().checkLight;
-    }
-
-    private bool IsPlayer(Collider2D collider)
-    {
-        return collider.CompareTag("Player");
     }
 }
