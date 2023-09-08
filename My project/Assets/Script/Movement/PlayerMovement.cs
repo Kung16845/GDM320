@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movementInput;
     private Vector2 _smoothedMoveInput;
     private Vector2 _movementInputSmoothVelocity;
+    private Animator _AnimatorForMovement;
 
     private void Awake() 
     {
@@ -41,6 +42,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
+    }
+
+    private void SetAnimationForMoveMent(Vector2 PlayerMovement)
+    {
+        _AnimatorForMovement.SetFloat("Horizontal", PlayerMovement.x);
     }
     
 }
