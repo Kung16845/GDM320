@@ -14,7 +14,7 @@ public class DamageArea : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(playerSanity.SanityResistance);
+        playerSanity = FindObjectOfType<HpAndSanity>();
     }
 
     private void OnTriggerStay2D(Collider2D other)
