@@ -28,8 +28,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.89, z: 0}
   m_LocalScale: {x: 0.49619, y: 0.49619, z: 0.49619}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 807679794219484628}
+  m_Children: []
   m_Father: {fileID: 7934923064395765929}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,11 +110,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692277495830956294}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.015357, y: 2.015357, z: 2.015357}
+  m_LocalPosition: {x: 0, y: 0.8900002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3766162426849649281}
+  m_Father: {fileID: 7934923064395765929}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3501239711538613209
@@ -180,6 +179,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ff1a97aeb73f048b8d96f574f353f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tranformplayer: {fileID: 0}
+  Anglemouse: 0
+  AnglemouseMin: 0
+  AnglemouseMax: 0
+  playertransfromZ: 0
 --- !u!1 &6435778765729192470
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,8 +220,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3766162426849649281}
+  - {fileID: 807679794219484628}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4920029647508069026
 SpriteRenderer:
@@ -283,9 +288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8c42e8df8ea7249a4fb6e81d1087cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  maxhp: 0
   currenthp: 0
-  sanity: 100
+  maxsanity: 0
   currentsanity: 0
   SanityResistance: 0.05
   healthText: {fileID: 0}
@@ -419,3 +424,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Light: {fileID: 3692277495830956294}
+  checkLight: 0
+  isHave: 0
