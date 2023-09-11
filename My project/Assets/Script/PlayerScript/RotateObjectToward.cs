@@ -14,7 +14,7 @@ public class RotateObjectToward : MonoBehaviour
     float Anglebetween;
     private void Start()
     {
-        tranformplayer = FindObjectOfType<HpAndSanity>().transform;
+        tranformplayer = FindObjectOfType<PlayerMovement>().transform;
     }
     private void Update() 
     {   

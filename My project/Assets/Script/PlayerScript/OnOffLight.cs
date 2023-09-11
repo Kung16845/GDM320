@@ -11,7 +11,7 @@ public class OnOffLight : MonoBehaviour
 
     void Start() 
     {
-        Light.SetActive(false);
+        Light.SetActive(false);      
     }
     // Update is called once per frame
     void Update()
