@@ -6,10 +6,13 @@ public class Animation_PlayerMovement : MonoBehaviour
 {
     Animator animator;
     Vector2 movement;
+    Transform player;
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Update()
     {
@@ -19,5 +22,7 @@ public class Animation_PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+        transform.position = new Vector3(player.position.x, player.position.y);
+
     }
 }
