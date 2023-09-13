@@ -10,9 +10,9 @@ public class Itemheal : MonoBehaviour
     {
         if(player.GetComponent<HpAndSanity>() != null)
         {
-            player.GetComponent<HpAndSanity>().HealSanity(sanityheal);
+            player.GetComponent<HpAndSanity>().HealSanity(sanityheal);  
             player.GetComponent<HpAndSanity>().HealHp(hpheal);  
-            Destroy(this.gameObject);
+            Destroy(this.gameObject); 
         }
     }
 }

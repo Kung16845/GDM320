@@ -7,10 +7,9 @@ namespace Enemy_State
     {
         public override void Behavevior(Enemy enemy)
         {
-            Debug.Log("State_Follow_Player");
             enemy.speed = 2.5f;
             Vector2 direction = (enemy.player.position - enemy.transform.position).normalized;
-            enemy.rb.velocity = direction * enemy.speed ;
+            enemy.rb.velocity = direction * enemy.speed;
         }
     }
 }

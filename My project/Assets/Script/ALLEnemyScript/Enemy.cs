@@ -11,8 +11,10 @@ namespace Enemy_State
         public float speed;
         public float damage;
         public float damageSanity;
+        public float detection;
         public Transform player;
         public Transform enemy;
+        public Vector2 savedPositionEnemy;
         public Rigidbody2D rb;
         public StateMachine currentState;
         public State_Follow_Player state_Follow_Player; 

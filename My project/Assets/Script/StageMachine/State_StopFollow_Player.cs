@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace Enemy_State
@@ -8,9 +9,9 @@ namespace Enemy_State
     {
         public override void Behavevior(Enemy enemy)
         {
-            enemy.speed = 0;
-            Vector2 direction = (enemy.player.position - enemy.transform.position).normalized;
-            enemy.rb.velocity = direction * enemy.speed ;
+            Vector2 direction = (enemy.savedPositionEnemy - 
+            new Vector2(enemy.transform.position.x,enemy.transform.position.y)).normalized;
+            enemy.rb.velocity = direction * enemy.speed;
         }
     }
 
