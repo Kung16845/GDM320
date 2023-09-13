@@ -7,7 +7,7 @@ namespace Enemy_State
     {
         public override void Behavevior(Enemy enemy)
         {
-            enemy.speed = 2.5f;
+            enemy.speed = 2f;
             Vector2 direction = (enemy.player.position - enemy.transform.position).normalized;
             enemy.rb.velocity = direction * enemy.speed;
         }
