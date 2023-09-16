@@ -17,7 +17,7 @@ namespace Enemy_State
         private void Update() 
         {   
             
-            if(Vector2.Distance(player.transform.position, this.transform.position) <= 10f)
+            if(enemySight.canSee) //Vector2.Distance(player.transform.position, this.transform.position) <= 10f &&
             {              
                 EnterState(state_Follow_Player);
             }           

@@ -15,6 +15,7 @@ public class DamageArea : MonoBehaviour
     private void Start()
     {
         playerSanity = FindObjectOfType<HpAndSanity>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -24,7 +25,7 @@ public class DamageArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D player)
     {
-        if (!CheckLightPlayer(player) && !isDamageRoutineRunning)
+        if (!CheckLightPlayer(player) && !isDamageRoutineRunning )
         {
             StartCoroutine(DamageRoutine(player));
         }
@@ -32,12 +33,9 @@ public class DamageArea : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D player)
     {
-        if (CheckLightPlayer(player) || !CheckLightPlayer(player))
-        {
-            isDamageRoutineRunning = false;
-            Debug.Log(isDamageRoutineRunning);
-            StopCoroutine(DamageRoutine(player));
-        }
+        isDamageRoutineRunning = false;
+        Debug.Log(isDamageRoutineRunning);
+        StopCoroutine(DamageRoutine(player));  
     }
 
     private void HandlePlayerCollision(Collider2D player)
@@ -48,7 +46,7 @@ public class DamageArea : MonoBehaviour
             {     
                 StartCoroutine(DamageRoutine(player));
             }
-            else if (CheckLightPlayer(player))
+            else if (isDamageRoutineRunning)
             { 
                 StopCoroutine(DamageRoutine(player));
             }
@@ -58,11 +56,11 @@ public class DamageArea : MonoBehaviour
     {
         isDamageRoutineRunning = true;
         yield return new WaitForSeconds(delayBeforeTakingDamage);
-        
-        while (!CheckLightPlayer(player) && isDamageRoutineRunning)
+
+        while (!CheckLightPlayer(player) && isDamageRoutineRunning &&  player.GetComponent<HpAndSanity>() != null)
         {
-            var damage = (damageAmount * gameManager.gameDifficulty) - playerSanity.SanityResistance;
-            player.GetComponent<HpAndSanity>().TakeSanity(damage);
+            var damage = (damageAmount * gameManager.gameDifficulty) - playerSanity.SanityResistance;         
+            player.GetComponent<HpAndSanity>().TakeSanity(damage);  
             Debug.Log("TakingDamge");
             yield return new WaitForSeconds(damageInterval);
         }
@@ -72,6 +70,9 @@ public class DamageArea : MonoBehaviour
 
     private bool CheckLightPlayer(Collider2D player)
     {
-        return player.GetComponent<OnOffLight>().checkLight;
+        if(player.GetComponent<OnOffLight>() != null)
+            return player.GetComponent<OnOffLight>().checkLight;
+        else 
+            return false;
     }
 }

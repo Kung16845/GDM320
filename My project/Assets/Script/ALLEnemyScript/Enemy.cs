@@ -16,6 +16,7 @@ namespace Enemy_State
         public Transform enemy;
         public Vector2 savedPositionEnemy;
         public Rigidbody2D rb;
+        public EnemySight enemySight;
         public StateMachine currentState;
         public State_Follow_Player state_Follow_Player; 
         public State_Attacl state_Attacl; 
