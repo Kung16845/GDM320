@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate() 
     {   
         SetPlayerVelocity();
-        RotateInDirecttionOfInput();
+        RotateInDirecttionOfInput();     
     }
     private void SetPlayerVelocity() 
     {
