@@ -6,10 +6,14 @@ namespace Enemy_State
     public class State_Follow_Player : StateMachine
     {
         public override void Behavevior(Enemy enemy)
-        {
-            enemy.speed = 2f;
+        {          
             Vector2 direction = (enemy.player.position - enemy.transform.position).normalized;
-            enemy.rb.velocity = direction * enemy.speed;
+            enemy.rb.velocity = direction * enemy.speed; 
+
+            Vector2 player = new Vector2(enemy.player.position.x,enemy.player.position.y);
+            float AnglePlayer = enemy.Vector2toAngle(player) - 90f;
+            
+            enemy.transform.up = enemy.AngletoVector2(AnglePlayer).normalized  * enemy.rotateSpeed;
         }
     }
 }
