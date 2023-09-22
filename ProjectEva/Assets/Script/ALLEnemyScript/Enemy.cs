@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemy_State
 {
@@ -13,6 +14,7 @@ namespace Enemy_State
         public float damage;
         public float damageSanity;
         public float detection;
+        public NavMeshAgent agent;
         public Transform player;
         public Transform enemy;
         public Vector2 savedPositionEnemy;
