@@ -11,24 +11,25 @@ namespace Enemy_State
         private void Start() 
         {
             this.rb = GetComponent<Rigidbody2D>();
-            this.player = FindObjectOfType<PlayerMovement>().transform;
+            this.directorAI = FindObjectOfType<DirectorAI>();
+            this.targetPosition = directorAI.transferPosition;
             this.enemy = FindObjectOfType<EnemyNormal>().transform;
-            this.savedPositionEnemy = new Vector2(enemy.transform.position.x,enemy.transform.position.y);
             this.agent = GetComponent<NavMeshAgent>();     
             this.agent.updateRotation = false; 
             this.agent.updateUpAxis = false; 
+            this.agent.speed = speed;
         }
         private void Update() 
         {   
-            agent.SetDestination(player.position);
+            EnterState(state_Listening_Follow_Player);
             if(enemySight.canSee) //Vector2.Distance(player.transform.position, this.transform.position) <= 10f &&
             {              
-                EnterState(state_Follow_Player);
+                
             }           
-            // else
-            // {
-            //     EnterState(state_StopFollow_Player);
-            // }
+            else if (!enemySight.canSee && Vector2.Distance(transform.position,targetPosition) <= 0.5f)
+            {
+               this.targetPosition = directorAI.transferPosition;
+            }
         
         }
     }

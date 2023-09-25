@@ -5,13 +5,11 @@ using UnityEngine;
 
 namespace Enemy_State
 {
-    public class State_Attacl : StateMachine
+    [Serializable]
+    public class SetPosition
     {
-        public override void Behavevior(Enemy enemy)
-        {
-
-        }
+        public string namePoint;
+        public Transform position;
     }
-
 }
 

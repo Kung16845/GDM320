@@ -15,15 +15,15 @@ namespace Enemy_State
         public float damageSanity;
         public float detection;
         public NavMeshAgent agent;
-        public Transform player;
+        public Vector2 targetPosition;
         public Transform enemy;
-        public Vector2 savedPositionEnemy;
         public Rigidbody2D rb;
+        public DirectorAI directorAI;
         public EnemySight enemySight;
         public StateMachine currentState;
-        public State_Follow_Player state_Follow_Player;
-        public State_Attacl state_Attacl;
-        public State_StopFollow_Player state_StopFollow_Player;
+        public State_Listening_Follow_Player state_Listening_Follow_Player;
+        public State_Hunting state_Hunting;
+        public State_Retreat state_Retreat;
         public void EnterState(StateMachine state)
         {
             currentState = state;
