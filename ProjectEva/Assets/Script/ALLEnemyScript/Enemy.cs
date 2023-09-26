@@ -21,6 +21,7 @@ namespace Enemy_State
         public DirectorAI directorAI;
         public EnemySight enemySight;
         public StateMachine currentState;
+        public State_Searching state_Searching;
         public State_Listening_Follow_Player state_Listening_Follow_Player;
         public State_Hunting state_Hunting;
         public State_Retreat state_Retreat;

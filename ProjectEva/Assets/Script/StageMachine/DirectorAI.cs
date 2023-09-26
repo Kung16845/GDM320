@@ -13,6 +13,7 @@ namespace Enemy_State
         public float maxXOffset;
         public float maxYOffset;
         public List<SetPosition> setSpawns = new List<SetPosition>();
+        public List<SetPosition> setRoom = new List<SetPosition>();
         private void Start()
         {
             this.player = FindObjectOfType<PlayerMovement>().transform;
@@ -20,14 +21,9 @@ namespace Enemy_State
         }
         private void Update()
         {
-            var distance = Vector2.Distance(player.position, enemy.position);
-            // Debug.Log(distance);
-            do
-            {
-                TransferPositionToEnemy();
-
-            } while (Vector2.Distance(transform.position, transferPosition) <= 0.5f);
+           
         }
+
         public void TransferPositionToEnemy()
         {
             do
