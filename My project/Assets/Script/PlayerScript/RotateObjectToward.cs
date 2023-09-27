@@ -11,7 +11,7 @@ public class RotateObjectToward : MonoBehaviour
     public float AnglemouseMin;
     public float AnglemouseMax;
     public float playertransfromZ;
-    float Anglebetween;
+    public float Anglebetween;
     private void Start()
     {
         tranformplayer = FindObjectOfType<PlayerMovement>().transform;
