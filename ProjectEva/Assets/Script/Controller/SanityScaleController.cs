@@ -10,6 +10,9 @@ public class SanityScaleController : MonoBehaviour
     private float speedScale = 1.0f;
     private float accuracyScale = 1.0f;
     private float damageScale = 1.0f;
+    private float criticalscale = 1.0f;
+    private float damageoutputScale = 1.0f;
+    private float Expsincreasecale = 1.0f;
 
     void Start()
     {
@@ -33,9 +36,35 @@ public class SanityScaleController : MonoBehaviour
         speedScale = GetSpeedScale(currentSanity);
         accuracyScale = GetAccuracyScale(currentSanity);
         damageScale = GetDamageScale(currentSanity);
+        criticalscale = GetCriticalscale(currentSanity);
+        damageoutputScale = GetDamageOutputscale(currentSanity);
+        Expsincreasecale = GetExpincreasesacle(currentSanity);
     }
 
     // Functions to get scaling factors based on sanity.
+    private float GetExpincreasesacle(float sanity)
+    {
+        if (sanity >= 50 && sanity < 70)
+        {
+        return 1.05f;
+        }
+        else if (sanity < 50 && sanity >= 20)
+        {
+        return 1.1f;
+        }
+        else if (sanity < 20 && sanity > 1)
+        {
+        return 1.15f;
+        }
+        else if (sanity == 1) 
+        {   
+        return 1.3f;
+        }
+        else
+        {
+        return 1.0f;
+        }
+    }
     private float GetSpeedScale(float sanity)
     {
 
@@ -43,14 +72,45 @@ public class SanityScaleController : MonoBehaviour
             return 1f;
         else if (sanity <= 50 && sanity > 20)
             return 1.05f;
-        else if (sanity <= 20 || sanity > 1)
+        else if (sanity <= 20 && sanity > 1)
             return 1.1f;
         else if (sanity == 1)
             return 1.2f;
         else
             return 1f;
     }
-
+    private float GetCriticalscale(float sanity)    
+    {
+        if(sanity >=20)
+        {
+            return 0.05f;
+        }
+        else if(sanity < 20 && sanity > 1)
+        return 0.1f;
+        else if(sanity == 1)
+        {
+            return 0.15f;
+        }
+        else
+        return 0.15f;
+    }
+     private float GetDamageOutputscale(float sanity)
+     {
+        if(sanity > 50)
+        {
+            return 1f;
+        }
+        else if(sanity < 50 && sanity >=20)
+        {
+            return 1.05f;
+        }
+        else if(sanity == 1)
+        {
+            return 1.2f;
+        }
+        else
+        return 1;
+     }
     private float GetAccuracyScale(float sanity)
     {
         if (sanity >= 50 && sanity < 70)
@@ -102,5 +162,17 @@ public class SanityScaleController : MonoBehaviour
     public float GetDamageScale()
     {
         return damageScale;
+    }
+    public float GetCriticalscale()
+    {
+        return criticalscale;
+    }
+    public float GetDamageOutputscale()
+    {
+        return damageoutputScale;
+    }
+    public float GetExpincreasesacle()
+    {
+        return Expsincreasecale;
     }
 }
