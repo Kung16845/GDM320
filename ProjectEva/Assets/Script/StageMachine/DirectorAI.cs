@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using NavMeshPlus.Components;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemy_State
 {
@@ -8,6 +10,7 @@ namespace Enemy_State
     {
         public Transform player;
         public Transform enemy;
+        public NavMeshSurface navMeshSurface;
         public LayerMask collisionLayer;
         public Vector2 transferPosition;
         public float maxXOffset;
@@ -19,11 +22,10 @@ namespace Enemy_State
             this.player = FindObjectOfType<PlayerMovement>().transform;
             this.enemy = FindObjectOfType<EnemyNormal>().transform;
         }
-        private void Update()
+        private void Update() 
         {
-           
+            // navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); ไว้อัปเดตแมพ
         }
-
         public void TransferPositionToEnemy()
         {
             do
@@ -31,6 +33,10 @@ namespace Enemy_State
                 transferPosition = new Vector2(player.position.x + RandomDistance(maxXOffset),
                 player.position.y + RandomDistance(maxYOffset));
             } while (IsColliding(transferPosition));
+        }
+        public void TransferPositionRoom()
+        {
+
         }
         public float RandomDistance(float distance)
         {

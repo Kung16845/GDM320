@@ -9,7 +9,8 @@ namespace Enemy_State
     public class SetPosition
     {
         public string namePoint;
-        public Transform position;
+        public Transform point;
+        
     }
 }
 

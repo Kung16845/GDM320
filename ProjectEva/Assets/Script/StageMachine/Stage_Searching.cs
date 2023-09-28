@@ -10,7 +10,7 @@ namespace Enemy_State
         public override void Behavevior(Enemy enemy)
         {
             enemy.agent.SetDestination(enemy.targetPosition);
-        }
+        }       
     }
 }
 
