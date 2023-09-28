@@ -10,7 +10,7 @@ public class HealAreaSanity : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D player)
     {
         isStay = true;
-        if (player.GetComponent<HpAndSanity>() != null) 
+        if (player.GetComponent<Sanity>() != null) 
         {
             StartCoroutine(DamageRoutine(player.gameObject));
         } 
@@ -18,7 +18,7 @@ public class HealAreaSanity : MonoBehaviour
     private void OnTriggerExit2D(Collider2D player)
     {
         isStay = false;
-        if (player.GetComponent<HpAndSanity>() != null)
+        if (player.GetComponent<Sanity>() != null)
         {
             StopCoroutine(DamageRoutine(player.gameObject));
         }
@@ -27,7 +27,7 @@ public class HealAreaSanity : MonoBehaviour
     {
         while (isStay)
         {
-            player.GetComponent<HpAndSanity>().HealSanity(HealAmount);
+            player.GetComponent<Sanity>().HealSanity(HealAmount);
             yield return new WaitForSeconds(HealInterval);
         }
     }

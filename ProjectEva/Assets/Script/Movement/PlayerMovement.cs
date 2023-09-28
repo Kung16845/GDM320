@@ -2,65 +2,104 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _slowSpeed;
+    [SerializeField] private float _reloadSpeed;
     [SerializeField] private float _runningSpeed;
     [SerializeField] private float _rotationSpeedl;
+    private float _originalSpeed; // Store the original speed.
+    private float _originalSlowSpeed; // Store the original slow speed.
+    private float _originalRunningSpeed; 
     private bool isRunning = false;
     private bool isSlowed = false;
+    private bool isAiming = false; // Flag to track aiming.
     private Rigidbody2D _rigidbody;
     private Vector2 _movementInput;
     private Vector2 _smoothedMoveInput;
     private Vector2 _movementInputSmoothVelocity;
+    private Pistol _pistol; // Reference to the Pistol script.
+    private SanityScaleController sanityScaleController;
 
-
-
-    private void Awake() 
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _pistol = GetComponent<Pistol>();
     }
-    private void FixedUpdate() 
-    {   
+    private void Start()
+    {
+        // Store the original speed values.
+        sanityScaleController = FindObjectOfType<SanityScaleController>();
+        _originalSpeed = _speed;
+        _originalSlowSpeed = _slowSpeed;
+        _originalRunningSpeed = _runningSpeed;
+    }
+    private void FixedUpdate()
+    {
         SetPlayerVelocity();
-        RotateInDirecttionOfInput();     
+        RotateInDirecttionOfInput();
     }
 
     private void Update()
     {
-    // Toggle running when Left Shift is pressed.
-    if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
-    {
-        isRunning = !isRunning;
+        // Toggle running when Left Shift is pressed and not aiming.
+        if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
+        {
+            if (isAiming)
+            {
+                isAiming = false; // Cancel aiming instantly when Shift is pressed.
+            }
+            else
+            {
+                isRunning = !isRunning;
+            }
+        }
+
+        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
+        {
+            isSlowed = !isSlowed;
+        }
+
+        // Toggle aiming when Right Mouse Button is pressed.
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            isAiming = !isAiming;
+            // If aiming is toggled off while Shift is pressed, cancel running.
+            if (isAiming && isRunning)
+            {
+                isRunning = false;
+            }
+        }
+
+        // Check if aiming is released and set speed to normal.
+        if (Mouse.current.rightButton.wasReleasedThisFrame)
+        {
+            isAiming = false;
+        }
+
     }
 
-    // Toggle slowing down when Alt is pressed.
-    if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
-    {
-    isSlowed = !isSlowed;
-    }
-
-    }
     private void SetPlayerVelocity()
     {
-    _smoothedMoveInput = Vector2.SmoothDamp(_smoothedMoveInput, _movementInput, ref _movementInputSmoothVelocity, 0.1f);
+        _smoothedMoveInput = Vector2.SmoothDamp(_smoothedMoveInput, _movementInput, ref _movementInputSmoothVelocity, 0.1f);
 
-    float currentSpeed = _speed;
+        float currentSpeed = _speed * sanityScaleController.GetSpeedScale();
 
-    if (isRunning)
-    {
-        currentSpeed = _runningSpeed;
+        if (isRunning)
+        {
+            currentSpeed = _runningSpeed * sanityScaleController.GetSpeedScale();
+        }
+        else if (isSlowed || isAiming)
+        {
+            currentSpeed = _slowSpeed * sanityScaleController.GetSpeedScale();
+        }
+
+        _rigidbody.velocity = _smoothedMoveInput * currentSpeed;
     }
-    else if (isSlowed)
-    {
-        currentSpeed = _slowSpeed;
-    }
 
-    _rigidbody.velocity = _smoothedMoveInput * currentSpeed;
-    }
-
-   private void RotateInDirecttionOfInput()
+    private void RotateInDirecttionOfInput()
     {
         if (_movementInput != Vector2.zero)
         {
@@ -75,5 +114,31 @@ public class PlayerMovement : MonoBehaviour
     {
         _movementInput = inputValue.Get<Vector2>();
     }
+    public void ReduceSpeedDuringReload()
+    {
+        _speed =  _slowSpeed * sanityScaleController.GetSpeedScale();
+        _runningSpeed = _slowSpeed * sanityScaleController.GetSpeedScale(); 
+    }
+    public void RestoreNormalSpeed()
+    {
+    // Restore the player's normal speed.
+    _speed = _originalSpeed;
+    _slowSpeed = _originalSlowSpeed;
+    _runningSpeed = _originalRunningSpeed;
+    }
+     public float GetCurrentSpeed()
+    {
+        float currentSpeed = _speed * sanityScaleController.GetSpeedScale();
 
+        if (isRunning)
+        {
+            currentSpeed = _runningSpeed;
+        }
+        else if (isSlowed || isAiming)
+        {
+            currentSpeed = _slowSpeed;
+        }
+
+        return currentSpeed;
+    }
 }

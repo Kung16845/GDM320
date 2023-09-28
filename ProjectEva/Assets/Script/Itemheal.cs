@@ -8,10 +8,10 @@ public class Itemheal : MonoBehaviour
     public float hpheal = 0;
     private void OnTriggerEnter2D(Collider2D player)
     {
-        if(player.GetComponent<HpAndSanity>() != null)
+        if(player.GetComponent<Sanity>() != null)
         {
-            player.GetComponent<HpAndSanity>().HealSanity(sanityheal);  
-            player.GetComponent<HpAndSanity>().HealHp(hpheal);  
+            player.GetComponent<Sanity>().HealSanity(sanityheal);  
+            player.GetComponent<Hp>().HealHp(hpheal);  
             Destroy(this.gameObject); 
         }
     }
