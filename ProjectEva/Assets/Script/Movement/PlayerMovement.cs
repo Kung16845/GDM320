@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _smoothedMoveInput;
     private Vector2 _movementInputSmoothVelocity;
     private Pistol _pistol; // Reference to the Pistol script.
+    private SanityScaleController sanityScaleController;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         // Store the original speed values.
+        sanityScaleController = FindObjectOfType<SanityScaleController>();
         _originalSpeed = _speed;
         _originalSlowSpeed = _slowSpeed;
         _originalRunningSpeed = _runningSpeed;
@@ -55,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Toggle slowing down when Alt is pressed.
         if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
         {
             isSlowed = !isSlowed;
@@ -77,21 +78,22 @@ public class PlayerMovement : MonoBehaviour
         {
             isAiming = false;
         }
+
     }
 
     private void SetPlayerVelocity()
     {
         _smoothedMoveInput = Vector2.SmoothDamp(_smoothedMoveInput, _movementInput, ref _movementInputSmoothVelocity, 0.1f);
 
-        float currentSpeed = _speed;
+        float currentSpeed = _speed * sanityScaleController.GetSpeedScale();
 
         if (isRunning)
         {
-            currentSpeed = _runningSpeed;
+            currentSpeed = _runningSpeed * sanityScaleController.GetSpeedScale();
         }
         else if (isSlowed || isAiming)
         {
-            currentSpeed = _slowSpeed;
+            currentSpeed = _slowSpeed * sanityScaleController.GetSpeedScale();
         }
 
         _rigidbody.velocity = _smoothedMoveInput * currentSpeed;
@@ -114,9 +116,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ReduceSpeedDuringReload()
     {
-
-        _speed =  _slowSpeed;
-        _runningSpeed = _slowSpeed;
+        _speed =  _slowSpeed * sanityScaleController.GetSpeedScale();
+        _runningSpeed = _slowSpeed * sanityScaleController.GetSpeedScale(); 
     }
     public void RestoreNormalSpeed()
     {
@@ -125,5 +126,19 @@ public class PlayerMovement : MonoBehaviour
     _slowSpeed = _originalSlowSpeed;
     _runningSpeed = _originalRunningSpeed;
     }
+     public float GetCurrentSpeed()
+    {
+        float currentSpeed = _speed * sanityScaleController.GetSpeedScale();
 
+        if (isRunning)
+        {
+            currentSpeed = _runningSpeed;
+        }
+        else if (isSlowed || isAiming)
+        {
+            currentSpeed = _slowSpeed;
+        }
+
+        return currentSpeed;
+    }
 }

@@ -15,8 +15,8 @@ public class Pistol : MonoBehaviour
     [SerializeField] float accuracyDecreaseRate = 0.1f;
     [SerializeField] float reloadTime = 2.0f;
     [SerializeField] GameObject accuracyCircle; // Reference to the accuracy circle GameObject.
-
-    private float currentAccuracy = 0.2f;
+    private SanityScaleController sanityScaleController;
+    public float currentAccuracy = 0.2f;
     private Transform firePoint;
     private float lastShotTime;
     public bool isAiming;
@@ -32,6 +32,7 @@ public class Pistol : MonoBehaviour
         isAiming = false;
         isReloading = false;
         bulletsToReload = 0;
+        sanityScaleController = FindObjectOfType<SanityScaleController>();
         playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
@@ -43,13 +44,13 @@ public class Pistol : MonoBehaviour
     {
         accuracyCircle.SetActive(true);
         isAiming = true;
-        currentAccuracy = Mathf.Lerp(currentAccuracy, maxAccuracy, accuracyIncreaseRate * Time.deltaTime);
+        currentAccuracy = Mathf.Lerp(currentAccuracy, maxAccuracy * sanityScaleController.GetAccuracyScale(), accuracyIncreaseRate * Time.deltaTime);
     }
     else
     {
         isAiming = false;
         accuracyCircle.SetActive(false);
-        currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy, accuracyDecreaseRate * Time.deltaTime);
+        currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
     }
 
     // Scale the accuracy circle based on the currentAccuracy.

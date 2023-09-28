@@ -7,14 +7,14 @@ public class DamageArea : MonoBehaviour
     public float damageAmount;
     public float delayBeforeTakingDamage;
 
-    public HpAndSanity playerSanity;
+    public Sanity playerSanity;
     public GameManager gameManager;
 
     private bool isDamageRoutineRunning = false;
 
     private void Start()
     {
-        playerSanity = FindObjectOfType<HpAndSanity>();
+        playerSanity = FindObjectOfType<Sanity>();
         gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -57,10 +57,10 @@ public class DamageArea : MonoBehaviour
         isDamageRoutineRunning = true;
         yield return new WaitForSeconds(delayBeforeTakingDamage);
 
-        while (!CheckLightPlayer(player) && isDamageRoutineRunning &&  player.GetComponent<HpAndSanity>() != null)
+        while (!CheckLightPlayer(player) && isDamageRoutineRunning &&  player.GetComponent<Sanity>() != null)
         {
             var damage = (damageAmount * gameManager.gameDifficulty) - playerSanity.SanityResistance;         
-            player.GetComponent<HpAndSanity>().TakeSanity(damage);  
+            player.GetComponent<Sanity>().TakeSanity(damage);  
             Debug.Log("TakingDamge");
             yield return new WaitForSeconds(damageInterval);
         }
