@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public float bulletForce = 10f;
-    public int maxAmmo = 10;
-    public int ammoInChamber = 5;
-    public float bulletDamage = 1.0f;
-    public float bulletSpeed = 10f;
-    public float maxAccuracy = 1.0f;
-    public float minAccuracy = 0.2f;
-    public float cooldownTime = 0.5f;
-    public float accuracyIncreaseRate = 0.2f;
-    public float accuracyDecreaseRate = 0.1f;
-    public float reloadTime = 2.0f;
-    public GameObject accuracyCircle; // Reference to the accuracy circle GameObject.
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float bulletForce = 10f;
+    [SerializeField] public int maxAmmo = 10;
+    [SerializeField] public int ammoInChamber = 5;
+    [SerializeField] float bulletDamage = 1.0f;
+    [SerializeField] public float bulletSpeed = 10f;
+    [SerializeField] float maxAccuracy = 1.0f;
+    [SerializeField] float minAccuracy = 0.2f;
+    [SerializeField] float cooldownTime = 0.5f;
+    [SerializeField] float accuracyIncreaseRate = 0.2f;
+    [SerializeField] float accuracyDecreaseRate = 0.1f;
+    [SerializeField] float reloadTime = 2.0f;
+    [SerializeField] GameObject accuracyCircle; // Reference to the accuracy circle GameObject.
 
     private float currentAccuracy = 0.2f;
     private Transform firePoint;
@@ -23,7 +23,7 @@ public class Pistol : MonoBehaviour
     public bool isReloading;
     private float reloadStartTime;
     private int bulletsToReload;
-    public PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
@@ -32,9 +32,7 @@ public class Pistol : MonoBehaviour
         isAiming = false;
         isReloading = false;
         bulletsToReload = 0;
-
-        // Find and store a reference to the PlayerMovement script.
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
     void Update()
