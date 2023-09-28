@@ -19,66 +19,76 @@ public class Pistol : MonoBehaviour
     private float currentAccuracy = 0.2f;
     private Transform firePoint;
     private float lastShotTime;
-    private bool isHoldingRightMouse;
-    private bool isReloading;
+    public bool isAiming;
+    public bool isReloading;
     private float reloadStartTime;
     private int bulletsToReload;
-    
+    public PlayerMovement playerMovement;
+
     void Start()
     {
         firePoint = transform.Find("FirePoint");
         lastShotTime = -cooldownTime;
-        isHoldingRightMouse = false;
+        isAiming = false;
         isReloading = false;
         bulletsToReload = 0;
+
+        // Find and store a reference to the PlayerMovement script.
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
-        RotateTowardsMouse();
+    RotateTowardsMouse();
 
-        if (Input.GetMouseButton(1))
-        {
-            isHoldingRightMouse = true;
-            currentAccuracy = Mathf.Lerp(currentAccuracy, maxAccuracy, accuracyIncreaseRate * Time.deltaTime);
-        }
-        else
-        {
-            isHoldingRightMouse = false;
-            currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy, accuracyDecreaseRate * Time.deltaTime);
-        }
+    if (Input.GetMouseButton(1))
+    {
+        accuracyCircle.SetActive(true);
+        isAiming = true;
+        currentAccuracy = Mathf.Lerp(currentAccuracy, maxAccuracy, accuracyIncreaseRate * Time.deltaTime);
+    }
+    else
+    {
+        isAiming = false;
+        accuracyCircle.SetActive(false);
+        currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy, accuracyDecreaseRate * Time.deltaTime);
+    }
 
-        // Scale the accuracy circle based on the currentAccuracy.
-        float scaledAccuracy = 0.08f / currentAccuracy;
-        accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
+    // Scale the accuracy circle based on the currentAccuracy.
+    float scaledAccuracy = 0.05f / currentAccuracy;
+    accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
 
-         if (isReloading)
-        {
-            if (Input.GetMouseButton(1)) // Check if right mouse button is pressed.
+    if (isReloading)
+    {
+        playerMovement.ReduceSpeedDuringReload();
+        if (Input.GetMouseButton(1)) // Check if right mouse button is pressed.
         {
             // Cancel the reload if right mouse button is pressed.
             isReloading = false;
             bulletsToReload = 0; // Reset the bullets to reload.
-            }
-            else if (Time.time - reloadStartTime >= reloadTime)
+            
+            // Restore the player's normal speed when the reload is canceled.
+            playerMovement.RestoreNormalSpeed();
+        }
+        else if (Time.time - reloadStartTime >= reloadTime)
         {
             FinishReload();
         }
-        }
-        else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime)
-        {
-            Shoot();
-            lastShotTime = Time.time;
-        }
-        else if (Input.GetKeyDown(KeyCode.R) && !isReloading && ammoInChamber < maxAmmo && !isHoldingRightMouse)
-        {
-            StartReload();
-        }
+    }
+    else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime)
+    {
+        Shoot();
+        lastShotTime = Time.time;
+    }
+    else if (Input.GetKeyDown(KeyCode.R) && !isReloading && ammoInChamber < maxAmmo && !isAiming)
+    {
+        StartReload();
+    }
 
-        // Move the accuracy circle to the mouse position in world coordinates.
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure the circle is at the same depth as the player.
-        accuracyCircle.transform.position = mousePosition;
+    // Move the accuracy circle to the mouse position in world coordinates.
+    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    mousePosition.z = 0; // Ensure the circle is at the same depth as the player.
+    accuracyCircle.transform.position = mousePosition;
     }
 
     void RotateTowardsMouse()
@@ -116,14 +126,16 @@ public class Pistol : MonoBehaviour
     void FinishReload()
     {
         if (bulletsToReload > 0)
-        {
-            ammoInChamber++;
-            bulletsToReload--;
-            reloadStartTime = Time.time; // Start the reload of the next bullet.
-        }
-        else
-        {
-            isReloading = false;
-        }
+    {
+        ammoInChamber++;
+        bulletsToReload--;
+        reloadStartTime = Time.time; // Start the reload of the next bullet.
+    }
+    else
+    {
+        isReloading = false;
+        // Restore the player's normal speed when the reload is finished.
+        playerMovement.RestoreNormalSpeed();
+    }
     }
 }
