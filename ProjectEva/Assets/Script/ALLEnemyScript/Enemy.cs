@@ -10,13 +10,16 @@ namespace Enemy_State
     public abstract class Enemy : MonoBehaviour
     {
         public float hp;
+        public float maxhp;
         public float speed;
         public float rotateSpeed;
         public float damage;
         public float damageSanity;
         public float detection;
-        public NavMeshAgent agent;
+        public bool isAttack = false;
+        public bool isRunStage = false;
         public Vector2 targetPosition;
+        public NavMeshAgent agent;
         public Rigidbody2D rb;
         public DirectorAI directorAI;
         public EnemySight enemySight;
@@ -25,22 +28,25 @@ namespace Enemy_State
         public State_Listening state_Listening;
         public State_Hunting state_Hunting;
         public State_Retreat state_Retreat;
+        private void Start()
+        {
+            hp = maxhp;
+        }
         public void EnterState(StateMachine state)
         {
             currentState = state;
             state.Behavevior(this);
         }
         public void RandomPositionSpawns(DirectorAI directorAI)
-        {   
-            this.agent.enabled = !this.agent.enabled; 
-            var ListPositionSpawans = new List<SetPosition>();
-            ListPositionSpawans = directorAI.setSpawns;
+        {
+            this.agent.enabled = !this.agent.enabled;
 
-            var RandomPosition = Random.Range(1,directorAI.setSpawns.Count);        
-            var position = ListPositionSpawans.ElementAt(RandomPosition);
+            var RandomPosition = Random.Range(1, directorAI.setSpawns.Count);
+            var position = directorAI.setSpawns.ElementAt(RandomPosition);
 
             this.transform.position = position.point.position;
-            this.agent.enabled = !this.agent.enabled; 
+
+            this.agent.enabled = !this.agent.enabled;
         }
         public float Vector2toAngle(Vector2 vector)
         {
@@ -51,12 +57,15 @@ namespace Enemy_State
             float radians = Angle * Mathf.Deg2Rad;
             return new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
         }
+        public void TakeDamage(float damage)
+        {
+            this.hp -= damage;
+        }
         
-        public IEnumerator EnemyAttack(float time,Collider2D player)
+        public IEnumerator EnemyAttack(float time, Collider2D player)
         {
             yield return new WaitForSeconds(time);
-            player.GetComponent<HpAndSanity>().TakeDamage(damage);
-            player.GetComponent<HpAndSanity>().TakeSanity(damageSanity);
+            player.GetComponent<Hp>().TakeDamage(damage);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Enemy_State;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -26,7 +27,10 @@ public class Bullet : MonoBehaviour
         //     // Deal damage to the object with Health component.
         //     health.TakeDamage(damage);
         // }
-
+        if(collision.GetComponent<EnemyNormal>() != null) 
+        {
+            collision.GetComponent<EnemyNormal>().TakeDamage(damage);
+        }
         // Destroy the bullet on collision with any object.
         if (collision.tag == "Walls")
     {

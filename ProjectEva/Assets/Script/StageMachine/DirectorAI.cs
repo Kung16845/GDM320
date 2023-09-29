@@ -15,12 +15,41 @@ namespace Enemy_State
         public Vector2 transferPosition;
         public float maxXOffset;
         public float maxYOffset;
+        public Dictionary<string,Transform> listSpawnPosition = new Dictionary<string, Transform>();
         public List<SetPosition> setSpawns = new List<SetPosition>();
+        public Dictionary<string,Transform> listRoomPosition = new Dictionary<string, Transform>();
         public List<SetPosition> setRoom = new List<SetPosition>();
         private void Start()
         {
             this.player = FindObjectOfType<PlayerMovement>().transform;
             this.enemy = FindObjectOfType<EnemyNormal>().transform;
+            SaveListPositionToDictinary(setSpawns,listSpawnPosition);
+            SaveListPositionToDictinary(setRoom,listRoomPosition);
+        }  
+        public void SaveListPositionToDictinary(List<SetPosition> listPosition,
+                                                Dictionary<string,Transform> listNameandPosition)
+        {
+            foreach (var info in listPosition)
+            {
+                listNameandPosition.Add(info.namePoint,info.point);
+            } 
+        }
+        public Transform FindClosestPosition(Dictionary<string,Transform> listNameandPoint,Transform target)
+        {
+            string namePoint = null;
+            float closestDistance = float.MaxValue;
+
+            foreach (var point in listNameandPoint)
+            {
+                float distance = Vector2.Distance(point.Value.position,target.position);
+
+                if(distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    namePoint = point.Key;
+                }
+            }
+            return listNameandPoint[namePoint];
         }
         private void Update() 
         {

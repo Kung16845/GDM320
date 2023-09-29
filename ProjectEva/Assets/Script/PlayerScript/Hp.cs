@@ -6,8 +6,9 @@ using TMPro;
 using System;
 public class Hp : MonoBehaviour
 {
-     public float maxhp;
+    public float maxhp;
     public float currenthp;
+    public GameObject player;
     public TextMeshProUGUI healthText;
     private SanityScaleController sanityScaleController;
 
@@ -31,7 +32,7 @@ public class Hp : MonoBehaviour
         }
         else
         {
-            this.gameObject.SetActive(false);
+            player.SetActive(false);
         }
     }
 
