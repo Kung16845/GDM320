@@ -7,6 +7,8 @@ public class Pistol : MonoBehaviour
     [SerializeField] public int maxAmmo = 10;
     [SerializeField] public int ammoInChamber = 5;
     [SerializeField] float bulletDamage = 1.0f;
+    [SerializeField] float criticalRate = 0.1f; // 10% critical rate
+    [SerializeField] float criticalDamageMultiplier = 5.0f;
     [SerializeField] public float bulletSpeed = 10f;
     [SerializeField] float maxAccuracy = 1.0f;
     [SerializeField] float minAccuracy = 0.2f;
@@ -107,10 +109,21 @@ public class Pistol : MonoBehaviour
         rb.AddForce(bulletDirection.normalized * bulletForce, ForceMode2D.Impulse);
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.damage = bulletDamage;
+        criticalRate = sanityScaleController.GetCriticalscale();
+        if (Random.value < criticalRate)
+        {
+            // Apply critical damage if the random value is less than the critical rate.
+            Debug.Log(criticalRate);
+            bulletScript.damage = bulletDamage * criticalDamageMultiplier;
+        }
+        else
+        {
+            bulletScript.damage = bulletDamage * sanityScaleController.GetDamageOutputscale();
+        }
 
         ammoInChamber--;
     }
+    
 
     void StartReload()
     {

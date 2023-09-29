@@ -30,12 +30,13 @@ public class Bullet : MonoBehaviour
         if(collision.GetComponent<EnemyNormal>() != null) 
         {
             collision.GetComponent<EnemyNormal>().TakeDamage(damage);
+            Destroy(gameObject);
         }
         // Destroy the bullet on collision with any object.
         if (collision.tag == "Walls")
-    {
+        {
         Destroy(gameObject);
-    }
+        }
 
     }
 }
