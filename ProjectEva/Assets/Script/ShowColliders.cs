@@ -9,16 +9,24 @@ public class ShowColliders : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            // ตรวจสอบว่า Collider นี้เป็น Collider 2D หรือ 3D
-            if (collider is Collider2D collider2D)
+            // ตรวจสอบว่า Collider นี้เป็น Collider 2D แบบไหน
+            Gizmos.color = Color.green; // สีเริ่มต้น
+            if (collider is BoxCollider2D boxCollider)
             {
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireCube(collider2D.bounds.center, collider2D.bounds.size);
+                Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
             }
-            else if (collider is Collider2D collider3D)
+            else if (collider is CircleCollider2D circleCollider)
             {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireCube(collider3D.bounds.center, collider3D.bounds.size);
+                Gizmos.DrawWireSphere(collider.bounds.center, (collider as CircleCollider2D).radius);
+            }
+            else if (collider is PolygonCollider2D polygonCollider)
+            {
+                Vector2[] pathPoints = polygonCollider.GetPath(0);
+                for (int i = 0; i < pathPoints.Length - 1; i++)
+                {
+                    Gizmos.DrawLine(pathPoints[i], pathPoints[i + 1]);
+                }
+                Gizmos.DrawLine(pathPoints[pathPoints.Length - 1], pathPoints[0]);
             }
         }
     }
