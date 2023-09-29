@@ -93,8 +93,8 @@ GameObject:
   - component: {fileID: 8132098572858709668}
   - component: {fileID: 8870332220306220864}
   - component: {fileID: 6416378519299647679}
-  - component: {fileID: 7318387728424238426}
   - component: {fileID: 6723240154667446455}
+  - component: {fileID: 7318387728424238426}
   - component: {fileID: 2459817810504981418}
   m_Layer: 0
   m_Name: Enemy
@@ -118,7 +118,7 @@ Transform:
   - {fileID: 6137762737009194607}
   - {fileID: 4595292425645306402}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8870332220306220864
 SpriteRenderer:
@@ -199,34 +199,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7318387728424238426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4920418984444432624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3227ededa5c35eb4aa3d2c16ac04fb5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  speed: 4
-  rotateSpeed: 720
-  damage: 10
-  damageSanity: 10
-  detection: 0
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  enemy: {fileID: 0}
-  savedPositionEnemy: {x: 0, y: 0}
-  rb: {fileID: 0}
-  enemySight: {fileID: 145755555114303672}
-  currentState: {fileID: 0}
-  state_Follow_Player: {fileID: 0}
-  state_Attacl: {fileID: 0}
-  state_StopFollow_Player: {fileID: 0}
 --- !u!61 &6723240154667446455
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -272,6 +244,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7318387728424238426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920418984444432624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3227ededa5c35eb4aa3d2c16ac04fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  speed: 4
+  rotateSpeed: 720
+  damage: 10
+  damageSanity: 10
+  detection: 0
+  agent: {fileID: 0}
+  targetPosition: {x: 0, y: 0}
+  rb: {fileID: 0}
+  directorAI: {fileID: 0}
+  enemySight: {fileID: 145755555114303672}
+  currentState: {fileID: 0}
+  state_Searching: {fileID: 0}
+  state_Listening_Follow_Player: {fileID: 0}
+  state_Hunting: {fileID: 0}
+  state_Retreat: {fileID: 0}
 --- !u!195 &2459817810504981418
 NavMeshAgent:
   m_ObjectHideFlags: 0
