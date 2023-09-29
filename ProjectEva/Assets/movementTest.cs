@@ -35,7 +35,7 @@ public class MovementTest : MonoBehaviour
             if (isUsingTunnel)
             {
                 agent.speed *= 2;  // Double the speed when entering the tunnel
-                PlaySound(tunnelSound);  // Play the tunnel sound
+                // PlaySound(tunnelSound);  // Play the tunnel sound
             }
             else
             {

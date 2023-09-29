@@ -51,8 +51,7 @@ public class RotateObjectToward : MonoBehaviour
         }
         
         this.transform.up = AngletoVector2(Anglebetween);
-        
-
+    
     }
     public float Vector2toAngle(Vector2 vector)
     {
