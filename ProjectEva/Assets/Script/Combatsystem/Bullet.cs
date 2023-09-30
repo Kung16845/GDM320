@@ -19,14 +19,6 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // // Check if the bullet hits an object with a "Health" component.
-        // Health health = collision.GetComponent<Health>();
-
-        // if (health != null)
-        // {
-        //     // Deal damage to the object with Health component.
-        //     health.TakeDamage(damage);
-        // }
         if(collision.GetComponent<EnemyNormal>() != null) 
         {
             collision.GetComponent<EnemyNormal>().TakeDamage(damage);
@@ -35,8 +27,8 @@ public class Bullet : MonoBehaviour
         // Destroy the bullet on collision with any object.
         if (collision.tag == "Walls")
         {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
         }
-
     }
+    
 }
