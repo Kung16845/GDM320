@@ -15,43 +15,69 @@ namespace Enemy_State
             this.agent.updateRotation = false;
             this.agent.updateUpAxis = false;
             this.agent.speed = speed;
+            this.hp = this.maxhp;
+            this.enemyCollider = GetComponent<Collider2D>();
             RandomPositionSpawns(directorAI);
 
         }
         private void Update()
         {
 
-            if (enemySight.canSee || isAttack)
+            if (enemySight.canSee || isAttack && hp > 0)
             {
                 isAttack = true;
                 Debug.Log("Enter State_Hunting");
                 EnterState(state_Hunting);
             }
 
-            if (!enemySight.canSee && !isAttack && currentState != state_Listening && !isRunStage)
-            {         
+            else if (!enemySight.canSee && !isAttack && currentState != state_Listening && !isRunStage && hp > 0)
+            {
                 isRunStage = true;
                 Debug.Log("Enter State_Listening");
                 EnterState(state_Listening);
             }
 
-            if (currentState != state_Searching && !isRunStage && !isAttack)
+            else if (currentState != state_Searching && !isRunStage && !isAttack && hp > 0)
             {
                 isRunStage = true;
                 Debug.Log("Enter State_Searching");
                 EnterState(state_Searching);
             }
-            if (Vector2.Distance(transform.position, targetPosition) <= 0.5f)
+            else if (Vector2.Distance(transform.position, ResingPoint.position) <= 0.5f && isUsingTunnel)
             {
-                isRunStage = false;
+                Debug.Log("Chagne State from arrive to ResingPoint");
+                this.isRunStage = false;
+                isUsingTunnel = false;
+                enemyCollider.isTrigger = false;
+                SetAreaMask();
+                StartCoroutine(DelayTimeForHeal(5.0f));
             }
-            if (hp <= 0)
+            else if (Vector2.Distance(transform.position, targetPosition) <= 0.5f && isRunStage)
+            {
+                Debug.Log("Chagne State");
+                this.isRunStage = false;
+                if (currentState == state_Retreat && !isRunStage)
+                {
+                    Debug.Log("Stay State_Retreat");
+                    isRunStage = true;
+                    isUsingTunnel = true;
+                    if (isUsingTunnel)
+                    {
+                        SetNavMeshArea("Tunnel");
+                        agent.speed *= 2;
+                        enemyCollider.isTrigger = true;
+                        targetPosition = ResingPoint.position;
+                        agent.SetDestination(ResingPoint.position);
+                    }
+                }
+            }
+
+            else if (hp <= 0 && currentState != state_Retreat)
             {
                 isAttack = false;
-                isRunStage = false;
+                isRunStage = true;
                 Debug.Log("Enter State_Retreat");
-                if(!isRunStage)
-                    EnterState(state_Retreat);
+                EnterState(state_Retreat);
             }
         }
 

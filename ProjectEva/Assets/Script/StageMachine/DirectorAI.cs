@@ -49,11 +49,12 @@ namespace Enemy_State
                     namePoint = point.Key;
                 }
             }
+
             return listNameandPoint[namePoint];
         }
         private void Update() 
         {
-            // navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); ไว้อัปเดตแมพ
+            // navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); //ไว้อัปเดตแมพ
         }
         public void TransferPositionToEnemy()
         {
@@ -62,10 +63,6 @@ namespace Enemy_State
                 transferPosition = new Vector2(player.position.x + RandomDistance(maxXOffset),
                 player.position.y + RandomDistance(maxYOffset));
             } while (IsColliding(transferPosition));
-        }
-        public void TransferPositionRoom()
-        {
-
         }
         public float RandomDistance(float distance)
         {

@@ -18,7 +18,10 @@ namespace Enemy_State
         public float detection;
         public bool isAttack = false;
         public bool isRunStage = false;
+        public bool isUsingTunnel = false;
+        public Collider2D enemyCollider;
         public Vector2 targetPosition;
+        public Transform ResingPoint;
         public NavMeshAgent agent;
         public Rigidbody2D rb;
         public DirectorAI directorAI;
@@ -30,7 +33,7 @@ namespace Enemy_State
         public State_Retreat state_Retreat;
         private void Start()
         {
-            hp = maxhp;
+
         }
         public void EnterState(StateMachine state)
         {
@@ -39,14 +42,44 @@ namespace Enemy_State
         }
         public void RandomPositionSpawns(DirectorAI directorAI)
         {
-            this.agent.enabled = !this.agent.enabled;
-
             var RandomPosition = Random.Range(1, directorAI.setSpawns.Count);
             var position = directorAI.setSpawns.ElementAt(RandomPosition);
+ 
+            this.agent.Warp(position.point.position);
+        }
+        public void SetNavMeshArea(string areaName)
+        {
+            int areaIndex = NavMesh.GetAreaFromName(areaName);
+            if (areaIndex == -1)
+            {
+                Debug.LogError("Navigation Area with name '" + areaName + "' not found.");
+                return;
+            }
 
-            this.transform.position = position.point.position;
+            int areaMask = 1 << areaIndex;
+            agent.areaMask = areaMask;
+        }
+        public void SetAreaMask()
+        {
+            int walkableAreaIndex = NavMesh.GetAreaFromName("Walkable");
+            int tunnelAreaIndex = NavMesh.GetAreaFromName("Tunnel");
 
-            this.agent.enabled = !this.agent.enabled;
+            if (walkableAreaIndex != -1 && tunnelAreaIndex != -1)
+            {
+                int walkableAreaMask = 1 << walkableAreaIndex;
+                int tunnelAreaMask = 1 << tunnelAreaIndex;
+                agent.areaMask = walkableAreaMask | tunnelAreaMask;  // Combine the masks using bitwise OR
+            }
+            else
+            {
+                Debug.LogError("One or both area names not found.");
+            }
+        }
+        public IEnumerator DelayTimeForHeal(float time)
+        {
+            Debug.Log("Start Delay Time");
+            yield return new WaitForSeconds(time);
+            hp = maxhp;
         }
         public float Vector2toAngle(Vector2 vector)
         {
@@ -61,7 +94,7 @@ namespace Enemy_State
         {
             this.hp -= damage;
         }
-        
+
         public IEnumerator EnemyAttack(float time, Collider2D player)
         {
             yield return new WaitForSeconds(time);
