@@ -9,22 +9,24 @@ namespace Enemy_State
     {
         public override void Behavevior(Enemy enemy)
         {
-            FindClosestPosition(enemy.directorAI, enemy);
-            StartCoroutine(DelayTime(2.0f));
+            FindClosestPositionRoom(enemy.directorAI,enemy);
+               
         }
         public IEnumerator DelayTime(float time)
         {
             Debug.Log("Start Delay Time");
             yield return new WaitForSeconds(time);
         }
-        public void FindClosestPosition(DirectorAI directorAI, Enemy enemy)
+        public void FindClosestPositionRoom(DirectorAI directorAI, Enemy enemy)
         {
+
             var movetoRoom = directorAI.FindClosestPosition
             (directorAI.listRoomPosition, directorAI.player);
 
             enemy.targetPosition = movetoRoom.position;
             Debug.Log(enemy.targetPosition);
             Debug.Log(movetoRoom);
+
             enemy.agent.SetDestination(movetoRoom.position);
         }
     }

@@ -17,8 +17,11 @@ namespace Enemy_State
 
             var movetoSpawn = directorAI.FindClosestPosition
             (directorAI.listSpawnPosition,directorAI.player);
+
+            Debug.Log(movetoSpawn.position);
             enemy.targetPosition = movetoSpawn.position;
             Debug.Log(movetoSpawn);
+            
             enemy.agent.SetDestination(movetoSpawn.position);
         }
     }
