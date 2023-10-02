@@ -17,6 +17,7 @@ namespace Enemy_State
             this.agent.speed = speed;
             this.hp = this.maxhp;
             this.enemyCollider = GetComponent<Collider2D>();
+            this.spriteRenderer = GetComponent<SpriteRenderer>();
             RandomPositionSpawns(directorAI);
 
         }
@@ -33,7 +34,9 @@ namespace Enemy_State
             else if (!enemySight.canSee && !isAttack && currentState != state_Listening && !isRunStage && hp > 0)
             {
                 isRunStage = true;
+                SetAreaMask();
                 Debug.Log("Enter State_Listening");
+                SetAlpha(255);
                 EnterState(state_Listening);
             }
 
@@ -43,15 +46,25 @@ namespace Enemy_State
                 Debug.Log("Enter State_Searching");
                 EnterState(state_Searching);
             }
+            else if (isUseTunnalToCloseSpawns)
+            {
+                agent.SetDestination(directorAI.FindClosestPosition(directorAI.listSpawnPosition, directorAI.player).position);
+                if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+                {
+                    Debug.Log("Chagne State from arrive to ClosaeSpawns");
+                    this.isRunStage = false;
+                    isUsingTunnel = false;
+                    isUseTunnalToCloseSpawns = false;
+                    enemyCollider.isTrigger = false;
+                    hp = maxhp;
+                }
+            }
             else if (Vector2.Distance(transform.position, ResingPoint.position) <= 0.5f && isUsingTunnel)
             {
-                Debug.Log("Chagne State from arrive to ResingPoint");
-                this.isRunStage = false;
-                isUsingTunnel = false;
-                enemyCollider.isTrigger = false;
-                SetAreaMask();
+                Debug.Log("Go to ResingPoint");
                 StartCoroutine(DelayTimeForHeal(5.0f));
             }
+           
             else if (Vector2.Distance(transform.position, targetPosition) <= 0.5f && isRunStage)
             {
                 Debug.Log("Chagne State");
@@ -64,6 +77,7 @@ namespace Enemy_State
                     if (isUsingTunnel)
                     {
                         SetNavMeshArea("Tunnel");
+                        SetAlpha(0);
                         agent.speed *= 2;
                         enemyCollider.isTrigger = true;
                         targetPosition = ResingPoint.position;

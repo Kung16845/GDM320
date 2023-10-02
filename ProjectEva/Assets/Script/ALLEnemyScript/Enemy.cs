@@ -19,8 +19,10 @@ namespace Enemy_State
         public bool isAttack = false;
         public bool isRunStage = false;
         public bool isUsingTunnel = false;
+        public bool isUseTunnalToCloseSpawns = false;
         public Collider2D enemyCollider;
         public Vector2 targetPosition;
+        public SpriteRenderer spriteRenderer;
         public Transform ResingPoint;
         public NavMeshAgent agent;
         public Rigidbody2D rb;
@@ -44,7 +46,7 @@ namespace Enemy_State
         {
             var RandomPosition = Random.Range(1, directorAI.setSpawns.Count);
             var position = directorAI.setSpawns.ElementAt(RandomPosition);
- 
+
             this.agent.Warp(position.point.position);
         }
         public void SetNavMeshArea(string areaName)
@@ -58,6 +60,11 @@ namespace Enemy_State
 
             int areaMask = 1 << areaIndex;
             agent.areaMask = areaMask;
+        }
+        public void SetAlpha(byte newAlpha)
+        {
+            Color32 currentColor = spriteRenderer.color;
+            spriteRenderer.color = new Color32(currentColor.r, currentColor.g, currentColor.b, newAlpha);
         }
         public void SetAreaMask()
         {
@@ -79,7 +86,7 @@ namespace Enemy_State
         {
             Debug.Log("Start Delay Time");
             yield return new WaitForSeconds(time);
-            hp = maxhp;
+            isUseTunnalToCloseSpawns = true;
         }
         public float Vector2toAngle(Vector2 vector)
         {
