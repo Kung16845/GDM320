@@ -101,11 +101,15 @@ namespace Enemy_State
         {
             this.hp -= damage;
         }
-
-        public IEnumerator EnemyAttack(float time, Collider2D player)
+        private void OnTriggerEnter2D(Collider2D player) 
         {
-            yield return new WaitForSeconds(time);
+            EnemyAttack(2.0f,player);
+        }
+        public IEnumerator EnemyAttack(float time, Collider2D player)
+        {   
             player.GetComponent<Hp>().TakeDamage(damage);
+            yield return new WaitForSeconds(time);
+            
         }
     }
 }
