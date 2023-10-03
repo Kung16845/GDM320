@@ -100,14 +100,22 @@ namespace Enemy_State
         public void TakeDamage(float damage)
         {
             this.hp -= damage;
+            StartCoroutine(StuntTime(2.0f));
         }
+        private IEnumerator StuntTime(float time)
+        {
+            agent.speed = 1;
+            yield return new WaitForSeconds(time); 
+            agent.speed = speed;
+        }   
         private void OnTriggerEnter2D(Collider2D player) 
         {
-            EnemyAttack(2.0f,player);
+            // StartCoroutine(EnemyAttack(2.0f,player));
+            player.GetComponent<Hp>().TakeDamage(damage);
         }
         public IEnumerator EnemyAttack(float time, Collider2D player)
         {   
-            player.GetComponent<Hp>().TakeDamage(damage);
+            
             yield return new WaitForSeconds(time);
             
         }
