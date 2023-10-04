@@ -8,7 +8,7 @@ using UnityEngine.AI;
 namespace Enemy_State
 {
     public abstract class Enemy : MonoBehaviour
-    {
+    {   
         public float hp;
         public float maxhp;
         public float speed;
