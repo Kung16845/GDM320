@@ -20,33 +20,61 @@ namespace Enemy_State
             this.enemyCollider = GetComponent<Collider2D>();
             this.spriteRenderer = GetComponent<SpriteRenderer>();
             RandomPositionSpawns(directorAI);
-
+            state_Listening.isRunState_Listening = true;
+            EnterState(state_Listening);
         }
         private void Update()
         {
             switch (currentState)
             {
-                case State_Hunting :
-                    EnterState(state_Hunting);    
-                    if(hp <= 0) 
-                        currentState = state_Retreat;          
-                break;
-                case State_Listening :
+                case State_Hunting:
+                    EnterState(state_Hunting);
+                    if (hp <= 0)
+                    {
+                        currentState = state_Retreat;
+                        state_Retreat.isRunState_Retreat = true;
+                    }
+                    break;
+                case State_Listening:
                     EnterState(state_Listening);
-                    if(enemySight.canSee)   
-                        currentState = state_Hunting;
-                break;
-                case State_Searching :
+                    if (!state_Listening.isRunState_Listening)
+                    {
+                        isUsingTunnel = false;
+                        SetAreaMask();
+                        currentState = state_Searching;
+                    }
+                    break;
+                case State_Searching:
                     EnterState(state_Searching);
-                    if(enemySight.canSee)   
+                    if (enemySight.canSee && hp > 0)
                         currentState = state_Hunting;
-                break;
-                case State_Retreat : 
-                    EnterState(state_Retreat);
-                    if(hp >= 0) 
+                    else if (isHear && hp > 0)
+                        currentState = state_SearchingSound;
+                    else if (directorAI.Stressvalue == 100)
+                    {
+                        state_Listening.isRunState_Listening = true;
                         currentState = state_Listening;
-                break;
-            } 
+                    }
+                    else if (hp <= 0)
+                    {
+                        state_Retreat.isRunState_Retreat = true;
+                        currentState = state_Retreat;
+                    }
+                    break;
+                case State_SearchingSound:
+                    EnterState(state_SearchingSound);
+                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+                        currentState = state_Searching;
+                    break;
+                case State_Retreat:
+                    EnterState(state_Retreat);
+                    if (!state_Retreat.isRunState_Retreat)
+                    {   
+                        state_Listening.isRunState_Listening = true;
+                        currentState = state_Listening;
+                    }
+                    break;
+            }
             // if (enemySight.canSee || isAttack && hp > 0)
             // {
             //     isAttack = true;
@@ -87,7 +115,7 @@ namespace Enemy_State
             //     Debug.Log("Go to ResingPoint");
             //     StartCoroutine(DelayTimeForHeal(5.0f));
             // }
-           
+
             // else if (Vector2.Distance(transform.position, targetPosition) <= 0.5f && isRunStage)
             // {
             //     Debug.Log("Chagne State");
@@ -117,6 +145,10 @@ namespace Enemy_State
             //     EnterState(state_Retreat);
             // }
         }
-
+        private void OnTriggerEnter2D(Collider2D player)
+        {
+            // StartCoroutine(EnemyAttack(2.0f,player));
+            player.GetComponent<Hp>().TakeDamage(damage);
+        }
     }
 }

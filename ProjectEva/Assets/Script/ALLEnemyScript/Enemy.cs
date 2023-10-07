@@ -16,12 +16,14 @@ namespace Enemy_State
         public float damage;
         public float damageSanity;
         public float detection;
+        public bool isHear;
         public bool isAttack = false;
+        public bool isWaittingtime = false;
         public bool isRunStage = false;
         public bool isUsingTunnel = false;
         public bool isUseTunnalToCloseSpawns = false;
         public Collider2D enemyCollider;
-        public Vector2 targetPosition;
+        // public Vector2 targetPosition;
         public SpriteRenderer spriteRenderer;
         public Transform ResingPoint;
         public NavMeshAgent agent;
@@ -30,13 +32,10 @@ namespace Enemy_State
         public EnemySight enemySight;
         public StateMachine currentState;
         public State_Searching state_Searching;
+        public State_SearchingSound state_SearchingSound;
         public State_Listening state_Listening;
         public State_Hunting state_Hunting;
         public State_Retreat state_Retreat;
-        private void Start()
-        {
-
-        }
         public void EnterState(StateMachine state)
         {
             currentState = state;
@@ -88,6 +87,13 @@ namespace Enemy_State
             yield return new WaitForSeconds(time);
             isUseTunnalToCloseSpawns = true;
         }
+         public IEnumerator DelayTime(float time)
+        {
+            Debug.Log("Start Delay Time");
+            isWaittingtime = true;
+            yield return new WaitForSeconds(time);
+            isWaittingtime = false;
+        }
         public float Vector2toAngle(Vector2 vector)
         {
             return Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
@@ -108,16 +114,11 @@ namespace Enemy_State
             yield return new WaitForSeconds(time); 
             agent.speed = speed;
         }   
-        private void OnTriggerEnter2D(Collider2D player) 
-        {
-            // StartCoroutine(EnemyAttack(2.0f,player));
-            player.GetComponent<Hp>().TakeDamage(damage);
-        }
+        
         public IEnumerator EnemyAttack(float time, Collider2D player)
-        {   
-            
+        {              
             yield return new WaitForSeconds(time);
-            
         }
+        
     }
 }
