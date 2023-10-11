@@ -29,32 +29,32 @@ namespace Enemy_State
             // SaveListPositionToDictinary(setRoom,listRoomPosition);
             StartCoroutine(EverySeconReduce(1.0f));
         }  
-        public void SaveListPositionToDictinary(List<SetPosition> listPosition,
-                                                Dictionary<string,Transform> listNameandPosition)
-        {   
-            foreach (var info in listPosition)
-            {
-                listNameandPosition.Add(info.namePoint,info.point);
-            } 
-        }
-        public Transform FindClosestPosition(Dictionary<string,Transform> listNameandPoint,Transform target)
-        {
-            string namePoint = null;
-            float closestDistance = float.MaxValue;
+        // public void SaveListPositionToDictinary(List<SetPosition> listPosition,
+        //                                         Dictionary<string,Transform> listNameandPosition)
+        // {   
+        //     foreach (var info in listPosition)
+        //     {
+        //         listNameandPosition.Add(info.namePoint,info.point);
+        //     } 
+        // }
+        // public Transform FindClosestPosition(Dictionary<string,Transform> listNameandPoint,Transform target)
+        // {
+        //     string namePoint = null;
+        //     float closestDistance = float.MaxValue;
 
-            foreach (var point in listNameandPoint)
-            {
-                float distance = Vector2.Distance(point.Value.position,target.position);
+        //     foreach (var point in listNameandPoint)
+        //     {
+        //         float distance = Vector2.Distance(point.Value.position,target.position);
 
-                if(distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    namePoint = point.Key;
-                }
-            }
+        //         if(distance < closestDistance)
+        //         {
+        //             closestDistance = distance;
+        //             namePoint = point.Key;
+        //         }
+        //     }
 
-            return listNameandPoint[namePoint];
-        }
+        //     return listNameandPoint[namePoint];
+        // }
         private void Update() 
         {
             // navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); //ไว้อัปเดตแมพ
