@@ -14,7 +14,7 @@ namespace Enemy_State
             Vector2 playerPosition = playerCollider.bounds.center;
 
             Vector2 direction = playerPosition - enemyPosition;
-
+            
             // Perform a raycast to check for obstacles
             RaycastHit2D hit = Physics2D.Raycast(enemyPosition, direction, direction.magnitude, obstacleLayer);
             Debug.DrawRay(enemyPosition, direction * direction.magnitude, Color.black);

@@ -59,16 +59,22 @@ namespace Enemy_State
         {
             var pointinRoomforEnemyMove = new List<Transform>();
             var NumMove = UnityEngine.Random.Range(2, allpointInRoom.Count);
+            
+            Debug.Log(NumMove);
             for (int i = 0; i < NumMove; i++)
             {
                 var point = allpointInRoom.ElementAt<Transform>(UnityEngine.Random.Range(0, allpointInRoom.Count));
                 // if(point != pointinRoomforEnemyMove.ElementAt<Transform>(i-1))
-                pointinRoomforEnemyMove.Add(CheckedTranform(point,allpointInRoom,i));
+                if(i > 0)
+                    pointinRoomforEnemyMove.Add(CheckedTranform(point,allpointInRoom,i));
+                else 
+                    pointinRoomforEnemyMove.Add(point);
             }
             foreach (var point in pointinRoomforEnemyMove)
             {
                 Debug.Log(point);
             }
+            Debug.Log(pointinRoomforEnemyMove);
             return pointinRoomforEnemyMove;
         }
         public Transform CheckedTranform(Transform transform, List<Transform> listpoint, int Count)
@@ -84,6 +90,7 @@ namespace Enemy_State
             else
                 return transform;
         }
+        
     }
 
 
