@@ -28,7 +28,7 @@ public class Hp : MonoBehaviour
         if (currenthp > 0)
         {
             currenthp -= damage * sanityScaleController.GetDamageScale();
-            currenthp = Mathf.Clamp(currenthp, 0, maxhp);
+            // currenthp = Mathf.Clamp(currenthp, 0, maxhp);
         }
         else
         {
@@ -39,7 +39,7 @@ public class Hp : MonoBehaviour
     public void HealHp(float healAmount)
     {
         currenthp += healAmount;
-        currenthp = Mathf.Clamp(currenthp, 0, maxhp);
+        // currenthp = Mathf.Clamp(currenthp, 0, maxhp);
     }
 
     void UpdateHealthText()

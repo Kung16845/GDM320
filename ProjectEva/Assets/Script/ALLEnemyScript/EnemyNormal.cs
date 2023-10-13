@@ -17,11 +17,11 @@ namespace Enemy_State
             this.agent.updateUpAxis = false;
             this.agent.speed = speed;
             this.hp = this.maxhp;
-            this.enemyCollider = GetComponent<Collider2D>();
             this.spriteRenderer = GetComponent<SpriteRenderer>();
             RandomPositionSpawns(directorAI);
             state_Listening.isRunState_Listening = true;
-            EnterState(state_Listening);
+            // EnterState(state_Listening);
+            currentState = state_Listening;
         }
         private void Update()
         {
@@ -69,7 +69,7 @@ namespace Enemy_State
                 case State_Retreat:
                     EnterState(state_Retreat);
                     if (!state_Retreat.isRunState_Retreat)
-                    {   
+                    {
                         state_Listening.isRunState_Listening = true;
                         currentState = state_Listening;
                     }
@@ -148,7 +148,8 @@ namespace Enemy_State
         private void OnTriggerEnter2D(Collider2D player)
         {
             // StartCoroutine(EnemyAttack(2.0f,player));
-            player.GetComponent<Hp>().TakeDamage(damage);
+            if(player.GetComponent<Hp>() != null)
+                player.GetComponent<Hp>().TakeDamage(damage);
         }
     }
 }

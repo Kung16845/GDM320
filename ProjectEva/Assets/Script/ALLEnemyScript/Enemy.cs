@@ -22,7 +22,7 @@ namespace Enemy_State
         public bool isRunStage = false;
         public bool isUsingTunnel = false;
         public bool isUseTunnalToCloseSpawns = false;
-        public Collider2D enemyCollider;
+        // public Collider2D enemyCollider;
         // public Vector2 targetPosition;
         public SpriteRenderer spriteRenderer;
         public Transform ResingPoint;
