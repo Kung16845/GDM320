@@ -72,9 +72,9 @@ namespace Enemy_State
             }
             foreach (var point in pointinRoomforEnemyMove)
             {
-                Debug.Log(point);
+                // Debug.Log(point);
             }
-            Debug.Log(pointinRoomforEnemyMove);
+            
             return pointinRoomforEnemyMove;
         }
         public Transform CheckedTranform(Transform transform, List<Transform> listpoint, int Count)

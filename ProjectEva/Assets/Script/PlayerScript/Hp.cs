@@ -17,7 +17,7 @@ public class Hp : MonoBehaviour
         currenthp = maxhp;
         sanityScaleController = FindObjectOfType<SanityScaleController>();
     }
-
+    
     void Update()
     {
         UpdateHealthText();
@@ -41,7 +41,7 @@ public class Hp : MonoBehaviour
         currenthp += healAmount;
         // currenthp = Mathf.Clamp(currenthp, 0, maxhp);
     }
-
+    
     void UpdateHealthText()
     {
         healthText.text = "HP: " + currenthp.ToString("F2");
