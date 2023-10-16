@@ -23,7 +23,7 @@ public class Pistol : MonoBehaviour
     public bool isReloading;
     private float reloadStartTime;
     private int bulletsToReload;
-    private PlayerMovement playerMovement;
+    private GunSpeedManager gunSpeedManager;
 
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
@@ -36,7 +36,7 @@ public class Pistol : MonoBehaviour
         isReloading = false;
         bulletsToReload = 0;
         sanityScaleController = FindObjectOfType<SanityScaleController>();
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        gunSpeedManager = FindObjectOfType<GunSpeedManager>();
 
         // Initialize current ammo to max ammo at the start.
     }
@@ -45,14 +45,16 @@ public class Pistol : MonoBehaviour
     {
         RotateTowardsMouse();
 
-        if (Input.GetMouseButton(1))
-        {
+        if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
+        {   
+            gunSpeedManager.ReduceSpeedDuringAimming();
             accuracyCircle.SetActive(true);
             isAiming = true;
             currentAccuracy = Mathf.Lerp(currentAccuracy, maxAccuracy * sanityScaleController.GetAccuracyScale(), accuracyIncreaseRate * Time.deltaTime);
         }
         else
-        {
+        {   
+            gunSpeedManager.RestoreNormalSpeed();
             isAiming = false;
             accuracyCircle.SetActive(false);
             currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
@@ -64,15 +66,15 @@ public class Pistol : MonoBehaviour
 
         if (isReloading)
         {
-            playerMovement.ReduceSpeedDuringReload();
-            if (Input.GetMouseButton(1)) // Check if right mouse button is pressed.
+            gunSpeedManager.ReduceSpeedDuringReload();
+            if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) // Check if right mouse button is pressed.
             {
                 // Cancel the reload if right mouse button is pressed.
                 isReloading = false;
                 bulletsToReload = 0; // Reset the bullets to reload.
                 
                 // Restore the player's normal speed when the reload is canceled.
-                playerMovement.RestoreNormalSpeed();
+                gunSpeedManager.RestoreNormalSpeed();
             }
             else if (Time.time - reloadStartTime >= reloadTime)
             {
@@ -84,7 +86,7 @@ public class Pistol : MonoBehaviour
             Shoot();
             lastShotTime = Time.time;
         }
-        else if (Input.GetKeyDown(KeyCode.R) && !isReloading && ammoInChamber < maxAmmo && !isAiming)
+        else if (Input.GetKeyDown(KeyCode.R) && !gunSpeedManager.isRunning && ammoInChamber < maxAmmo && !isAiming)
         {
             // Check if the player has enough total ammo to reload.
             if (currentAmmo > 0)
@@ -124,11 +126,11 @@ public class Pistol : MonoBehaviour
     private void StartReload()
     {
         if (ammoInChamber < maxAmmo && currentAmmo > 0)
-        {
+        {   
+            gunSpeedManager.ReduceSpeedDuringReload();
             isReloading = true;
             reloadStartTime = Time.time;
             bulletsToReload = maxAmmo - ammoInChamber;
-
             // Decrease current ammo when starting a reload.
         }
     }
@@ -148,7 +150,7 @@ public class Pistol : MonoBehaviour
         {
             isReloading = false;
             // Restore the player's normal speed when the reload is finished.
-            playerMovement.RestoreNormalSpeed();
+            gunSpeedManager.RestoreNormalSpeed();
         }
     }
 }

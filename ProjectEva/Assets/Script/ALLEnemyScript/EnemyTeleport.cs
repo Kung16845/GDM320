@@ -12,13 +12,13 @@ public class EnemyTeleport : MonoBehaviour
     public Transform EnemyForTeleport;
     private void OnTriggerEnter2D(Collider2D enemy)
     {
-        Debug.Log(" Ready for  Teleported");
+
         if (isReadyTeleport && enemy.GetComponent<EnemyNormal>() != null)  // ตรวจสอบว่า GameObject ที่ติด tag ว่า "Enemy" ได้ปรากฏใน collider
         {
-            Debug.Log(" Use Teleported");
+
             if (enemy.GetComponent<EnemyNormal>().isUsingTunnel)  // ตรวจสอบว่า enemy มี component EnemyNormal และ isUsingTunnel เป็น true
-            {   
-                Debug.Log(" Use Teleported 2.0");
+            {
+
                 // ตรวจสอบว่าตัวละครอยู่ที่จุด teleport หนึ่งหรือสอง แล้วทำการ teleport ไปยังจุดปลายทาง
                 if (Vector2.Distance(EnemyForTeleport.position, teleportPointA.position) < 3f)
                 {
@@ -32,7 +32,7 @@ public class EnemyTeleport : MonoBehaviour
                 }
 
                 isReadyTeleport = false;  // ตั้งค่า isReadyTeleport เป็น false เพื่อป้องกันการ teleport ซ้ำ
-                enemy.GetComponent<EnemyNormal>().agent.SetDestination(enemy.GetComponent<EnemyNormal>().targetPosition);  // ตั้งค่าปลายทางใหม่ของ enemy
+                // enemy.GetComponent<EnemyNormal>().agent.SetDestination(enemy.GetComponent<EnemyNormal>().targetPosition);  // ตั้งค่าปลายทางใหม่ของ enemy
                 StartCoroutine(DelayTime(5.0f));  // เรียกใช้ coroutine เพื่อรีเซ็ต isReadyTeleport หลังจากหน่วงเวลา 5 วินาที
             }
         }

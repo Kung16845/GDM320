@@ -21,7 +21,7 @@ public class Hp : MonoBehaviour
         sanityScaleController = FindObjectOfType<SanityScaleController>();
         canvasGroup.alpha = 0f; // Assuming this script is attached to the same GameObject as the CanvasGroup.
     }
-
+    
     void Update()
     {
         UpdateHealthText();
@@ -44,7 +44,7 @@ public class Hp : MonoBehaviour
         if (currenthp > 0)
         {
             currenthp -= damage * sanityScaleController.GetDamageScale();
-            currenthp = Mathf.Clamp(currenthp, 0, maxhp);
+            // currenthp = Mathf.Clamp(currenthp, 0, maxhp);
         }
         else
         {
@@ -55,9 +55,9 @@ public class Hp : MonoBehaviour
     public void HealHp(float healAmount)
     {
         currenthp += healAmount;
-        currenthp = Mathf.Clamp(currenthp, 0, maxhp);
+        // currenthp = Mathf.Clamp(currenthp, 0, maxhp);
     }
-
+    
     void UpdateHealthText()
     {
         healthText.text = "HP: " + currenthp.ToString("F2");

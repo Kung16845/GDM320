@@ -1,12 +1,10 @@
 using UnityEngine;
 
 public class ShowColliders : MonoBehaviour
-{
+{   
+    public Collider2D[] colliders;
     private void OnDrawGizmos()
     {
-        // ดึง Collider ทั้งหมดในฉาก
-        Collider2D[] colliders = FindObjectsOfType<Collider2D>();
-
         foreach (Collider2D collider in colliders)
         {
             // ตรวจสอบว่า Collider นี้เป็น Collider 2D แบบไหน
