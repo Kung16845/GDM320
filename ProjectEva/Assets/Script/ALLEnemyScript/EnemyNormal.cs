@@ -61,10 +61,15 @@ namespace Enemy_State
                     break;
                 case State_SearchingSound:
                     EnterState(state_SearchingSound);
-                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending || agent.remainingDistance <= 0.5f)
+                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending || agent.remainingDistance <= 0.5f && hp > 0)
                     {   
                         state_Searching.isSetValue = false;
                         currentState = state_Searching;
+                    }
+                    else if (hp <= 0)
+                    {
+                        state_Retreat.isRunState_Retreat = true;
+                        currentState = state_Retreat;
                     }
                     break;
                 case State_Retreat:

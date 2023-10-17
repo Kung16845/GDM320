@@ -14,6 +14,7 @@ public class NewMovementPlayer : MonoBehaviour
     private GunSpeedManager gunSpeedManager;
 
     public bool isRunning = false;
+    public bool isWalking = false;
     public bool isCrouching = false;
     public bool isWaittingtime = false;
     private void Start()
@@ -36,14 +37,17 @@ public class NewMovementPlayer : MonoBehaviour
         {
             isRunning = true;
             isCrouching = false;
+            isWalking = false;
         }
         else if (Input.GetKey(KeyCode.LeftControl))
         {
             isCrouching = true;
             isRunning = false;
+            isWalking = false;
         }
         else
         {
+            isWalking = true;
             isRunning = false;
             isCrouching = false;
         }
@@ -57,17 +61,17 @@ public class NewMovementPlayer : MonoBehaviour
             Debug.Log("Create Sound");
             transform.hasChanged = false;
         }
-        else if (isCrouching)
-        {
-            Crouch();
-        }
-        else
+        else if (isWalking)
         {   
             if(!isWaittingtime && direction.x + direction.y != 0)
                 StartCoroutine(DelayTimeSoundWave());
             Debug.Log("Create Sound");
             transform.hasChanged = false;
             Move();
+        }
+        else 
+        {
+            Crouch();
         }
     }
     IEnumerator DelayTimeSoundWave()
@@ -76,7 +80,7 @@ public class NewMovementPlayer : MonoBehaviour
         yield return new WaitForSeconds(1);
         if(isRunning) 
             SoundWave.SpawnFromPool("Sound Wave Run", this.transform.position, Quaternion.identity);
-        else
+        else if(isWalking)
             SoundWave.SpawnFromPool("Sound Wave Walk", this.transform.position, Quaternion.identity);
         isWaittingtime = false;
     }
