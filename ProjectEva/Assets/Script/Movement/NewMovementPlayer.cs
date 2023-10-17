@@ -8,6 +8,8 @@ public class NewMovementPlayer : MonoBehaviour
     public float speed;
     public float crouchSpeed;
     public float runspeed;
+    public float radiusSound;
+    public Collider2D CircleSound;
     public SanityScaleController sanityScaleController;
     private GunSpeedManager gunSpeedManager;
 
@@ -23,7 +25,14 @@ public class NewMovementPlayer : MonoBehaviour
     void Update()
     {
         GetDirection();
-
+        if (transform.hasChanged)
+        {
+            Debug.Log("The transform has changed!");
+            MakeTrigger2DSound();
+            transform.hasChanged = false;
+        }
+        else
+            StartCoroutine(ReduceRadiusSound());
         // Check for running and crouching
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -55,7 +64,20 @@ public class NewMovementPlayer : MonoBehaviour
             Move();
         }
     }
-
+    public void MakeTrigger2DSound()
+    {
+        Debug.Log("Make Sound");
+        CircleSound.GetComponent<CircleCollider2D>().radius = radiusSound;
+        StartCoroutine(ReduceRadiusSound());
+    }
+    IEnumerator ReduceRadiusSound()
+    {
+        CircleSound.GetComponent<CircleCollider2D>().radius -= 1;
+        yield return new WaitForSeconds(1f);
+        Debug.Log("ReduceRadiusSound is Complete");
+        if(CircleSound.GetComponent<CircleCollider2D>().radius > 0.1)
+            StartCoroutine(ReduceRadiusSound());
+    }
     void GetDirection()
     {
         float horizontal = Input.GetAxis("Horizontal");
