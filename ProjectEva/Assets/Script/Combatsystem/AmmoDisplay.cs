@@ -25,7 +25,7 @@ public class AmmoDisplay : MonoBehaviour
         if (ammoText != null && playerPistol != null)
         {
             // Update the text to display the player's ammo count.
-            ammoText.text = "Ammo: " + playerPistol.ammoInChamber + " / " + playerPistol.maxAmmo;
+            ammoText.text = "Ammo: " + playerPistol.ammoInChamber + " / " + playerPistol.currentAmmo;
 
             // Check if the UI should disappear.
             if (Time.time - lastActionTime >= uiDisappearTime && isUIVisible)

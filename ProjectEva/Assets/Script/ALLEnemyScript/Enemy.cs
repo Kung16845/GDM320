@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -106,7 +105,7 @@ namespace Enemy_State
         public void TakeDamage(float damage)
         {
             this.hp -= damage;
-            StartCoroutine(StuntTime(2.0f));
+            StartCoroutine(StuntTime(3.5f));
         }
         private IEnumerator StuntTime(float time)
         {
