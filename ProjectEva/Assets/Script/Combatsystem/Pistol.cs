@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Pistol : MonoBehaviour
 {
@@ -24,6 +26,8 @@ public class Pistol : MonoBehaviour
     private float reloadStartTime;
     private int bulletsToReload;
     private GunSpeedManager gunSpeedManager;
+    public ObjectPolling SoundWave;
+    public bool isshoot = false;
 
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
@@ -111,16 +115,25 @@ public class Pistol : MonoBehaviour
 
     void Shoot()
     {
+        isshoot = true;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-    
+
         Vector2 bulletDirection = (Vector2)firePoint.up + Random.insideUnitCircle * (1 - currentAccuracy);
         rb.AddForce(bulletDirection.normalized * bulletForce, ForceMode2D.Impulse);
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         bulletScript.damage = bulletDamage;
-
+        SoundWave.SpawnFromPool("Sound Wave Gun", this.transform.position, Quaternion.identity);
         ammoInChamber--;
+
+        StartCoroutine(ResetShootFlagAfterDelay());
+    }
+
+    IEnumerator ResetShootFlagAfterDelay()
+    {
+        yield return new WaitForSeconds(1.0f); // Wait for 1 second (you can adjust the time as needed)
+        isshoot = false;
     }
 
     private void StartReload()

@@ -15,6 +15,7 @@ namespace Enemy_State
         public bool isCountingValueSound;
         public bool isRunningReduceSoundValue;
         public NewMovementPlayer newMovementPlayer;
+        public Pistol pistol;
         public Enemy enemy;
         public LayerMask layerMask;
 
@@ -60,13 +61,14 @@ namespace Enemy_State
             isCountingValueSound = true;
             if(newMovementPlayer.isRunning)
                 soundValue += 8;
-            else    
+            else if(pistol.isshoot)
+                soundValue += 16;
+            else if(newMovementPlayer.isWalking)    
                 soundValue += 4;
+            else 
+                soundValue += 0;
             yield return new WaitForSeconds(4.0f);
-
-
             isCountingValueSound = false;
-
         }
         IEnumerator ReduceSoundValue(Enemy enemy)
         {

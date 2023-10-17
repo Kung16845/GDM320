@@ -45,9 +45,15 @@ public class NewMovementPlayer : MonoBehaviour
             isRunning = false;
             isWalking = false;
         }
-        else
+        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             isWalking = true;
+            isRunning = false;
+            isCrouching = false;
+        }
+        else 
+        {
+            isWalking = false;
             isRunning = false;
             isCrouching = false;
         }
