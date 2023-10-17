@@ -61,8 +61,11 @@ namespace Enemy_State
                     break;
                 case State_SearchingSound:
                     EnterState(state_SearchingSound);
-                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending || agent.remainingDistance <= 0.5f)
+                    {   
+                        state_Searching.isSetValue = false;
                         currentState = state_Searching;
+                    }
                     break;
                 case State_Retreat:
                     EnterState(state_Retreat);
@@ -73,8 +76,8 @@ namespace Enemy_State
                     }
                     break;
             }
-            
-        }   
+
+        }
         private void OnTriggerEnter2D(Collider2D player)
         {
             // StartCoroutine(EnemyAttack(2.0f,player));

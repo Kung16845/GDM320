@@ -29,6 +29,7 @@ namespace Enemy_State
         public Rigidbody2D rb;
         public DirectorAI directorAI;
         public EnemySight enemySight;
+        public EnemyDetectSound enemyDetectSound;
         public StateMachine currentState;
         public State_Searching state_Searching;
         public State_SearchingSound state_SearchingSound;

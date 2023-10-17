@@ -1,8 +1,15 @@
+using System;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShowColliders : MonoBehaviour
 {   
     public Collider2D[] colliders;
+    private void Start() 
+    {
+        
+    }
     private void OnDrawGizmos()
     {
         foreach (Collider2D collider in colliders)

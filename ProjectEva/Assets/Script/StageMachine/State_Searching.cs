@@ -27,7 +27,7 @@ namespace Enemy_State
                 GoPointInRooms(allpointMove.ElementAt<Transform>(currentPointIndex), enemy);
                 isSetValue = true;
             }
-           
+
             if (!enemy.agent.pathPending && enemy.agent.remainingDistance < 0.1f && isExpolre)
                 ExploreAllPoint(allpointMove, enemy);
 

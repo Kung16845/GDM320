@@ -7,27 +7,75 @@ namespace Enemy_State
 {
     public class EnemyDetectSound : MonoBehaviour
     {
+        [Header("-----------Sound Detection---------")]
+        [Space(25f)]
         public float radius;
+        public float soundValue;
+        public float maxSoundValue;
+        public bool isCountingValueSound;
+        public bool isRunningReduceSoundValue;
+        public NewMovementPlayer newMovementPlayer;
         public Enemy enemy;
         public LayerMask layerMask;
+
+        [Header("-----------Time-----------")]
+        [Space(25f)]
+        public float time;
+        public float timeDelay;
         private void Update()
         {
-            var Collider2DCheckSound = Physics2D.OverlapCircle(transform.position,radius,layerMask);
+            var Collider2DCheckSound = Physics2D.OverlapCircle(transform.position, radius, layerMask);
             if (Collider2DCheckSound != null)
-            {
+            {   
+                isRunningReduceSoundValue = false;
                 // enemy.isHear = true;
                 Debug.Log("Sound Is Hear");
+                if (!isCountingValueSound)
+                    StartCoroutine(DelayTimeCountSoundValue());
+
+                if (soundValue >= maxSoundValue)
+                {
+                    if (enemy.currentState != enemy.state_SearchingSound)
+                        enemy.isHear = true;
+                }
+                time = 0;
             }
-            else 
-            {   
+
+            else
+            {
                 Debug.Log("Sound Is Not Hear");
-                // enemy.isHear = false;
+                time = time + 1f * Time.deltaTime;
+
+                if (time >= timeDelay && !enemy.isHear && soundValue > 0)
+                {
+                    time = 0;
+                    StartCoroutine(ReduceSoundValue(enemy));
+                    isRunningReduceSoundValue = true;
+                }
             }
+
         }
-
-        public void MakeSoundWalkingRayCast()
+        IEnumerator DelayTimeCountSoundValue()
         {
+            isCountingValueSound = true;
+            if(newMovementPlayer.isRunning)
+                soundValue += 8;
+            else    
+                soundValue += 4;
+            yield return new WaitForSeconds(4.0f);
 
+
+            isCountingValueSound = false;
+
+        }
+        IEnumerator ReduceSoundValue(Enemy enemy)
+        {
+            soundValue -= 1;
+            Debug.Log("ReduceSoundValue");
+            time = 0;
+            yield return new WaitForSeconds(1.0f);
+            if (soundValue > 0 && isRunningReduceSoundValue)
+                StartCoroutine(ReduceSoundValue(enemy));
         }
         private void OnDrawGizmos()
         {
