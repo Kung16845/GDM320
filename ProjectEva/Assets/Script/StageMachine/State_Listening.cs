@@ -13,11 +13,10 @@ namespace Enemy_State
         public bool isSetValue = false;
         public override void Behavevior(Enemy enemy)
         {
-
+            Debug.Log("Enter Start StageState_Listening");
             if (isRunState_Listening)
             {
-                // if (enemy.isUsingTunnel)
-                // {
+
                 if (!isSetValue)
                 {
                     Debug.Log("Start StageState_Listening");
@@ -26,40 +25,25 @@ namespace Enemy_State
                     enemy.agent.speed = enemy.speed * 2;
                     var SpawmsClosePlayer = AllSpawns.FindClosestPosition(enemy.directorAI.setSpawns, enemy.directorAI.player).position;
                     enemy.agent.SetDestination(SpawmsClosePlayer);
+                    enemy.GetComponent<BoxCollider2D>().enabled = false;
+
                     isSetValue = true;
                 }
-                else if (enemy.agent.remainingDistance <= enemy.agent.stoppingDistance && !enemy.agent.pathPending)
+                if (enemy.enemyDetectSound.soundValue >= 8)
                 {
-                    enemy.isUsingTunnel = false;
-                    isRunState_Listening = false;
-                    isSetValue = false;
-                    enemy.SetAlpha(255);
-                    enemy.agent.speed = enemy.speed;
-                    Debug.Log("End State Listen");
+                    if (enemy.agent.remainingDistance <= enemy.agent.stoppingDistance && !enemy.agent.pathPending)
+                    {
+                        enemy.isUsingTunnel = false;
+                        isRunState_Listening = false;
+                        isSetValue = false;
+                        enemy.SetAlpha(255);
+                        enemy.agent.speed = enemy.speed;
+                        Debug.Log("End State Listen");
+                    }
                 }
-                // }
-                // else
-                // {
-                //     Debug.Log("enemy Find Closest Spawns");
-                //     var SpawmsCloseEnemy = AllSpawns.FindClosestPosition(enemy.directorAI.setSpawns, enemy.directorAI.enemy).position;
-                //     enemy.agent.SetDestination(SpawmsCloseEnemy);
-                //     if (enemy.agent.remainingDistance <= enemy.agent.stoppingDistance && !enemy.agent.pathPending)
-                //         enemy.isUsingTunnel = true;
-                // }
             }
         }
-        // public void MovetonClosesttunnel(DirectorAI directorAI, Enemy enemy)
-        // {
 
-        //     var movetoSpawn = directorAI.FindClosestPosition
-        //     (directorAI.listSpawnPosition, directorAI.player);
-
-        //     Debug.Log(movetoSpawn.position);
-        //     enemy.targetPosition = movetoSpawn.position;
-        //     Debug.Log(movetoSpawn);
-
-        //     enemy.agent.SetDestination(movetoSpawn.position);
-        // }
     }
 
 }

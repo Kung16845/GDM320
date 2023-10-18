@@ -15,7 +15,7 @@ namespace Enemy_State
         public List<Transform> allpointMove;
         public override void Behavevior(Enemy enemy)
         {
-
+            
             if (!isSetValue)
             {   
                 Debug.Log("Start State_Searching");
@@ -60,17 +60,6 @@ namespace Enemy_State
             isExpolre = true;
         }
 
-        // public void FindClosestPositionRoom(DirectorAI directorAI, Enemy enemy)
-        // {
-        //     var movetoRoom = directorAI.FindClosestPosition
-        //     (directorAI.listRoomPosition, directorAI.player);
-
-        //     enemy.targetPosition = movetoRoom.position;
-        //     Debug.Log(enemy.targetPosition);
-        //     Debug.Log(movetoRoom);
-
-        //     enemy.agent.SetDestination(movetoRoom.position);
-        // }
     }
 }
 

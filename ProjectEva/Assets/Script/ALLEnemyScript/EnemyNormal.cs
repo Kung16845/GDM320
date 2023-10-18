@@ -36,10 +36,12 @@ namespace Enemy_State
                 case State_Listening:
                     EnterState(state_Listening);
                     if (!state_Listening.isRunState_Listening)
-                    {
+                    {   
+                        this.GetComponent<BoxCollider2D>().enabled = true;
                         isUsingTunnel = false;
                         SetAreaMask();
                         currentState = state_Searching;
+                        EnterState(state_Searching);
                     }
                     break;
                 case State_Searching:
@@ -66,6 +68,8 @@ namespace Enemy_State
                         state_Searching.isSetValue = false;
                         currentState = state_Searching;
                     }
+                    else if (enemySight.canSee && hp > 0)
+                        currentState = state_Hunting;
                     else if (hp <= 0)
                     {
                         state_Retreat.isRunState_Retreat = true;

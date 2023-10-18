@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 8132098572858709668}
   - component: {fileID: 8870332220306220864}
   - component: {fileID: 6416378519299647679}
-  - component: {fileID: 6723240154667446455}
   - component: {fileID: 7318387728424238426}
   - component: {fileID: 2459817810504981418}
   m_Layer: 0
@@ -113,7 +112,7 @@ Transform:
   - {fileID: 4595292425645306402}
   - {fileID: 4663710080394928425}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8870332220306220864
 SpriteRenderer:
@@ -194,51 +193,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6723240154667446455
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4920418984444432624}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &7318387728424238426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,15 +212,22 @@ MonoBehaviour:
   damage: 10
   damageSanity: 10
   detection: 0
+  isHear: 0
   isAttack: 0
+  isWaittingtime: 0
   isRunStage: 0
-  targetPosition: {x: 0, y: 0}
+  isUsingTunnel: 0
+  isUseTunnalToCloseSpawns: 0
+  spriteRenderer: {fileID: 0}
+  ResingPoint: {fileID: 0}
   agent: {fileID: 0}
   rb: {fileID: 0}
   directorAI: {fileID: 0}
   enemySight: {fileID: 145755555114303672}
+  enemyDetectSound: {fileID: 0}
   currentState: {fileID: 0}
   state_Searching: {fileID: 0}
+  state_SearchingSound: {fileID: 0}
   state_Listening: {fileID: 0}
   state_Hunting: {fileID: 0}
   state_Retreat: {fileID: 0}

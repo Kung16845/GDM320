@@ -10,6 +10,7 @@ namespace Enemy_State
         [Header("-----------Sound Detection---------")]
         [Space(25f)]
         public float radius;
+        public float Saveradius;
         public float soundValue;
         public float maxSoundValue;
         public bool isCountingValueSound;
@@ -23,11 +24,15 @@ namespace Enemy_State
         [Space(25f)]
         public float time;
         public float timeDelay;
+        private void Start()
+        {
+            Saveradius = radius;
+        }
         private void Update()
         {
             var Collider2DCheckSound = Physics2D.OverlapCircle(transform.position, radius, layerMask);
             if (Collider2DCheckSound != null)
-            {   
+            {
                 isRunningReduceSoundValue = false;
                 // enemy.isHear = true;
                 Debug.Log("Sound Is Hear");
@@ -54,18 +59,35 @@ namespace Enemy_State
                     isRunningReduceSoundValue = true;
                 }
             }
+            if (soundValue > 16)
+                soundValue = 16;
 
+            if (enemy.currentState == enemy.state_Listening)
+                radius = Saveradius / 2;
+            else
+                radius = Saveradius;
         }
         IEnumerator DelayTimeCountSoundValue()
         {
             isCountingValueSound = true;
-            if(newMovementPlayer.isRunning)
-                soundValue += 8;
-            else if(pistol.isshoot)
+            if (newMovementPlayer.isRunning)
+            {
+                if (enemy.currentState = enemy.state_Listening)
+                    soundValue += 16;
+                else
+                    soundValue += 8;
+            }
+            else if (pistol.isshoot)
                 soundValue += 16;
-            else if(newMovementPlayer.isWalking)    
-                soundValue += 4;
-            else 
+
+            else if (newMovementPlayer.isWalking)
+            {
+                if (enemy.currentState = enemy.state_Listening)
+                    soundValue += 4 * 2;
+                else
+                    soundValue += 4;
+            }
+            else
                 soundValue += 0;
             yield return new WaitForSeconds(4.0f);
             isCountingValueSound = false;
