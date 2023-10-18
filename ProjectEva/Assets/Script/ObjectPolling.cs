@@ -15,7 +15,7 @@ public class ObjectPolling : MonoBehaviour
     public Transform player;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         player = FindAnyObjectByType<Hp>().transform;
         CreateObjectPooling();

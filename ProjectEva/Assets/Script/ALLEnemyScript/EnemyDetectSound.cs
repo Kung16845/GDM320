@@ -36,9 +36,11 @@ namespace Enemy_State
                 isRunningReduceSoundValue = false;
                 // enemy.isHear = true;
                 Debug.Log("Sound Is Hear");
-                if (!isCountingValueSound)
+                if (!Collider2DCheckSound.GetComponent<SoundWave>().isDetect) //!isCountingValueSound &&
+                {   
+                    Collider2DCheckSound.GetComponent<SoundWave>().isDetect = true;
                     StartCoroutine(DelayTimeCountSoundValue());
-
+                }
                 if (soundValue >= maxSoundValue)
                 {
                     if (enemy.currentState != enemy.state_SearchingSound)
@@ -46,7 +48,6 @@ namespace Enemy_State
                 }
                 time = 0;
             }
-
             else
             {
                 Debug.Log("Sound Is Not Hear");

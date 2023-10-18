@@ -70,11 +70,7 @@ namespace Enemy_State
                 else 
                     pointinRoomforEnemyMove.Add(point);
             }
-            foreach (var point in pointinRoomforEnemyMove)
-            {
-                // Debug.Log(point);
-            }
-            
+                     
             return pointinRoomforEnemyMove;
         }
         public Transform CheckedTranform(Transform transform, List<Transform> listpoint, int Count)

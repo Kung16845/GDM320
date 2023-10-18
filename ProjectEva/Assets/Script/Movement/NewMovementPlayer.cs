@@ -8,15 +8,15 @@ public class NewMovementPlayer : MonoBehaviour
     public float speed;
     public float crouchSpeed;
     public float runspeed;
-    public Collider2D CircleSound;
     public ObjectPolling SoundWave;
     public SanityScaleController sanityScaleController;
     private GunSpeedManager gunSpeedManager;
-
-    public bool isRunning = false;
-    public bool isWalking = false;
-    public bool isCrouching = false;
-    public bool isWaittingtime = false;
+    
+    public bool isRunning;
+    public bool isWalking;
+    public bool isCrouching;
+    public bool isWaittingtime;
+    public bool isStaySafeRoom;
     private void Start()
     {
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
@@ -26,30 +26,28 @@ public class NewMovementPlayer : MonoBehaviour
 
     void Update()
     {
-        GetDirection();
-        if (transform.hasChanged && !isCrouching && !isRunning)
-        {   
-            
-        }
-        
+        GetDirection();      
         // Check for running and crouching
         if (Input.GetKey(KeyCode.LeftShift))
         {
             isRunning = true;
             isCrouching = false;
             isWalking = false;
+            Run();
         }
         else if (Input.GetKey(KeyCode.LeftControl))
         {
             isCrouching = true;
             isRunning = false;
             isWalking = false;
+            Crouch();
         }
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             isWalking = true;
             isRunning = false;
             isCrouching = false;
+            Move();
         }
         else 
         {
@@ -59,35 +57,16 @@ public class NewMovementPlayer : MonoBehaviour
         }
 
         // Adjust movement based on the current state
-        if (isRunning)
-        {
-            Run();
-            if(!isWaittingtime && direction.x + direction.y != 0)
+        if(!isWaittingtime && direction.x + direction.y != 0 && !isStaySafeRoom)
                 StartCoroutine(DelayTimeSoundWave());
-            Debug.Log("Create Sound");
-            transform.hasChanged = false;
-        }
-        else if (isWalking)
-        {   
-            if(!isWaittingtime && direction.x + direction.y != 0)
-                StartCoroutine(DelayTimeSoundWave());
-            Debug.Log("Create Sound");
-            transform.hasChanged = false;
-            Move();
-        }
-        else 
-        {
-            Crouch();
-        }
     }
     IEnumerator DelayTimeSoundWave()
     {   
         isWaittingtime = true;
+        
         yield return new WaitForSeconds(1);
-        if(isRunning) 
-            SoundWave.SpawnFromPool("Sound Wave Run", this.transform.position, Quaternion.identity);
-        else if(isWalking)
-            SoundWave.SpawnFromPool("Sound Wave Walk", this.transform.position, Quaternion.identity);
+        SoundWave.SpawnFromPool("Sound Wave", this.transform.position, Quaternion.identity);
+
         isWaittingtime = false;
     }
     void GetDirection()

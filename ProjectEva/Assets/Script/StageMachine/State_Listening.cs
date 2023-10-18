@@ -25,8 +25,7 @@ namespace Enemy_State
                     enemy.agent.speed = enemy.speed * 2;
                     var SpawmsClosePlayer = AllSpawns.FindClosestPosition(enemy.directorAI.setSpawns, enemy.directorAI.player).position;
                     enemy.agent.SetDestination(SpawmsClosePlayer);
-                    enemy.GetComponent<BoxCollider2D>().enabled = false;
-
+                    enemy.GetComponent<BoxCollider2D>().isTrigger = false;
                     isSetValue = true;
                 }
                 if (enemy.enemyDetectSound.soundValue >= 8)

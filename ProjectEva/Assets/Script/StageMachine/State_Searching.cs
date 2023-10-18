@@ -25,7 +25,7 @@ namespace Enemy_State
                 allpointMove = allRoom.FindPointMoveInRoom(pointInRoomForEnemyMove.AllpointInRoom);
                 enemy.SetAreaMask();
                 GoPointInRooms(allpointMove.ElementAt<Transform>(currentPointIndex), enemy);
-                isSetValue = true;
+                isSetValue = !isSetValue;
             }
 
             if (!enemy.agent.pathPending && enemy.agent.remainingDistance < 0.1f && isExpolre)
