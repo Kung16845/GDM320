@@ -30,16 +30,21 @@ public class NewMovementPlayer : MonoBehaviour
     public SanityScaleController sanityScaleController;
     private GunSpeedManager gunSpeedManager;
 
+    [Header("---------Audiomanager------------")]
+    private SoundManager soundManager;
+
     private void Start()
     {
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
         sanityScaleController = FindObjectOfType<SanityScaleController>();
+        soundManager = FindObjectOfType<SoundManager>();
         
     }
 
-    void Update()
+     void Update()
     {
-        GetDirection();      
+        GetDirection();
+
         // Check for running and crouching
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -47,6 +52,7 @@ public class NewMovementPlayer : MonoBehaviour
             isCrouching = false;
             isWalking = false;
             Run();
+            // soundManager.PlaySound("Run"); // Play the run sound
         }
         else if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -54,6 +60,7 @@ public class NewMovementPlayer : MonoBehaviour
             isRunning = false;
             isWalking = false;
             Crouch();
+            // soundManager.PlaySound("CrouchSound"); // Play the crouch sound
         }
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
@@ -61,17 +68,17 @@ public class NewMovementPlayer : MonoBehaviour
             isRunning = false;
             isCrouching = false;
             Move();
+            // soundManager.PlaySound("Walk"); // Play the walk sound
         }
-        else 
+        else
         {
             isWalking = false;
             isRunning = false;
             isCrouching = false;
+            // soundManager.StopSound();
         }
-
-        // Adjust movement based on the current state
-        if(!isWaittingtime && direction.x + direction.y != 0 && !isStaySafeRoom)
-                StartCoroutine(DelayTimeSoundWave());
+        if (!isWaittingtime && direction.x + direction.y != 0 && !isStaySafeRoom)
+            StartCoroutine(DelayTimeSoundWave());
     }
     IEnumerator DelayTimeSoundWave()
     {   
@@ -93,6 +100,7 @@ public class NewMovementPlayer : MonoBehaviour
     void Move()
     {
         transform.Translate(direction * (speed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
+        
     }
 
     void Run()

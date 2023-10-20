@@ -12,7 +12,7 @@ public class Pistol : MonoBehaviour
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float maxAccuracy = 1.0f;
     [SerializeField] float minAccuracy = 0.2f;
-    [SerializeField] float cooldownTime = 0.5f;
+    [SerializeField] float cooldownTime = 1.5f;
     [SerializeField] float accuracyIncreaseRate = 0.2f;
     [SerializeField] float accuracyDecreaseRate = 0.1f;
     [SerializeField] float reloadTime = 2.0f;
@@ -28,6 +28,7 @@ public class Pistol : MonoBehaviour
     private GunSpeedManager gunSpeedManager;
     public ObjectPolling SoundWave;
     public bool isshoot = false;
+    public SoundManager soundManager;
 
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
@@ -41,6 +42,7 @@ public class Pistol : MonoBehaviour
         bulletsToReload = 0;
         sanityScaleController = FindObjectOfType<SanityScaleController>();
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
+        soundManager = FindObjectOfType<SoundManager>();
 
         // Initialize current ammo to max ammo at the start.
     }
@@ -90,6 +92,10 @@ public class Pistol : MonoBehaviour
             Shoot();
             lastShotTime = Time.time;
         }
+        else if (Input.GetMouseButtonDown(0) && ammoInChamber == 0 && Time.time - lastShotTime >= cooldownTime)
+        {
+            soundManager.PlaySound("Drymag");
+        }
         else if (Input.GetKeyDown(KeyCode.R) && !gunSpeedManager.isRunning && ammoInChamber < maxAmmo && !isAiming)
         {
             // Check if the player has enough total ammo to reload.
@@ -126,13 +132,14 @@ public class Pistol : MonoBehaviour
         bulletScript.damage = bulletDamage;
         SoundWave.SpawnFromPool("Sound Wave Gun", this.transform.position, Quaternion.identity);
         ammoInChamber--;
-
+        soundManager.PlaySound("Fire");
         StartCoroutine(ResetShootFlagAfterDelay());
     }
 
     IEnumerator ResetShootFlagAfterDelay()
     {
-        yield return new WaitForSeconds(1.0f); // Wait for 1 second (you can adjust the time as needed)
+        yield return new WaitForSeconds(1.5f);
+        soundManager.PlaySound("Cock"); // Wait for 1 second (you can adjust the time as needed)
         isshoot = false;
     }
 
@@ -158,6 +165,7 @@ public class Pistol : MonoBehaviour
             // Decrease current ammo when finishing a reload.
             currentAmmo--;
             reloadStartTime = Time.time; // Start the reload of the next bullet.
+            soundManager.PlaySound("Reload");
         }
         else
         {
