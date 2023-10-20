@@ -17,8 +17,12 @@ public class SoundWave : MonoBehaviour
     public float radiusGun;
     [Header("---------CheckValue------------")]
     [Space(25f)]
+    public bool isCreatingSoundWave;
     public bool isReducing;
     public bool isDetect;
+    
+    [Header("---------ScriptValue------------")]
+    [Space(25f)]
     public NewMovementPlayer checkMovementPlayer;
     public Pistol checkShoot;
     // Start is called before the first frame update
@@ -33,16 +37,19 @@ public class SoundWave : MonoBehaviour
     }
     void CheckCreateSoundWave()
     {
-        if (checkMovementPlayer.isRunning)
+        if (checkMovementPlayer.isRunning && !isCreatingSoundWave)
             StartCoroutine(CreateCircleCollder2DSound(radiusRun));
-        else if (checkMovementPlayer.isWalking)
+
+        else if (checkMovementPlayer.isWalking && !isCreatingSoundWave)
             StartCoroutine(CreateCircleCollder2DSound(radiusWalk));
-        else if (checkShoot.isshoot)
+            
+        else if (checkShoot.isshoot && !isCreatingSoundWave)
             StartCoroutine(CreateCircleCollder2DSound(radiusGun));
     }
     IEnumerator CreateCircleCollder2DSound(float radius)
     {
         yield return new WaitForSeconds(delayTimeIncreateRadius);
+        isCreatingSoundWave = true;
         this.GetComponent<CircleCollider2D>().radius = radius;
         if(!isReducing)
             StartCoroutine(ReduceSoundWave(this.GetComponent<CircleCollider2D>().radius / 4));

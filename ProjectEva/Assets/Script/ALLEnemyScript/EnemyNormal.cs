@@ -63,7 +63,7 @@ namespace Enemy_State
                     break;
                 case State_SearchingSound:
                     EnterState(state_SearchingSound);
-                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending || agent.remainingDistance <= 0.5f && hp > 0)
+                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0)
                     {
                         state_Searching.isSetValue = false;
                         currentState = state_Searching;
@@ -90,12 +90,15 @@ namespace Enemy_State
         private void OnTriggerEnter2D(Collider2D player)
         {
             // StartCoroutine(EnemyAttack(2.0f,player));
-            if (player.GetComponent<Hp>() != null && currentState == state_Hunting)
+            Debug.Log("Player Taken Damage ");
+            if (player.GetComponent<Hp>() != null)
             {
-                player.GetComponent<Hp>().TakeDamage(damage);
-                Debug.Log("Player Taken Damage  ");
+                if (currentState == state_Hunting)
+                {
+                    player.GetComponent<Hp>().TakeDamage(damage);
+                    Debug.Log("Player Taken Damage  ");
+                }
             }
-
         }
     }
 }

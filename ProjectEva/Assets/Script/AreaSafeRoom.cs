@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class AreaSafeRoom : MonoBehaviour
 {
-
+    
     private void OnTriggerStay2D(Collider2D player)
-    {
-        if (!player.GetComponent<NewMovementPlayer>().isStaySafeRoom && player.GetComponent<NewMovementPlayer>() != null)
-            player.GetComponent<NewMovementPlayer>().isStaySafeRoom = true;
+    {   
+        var NewMovementPlayer = player.GetComponent<NewMovementPlayer>();
+        if (NewMovementPlayer != null)
+        {
+            if (NewMovementPlayer.isStaySafeRoom)
+                NewMovementPlayer.isStaySafeRoom = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D player)
-    {
-        if(player.GetComponent<NewMovementPlayer>().isStaySafeRoom && player.GetComponent<NewMovementPlayer>() != null)
-            player.GetComponent<NewMovementPlayer>().isStaySafeRoom = false;
+    {   
+        var NewMovementPlayer = player.GetComponent<NewMovementPlayer>();
+        if (NewMovementPlayer != null)
+        {
+            if (NewMovementPlayer.isStaySafeRoom)
+                NewMovementPlayer.isStaySafeRoom = false;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Enemy_State
         public float radius;
         public float angle;
         public GameObject player;
-
+        
         public LayerMask targetMask;
         public LayerMask obstrctionMask;
 

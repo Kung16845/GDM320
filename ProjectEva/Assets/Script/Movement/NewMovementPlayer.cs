@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class NewMovementPlayer : MonoBehaviour
 {
-    public Vector2 direction;
+    
+    [Header ("--------Movenment----------")]
+    [Space(25f)]
     public float speed;
     public float crouchSpeed;
     public float runspeed;
-    public ObjectPolling SoundWave;
-    public SanityScaleController sanityScaleController;
-    private GunSpeedManager gunSpeedManager;
+    public Vector2 direction;
     
+    [Header ("--------CheckValue----------")]
+    [Space(25f)]
     public bool isRunning;
     public bool isWalking;
     public bool isCrouching;
     public bool isWaittingtime;
     public bool isStaySafeRoom;
+
+    [Header ("--------SoundValue----------")]
+    [Space(25f)]
+    public GameObject SoundWavePrefeb;
+    public ObjectPolling SoundWave;
+
+    [Header("---------ScriptValue------------")]
+    [Space(25f)]
+    public SanityScaleController sanityScaleController;
+    private GunSpeedManager gunSpeedManager;
+
     private void Start()
     {
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();

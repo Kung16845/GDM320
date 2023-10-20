@@ -16,45 +16,16 @@ namespace Enemy_State
         public float maxXOffset;
         public float maxYOffset;
         public float Stressvalue;
-        // public Dictionary<string,Transform> listSpawnPosition = new Dictionary<string, Transform>();
         public List<SetPosition> setSpawns = new List<SetPosition>();
-        // public Dictionary<string,Transform> listRoomPosition = new Dictionary<string, Transform>();
-        // public List<SetPosition> setRoom = new List<SetPosition>();
+        
         public List<Room> rooms = new List<Room>();
         private void Start()
         {
             this.player = FindObjectOfType<PlayerMovement>().transform;
             this.enemy = FindObjectOfType<EnemyNormal>().transform;
-            // SaveListPositionToDictinary(setSpawns,listSpawnPosition);
-            // SaveListPositionToDictinary(setRoom,listRoomPosition);
             StartCoroutine(EverySeconReduce(1.0f));
         }  
-        // public void SaveListPositionToDictinary(List<SetPosition> listPosition,
-        //                                         Dictionary<string,Transform> listNameandPosition)
-        // {   
-        //     foreach (var info in listPosition)
-        //     {
-        //         listNameandPosition.Add(info.namePoint,info.point);
-        //     } 
-        // }
-        // public Transform FindClosestPosition(Dictionary<string,Transform> listNameandPoint,Transform target)
-        // {
-        //     string namePoint = null;
-        //     float closestDistance = float.MaxValue;
-
-        //     foreach (var point in listNameandPoint)
-        //     {
-        //         float distance = Vector2.Distance(point.Value.position,target.position);
-
-        //         if(distance < closestDistance)
-        //         {
-        //             closestDistance = distance;
-        //             namePoint = point.Key;
-        //         }
-        //     }
-
-        //     return listNameandPoint[namePoint];
-        // }
+       
         private void Update() 
         {
             navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); //ไว้อัปเดตแมพ

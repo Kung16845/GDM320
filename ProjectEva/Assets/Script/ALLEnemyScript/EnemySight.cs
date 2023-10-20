@@ -12,7 +12,7 @@ namespace Enemy_State
         {
             Vector2 enemyPosition = transform.position;
             Vector2 playerPosition = playerCollider.bounds.center;
-
+            
             Vector2 direction = playerPosition - enemyPosition;
             
             // Perform a raycast to check for obstacles

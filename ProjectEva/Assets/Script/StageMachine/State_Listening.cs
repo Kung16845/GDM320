@@ -16,7 +16,6 @@ namespace Enemy_State
             Debug.Log("Enter Start StageState_Listening");
             if (isRunState_Listening)
             {
-
                 if (!isSetValue)
                 {
                     Debug.Log("Start StageState_Listening");
@@ -29,7 +28,7 @@ namespace Enemy_State
                     isSetValue = true;
                 }
                 if (enemy.enemyDetectSound.soundValue >= 8)
-                {
+                {       
                     if (enemy.agent.remainingDistance <= enemy.agent.stoppingDistance && !enemy.agent.pathPending)
                     {
                         enemy.isUsingTunnel = false;
@@ -37,6 +36,7 @@ namespace Enemy_State
                         isSetValue = false;
                         enemy.SetAlpha(255);
                         enemy.agent.speed = enemy.speed;
+                        enemy.GetComponent<BoxCollider2D>().isTrigger = true;
                         Debug.Log("End State Listen");
                     }
                 }
