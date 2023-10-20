@@ -151,8 +151,6 @@ MonoBehaviour:
   maxAmmo: 6
   ammoInChamber: 6
   bulletDamage: 1
-  criticalRate: 0.1
-  criticalDamageMultiplier: 5
   bulletSpeed: 10
   maxAccuracy: 1
   minAccuracy: 0.2
@@ -164,6 +162,9 @@ MonoBehaviour:
   currentAccuracy: 0.2
   isAiming: 0
   isReloading: 0
+  SoundWave: {fileID: 0}
+  isshoot: 0
+  currentAmmo: 0
 --- !u!1 &2137785785637775857
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +292,7 @@ Transform:
   - {fileID: 1861472334771221059}
   - {fileID: 9067954830414776689}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8944580823985512740
 SpriteRenderer:
@@ -389,6 +390,7 @@ MonoBehaviour:
   _reloadSpeed: 1
   _runningSpeed: 4.5
   _rotationSpeedl: 720
+  CircleSound: {fileID: 0}
 --- !u!114 &568293476761580300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +546,9 @@ MonoBehaviour:
   currenthp: 100
   player: {fileID: 2540481536168168083}
   healthText: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  lowHpThreshold: 30
+  reloadScript: {fileID: 0}
 --- !u!114 &8069690571805258274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,14 +637,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4921716648466806717}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6510801991967429543}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!212 &6170924228208512639
 SpriteRenderer:
   m_ObjectHideFlags: 0
