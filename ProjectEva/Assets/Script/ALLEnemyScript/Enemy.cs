@@ -8,6 +8,8 @@ namespace Enemy_State
 {
     public abstract class Enemy : MonoBehaviour
     {   
+        [Header ("---------EnemyValue-----------")]
+        [Space(25f)]
         public float hp;
         public float maxhp;
         public float speed;
@@ -15,18 +17,21 @@ namespace Enemy_State
         public float damage;
         public float damageSanity;
         public float detection;
+        [Header ("---------CheckValue-----------")]
+        [Space(25f)]
         public bool isHear;
         public bool isAttack = false;
         public bool isWaittingtime = false;
         public bool isRunStage = false;
         public bool isUsingTunnel = false;
         public bool isUseTunnalToCloseSpawns = false;
-        // public Collider2D enemyCollider;
-        // public Vector2 targetPosition;
-        public SpriteRenderer spriteRenderer;
+        
+        
+        [Header ("---------ScriptValue-----------")]
+        [Space(25f)]
         public Transform ResingPoint;
+        public SpriteRenderer spriteRenderer;
         public NavMeshAgent agent;
-        public Rigidbody2D rb;
         public DirectorAI directorAI;
         public EnemySight enemySight;
         public EnemyDetectSound enemyDetectSound;

@@ -25,6 +25,7 @@ public class SoundWave : MonoBehaviour
     [Space(25f)]
     public NewMovementPlayer checkMovementPlayer;
     public Pistol checkShoot;
+    
     // Start is called before the first frame update
     private void Update()
     {   

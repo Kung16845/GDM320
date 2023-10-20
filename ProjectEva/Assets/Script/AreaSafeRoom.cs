@@ -10,7 +10,7 @@ public class AreaSafeRoom : MonoBehaviour
         var NewMovementPlayer = player.GetComponent<NewMovementPlayer>();
         if (NewMovementPlayer != null)
         {
-            if (NewMovementPlayer.isStaySafeRoom)
+            if (!NewMovementPlayer.isStaySafeRoom)
                 NewMovementPlayer.isStaySafeRoom = true;
         }
     }

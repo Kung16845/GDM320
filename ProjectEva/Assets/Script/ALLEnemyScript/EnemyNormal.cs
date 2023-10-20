@@ -9,7 +9,6 @@ namespace Enemy_State
     {
         private void Start()
         {
-            this.rb = GetComponent<Rigidbody2D>();
             this.directorAI = FindObjectOfType<DirectorAI>();
             this.agent = GetComponent<NavMeshAgent>();
             this.agent.updateRotation = false;
