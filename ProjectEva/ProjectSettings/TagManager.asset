@@ -9,6 +9,7 @@ TagManager:
   - Door
   - Bullet
   - inventory
+  - Velocrux
   layers:
   - Default
   - TransparentFX
