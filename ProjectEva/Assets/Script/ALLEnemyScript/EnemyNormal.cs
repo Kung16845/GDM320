@@ -5,9 +5,9 @@ using UnityEngine.AI;
 using Unity.VisualScripting;
 
 namespace Enemy_State
-{   
+{
     public class EnemyNormal : Enemy
-    {   
+    {
         private void Start()
         {
             this.directorAI = FindObjectOfType<DirectorAI>();
@@ -16,7 +16,7 @@ namespace Enemy_State
             this.agent.updateUpAxis = false;
             this.agent.speed = speed;
             this.hp = this.maxhp;
-            this.spriteRenderer = GetComponent<SpriteRenderer>();
+            this.spriteRenderer = FindObjectOfType<Velo_movement>().GetComponent<SpriteRenderer>();
             this.newMovementPlayer = FindAnyObjectByType<NewMovementPlayer>();
             RandomPositionSpawns(directorAI);
             state_Listening.isRunState_Listening = true;
@@ -32,6 +32,12 @@ namespace Enemy_State
                     {
                         currentState = state_Retreat;
                         state_Retreat.isRunState_Retreat = true;
+                    }
+                    else if (newMovementPlayer.isStaySafeRoom)
+                    {
+                        enemyDetectSound.soundValue = 0;
+                        state_Searching.isSetValue = false;
+                        EnterState(state_Searching);
                     }
                     break;
                 case State_Listening:
@@ -63,17 +69,12 @@ namespace Enemy_State
                     break;
                 case State_SearchingSound:
                     EnterState(state_SearchingSound);
-                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0 )
+                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0)
                     {
                         state_Searching.isSetValue = false;
                         currentState = state_Searching;
                     }
-                    else if(newMovementPlayer.isStaySafeRoom)
-                    {
-                        state_Searching.isSetValue = false;
-                        enemyDetectSound.soundValue = 0;
-                        currentState = state_Searching;
-                    }
+
                     else if (enemySight.canSee && hp > 0)
                         currentState = state_Hunting;
                     else if (hp <= 0)
@@ -93,6 +94,6 @@ namespace Enemy_State
             }
 
         }
-        
+
     }
 }
