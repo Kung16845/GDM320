@@ -2,11 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 namespace Enemy_State
-{
+{   
     public class EnemyNormal : Enemy
-    {
+    {   
         private void Start()
         {
             this.directorAI = FindObjectOfType<DirectorAI>();
@@ -16,6 +17,7 @@ namespace Enemy_State
             this.agent.speed = speed;
             this.hp = this.maxhp;
             this.spriteRenderer = GetComponent<SpriteRenderer>();
+            this.newMovementPlayer = FindAnyObjectByType<NewMovementPlayer>();
             RandomPositionSpawns(directorAI);
             state_Listening.isRunState_Listening = true;
             currentState = state_Listening;
@@ -61,9 +63,15 @@ namespace Enemy_State
                     break;
                 case State_SearchingSound:
                     EnterState(state_SearchingSound);
-                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0)
+                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0 )
                     {
                         state_Searching.isSetValue = false;
+                        currentState = state_Searching;
+                    }
+                    else if(newMovementPlayer.isStaySafeRoom)
+                    {
+                        state_Searching.isSetValue = false;
+                        enemyDetectSound.soundValue = 0;
                         currentState = state_Searching;
                     }
                     else if (enemySight.canSee && hp > 0)

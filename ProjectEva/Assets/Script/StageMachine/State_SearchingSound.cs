@@ -15,6 +15,7 @@ namespace Enemy_State
                 Debug.Log("Find position plater Lasty");
                 enemy.isHear = false;
             }
+            
         }
     }
 }

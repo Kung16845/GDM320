@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     public EnemyNormal enemyNormal;
-    public Animation animationActtack;
+    public Animator animationActtack;
     private void Start()
     {
         enemyNormal = FindObjectOfType<EnemyNormal>();
@@ -19,7 +19,7 @@ public class EnemyAttack : MonoBehaviour
         {
             if (enemyNormal.currentState == enemyNormal.state_Hunting)
             {
-                player.GetComponent<Hp>().TakeDamage(enemyNormal.damage);
+                // player.GetComponent<Hp>().TakeDamage(enemyNormal.damage);
                 Debug.Log("Player Taken Damage  ");
             }
         }

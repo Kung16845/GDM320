@@ -29,9 +29,11 @@ namespace Enemy_State
         
         [Header ("---------ScriptValue-----------")]
         [Space(25f)]
+        
         public Transform ResingPoint;
         public SpriteRenderer spriteRenderer;
         public NavMeshAgent agent;
+        public NewMovementPlayer newMovementPlayer;
         public DirectorAI directorAI;
         public EnemySight enemySight;
         public EnemyDetectSound enemyDetectSound;
