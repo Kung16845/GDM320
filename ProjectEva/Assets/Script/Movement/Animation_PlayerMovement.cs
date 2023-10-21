@@ -23,8 +23,14 @@ public class Animation_PlayerMovement : MonoBehaviour
 
         if (Input.GetMouseButton(1)){ isAiming = true; animator.SetBool("isAiming", true); }
         else { isAiming= false; animator.SetBool("isAiming", false); }
-        
-        if(isAiming) { aimRotate(); }
+
+        if (Input.GetKey(KeyCode.LeftShift)) { animator.SetBool("isRunning", true); }
+        else { animator.SetBool("isRunning", false); }
+
+        if(Input.GetKey(KeyCode.LeftControl)) { animator.SetBool("isSlow", true); }
+        else { animator.SetBool("isSlow", false); }
+
+        if (isAiming) { aimRotate(); }
         else { normalRotate(); }
         
         animator.SetFloat("Speed", movement.sqrMagnitude);
