@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NewMovementPlayer : MonoBehaviour
@@ -78,8 +79,10 @@ public class NewMovementPlayer : MonoBehaviour
         isWaittingtime = true;
         
         yield return new WaitForSeconds(1);
-        SoundWave.SpawnFromPool("Sound Wave", this.transform.position, Quaternion.identity);
-
+        // SoundWave.SpawnFromPool("Sound Wave",this.transform.position,Quaternion.identity);
+        GameObject soundwave = Instantiate(SoundWavePrefeb,gameObject.transform); 
+        soundwave.SetActive(true);
+        
         isWaittingtime = false;
     }
     void GetDirection()

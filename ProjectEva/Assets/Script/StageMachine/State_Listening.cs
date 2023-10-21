@@ -24,7 +24,6 @@ namespace Enemy_State
                     enemy.agent.speed = enemy.speed * 2;
                     var SpawmsClosePlayer = AllSpawns.FindClosestPosition(enemy.directorAI.setSpawns, enemy.directorAI.player).position;
                     enemy.agent.SetDestination(SpawmsClosePlayer);
-                    enemy.GetComponent<BoxCollider2D>().isTrigger = false;
                     isSetValue = true;
                 }
                 if (enemy.enemyDetectSound.soundValue >= 8)
@@ -36,13 +35,17 @@ namespace Enemy_State
                         isSetValue = false;
                         enemy.SetAlpha(255);
                         enemy.agent.speed = enemy.speed;
-                        enemy.GetComponent<BoxCollider2D>().isTrigger = true;
                         Debug.Log("End State Listen");
                     }
                 }
             }
         }
-
+        public void SetValueforState_Listening(Enemy enemy)
+        {
+            enemy.SetNavMeshArea("Tunnel");
+            enemy.SetAlpha(0);
+            enemy.agent.speed = enemy.speed * 2;
+        }
     }
 
 }

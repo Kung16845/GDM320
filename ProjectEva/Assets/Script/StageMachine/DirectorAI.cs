@@ -21,7 +21,7 @@ namespace Enemy_State
         public List<Room> rooms = new List<Room>();
         private void Start()
         {
-            this.player = FindObjectOfType<PlayerMovement>().transform;
+            this.player = FindObjectOfType<NewMovementPlayer>().transform;
             this.enemy = FindObjectOfType<EnemyNormal>().transform;
             StartCoroutine(EverySeconReduce(1.0f));
         }  
