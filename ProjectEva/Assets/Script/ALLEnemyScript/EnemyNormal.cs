@@ -36,7 +36,6 @@ namespace Enemy_State
                     EnterState(state_Listening);
                     if (!state_Listening.isRunState_Listening)
                     {
-                        this.GetComponent<BoxCollider2D>().enabled = true;
                         isUsingTunnel = false;
                         SetAreaMask();
                         currentState = state_Searching;
@@ -86,18 +85,6 @@ namespace Enemy_State
             }
 
         }
-        private void OnTriggerEnter2D(Collider2D player)
-        {
-            // StartCoroutine(EnemyAttack(2.0f,player));
-            Debug.Log("Player Taken Damage ");
-            if (player.GetComponent<Hp>() != null)
-            {
-                if (currentState == state_Hunting)
-                {
-                    player.GetComponent<Hp>().TakeDamage(damage);
-                    Debug.Log("Player Taken Damage  ");
-                }
-            }
-        }
+        
     }
 }
