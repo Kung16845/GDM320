@@ -35,21 +35,4 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("Sound not found: " + soundName);
         }
     }
-    public bool HasSound(string soundName)
-    {
-        return soundLibrary.ContainsKey(soundName);
-    }
-
-    public AudioClip GetSound(string soundName)
-    {
-        if (soundLibrary.ContainsKey(soundName))
-        {
-            return soundLibrary[soundName];
-        }
-        else
-        {
-            Debug.LogWarning("Sound not found: " + soundName);
-            return null;
-        }
-    }
 }

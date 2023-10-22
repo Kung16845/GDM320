@@ -31,55 +31,62 @@ public class NewMovementPlayer : MonoBehaviour
     private GunSpeedManager gunSpeedManager;
 
     [Header("---------Audiomanager------------")]
-    private SoundManager soundManager;
+    public WalkSoundManager WalkSoundManager;
+    private GameObject currentSoundObject;
+
 
     private void Start()
     {
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
         sanityScaleController = FindObjectOfType<SanityScaleController>();
-        soundManager = FindObjectOfType<SoundManager>();
+        WalkSoundManager = FindObjectOfType<WalkSoundManager>();
         
     }
 
      void Update()
-    {
-        GetDirection();
+{
+    GetDirection();
 
-        // Check for running and crouching
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            isRunning = true;
-            isCrouching = false;
-            isWalking = false;
-            Run();
-            // soundManager.PlaySound("Run"); // Play the run sound
-        }
-        else if (Input.GetKey(KeyCode.LeftControl))
-        {
-            isCrouching = true;
-            isRunning = false;
-            isWalking = false;
-            Crouch();
-            // soundManager.PlaySound("CrouchSound"); // Play the crouch sound
-        }
-        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-        {
-            isWalking = true;
-            isRunning = false;
-            isCrouching = false;
-            Move();
-            // soundManager.PlaySound("Walk"); // Play the walk sound
-        }
-        else
-        {
-            isWalking = false;
-            isRunning = false;
-            isCrouching = false;
-            // soundManager.StopSound();
-        }
-        if (!isWaittingtime && direction.x + direction.y != 0 && !isStaySafeRoom)
-            StartCoroutine(DelayTimeSoundWave());
+    // Check for running and crouching
+    if (Input.GetKey(KeyCode.LeftShift))
+    {
+        isRunning = true;
+        isCrouching = false;
+        isWalking = false;
+        Run();
     }
+    else if (Input.GetKey(KeyCode.LeftControl))
+    {
+        isCrouching = true;
+        isRunning = false;
+        isWalking = false;
+        Crouch();
+    }
+    else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+    {
+        isWalking = true;
+        isRunning = false;
+        isCrouching = false;
+
+        if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
+        {
+            currentSoundObject = WalkSoundManager.PlaySound("Walk", transform);
+        }
+
+        Move();
+    }
+    else
+    {
+        isWalking = false;
+        isRunning = false;
+        isCrouching = false;
+        WalkSoundManager.StopSound();
+    }
+
+    if (!isWaittingtime && direction.x + direction.y != 0 && !isStaySafeRoom)
+        StartCoroutine(DelayTimeSoundWave());
+}
+
     IEnumerator DelayTimeSoundWave()
     {   
         isWaittingtime = true;
@@ -100,16 +107,28 @@ public class NewMovementPlayer : MonoBehaviour
     void Move()
     {
         transform.Translate(direction * (speed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
-        
+    }
+    void Run()
+{
+    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+    {
+        if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
+        {
+            WalkSoundManager.StopSound(); // Stop the walk sound if it's playing
+            currentSoundObject = WalkSoundManager.PlaySound("Run", transform);
+        }
+    }
+    else
+    {
+        WalkSoundManager.StopSound(); // Stop the walk sound if the player is not pressing movement keys
     }
 
-    void Run()
-    {
-        transform.Translate(direction * (runspeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
-    }
+    transform.Translate(direction * (runspeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
+}
 
     void Crouch()
     {
         transform.Translate(direction * (crouchSpeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
     }
 }
+
