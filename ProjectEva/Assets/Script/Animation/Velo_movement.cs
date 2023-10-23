@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class Velo_movement : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class Velo_movement : MonoBehaviour
     Transform mon;
     Vector2 movement;
     Vector2 lastPosition;
+    public NavMeshAgent agent;
+    public Vector3 velocity;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -18,6 +22,7 @@ public class Velo_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        velocity = agent.velocity;
 
         Vector2 currentPosition = mon.position;
         
@@ -30,11 +35,8 @@ public class Velo_movement : MonoBehaviour
             animator.SetFloat("Speed", 0); 
         }
 
-        movement.x = Mathf.Cos(Mathf.Deg2Rad * Vector2.Angle(lastPosition, currentPosition));
-        movement.y = Mathf.Cos(Mathf.Deg2Rad * Vector2.Angle(lastPosition, currentPosition));
-
-
-
+        movement.x = agent.velocity.x;
+        movement.y = agent.velocity.y;
 
 
         animator.SetFloat("Horizontal", movement.x);

@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 5563537812029586342}
   - component: {fileID: 232525256220234829}
   - component: {fileID: 5737416407848190947}
+  - component: {fileID: 3123521519109031773}
   m_Layer: 0
   m_Name: Velo_Sprite
   m_TagString: Untagged
@@ -183,6 +184,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3123521519109031773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4638985689835255648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8a5a9cb0943ac4f94e1faf7beef10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 2459817810504981418}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &4920418984444432624
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,10 +340,9 @@ MonoBehaviour:
   isRunStage: 0
   isUsingTunnel: 0
   isUseTunnalToCloseSpawns: 0
-  spriteRenderer: {fileID: 0}
   ResingPoint: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   agent: {fileID: 0}
-  rb: {fileID: 0}
   directorAI: {fileID: 0}
   enemySight: {fileID: 145755555114303672}
   enemyDetectSound: {fileID: 0}
