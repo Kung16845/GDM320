@@ -67,7 +67,6 @@ public class NewMovementPlayer : MonoBehaviour
         isWalking = true;
         isRunning = false;
         isCrouching = false;
-
         if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
         {
             currentSoundObject = WalkSoundManager.PlaySound("Walk", transform);
@@ -80,7 +79,8 @@ public class NewMovementPlayer : MonoBehaviour
         isWalking = false;
         isRunning = false;
         isCrouching = false;
-        WalkSoundManager.StopSound();
+        WalkSoundManager.StopSound("Walk");
+        WalkSoundManager.StopSound("Run");
     }
 
     if (!isWaittingtime && direction.x + direction.y != 0 && !isStaySafeRoom)
@@ -106,21 +106,23 @@ public class NewMovementPlayer : MonoBehaviour
 
     void Move()
     {
+        WalkSoundManager.StopSound("Run");
         transform.Translate(direction * (speed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
     }
     void Run()
-{
+    {
     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
     {
+        WalkSoundManager.StopSound("Walk");
         if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
         {
-            WalkSoundManager.StopSound(); // Stop the walk sound if it's playing
+
             currentSoundObject = WalkSoundManager.PlaySound("Run", transform);
         }
     }
     else
     {
-        WalkSoundManager.StopSound(); // Stop the walk sound if the player is not pressing movement keys
+        WalkSoundManager.StopSound("Walk"); // Stop the walk sound if the player is not pressing movement keys
     }
 
     transform.Translate(direction * (runspeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);

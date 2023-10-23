@@ -166,36 +166,36 @@ public class Pistol : MonoBehaviour
     }
     IEnumerator PlayPullmag()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
         soundManager.PlaySound("Pullmag"); 
+        yield return new WaitForSeconds(0.8f);
+        soundManager.PlaySound("Ammoshelldrop");
     }
 
-   private void FinishReload()
-{
-    if (bulletsToReload > 0 && currentAmmo > 0)
+    private void FinishReload()
     {
-        ammoInChamber++;
-        bulletsToReload--;
-
-        // Decrease current ammo when finishing a reload.
-        currentAmmo--;
-
-        reloadStartTime = Time.time; // Start the reload of the next bullet.
-        soundManager.PlaySound("Reload");
-        
-        if (bulletsToReload == 0 || currentAmmo == 0)
+        if (bulletsToReload > 0 && currentAmmo > 0)
         {
-            // No more bullets to reload and only one bullet left in the chamber, play the "Cock" sound.
-            StartCoroutine(Playcockinlastbullet());
+            ammoInChamber++;
+            bulletsToReload--;
+
+            // Decrease current ammo when finishing a reload.
+            currentAmmo--;
+
+            reloadStartTime = Time.time; // Start the reload of the next bullet.
+            soundManager.PlaySound("Reload");
+            
+            if (bulletsToReload == 0 || currentAmmo == 0)
+            {
+                // No more bullets to reload and only one bullet left in the chamber, play the "Cock" sound.
+                StartCoroutine(Playcockinlastbullet());
+            }
+        }
+        else
+        {
+            isReloading = false;
+            // Restore the player's normal speed when the reload is finished.
+            gunSpeedManager.RestoreNormalSpeed();
         }
     }
-    else
-    {
-        isReloading = false;
-        // Restore the player's normal speed when the reload is finished.
-        gunSpeedManager.RestoreNormalSpeed();
-    }
-}
-
-
 }
