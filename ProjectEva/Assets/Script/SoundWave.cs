@@ -68,7 +68,8 @@ public class SoundWave : MonoBehaviour
         {
             isReducing = false;
             isDetect =false;
-            this.gameObject.SetActive(false);
+            Destroy(this.gameObject);
+            // this.gameObject.SetActive(false);
         }
 
     }
