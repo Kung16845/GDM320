@@ -41,7 +41,7 @@ public class Pistol : MonoBehaviour
     void Update()
     {
         RotateTowardsMouse();
-
+        Decreasemaxacrrancywhilemoving();
         if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
         {   
             createcrosshaircircle();
@@ -204,7 +204,14 @@ public class Pistol : MonoBehaviour
         gunSpeedManager.ReduceSpeedDuringAimming();
         accuracyCircle.SetActive(true);
         isAiming = true;
-         currentAccuracy = Mathf.Lerp(currentAccuracy, maxAccuracy * sanityScaleController.GetAccuracyScale(), accuracyIncreaseRate * Time.deltaTime);
+        if(currentAccuracy > maxAccuracy)
+        {
+            currentAccuracy = Mathf.Lerp(currentAccuracy, maxAccuracy * sanityScaleController.GetAccuracyScale(), accuracyDecreaseRate * Time.deltaTime);
+        }
+        else
+        {
+            currentAccuracy = Mathf.Lerp(currentAccuracy, maxAccuracy * sanityScaleController.GetAccuracyScale(), accuracyIncreaseRate * Time.deltaTime);
+        }
     }
     void removecrosshaircircle()
     {
@@ -212,5 +219,23 @@ public class Pistol : MonoBehaviour
         isAiming = false;
         accuracyCircle.SetActive(false);
         currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
+    }
+    void Decreasemaxacrrancywhilemoving()
+    {
+        if(!gunSpeedManager.IsPlayerNotMoving())
+        {
+            maxAccuracy = 0.4f;
+            if(currentAccuracy > maxAccuracy)
+            {
+                accuracyIncreaseRate = 0;
+                accuracyDecreaseRate = 15;
+            }
+        }
+        else if(gunSpeedManager.IsPlayerNotMoving())
+        {
+            maxAccuracy = 1;
+            accuracyDecreaseRate = 3;
+            accuracyIncreaseRate = 0.2f;
+        }
     }
 }

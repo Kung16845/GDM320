@@ -111,26 +111,27 @@ public class NewMovementPlayer : MonoBehaviour
     }
     void Run()
     {
-    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-    {
-        WalkSoundManager.StopSound("Walk");
-        if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
+            WalkSoundManager.StopSound("Walk");
+            if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
+            {
 
-            currentSoundObject = WalkSoundManager.PlaySound("Run", transform);
+                currentSoundObject = WalkSoundManager.PlaySound("Run", transform);
+            }
         }
-    }
-    else
-    {
-        WalkSoundManager.StopSound("Walk"); // Stop the walk sound if the player is not pressing movement keys
-    }
+        else
+            {
+                WalkSoundManager.StopSound("Walk"); // Stop the walk sound if the player is not pressing movement keys
+            }
 
-    transform.Translate(direction * (runspeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
-}
+        transform.Translate(direction * (runspeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
+    }
 
     void Crouch()
     {
         transform.Translate(direction * (crouchSpeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
     }
+    
 }
 
