@@ -61,7 +61,6 @@ public class DamageArea : MonoBehaviour
         {
             var damage = (damageAmount * gameManager.gameDifficulty) - playerSanity.SanityResistance;         
             player.GetComponent<Sanity>().TakeSanity(damage);  
-            Debug.Log("TakingDamge");
             yield return new WaitForSeconds(damageInterval);
         }
 

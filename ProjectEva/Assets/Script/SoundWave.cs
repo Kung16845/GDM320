@@ -59,7 +59,6 @@ public class SoundWave : MonoBehaviour
     {
         isReducing = true;
         yield return new WaitForSeconds(1.0f);
-        Debug.Log("ReduceRadiusSound is Complete");
         if (this.GetComponent<CircleCollider2D>().radius > 0.5)
         {
             this.GetComponent<CircleCollider2D>().radius -= reduceradius;      

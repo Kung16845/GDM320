@@ -25,7 +25,8 @@ namespace Enemy_State
                 allpointMove = allRoom.FindPointMoveInRoom(pointInRoomForEnemyMove.AllpointInRoom);
                 enemy.SetAreaMask();
                 GoPointInRooms(allpointMove.ElementAt<Transform>(currentPointIndex), enemy);
-                isSetValue = !isSetValue;
+                
+                enemy.state_Searching.isSetValue = true;
             }
 
             if (!enemy.agent.pathPending && enemy.agent.remainingDistance < 0.1f && isExpolre)
@@ -33,7 +34,7 @@ namespace Enemy_State
 
         }
         public void ExploreAllPoint(List<Transform> allpoint, Enemy enemy)
-        {
+        {   
             if (currentPointIndex < allpoint.Count - 1)
             {
                 currentPointIndex++;
@@ -52,7 +53,6 @@ namespace Enemy_State
             currentPointIndex = 0;
             isSetValue = false;
             isExpolre = true;
-
         }
         public void GoPointInRooms(Transform point, Enemy enemy)
         {

@@ -58,17 +58,17 @@ namespace Enemy_State
         public List<Transform> FindPointMoveInRoom(List<Transform> allpointInRoom)
         {
             var pointinRoomforEnemyMove = new List<Transform>();
-            var NumMove = UnityEngine.Random.Range(2, allpointInRoom.Count);
+            var NumMove = UnityEngine.Random.Range(2, allpointInRoom.Count - 1);
             
             Debug.Log(NumMove);
             for (int i = 0; i < NumMove; i++)
             {
-                var point = allpointInRoom.ElementAt<Transform>(UnityEngine.Random.Range(0, allpointInRoom.Count));
-                // if(point != pointinRoomforEnemyMove.ElementAt<Transform>(i-1))
+                var point = allpointInRoom.ElementAt<Transform>(UnityEngine.Random.Range(0, allpointInRoom.Count - 1));
+                
                 if(i > 0)
-                    pointinRoomforEnemyMove.Add(CheckedTranform(point,allpointInRoom,i));
-                else 
-                    pointinRoomforEnemyMove.Add(point);
+                    point = CheckedTranform(point,allpointInRoom,i);
+                
+                pointinRoomforEnemyMove.Add(point);
             }
                      
             return pointinRoomforEnemyMove;

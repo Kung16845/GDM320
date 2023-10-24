@@ -15,12 +15,7 @@ namespace Enemy_State
                 Debug.Log("Find position plater Lasty");
                 enemy.isHear = false;
             }
-            if (enemy.newMovementPlayer.isStaySafeRoom)
-            {
-                enemy.enemyDetectSound.soundValue = 0;
-                enemy.state_Searching.isSetValue = false;
-                enemy.EnterState(enemy.state_Searching);
-            }
+            
         }
     }
 }

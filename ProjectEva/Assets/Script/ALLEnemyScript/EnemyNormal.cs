@@ -38,6 +38,7 @@ namespace Enemy_State
                         enemyDetectSound.soundValue = 0;
                         state_Searching.isSetValue = false;
                         EnterState(state_Searching);
+                        enemySight.canSee = false;
                     }
                     break;
                 case State_Listening:
@@ -52,7 +53,7 @@ namespace Enemy_State
                     break;
                 case State_Searching:
                     EnterState(state_Searching);
-                    if (enemySight.canSee && hp > 0)
+                    if (enemySight.canSee && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                         currentState = state_Hunting;
                     else if (isHear && hp > 0)
                         currentState = state_SearchingSound;
@@ -69,13 +70,18 @@ namespace Enemy_State
                     break;
                 case State_SearchingSound:
                     EnterState(state_SearchingSound);
-                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0)
+                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                     {
                         state_Searching.isSetValue = false;
                         currentState = state_Searching;
                     }
-
-                    else if (enemySight.canSee && hp > 0)
+                    else if (newMovementPlayer.isStaySafeRoom && currentState != state_Searching)
+                    {
+                        enemyDetectSound.soundValue = 0;
+                        state_Searching.isSetValue = false;
+                        currentState = state_Searching;
+                    }
+                    else if (enemySight.canSee && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                         currentState = state_Hunting;
                     else if (hp <= 0)
                     {
