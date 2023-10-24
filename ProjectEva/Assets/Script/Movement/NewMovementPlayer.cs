@@ -31,49 +31,63 @@ public class NewMovementPlayer : MonoBehaviour
     public SanityScaleController sanityScaleController;
     private GunSpeedManager gunSpeedManager;
 
+    [Header("---------Audiomanager------------")]
+    public WalkSoundManager WalkSoundManager;
+    private GameObject currentSoundObject;
+
+
     private void Start()
     {
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
         sanityScaleController = FindObjectOfType<SanityScaleController>();
+        WalkSoundManager = FindObjectOfType<WalkSoundManager>();
         
     }
 
-    void Update()
+     void Update()
+{
+    GetDirection();
+
+    // Check for running and crouching
+    if (Input.GetKey(KeyCode.LeftShift))
     {
-        GetDirection();      
-        // Check for running and crouching
-        if (Input.GetKey(KeyCode.LeftShift))
+        isRunning = true;
+        isCrouching = false;
+        isWalking = false;
+        Run();
+    }
+    else if (Input.GetKey(KeyCode.LeftControl))
+    {
+        isCrouching = true;
+        isRunning = false;
+        isWalking = false;
+        Crouch();
+    }
+    else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+    {
+        isWalking = true;
+        isRunning = false;
+        isCrouching = false;
+        if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
         {
-            isRunning = true;
-            isCrouching = false;
-            isWalking = false;
-            Run();
-        }
-        else if (Input.GetKey(KeyCode.LeftControl))
-        {
-            isCrouching = true;
-            isRunning = false;
-            isWalking = false;
-            Crouch();
-        }
-        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-        {
-            isWalking = true;
-            isRunning = false;
-            isCrouching = false;
-            Move();
-        }
-        else 
-        {
-            isWalking = false;
-            isRunning = false;
-            isCrouching = false;
+            currentSoundObject = WalkSoundManager.PlaySound("Walk", transform);
         }
 
-        // Adjust movement based on the current state
-        if(!isWaittingtime && direction.x + direction.y != 0 && !isStaySafeRoom)
-                StartCoroutine(DelayTimeSoundWave());
+        Move();
     }
+    else
+    {
+        isWalking = false;
+        isRunning = false;
+        isCrouching = false;
+        WalkSoundManager.StopSound("Walk");
+        WalkSoundManager.StopSound("Run");
+    }
+
+    if (!isWaittingtime && direction.x + direction.y != 0 && !isStaySafeRoom)
+        StartCoroutine(DelayTimeSoundWave());
+}
+
     IEnumerator DelayTimeSoundWave()
     {   
         isWaittingtime = true;
@@ -95,11 +109,25 @@ public class NewMovementPlayer : MonoBehaviour
 
     void Move()
     {
+        WalkSoundManager.StopSound("Run");
         transform.Translate(direction * (speed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
     }
-
     void Run()
     {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            WalkSoundManager.StopSound("Walk");
+            if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
+            {
+
+                currentSoundObject = WalkSoundManager.PlaySound("Run", transform);
+            }
+        }
+        else
+            {
+                WalkSoundManager.StopSound("Walk"); // Stop the walk sound if the player is not pressing movement keys
+            }
+
         transform.Translate(direction * (runspeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
     }
 
@@ -107,4 +135,6 @@ public class NewMovementPlayer : MonoBehaviour
     {
         transform.Translate(direction * (crouchSpeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
     }
+    
 }
+
