@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5059322504159645731}
   - component: {fileID: 1147706391403661405}
   - component: {fileID: 230284128929383159}
+  - component: {fileID: 8946341916802775782}
   m_Layer: 0
   m_Name: Light 2D
   m_TagString: Untagged
@@ -123,6 +124,27 @@ MonoBehaviour:
   South: 0
   West: 0
   East: 0
+--- !u!114 &8946341916802775782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968562542407998013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6fd738f23bb6a43bbd51e1a4739171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  Anglemouse: 0
+  Anglebetween: 0
+  directionX: 0
+  directionY: 0
+  North: 0
+  South: 0
+  West: 0
+  East: 0
 --- !u!1 &1177889371899759541
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +194,7 @@ MonoBehaviour:
   bulletForce: 50
   maxAmmo: 5
   ammoInChamber: 1
-  bulletDamage: 44
+  bulletDamage: 33
   bulletSpeed: 10
   maxAccuracy: 1
   minAccuracy: 0.2
@@ -288,8 +310,8 @@ GameObject:
   - component: {fileID: 6510801991967429543}
   - component: {fileID: 8944580823985512740}
   - component: {fileID: 3151786257150741045}
-  - component: {fileID: 4517371376339458168}
-  - component: {fileID: 5544067093018815083}
+  - component: {fileID: 7537813483175652853}
+  - component: {fileID: 7555040009682815494}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -400,7 +422,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4517371376339458168
+--- !u!114 &7537813483175652853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -424,8 +446,8 @@ MonoBehaviour:
   SoundWavePrefeb: {fileID: 3661301798704465436}
   SoundWave: {fileID: 0}
   sanityScaleController: {fileID: 0}
-  WalkSoundManager: {fileID: 0}
---- !u!61 &5544067093018815083
+  WalkSoundManager: {fileID: 3709462481840491899}
+--- !u!61 &7555040009682815494
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1258,10 +1280,6 @@ PrefabInstance:
       propertyPath: checkShoot
       value: 
       objectReference: {fileID: 895377242920529984}
-    - target: {fileID: 7423986476672243402, guid: e7e4613052e794040b03072121550388, type: 3}
-      propertyPath: checkMovementPlayer
-      value: 
-      objectReference: {fileID: 4517371376339458168}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
