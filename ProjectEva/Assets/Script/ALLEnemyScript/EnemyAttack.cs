@@ -7,6 +7,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public EnemyNormal enemyNormal;
     public Animator animationActtack;
+    public GameObject hitbox;
     private void Start()
     {
         enemyNormal = FindObjectOfType<EnemyNormal>();
@@ -14,12 +15,12 @@ public class EnemyAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D player)
     {
         // StartCoroutine(EnemyAttack(2.0f,player));
-        Debug.Log("Player Taken Damage ");
+        
         if (player.GetComponent<Hp>() != null)
         {
             if (enemyNormal.currentState == enemyNormal.state_Hunting)
             {
-                // player.GetComponent<Hp>().TakeDamage(enemyNormal.damage);
+                player.GetComponent<Hp>().TakeDamage(enemyNormal.damage);
                 Debug.Log("Player Taken Damage  ");
             }
         }
