@@ -97,8 +97,7 @@ public class NewMovementPlayer : MonoBehaviour
         Debug.Log("Create Sound");
         SoundWave.SpawnFromPool("Sound Wave",this.transform.position,Quaternion.identity);
         // GameObject soundwave = Instantiate(SoundWavePrefeb,gameObject.transform); 
-        // soundwave.SetActive(true);
-        
+        // soundwave.SetActive(true);        
         isWaittingtime = false;
     }
     void GetDirection()
