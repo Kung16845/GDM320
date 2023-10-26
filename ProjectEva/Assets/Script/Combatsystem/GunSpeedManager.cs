@@ -45,6 +45,7 @@ public class GunSpeedManager : MonoBehaviour
 
     public void RestoreNormalSpeed()
     {
+
         newMovementPlayer.speed = originalSpeed;
         newMovementPlayer.crouchSpeed = originalSlowSpeed;
         newMovementPlayer.runspeed = originalRunningSpeed;

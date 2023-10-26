@@ -5,19 +5,43 @@ using UnityEngine;
 public class Libarykey : MonoBehaviour
 {
     public keyinventory inventory;
+    public SoundManager soundManager;
+    private bool canPickup;
 
     private void Start()
     {
         // Use GetComponentInParent to find the keyinventory script on the player or any parent GameObject.
-          inventory = GameObject.FindWithTag("inventory").GetComponent<keyinventory>();
+        canPickup = false;
+        inventory = GameObject.FindWithTag("inventory").GetComponent<keyinventory>();
+        soundManager = FindObjectOfType<SoundManager>();
+    }
+    private void Update()
+    {
+        // Check if the player can pick up the ammo and 'E' is pressed.
+        if (canPickup && Input.GetKeyDown(KeyCode.E))
+        {
+            keypickup();
+        }
+    }
+     private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            canPickup = true;
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (collision.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            inventory.AddKey("Libarykey");
-            Destroy(this.gameObject); // Remove the collected key from the scene.
+            canPickup = false;
         }
+    }
+    void keypickup()
+    {
+        inventory.AddKey("Libarykey");
+        soundManager.PlaySound("Pickupkey");
+        Destroy(this.gameObject); // Remove the collected key from the scene.
     }
 }

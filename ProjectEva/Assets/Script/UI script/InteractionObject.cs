@@ -4,6 +4,7 @@ public class InteractionObject : MonoBehaviour
 {
     public GameObject sceneObject; // The object to be displayed in the scene.
     public GameObject panel; // The panel to be displayed when 'E' is pressed.
+    public SoundManager soundManager;
 
     private bool objectVisible = false;
     private bool panelVisible = false;
@@ -12,6 +13,7 @@ public class InteractionObject : MonoBehaviour
     {
         HideObject();
         HidePanel();
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -60,6 +62,7 @@ public class InteractionObject : MonoBehaviour
 
     private void ShowPanel()
     {
+        soundManager.PlaySound("Paperaction");
         panel.SetActive(true);
         panelVisible = true;
     }

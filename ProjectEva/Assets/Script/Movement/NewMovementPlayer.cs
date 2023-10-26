@@ -12,6 +12,9 @@ public class NewMovementPlayer : MonoBehaviour
     public float crouchSpeed;
     public float runspeed;
     public Vector2 direction;
+    private float originalSpeed;
+    private float originalCrouchSpeed;
+    private float originalRunSpeed;
     
     [Header ("--------CheckValue----------")]
     [Space(25f)]
@@ -41,6 +44,10 @@ public class NewMovementPlayer : MonoBehaviour
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
         sanityScaleController = FindObjectOfType<SanityScaleController>();
         WalkSoundManager = FindObjectOfType<WalkSoundManager>();
+        originalSpeed = speed;
+        originalCrouchSpeed = crouchSpeed;
+        originalRunSpeed = runspeed;
+
         
     }
 
@@ -136,6 +143,19 @@ public class NewMovementPlayer : MonoBehaviour
     {
         transform.Translate(direction * (crouchSpeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
     }
-    
+    public void StopMoving()
+    {
+        Debug.Log("Stuck");
+        speed = 0f;
+        crouchSpeed = 0f;
+        runspeed = 0f;
+    }
+    public void ResumeMoving()
+    {
+        Debug.Log("released");
+        speed = originalSpeed;
+        crouchSpeed = originalCrouchSpeed;
+        runspeed = originalRunSpeed;
+    }
 }
 

@@ -29,6 +29,7 @@ public class Pistol : MonoBehaviour
     public ObjectPolling SoundWave;
     public bool isshoot = false;
     public SoundManager soundManager;
+    public TrapController trapController;
 
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
@@ -65,12 +66,12 @@ public class Pistol : MonoBehaviour
                 FinishReload();
             }
         }
-        else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime)
+        else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
         {
             Shoot();
             lastShotTime = Time.time;
         }
-        else if (Input.GetMouseButtonDown(0) && ammoInChamber == 0 && Time.time - lastShotTime >= cooldownTime)
+        else if (Input.GetMouseButtonDown(0) && ammoInChamber == 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
         {
             soundManager.PlaySound("Drymag");
         }
@@ -147,7 +148,7 @@ public class Pistol : MonoBehaviour
     {
         isReloading = false;
         bulletsToReload = 0; // Reset the bullets to reload.
-        // Restore the player's normal speed when the reload is canceled.
+        // Restore the player's normal speed when the reload is canceled.     
         gunSpeedManager.RestoreNormalSpeed();
     }
     private void FinishReload()
@@ -166,6 +167,7 @@ public class Pistol : MonoBehaviour
         {
             isReloading = false;
             // Restore the player's normal speed when the reload is finished.
+            Debug.Log("I call");   
             gunSpeedManager.RestoreNormalSpeed();
         }
     }
@@ -201,7 +203,10 @@ public class Pistol : MonoBehaviour
     }
     void createcrosshaircircle()
     {
-        gunSpeedManager.ReduceSpeedDuringAimming();
+        if(!trapController.stuck)
+        {
+            gunSpeedManager.ReduceSpeedDuringAimming();
+        }
         accuracyCircle.SetActive(true);
         isAiming = true;
         if(currentAccuracy > maxAccuracy)
@@ -215,10 +220,13 @@ public class Pistol : MonoBehaviour
     }
     void removecrosshaircircle()
     {
-        gunSpeedManager.RestoreNormalSpeed();
-        isAiming = false;
-        accuracyCircle.SetActive(false);
-        currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
+        if(!trapController.stuck)
+        {
+            gunSpeedManager.RestoreNormalSpeed();
+            isAiming = false;
+            accuracyCircle.SetActive(false);
+            currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
+        }
     }
     void Decreasemaxacrrancywhilemoving()
     {

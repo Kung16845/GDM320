@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5562068752312973163}
   - component: {fileID: 5059322504159645731}
   - component: {fileID: 1147706391403661405}
-  - component: {fileID: 230284128929383159}
   - component: {fileID: 8946341916802775782}
   m_Layer: 0
   m_Name: Light 2D
@@ -50,9 +49,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.654
+  m_FalloffIntensity: 0.8
   m_Color: {r: 0.8867924, g: 0.66325146, b: 0.20496619, a: 1}
-  m_Intensity: 10
+  m_Intensity: 5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0000000031e80b05
@@ -71,10 +70,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 60.61295
+  m_PointLightInnerAngle: 15
   m_PointLightOuterAngle: 141.11252
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 11.31
+  m_PointLightOuterRadius: 15
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -103,27 +102,6 @@ MonoBehaviour:
   AnglemouseMax: 0
   playertransfromZ: 0
   Anglebetween: 0
---- !u!114 &230284128929383159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968562542407998013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f6fd738f23bb6a43bbd51e1a4739171, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  Anglemouse: 0
-  Anglebetween: 0
-  directionX: 0
-  directionY: 0
-  North: 0
-  South: 0
-  West: 0
-  East: 0
 --- !u!114 &8946341916802775782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +187,7 @@ MonoBehaviour:
   SoundWave: {fileID: 0}
   isshoot: 0
   soundManager: {fileID: 0}
+  trapController: {fileID: 0}
   currentAmmo: 0
 --- !u!1 &2137785785637775857
 GameObject:
@@ -480,7 +459,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0018609166, y: -0.01116737}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -491,7 +470,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.228246, y: 0.18729909}
   m_EdgeRadius: 0
 --- !u!1 &2784648521742613317
 GameObject:
@@ -561,7 +540,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0009266585, y: -0.026543528}
+  m_Offset: {x: 0.010030109, y: -0.21922225}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -572,7 +551,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.40555003, y: 0.94691294}
+  m_Size: {x: 0.120324455, y: 0.53120935}
   m_EdgeRadius: 0
 --- !u!114 &8322850850181433867
 MonoBehaviour:
@@ -1021,7 +1000,7 @@ GameObject:
   - component: {fileID: 6729476165139331073}
   - component: {fileID: 4706538273517572920}
   m_Layer: 0
-  m_Name: Gunsoundmanager
+  m_Name: Actionsoundmanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1165,6 +1144,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 1339d1e4a2340b24cb9c9cd5500ec19f, type: 3}
   - name: Alert
     clip: {fileID: 8300000, guid: 5823ca395f5fb8742a56678a36e63629, type: 3}
+  - name: Trapped
+    clip: {fileID: 8300000, guid: a3790c2dff93f8040bc440e19c410efa, type: 3}
 --- !u!1 &8320366769236308967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1157,7 @@ GameObject:
   - component: {fileID: 4437102167955631979}
   - component: {fileID: 8479175457817920574}
   m_Layer: 0
-  m_Name: Light 2D (1)
+  m_Name: Body light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1213,7 +1194,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.411
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 1}
   m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
