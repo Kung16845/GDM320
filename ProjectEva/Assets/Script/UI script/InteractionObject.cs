@@ -72,4 +72,13 @@ public class InteractionObject : MonoBehaviour
         panel.SetActive(false);
         panelVisible = false;
     }
+    private void ShowEButton()
+    {
+        sceneObject.SetActive(true);
+    }
+
+    private void HideEButton()
+    {
+        sceneObject.SetActive(false);
+    }
 }

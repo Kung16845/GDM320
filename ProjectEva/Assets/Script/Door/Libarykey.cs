@@ -6,11 +6,13 @@ public class Libarykey : MonoBehaviour
 {
     public keyinventory inventory;
     public SoundManager soundManager;
+    public GameObject sceneObject;
     private bool canPickup;
 
     private void Start()
     {
         // Use GetComponentInParent to find the keyinventory script on the player or any parent GameObject.
+        HideEButton();
         canPickup = false;
         inventory = GameObject.FindWithTag("inventory").GetComponent<keyinventory>();
         soundManager = FindObjectOfType<SoundManager>();
@@ -27,6 +29,7 @@ public class Libarykey : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            ShowEButton();
             canPickup = true;
         }
     }
@@ -35,6 +38,7 @@ public class Libarykey : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            HideEButton();
             canPickup = false;
         }
     }
@@ -43,5 +47,14 @@ public class Libarykey : MonoBehaviour
         inventory.AddKey("Libarykey");
         soundManager.PlaySound("Pickupkey");
         Destroy(this.gameObject); // Remove the collected key from the scene.
+    }
+    private void ShowEButton()
+    {
+        sceneObject.SetActive(true);
+    }
+
+    private void HideEButton()
+    {
+        sceneObject.SetActive(false);
     }
 }

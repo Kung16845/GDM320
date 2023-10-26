@@ -7,6 +7,7 @@ public class Trap : MonoBehaviour
     public float trapDuration = 5.0f; // How long the trap lasts
     public float sliderFillRate = 1.0f; // Rate at which the slider fills when pressing 'E'
     public TrapController trapController;
+    public GameObject sceneObject;
     public Slider slider;
     private bool isActivated = false;
     private float currentDuration = 0.0f;
@@ -61,12 +62,12 @@ public class Trap : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            ShowEButton();
             soundManager.PlaySound("Trapped");
             isActivated = true;
             trapController.PlayerHitByTrap();
         }
     }
-
     void ReleasePlayer()
     {
         isActivated = false;
@@ -77,6 +78,15 @@ public class Trap : MonoBehaviour
     public float returnSlidervalue()
     {
         return sliderValue;
+    }
+    private void ShowEButton()
+    {
+        sceneObject.SetActive(true);
+    }
+
+    private void HideEButton()
+    {
+        sceneObject.SetActive(false);
     }
 
 }

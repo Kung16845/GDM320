@@ -3,6 +3,7 @@ using UnityEngine;
 public class AmmoPickup : MonoBehaviour
 {
     public int ammoAmount; // The amount of ammo this pickup adds.
+    public GameObject sceneObject;
     private Pistol pistol;
     public SoundManager soundManager;
     private bool canPickup;
@@ -10,6 +11,7 @@ public class AmmoPickup : MonoBehaviour
     private void Start()
     {
         canPickup = false;
+        HideEButton();
         pistol = FindObjectOfType<Pistol>();
         soundManager = FindObjectOfType<SoundManager>();
     }
@@ -25,6 +27,7 @@ public class AmmoPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            ShowEButton();
             canPickup = true;
         }
     }
@@ -33,6 +36,7 @@ public class AmmoPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            HideEButton();
             canPickup = false;
         }
     }
@@ -46,5 +50,14 @@ public class AmmoPickup : MonoBehaviour
                 // Destroy this pickup object.
                 Destroy(gameObject);
             }
+    }
+    private void ShowEButton()
+    {
+        sceneObject.SetActive(true);
+    }
+
+    private void HideEButton()
+    {
+        sceneObject.SetActive(false);
     }
 }
