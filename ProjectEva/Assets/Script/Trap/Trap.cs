@@ -7,8 +7,8 @@ public class Trap : MonoBehaviour
     public float trapDuration = 5.0f; // How long the trap lasts
     public float sliderFillRate = 1.0f; // Rate at which the slider fills when pressing 'E'
     public TrapController trapController;
-    public GameObject sceneObject;
     public Slider slider;
+    public RawImage sliderImage; // Reference to the child Image component
     private bool isActivated = false;
     private float currentDuration = 0.0f;
     public float sliderValue = 0.0f;
@@ -18,6 +18,7 @@ public class Trap : MonoBehaviour
     {
         soundManager = FindObjectOfType<SoundManager>();
     }
+    
     void Update()
     {
         if (isActivated)
@@ -30,6 +31,9 @@ public class Trap : MonoBehaviour
                     sliderValue += sliderFillRate * Time.deltaTime;
                     // Update the Slider's value here
                     slider.value = sliderValue / 100.0f; // Normalize the value to be between 0 and 1
+
+                    // Change the color of the child Image when 'E' is pressed
+                    StartCoroutine(ChangeSliderColorWhilePressingE(Color.grey));
                 }
 
                 // Restrict the slider value to be between 0 and 100
@@ -57,36 +61,37 @@ public class Trap : MonoBehaviour
         }
     }
 
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            ShowEButton();
             soundManager.PlaySound("Trapped");
             isActivated = true;
             trapController.PlayerHitByTrap();
         }
     }
+
     void ReleasePlayer()
     {
         isActivated = false;
         sliderValue = 0.0f;
         currentDuration = 0.0f;
+
+        // Reset the child Image color to its normal state
+
         trapController.PlayerReleaseTrap();
     }
+
     public float returnSlidervalue()
     {
         return sliderValue;
     }
-    private void ShowEButton()
-    {
-        sceneObject.SetActive(true);
-    }
 
-    private void HideEButton()
+    // Function to change the color of the child Image component
+    IEnumerator ChangeSliderColorWhilePressingE(Color color)
     {
-        sceneObject.SetActive(false);
+        sliderImage.color = color;
+        yield return new WaitForSeconds(0.1f);
+        sliderImage.color = Color.white;
     }
-
 }
