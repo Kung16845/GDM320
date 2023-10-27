@@ -17,6 +17,7 @@ public class Pistol : MonoBehaviour
     [SerializeField] float accuracyDecreaseRate = 0.1f;
     [SerializeField] float reloadTime = 2.0f;
     [SerializeField] GameObject accuracyCircle; // Reference to the accuracy circle GameObject.
+    public bool isReloadCanceled = false;
     private SanityScaleController sanityScaleController;
     public float currentAccuracy = 0.2f;
     private Transform firePoint;
@@ -28,6 +29,7 @@ public class Pistol : MonoBehaviour
     private GunSpeedManager gunSpeedManager;
     public ObjectPolling SoundWave;
     public bool isshoot = false;
+    private bool playaimsound = false;  
     public SoundManager soundManager;
     public TrapController trapController;
 
@@ -45,13 +47,18 @@ public class Pistol : MonoBehaviour
         Decreasemaxacrrancywhilemoving();
         if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
         {   
+            if(!playaimsound)
+            {
+                soundManager.PlaySound("ReadyAim");
+                playaimsound = true;
+            }
             createcrosshaircircle();
         }
         else
         {   
             removecrosshaircircle();
         }
-        float scaledAccuracy = 0.05f / currentAccuracy;
+        float scaledAccuracy = 0.02f / currentAccuracy;
         accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
 
         if (isReloading)
@@ -59,6 +66,7 @@ public class Pistol : MonoBehaviour
             gunSpeedManager.ReduceSpeedDuringReload();
             if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) // Check if right mouse button is pressed.
             {
+                StartCoroutine(WaitBeforeNextReload());
                 cancelreload();
             }
             else if (Time.time - reloadStartTime >= reloadTime)
@@ -66,7 +74,7 @@ public class Pistol : MonoBehaviour
                 FinishReload();
             }
         }
-        else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
+        else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning && !isReloadCanceled)
         {
             Shoot();
             lastShotTime = Time.time;
@@ -134,8 +142,10 @@ public class Pistol : MonoBehaviour
     }
     IEnumerator Playcockinlastbullet()
     {
-        yield return new WaitForSeconds(1.5f);
-            soundManager.PlaySound("Cock"); 
+        yield return new WaitForSeconds(2);
+        soundManager.PlaySound("Pushcyclinder"); 
+        yield return new WaitForSeconds(1);
+        soundManager.PlaySound("Cock"); 
     }
     IEnumerator PlayPullmag()
     {
@@ -143,6 +153,13 @@ public class Pistol : MonoBehaviour
         soundManager.PlaySound("Pullmag"); 
         yield return new WaitForSeconds(0.8f);
         soundManager.PlaySound("Ammoshelldrop");
+    }
+    IEnumerator WaitBeforeNextReload()
+    {
+        isReloadCanceled = true;
+        StartCoroutine(Playcockinlastbullet());
+        yield return new WaitForSeconds(3f); // Wait for 3 seconds
+        isReloadCanceled = false; // Reset the reload canceled flag after waiting
     }
     void cancelreload()
     {
@@ -166,8 +183,6 @@ public class Pistol : MonoBehaviour
         else
         {
             isReloading = false;
-            // Restore the player's normal speed when the reload is finished.
-            Debug.Log("I call");   
             gunSpeedManager.RestoreNormalSpeed();
         }
     }
@@ -188,7 +203,14 @@ public class Pistol : MonoBehaviour
         bulletsToReload--;
         currentAmmo--;
         reloadStartTime = Time.time; // Start the reload of the next bullet.
+        StartCoroutine(reloadsound());
+    }
+    IEnumerator reloadsound()
+    {
         soundManager.PlaySound("Reload");
+        yield return new WaitForSeconds(0.8f);
+        soundManager.PlaySound("Cylinder");
+        yield return new WaitForSeconds(0.5f);
     }
     void initializevariable()
     {
@@ -222,6 +244,7 @@ public class Pistol : MonoBehaviour
     {
         if(!trapController.stuck)
         {
+            playaimsound = false;
             gunSpeedManager.RestoreNormalSpeed();
             isAiming = false;
             accuracyCircle.SetActive(false);
