@@ -12,6 +12,7 @@ public class GunSpeedManager : MonoBehaviour
     public float originalRunningSpeed;
     public float AimmingSpeed;
     public float reloadspeed;
+    public bool isPlayerNotMoving = false;
 
     void Start() // It should be "Start" with a capital "S"
     {
@@ -22,10 +23,16 @@ public class GunSpeedManager : MonoBehaviour
         sanityScaleController = FindObjectOfType<SanityScaleController>();
     }
 
+    public bool IsPlayerNotMoving()
+    {
+        return isPlayerNotMoving;
+    }
+
     void Update()
     {
         isCrouching = newMovementPlayer.isCrouching;
         isRunning = newMovementPlayer.isRunning;
+        isPlayerNotMoving = !newMovementPlayer.isWalking && !newMovementPlayer.isRunning && !newMovementPlayer.isCrouching;
     }
     public void ReduceSpeedDuringAimming()
     {
@@ -38,6 +45,7 @@ public class GunSpeedManager : MonoBehaviour
 
     public void RestoreNormalSpeed()
     {
+
         newMovementPlayer.speed = originalSpeed;
         newMovementPlayer.crouchSpeed = originalSlowSpeed;
         newMovementPlayer.runspeed = originalRunningSpeed;

@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class Animation_PlayerMovement : MonoBehaviour
 {
+    private GunSpeedManager gunSpeedManager;
     Animator animator;
     Vector2 movement;
     Vector2 mPmovement;
@@ -15,13 +16,14 @@ public class Animation_PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform; 
+        gunSpeedManager = FindObjectOfType<GunSpeedManager>();
     }
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetMouseButton(1)){ isAiming = true; animator.SetBool("isAiming", true); }
+        if (Input.GetMouseButton(1)&& !gunSpeedManager.isRunning){ isAiming = true; animator.SetBool("isAiming", true); }
         else { isAiming= false; animator.SetBool("isAiming", false); }
 
         if (Input.GetKey(KeyCode.LeftShift)) { animator.SetBool("isRunning", true); }
