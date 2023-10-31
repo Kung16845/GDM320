@@ -8,6 +8,7 @@ public class OnOffLight : MonoBehaviour
     public GameObject Light;
     public bool checkLight = false;
     public bool isHave = false;
+    public bool isopen = false;
 
     void Start() 
     {
@@ -22,11 +23,13 @@ public class OnOffLight : MonoBehaviour
             {
                 Light.SetActive(false);
                 checkLight = false;
+                isopen = false;
             }
             else 
             {
                 Light.SetActive(true);
                 checkLight = true;
+                isopen = true;
             } 
         }
     }

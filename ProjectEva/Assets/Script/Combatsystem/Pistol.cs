@@ -28,6 +28,7 @@ public class Pistol : MonoBehaviour
     private int bulletsToReload;
     private GunSpeedManager gunSpeedManager;
     public ObjectPolling SoundWave;
+    public OnOffLight onOffLight;
     public bool isshoot = false;
     private bool playaimsound = false;  
     public SoundManager soundManager;
@@ -58,7 +59,7 @@ public class Pistol : MonoBehaviour
         {   
             removecrosshaircircle();
         }
-        float scaledAccuracy = 0.02f / currentAccuracy;
+        float scaledAccuracy = 0.015f / currentAccuracy;
         accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
 
         if (isReloading)
@@ -253,7 +254,7 @@ public class Pistol : MonoBehaviour
     }
     void Decreasemaxacrrancywhilemoving()
     {
-        if(!gunSpeedManager.IsPlayerNotMoving())
+        if(!gunSpeedManager.IsPlayerNotMoving() && !onOffLight.isopen)
         {
             maxAccuracy = 0.4f;
             if(currentAccuracy > maxAccuracy)
@@ -261,8 +262,26 @@ public class Pistol : MonoBehaviour
                 accuracyIncreaseRate = 0;
                 accuracyDecreaseRate = 15;
             }
+
         }
-        else if(gunSpeedManager.IsPlayerNotMoving())
+        else if(!gunSpeedManager.IsPlayerNotMoving() && onOffLight.isopen)
+        {
+            maxAccuracy = 0.2f;
+            if(currentAccuracy > maxAccuracy)
+            {
+                accuracyIncreaseRate = 0;
+                accuracyDecreaseRate = 15;
+            }
+
+        }
+        else if(gunSpeedManager.IsPlayerNotMoving() && onOffLight.isopen)
+        {
+            maxAccuracy = 0.8f;
+            accuracyDecreaseRate = 3;
+            accuracyIncreaseRate = 0.2f;
+
+        }
+        else 
         {
             maxAccuracy = 1;
             accuracyDecreaseRate = 3;
