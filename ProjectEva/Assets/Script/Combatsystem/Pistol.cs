@@ -55,6 +55,10 @@ public class Pistol : MonoBehaviour
             }
             createcrosshaircircle();
         }
+        else if(Input.GetMouseButtonUp(1))
+        {
+            gunSpeedManager.RestoreNormalSpeed();
+        }
         else
         {   
             removecrosshaircircle();
@@ -246,7 +250,6 @@ public class Pistol : MonoBehaviour
         if(!trapController.stuck)
         {
             playaimsound = false;
-            gunSpeedManager.RestoreNormalSpeed();
             isAiming = false;
             accuracyCircle.SetActive(false);
             currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);

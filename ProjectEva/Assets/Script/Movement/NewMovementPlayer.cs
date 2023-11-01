@@ -145,17 +145,27 @@ public class NewMovementPlayer : MonoBehaviour
     }
     public void StopMoving()
     {
-        Debug.Log("Stuck");
         speed = 0f;
         crouchSpeed = 0f;
         runspeed = 0f;
     }
     public void ResumeMoving()
     {
-        Debug.Log("released");
         speed = originalSpeed;
         crouchSpeed = originalCrouchSpeed;
         runspeed = originalRunSpeed;
+    }
+    public void Decreasespeedbyscale(float decresescale)
+    {   
+        speed *= decresescale;
+        crouchSpeed *=  decresescale;
+        runspeed *= decresescale;
+    }
+    public void Permadecreasespeed(float decreasevalue)
+    {
+        speed = decreasevalue;
+        runspeed = decreasevalue;
+        crouchSpeed =  decreasevalue;
     }
 }
 

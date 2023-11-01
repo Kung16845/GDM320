@@ -36,4 +36,10 @@ public class TrapController : MonoBehaviour
         movementScript.ResumeMoving();
         trapSlider.SetActive(false);
     }
+    public void HitbyWebtrap()
+    {
+        stuck = false;
+        movementScript.Permadecreasespeed(1f);
+        
+    }
 }
