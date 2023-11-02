@@ -8,6 +8,7 @@ public class InventoryPresentCharactor : MonoBehaviour
 {
     public ItemsDataCharactor[] itemsDataCharactors => itemsListCharactors.ToArray();
     [SerializeField] List<ItemsDataCharactor> itemsListCharactors;
+    public GameObject slotprefeb;
     public UIItemCharactor uIItemCharactorPrefeb;
     public List<UIItemCharactor> uIItemListCharactor;
     private void Start()
@@ -32,9 +33,9 @@ public class InventoryPresentCharactor : MonoBehaviour
             }
         }
 
-        SetItemCharactorList(itemsDataCharactors);
+        SetDataItemCharactorList(itemsDataCharactors);
     }
-    public void SetItemCharactorList(ItemsDataCharactor[] uIItemCharactordatas)
+    public void SetDataItemCharactorList(ItemsDataCharactor[] uIItemCharactordatas)
     {
         int i = 0;
         foreach (var uiItem in uIItemCharactordatas)
