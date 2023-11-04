@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - inventory
   - Velocrux
+  - Leg
   layers:
   - Default
   - TransparentFX
