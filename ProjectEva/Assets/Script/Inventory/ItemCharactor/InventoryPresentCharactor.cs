@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class InventoryPresentCharactor : MonoBehaviour
 {
     public ItemsDataCharactor[] itemsDataCharactors => itemsListCharactors.ToArray();
     [SerializeField] List<ItemsDataCharactor> itemsListCharactors;
-    public GameObject slotprefeb;
+    public List<GameObject> slots;
     public UIItemCharactor uIItemCharactorPrefeb;
     public List<UIItemCharactor> uIItemListCharactor;
     private void Start()
@@ -17,23 +18,32 @@ public class InventoryPresentCharactor : MonoBehaviour
         RefreshUIInventoryCharactor();
     }
     public void RefreshUIInventoryCharactor()
-    {   
+    {
         ClearALLItemCharactors();
-        
-        for (int i = 1; i <= 12; i++)
+
+        SetUIItemsInSlots();
+
+        SetDataItemCharactorList(itemsDataCharactors);
+    }
+    public void SetUIItemsInSlots()
+    {
+        for (int i = 0; i < 12; i++)
         {
-            var newItemCharactor = Instantiate(uIItemCharactorPrefeb, uIItemCharactorPrefeb.transform.parent, false);
+
+            var newItemCharactor = Instantiate(uIItemCharactorPrefeb, slots.ElementAt<GameObject>(i).transform, false);
 
             newItemCharactor.gameObject.SetActive(true);
             uIItemListCharactor.Add(newItemCharactor);
-            if (i > 6)
-            {   
+
+            if (i > 5)
+            {
                 newItemCharactor.isLock = true;
                 newItemCharactor.imageItemLock.gameObject.SetActive(true);
             }
-        }
+            else if (i > itemsDataCharactors.Length - 1)
+                Destroy(uIItemListCharactor.ElementAt<UIItemCharactor>(i).gameObject);
 
-        SetDataItemCharactorList(itemsDataCharactors);
+        }
     }
     public void SetDataItemCharactorList(ItemsDataCharactor[] uIItemCharactordatas)
     {
