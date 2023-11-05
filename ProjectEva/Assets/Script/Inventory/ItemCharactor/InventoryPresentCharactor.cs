@@ -17,6 +17,36 @@ public class InventoryPresentCharactor : MonoBehaviour
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
     }
+    public void AddItemCharactors(ItemsDataCharactor itemsDataCharactor)
+    {
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
+            UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
+            if (itemInSlot != null && itemInSlot.count < itemsDataCharactor.maxCount
+            && itemInSlot.nameItem.text == itemsDataCharactor.nameItemCharactor)
+            {
+                itemInSlot.count++;
+                itemInSlot.RefrehCount();
+                return;
+            }
+            else if (itemInSlot == null)
+            {
+                SpawnNewItem(itemsDataCharactor, slot);
+                return;
+            }
+        }
+    }
+
+    public void SpawnNewItem(ItemsDataCharactor item, InventorySlots slot)
+    {
+        var newItemGo = Instantiate(uIItemCharactorPrefeb, slot.transform, false);
+        newItemGo.SetDataUIItemCharactor(item);
+        newItemGo.gameObject.SetActive(true);
+        uIItemListCharactor.Add(newItemGo);
+    }
+
     public void RefreshUIInventoryCharactor()
     {
         ClearALLItemCharactors();
@@ -27,22 +57,23 @@ public class InventoryPresentCharactor : MonoBehaviour
     }
     public void SetUIItemsInSlots()
     {
-        for (int i = 0; i < 12; i++)
+        var newItemCharactor = new UIItemCharactor();
+        for (int i = 0; i < slots.Count; i++)
         {
-
-            var newItemCharactor = Instantiate(uIItemCharactorPrefeb, slots.ElementAt<GameObject>(i).transform, false);
-
-            newItemCharactor.gameObject.SetActive(true);
-            uIItemListCharactor.Add(newItemCharactor);
-
-            if (i > 5)
+            if (i < itemsDataCharactors.Length)
             {
+                newItemCharactor = Instantiate(uIItemCharactorPrefeb, slots.ElementAt(i).transform, false);
+                newItemCharactor.gameObject.SetActive(true);
+                uIItemListCharactor.Add(newItemCharactor);
+            }
+            else if (i > 5)
+            {
+                newItemCharactor = Instantiate(uIItemCharactorPrefeb, slots.ElementAt(i).transform, false);
+                newItemCharactor.gameObject.SetActive(true);
                 newItemCharactor.isLock = true;
                 newItemCharactor.imageItemLock.gameObject.SetActive(true);
+                uIItemListCharactor.Add(newItemCharactor);
             }
-            else if (i > itemsDataCharactors.Length - 1)
-                Destroy(uIItemListCharactor.ElementAt<UIItemCharactor>(i).gameObject);
-
         }
     }
     public void SetDataItemCharactorList(ItemsDataCharactor[] uIItemCharactordatas)
@@ -62,10 +93,12 @@ public class InventoryPresentCharactor : MonoBehaviour
     }
 }
 
+[CreateAssetMenuAttribute(menuName = "ScriptableObject object/ItemChractor")]
 [Serializable]
-public class ItemsDataCharactor
+public class ItemsDataCharactor : ScriptableObject
 {
     public string nameItemCharactor;
     public Sprite ItemImage;
-
+    public int count;
+    public int maxCount;
 }

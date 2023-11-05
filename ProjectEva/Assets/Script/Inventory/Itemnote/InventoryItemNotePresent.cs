@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryItemNotePresent : MonoBehaviour
@@ -10,20 +11,29 @@ public class InventoryItemNotePresent : MonoBehaviour
     public UIItemNote uIItemNotePrefeb;
     public List<UIItemNote> uIItemListNotes;
     public int currentCategory;
-    private void Start() 
+    public GameObject[] DetallisCategorttype;
+    private void Start()
     {
         uIItemNotePrefeb.gameObject.SetActive(false);
         currentCategory = 1;
-        RefreshUIInventoryItenNote();
+        RefreshUIInventoryItenNote();        
+        
+    }
+    public void AddItemsNote(ItemDataNote ItemDataNotes)
+    {
+        itemsListNotes.Add(ItemDataNotes);
     }
     public void ChangeCategory(int n)
     {
+        DetallisCategorttype[currentCategory - 1].SetActive(false);
         currentCategory = n;
         RefreshUIInventoryItenNote();
     }
     public void RefreshUIInventoryItenNote()
-    {   
+    {
         ClearALLItemCharactors();
+
+        DetallisCategorttype[currentCategory - 1].SetActive(true);
 
         var itemsCurrentCategory = GetCategory((Category)currentCategory);
 
@@ -33,26 +43,31 @@ public class InventoryItemNotePresent : MonoBehaviour
         {
             uiItemNoteDatas.Add(items);
         }
+        
 
         SetItemNoteList(uiItemNoteDatas.ToArray());
+
+
     }
     public void SetItemNoteList(ItemDataNote[] itemDataNotes)
-    {
-        foreach(var uiItemNote in itemDataNotes)
+    {   
+        foreach (var uiItemNote in itemDataNotes)
         {
-            var newItemNoteUI = Instantiate(uIItemNotePrefeb,uIItemNotePrefeb.transform.parent,false);
+            var newItemNoteUI = Instantiate(uIItemNotePrefeb, uIItemNotePrefeb.transform.parent, false);
 
             newItemNoteUI.gameObject.SetActive(true);
             uIItemListNotes.Add(newItemNoteUI);
             newItemNoteUI.SetDataUIItemNote(uiItemNote);
+
         }
+
     }
     public ItemDataNote[] GetCategory(Category category)
     {
         var dataListCategory = new List<ItemDataNote>();
         foreach (var item in itemsListNotes)
         {
-            if(item.type == category)
+            if (item.type == category)
                 dataListCategory.Add(item);
         }
 
