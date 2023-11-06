@@ -41,7 +41,7 @@ public class InventoryPresentCharactor : MonoBehaviour
         //     }        
         // }
         var ItemReduceCharactor = uIItemListCharactor.Where(name => name.nameItem.text == nameItemReduceCharactor)
-        .OrderBy(num => num.count).First();
+        .OrderByDescending(num => num.count).LastOrDefault();
         ItemReduceCharactor.count--;
         ItemReduceCharactor.RefrehCount();
         if (ItemReduceCharactor.count <= 0)
