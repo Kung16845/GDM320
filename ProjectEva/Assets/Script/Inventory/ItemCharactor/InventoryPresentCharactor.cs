@@ -18,22 +18,26 @@ public class InventoryPresentCharactor : MonoBehaviour
         RefreshUIInventoryCharactor();
     }
     public void ManageReduceResource(string nameItemReduceCharactor)
-    {
+    {   
+        // var listItemReduce = new List<UIItemCharactor>();
         for (int i = 0; i < slots.Count; i++)
         {
             InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
             UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
-            if (itemInSlot != null && itemInSlot.count > 0
+            if (itemInSlot != null && itemInSlot.count > 0 
              && itemInSlot.nameItem.text == nameItemReduceCharactor)
-            {
+            {   
+                // listItemReduce.Add(itemInSlot);
                 itemInSlot.count--;
                 itemInSlot.RefrehCount();
                 if(itemInSlot.count <= 0)
                     Destroy(itemInSlot.gameObject);
                 return;
-            }
-            
+            }        
         }
+        // var itemRedece = listItemReduce.OrderBy(num => num.count).First();
+        // itemRedece.count--;
+        
     }
     public void AddItemCharactors(ItemsDataCharactor itemsDataCharactor)
     {

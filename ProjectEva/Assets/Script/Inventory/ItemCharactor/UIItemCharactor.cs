@@ -17,6 +17,9 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public int maxCount;
     public bool isLock;
     public bool isFull;
+
+    public object Add { get; internal set; }
+
     public void SetDataUIItemCharactor(ItemsDataCharactor itemsDataCharactor)
     {
         nameItem.text = itemsDataCharactor.nameItemCharactor;

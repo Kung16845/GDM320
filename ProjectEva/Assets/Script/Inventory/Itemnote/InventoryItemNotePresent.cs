@@ -22,6 +22,7 @@ public class InventoryItemNotePresent : MonoBehaviour
     public void AddItemsNote(ItemDataNote ItemDataNotes)
     {
         itemsListNotes.Add(ItemDataNotes);
+        RefreshUIInventoryItenNote();
     }
     public void ChangeCategory(int n)
     {
