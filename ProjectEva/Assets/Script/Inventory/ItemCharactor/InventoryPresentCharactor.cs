@@ -53,46 +53,94 @@ public class InventoryPresentCharactor : MonoBehaviour
     public void AddItemCharactors(ItemsDataCharactor itemsDataCharactor)
     {
 
-        for (int i = 0; i < slots.Count; i++)
+        var ItemAddCharactors = uIItemListCharactor.Where(name => name.nameItem.text == itemsDataCharactor.nameItemCharactor
+        && name.count != name.maxCount).
+        OrderByDescending(num => num.count).FirstOrDefault();
+
+        var slotNull = slots.FirstOrDefault(slot => slot.GetComponentInChildren<UIItemCharactor>() == null);
+
+        if (ItemAddCharactors == null && slotNull != null)
         {
-            InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
-            UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
-            if (itemInSlot != null && itemInSlot.count < itemInSlot.maxCount
-            && itemInSlot.nameItem.text == itemsDataCharactor.nameItemCharactor)
+            SpawnNewItem(itemsDataCharactor, slotNull.GetComponentInChildren<InventorySlots>());
+            return;
+        }
+
+        else if (ItemAddCharactors != null)
+        {
+            var sum = 0;
+            ItemAddCharactors.count += itemsDataCharactor.count;
+            ItemAddCharactors.RefrehCount();
+            sum = ItemAddCharactors.count;
+
+            if (ItemAddCharactors.count > ItemAddCharactors.maxCount)
             {
-                var sum = 0;
-                itemInSlot.count += itemsDataCharactor.count;
-                sum = itemInSlot.count;
-                itemInSlot.RefrehCount();
-                if (itemInSlot.count > itemInSlot.maxCount)
-                {
-                    itemInSlot.count = itemInSlot.maxCount;
-                    itemInSlot.RefrehCount();
-                    sum -= itemInSlot.maxCount;
+                ItemAddCharactors.count = ItemAddCharactors.maxCount;
+                ItemAddCharactors.RefrehCount();
+                sum -= ItemAddCharactors.maxCount;
 
-                    var slotNull = slots.FirstOrDefault(slot => slot.GetComponentInChildren<UIItemCharactor>() == null);
-                    var newItemGo = Instantiate(uIItemCharactorPrefeb, slotNull.transform, false);
-                    
-                    newItemGo.SetDataUIItemCharactor(new ItemsDataCharactor
-                    (
-                        itemsDataCharactor.nameItemCharactor
-                        , itemsDataCharactor.ItemImage
-                        , sum
-                        , itemsDataCharactor.maxCount
-                    ));
+                var newItemGo = Instantiate(uIItemCharactorPrefeb, slotNull.transform, false);
 
-                    newItemGo.gameObject.SetActive(true);
-                    uIItemListCharactor.Add(newItemGo);
-                }
-                return;
+                newItemGo.SetDataUIItemCharactor(new ItemsDataCharactor
+                (
+                    itemsDataCharactor.nameItemCharactor
+                    , itemsDataCharactor.ItemImage
+                    , sum
+                    , itemsDataCharactor.maxCount
+                ));
 
-            }
-            else if (itemInSlot == null)
-            {
-                SpawnNewItem(itemsDataCharactor, slot);
+                newItemGo.gameObject.SetActive(true);
+                uIItemListCharactor.Add(newItemGo);
+
                 return;
             }
         }
+        else if (slotNull != null && ItemAddCharactors != null)
+        {
+            // ถ้าของเต็มให้ทำอะไรบ้างอย่าง 
+            return;
+        }
+
+
+        // for (int i = 0; i < slots.Count; i++)
+        // {
+        //     InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
+        //     UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
+        //     if (itemInSlot != null && itemInSlot.count < itemInSlot.maxCount
+        //     && itemInSlot.nameItem.text == itemsDataCharactor.nameItemCharactor)
+        //     {
+        //         var sum = 0;
+        //         itemInSlot.count += itemsDataCharactor.count;
+        //         sum = itemInSlot.count;
+        //         itemInSlot.RefrehCount();
+        //         if (itemInSlot.count > itemInSlot.maxCount)
+        //         {
+        //             itemInSlot.count = itemInSlot.maxCount;
+        //             itemInSlot.RefrehCount();
+        //             sum -= itemInSlot.maxCount;
+
+        //             var slotNull = slots.FirstOrDefault(slot => slot.GetComponentInChildren<UIItemCharactor>() == null);
+        //             var newItemGo = Instantiate(uIItemCharactorPrefeb, slotNull.transform, false);
+
+        //             newItemGo.SetDataUIItemCharactor(new ItemsDataCharactor
+        //             (
+        //                 itemsDataCharactor.nameItemCharactor
+        //                 , itemsDataCharactor.ItemImage
+        //                 , sum
+        //                 , itemsDataCharactor.maxCount
+        //             ));
+
+        //             newItemGo.gameObject.SetActive(true);
+        //             uIItemListCharactor.Add(newItemGo);
+        //         }
+        //         return;
+
+        //     }
+        //     else if (itemInSlot == null)
+        //     {
+        //         SpawnNewItem(itemsDataCharactor, slot);
+        //         return;
+        //     }
+        // }
     }
     public void SpawnNewItem(ItemsDataCharactor item, InventorySlots slot)
     {
