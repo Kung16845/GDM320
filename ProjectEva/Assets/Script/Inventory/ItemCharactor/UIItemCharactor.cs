@@ -24,7 +24,7 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         nameItem.text = itemsDataCharactor.nameItemCharactor;
         count = itemsDataCharactor.count;
-        // maxCount = itemsDataCharactor.maxCount;
+        maxCount = itemsDataCharactor.maxCount;
         RefrehCount();
         imageItem.sprite = itemsDataCharactor.ItemImage;
     }

@@ -17,27 +17,38 @@ public class InventoryPresentCharactor : MonoBehaviour
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
     }
+    public void UnlockSlot()
+    {
+        var slotLock = uIItemListCharactor.FirstOrDefault(slotsImage => slotsImage.imageItemLock.gameObject.activeInHierarchy);
+        Destroy(slotLock.gameObject);
+        uIItemListCharactor.Remove(slotLock);
+    }
     public void ManageReduceResource(string nameItemReduceCharactor)
-    {   
-        // var listItemReduce = new List<UIItemCharactor>();
-        for (int i = 0; i < slots.Count; i++)
+    {
+
+        // for (int i = 0; i < slots.Count; i++)
+        // {
+        //     InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
+        //     UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
+        //     if (itemInSlot != null && itemInSlot.count > 0 
+        //      && itemInSlot.nameItem.text == nameItemReduceCharactor)
+        //     {   
+        //         itemInSlot.count--;
+        //         itemInSlot.RefrehCount();
+        //         if(itemInSlot.count <= 0)
+        //             Destroy(itemInSlot.gameObject);
+        //         return;
+        //     }        
+        // }
+        var ItemReduceCharactor = uIItemListCharactor.Where(name => name.nameItem.text == nameItemReduceCharactor)
+        .OrderBy(num => num.count).First();
+        ItemReduceCharactor.count--;
+        ItemReduceCharactor.RefrehCount();
+        if (ItemReduceCharactor.count <= 0)
         {
-            InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
-            UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
-            if (itemInSlot != null && itemInSlot.count > 0 
-             && itemInSlot.nameItem.text == nameItemReduceCharactor)
-            {   
-                // listItemReduce.Add(itemInSlot);
-                itemInSlot.count--;
-                itemInSlot.RefrehCount();
-                if(itemInSlot.count <= 0)
-                    Destroy(itemInSlot.gameObject);
-                return;
-            }        
+            Destroy(ItemReduceCharactor.gameObject);
+            uIItemListCharactor.Remove(ItemReduceCharactor);
         }
-        // var itemRedece = listItemReduce.OrderBy(num => num.count).First();
-        // itemRedece.count--;
-        
     }
     public void AddItemCharactors(ItemsDataCharactor itemsDataCharactor)
     {
@@ -46,12 +57,35 @@ public class InventoryPresentCharactor : MonoBehaviour
         {
             InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
             UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
-            if (itemInSlot != null && itemInSlot.count < itemsDataCharactor.maxCount
+            if (itemInSlot != null && itemInSlot.count < itemInSlot.maxCount
             && itemInSlot.nameItem.text == itemsDataCharactor.nameItemCharactor)
-            {   
-                itemInSlot.count++;
+            {
+                var sum = 0;
+                itemInSlot.count += itemsDataCharactor.count;
+                sum = itemInSlot.count;
                 itemInSlot.RefrehCount();
+                if (itemInSlot.count > itemInSlot.maxCount)
+                {
+                    itemInSlot.count = itemInSlot.maxCount;
+                    itemInSlot.RefrehCount();
+                    sum -= itemInSlot.maxCount;
+
+                    var slotNull = slots.FirstOrDefault(slot => slot.GetComponentInChildren<UIItemCharactor>() == null);
+                    var newItemGo = Instantiate(uIItemCharactorPrefeb, slotNull.transform, false);
+                    
+                    newItemGo.SetDataUIItemCharactor(new ItemsDataCharactor
+                    (
+                        itemsDataCharactor.nameItemCharactor
+                        , itemsDataCharactor.ItemImage
+                        , sum
+                        , itemsDataCharactor.maxCount
+                    ));
+
+                    newItemGo.gameObject.SetActive(true);
+                    uIItemListCharactor.Add(newItemGo);
+                }
                 return;
+
             }
             else if (itemInSlot == null)
             {
@@ -122,4 +156,12 @@ public class ItemsDataCharactor : ScriptableObject
     public Sprite ItemImage;
     public int count;
     public int maxCount;
+
+    public ItemsDataCharactor(string nameItem, Sprite sprite, int count, int maxCount)
+    {
+        this.nameItemCharactor = nameItem;
+        this.ItemImage = sprite;
+        this.count = count;
+        this.maxCount = maxCount;
+    }
 }
