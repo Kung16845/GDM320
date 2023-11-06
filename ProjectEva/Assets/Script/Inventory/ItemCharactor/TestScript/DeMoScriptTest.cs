@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class DeMoScriptTest : MonoBehaviour
 {   
-    // public InventoryPresentCharactor inventoryPresentCharactor;
-    // public ItemsDataCharactor itemsDataCharactor;
+    public InventoryPresentCharactor inventoryPresentCharactor;
+    public ItemsDataCharactor itemsDataCharactor;
     public InventoryItemNotePresent inventoryItemNotePresent;
     public ItemDataNote itemDataNote;
     public void PickupItemNote()
     {
         inventoryItemNotePresent.AddItemsNote(itemDataNote);
     }
-    // public void PickupItemCharactors()
-    // {   
-    //     inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
-    // }
+    public void PickupItemCharactors()
+    {   
+        inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
+    }
 }

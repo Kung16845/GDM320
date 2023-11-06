@@ -17,6 +17,24 @@ public class InventoryPresentCharactor : MonoBehaviour
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
     }
+    public void ManageReduceResource(string nameItemReduceCharactor)
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
+            UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
+            if (itemInSlot != null && itemInSlot.count > 0
+             && itemInSlot.nameItem.text == nameItemReduceCharactor)
+            {
+                itemInSlot.count--;
+                itemInSlot.RefrehCount();
+                if(itemInSlot.count <= 0)
+                    Destroy(itemInSlot.gameObject);
+                return;
+            }
+            
+        }
+    }
     public void AddItemCharactors(ItemsDataCharactor itemsDataCharactor)
     {
 
@@ -26,7 +44,7 @@ public class InventoryPresentCharactor : MonoBehaviour
             UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
             if (itemInSlot != null && itemInSlot.count < itemsDataCharactor.maxCount
             && itemInSlot.nameItem.text == itemsDataCharactor.nameItemCharactor)
-            {
+            {   
                 itemInSlot.count++;
                 itemInSlot.RefrehCount();
                 return;
@@ -38,7 +56,6 @@ public class InventoryPresentCharactor : MonoBehaviour
             }
         }
     }
-
     public void SpawnNewItem(ItemsDataCharactor item, InventorySlots slot)
     {
         var newItemGo = Instantiate(uIItemCharactorPrefeb, slot.transform, false);
