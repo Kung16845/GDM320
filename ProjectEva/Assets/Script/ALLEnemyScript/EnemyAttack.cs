@@ -20,9 +20,17 @@ public class EnemyAttack : MonoBehaviour
         {
             if (enemyNormal.currentState == enemyNormal.state_Hunting)
             {
-                player.GetComponent<Hp>().TakeDamage(enemyNormal.damage);
-                Debug.Log("Player Taken Damage  ");
+               // player.GetComponent<Hp>().TakeDamage(enemyNormal.damage);
+                Debug.Log("Enermy Attack");
+
             }
         }
     }
+    private IEnumerator EnermyAttack(float waitTime)
+    {
+        animationActtack.SetBool("isAttack", true);                 //Play Attack Animation
+        yield return new WaitForSeconds(2f);
+        animationActtack.SetBool("isAttack", false);
+    }
+
 }
