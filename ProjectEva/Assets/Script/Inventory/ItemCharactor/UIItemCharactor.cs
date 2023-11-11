@@ -4,19 +4,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using JetBrains.Annotations;
 public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [HideInInspector] public Transform parentAfterDray;
+    public Transform parentBeforeDray;
+    
     
     [Header("UI")]
     public TextMeshProUGUI nameItem;
     public TextMeshProUGUI countItemText;
     public Image imageItem;
     public Image imageItemLock;
+    public string scriptItem;
     public int count;
     public int maxCount;
     public bool isLock;
-    public bool isFull;
+    public bool isFlashLight;
+    public bool isOnhand;
 
     public object Add { get; internal set; }
 
@@ -25,6 +30,9 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         nameItem.text = itemsDataCharactor.nameItemCharactor;
         count = itemsDataCharactor.count;
         maxCount = itemsDataCharactor.maxCount;
+        scriptItem = itemsDataCharactor.scriptItem;
+        isFlashLight = itemsDataCharactor.isFlashLight;
+        isOnhand = itemsDataCharactor.isOnhand;
         RefrehCount();
         imageItem.sprite = itemsDataCharactor.ItemImage;
     }
@@ -37,6 +45,8 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnBeginDrag(PointerEventData eventData)
     {
         parentAfterDray = transform.parent;
+        parentBeforeDray = parentAfterDray.transform;
+        
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         imageItem.raycastTarget = false;
@@ -50,7 +60,8 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     }
 
     public void OnEndDrag(PointerEventData eventData)
-    {
+    {   
+            
         transform.SetParent(parentAfterDray);
         imageItem.raycastTarget = true;
     }

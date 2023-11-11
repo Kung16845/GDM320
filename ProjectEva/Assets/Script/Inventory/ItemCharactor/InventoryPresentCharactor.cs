@@ -10,6 +10,7 @@ public class InventoryPresentCharactor : MonoBehaviour
     public ItemsDataCharactor[] itemsDataCharactors => itemsListCharactors.ToArray();
     [SerializeField] List<ItemsDataCharactor> itemsListCharactors;
     public List<GameObject> slots;
+    public GameObject slotsEquipment;
     public UIItemCharactor uIItemCharactorPrefeb;
     public List<UIItemCharactor> uIItemListCharactor;
     private void Start()
@@ -22,6 +23,19 @@ public class InventoryPresentCharactor : MonoBehaviour
         var slotLock = uIItemListCharactor.FirstOrDefault(slotsImage => slotsImage.imageItemLock.gameObject.activeInHierarchy);
         Destroy(slotLock.gameObject);
         uIItemListCharactor.Remove(slotLock);
+    }
+    public void DeleteItemCharactorEquipment()
+    {   
+        Debug.Log("DeleteItemCharactorEquipment");
+        Transform child = transform.GetChild(0);
+        DestroyImmediate(child.gameObject);
+        Destroy(slotsEquipment.GetComponentInChildren<UIItemCharactor>().gameObject);
+    }
+    public void CreateItemCharactorEquipment(string scriptItem)
+    {
+        var newEmptyObjectForItem = Instantiate(new GameObject("EmptyObject"), this.transform);
+        Type scriptType = Type.GetType(scriptItem);
+        newEmptyObjectForItem.AddComponent(scriptType);
     }
     public void ManageReduceResource(string nameItemReduceCharactor)
     {
@@ -86,6 +100,9 @@ public class InventoryPresentCharactor : MonoBehaviour
                     , itemsDataCharactor.ItemImage
                     , sum
                     , itemsDataCharactor.maxCount
+                    , itemsDataCharactor.scriptItem
+                    , itemsDataCharactor.isFlashLight
+                    , itemsDataCharactor.isOnhand
                 ));
 
                 newItemGo.gameObject.SetActive(true);
@@ -202,14 +219,19 @@ public class ItemsDataCharactor : ScriptableObject
 {
     public string nameItemCharactor;
     public Sprite ItemImage;
+    public string scriptItem;
     public int count;
     public int maxCount;
-
-    public ItemsDataCharactor(string nameItem, Sprite sprite, int count, int maxCount)
+    public bool isFlashLight;
+    public bool isOnhand;
+    public ItemsDataCharactor(string nameItem, Sprite sprite, int count, int maxCount, string scriptItem, bool flashLight, bool Onhand)
     {
         this.nameItemCharactor = nameItem;
         this.ItemImage = sprite;
         this.count = count;
         this.maxCount = maxCount;
+        this.scriptItem = scriptItem;
+        this.isFlashLight = flashLight;
+        this.isOnhand = Onhand;
     }
 }

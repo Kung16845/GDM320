@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemsDataCharactor
   nameItemCharactor: Potion
   ItemImage: {fileID: 21300000, guid: 7966b76d2681ca047883dd32c4a54ee4, type: 3}
+  scriptItem: Bandage
   count: 1
   maxCount: 1
+  isFlashLight: 0
+  isOnhand: 1

@@ -454,12 +454,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentAfterDray: {fileID: 0}
+  parentBeforeDray: {fileID: 0}
+  Onhand: {fileID: 0}
   nameItem: {fileID: 6164139961213261642}
   countItemText: {fileID: 6830344284479711957}
   imageItem: {fileID: 7905602635943586498}
   imageItemLock: {fileID: 4529411527115507417}
+  scriptItem: 
+  count: 0
+  maxCount: 0
   isLock: 0
-  isFull: 0
+  isFlashLight: 0
+  isOnhand: 0
 --- !u!1 &8697552221009180983
 GameObject:
   m_ObjectHideFlags: 0
