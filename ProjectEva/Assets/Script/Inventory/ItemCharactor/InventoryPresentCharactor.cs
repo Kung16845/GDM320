@@ -20,12 +20,13 @@ public class InventoryPresentCharactor : MonoBehaviour
     }
     public void UnlockSlot()
     {
-        var slotLock = uIItemListCharactor.FirstOrDefault(slotsImage => slotsImage.imageItemLock.gameObject.activeInHierarchy);
-        Destroy(slotLock.gameObject);
+        var slotLock = uIItemListCharactor.FirstOrDefault(slotsImage => slotsImage.isLock);
         uIItemListCharactor.Remove(slotLock);
+        Destroy(slotLock.gameObject);
+
     }
     public void DeleteItemCharactorEquipment()
-    {   
+    {
         Debug.Log("DeleteItemCharactorEquipment");
         Transform child = transform.GetChild(0);
         DestroyImmediate(child.gameObject);
