@@ -5,12 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using JetBrains.Annotations;
-using System;
 public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [HideInInspector] public Transform parentAfterDray;
     public Transform parentBeforeDray;
-    public Transform slotEqicpment;
+    
     
     [Header("UI")]
     public TextMeshProUGUI nameItem;
@@ -25,9 +24,6 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public bool isOnhand;
 
     public object Add { get; internal set; }
-    private void Awake() {
-        slotEqicpment = GameObject.Find("BgOnHand").transform;
-    }
 
     public void SetDataUIItemCharactor(ItemsDataCharactor itemsDataCharactor)
     {
@@ -65,13 +61,7 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {   
-        if(parentBeforeDray == slotEqicpment) 
-        {   
-           
-            var objectitem = FindObjectOfType<InventoryPresentCharactor>();
-            Destroy(objectitem.transform.GetChild(0).gameObject);
             
-        } 
         transform.SetParent(parentAfterDray);
         imageItem.raycastTarget = true;
     }
