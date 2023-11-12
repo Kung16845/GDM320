@@ -12,6 +12,10 @@ public class Bandage : MonoBehaviour
     private bool isHealing = false; // Flag to track if healing is in progress.
     public GameObject healslider;
     public InventoryPresentCharactor inventoryPresentCharactor;
+    private void Awake()
+    {
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+    }
     void Start()
     {
         slider.maxValue = maxHealingValue;
@@ -23,10 +27,12 @@ public class Bandage : MonoBehaviour
 
     void Update()
     {   
-        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+        
+        if(Input.GetKey(KeyCode.D))
+            inventoryPresentCharactor.DeleteItemCharactorEquipment();
         if (Input.GetKey(KeyCode.B))
         {   
-            inventoryPresentCharactor.DeleteItemCharactorEquipment();
+            
             healslider.SetActive(true);
             isHealing = true;
             slider.value += healingSpeed * Time.deltaTime;

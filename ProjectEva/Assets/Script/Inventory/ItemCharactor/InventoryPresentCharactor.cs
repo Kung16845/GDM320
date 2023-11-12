@@ -26,7 +26,8 @@ public class InventoryPresentCharactor : MonoBehaviour
 
     }
     public void DeleteItemCharactorEquipment()
-    {
+    {   
+        
         Debug.Log("DeleteItemCharactorEquipment");
         Transform child = transform.GetChild(0);
         DestroyImmediate(child.gameObject);
