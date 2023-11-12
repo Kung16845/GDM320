@@ -9,8 +9,8 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 {
     [HideInInspector] public Transform parentAfterDray;
     public Transform parentBeforeDray;
-    
-    
+    public Transform slotEqicpment;
+
     [Header("UI")]
     public TextMeshProUGUI nameItem;
     public TextMeshProUGUI countItemText;
@@ -24,7 +24,10 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public bool isOnhand;
 
     public object Add { get; internal set; }
-
+    private void Awake()
+    {
+        slotEqicpment = GameObject.Find("BgOnHand").transform;
+    }
     public void SetDataUIItemCharactor(ItemsDataCharactor itemsDataCharactor)
     {
         nameItem.text = itemsDataCharactor.nameItemCharactor;
@@ -46,7 +49,7 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         parentAfterDray = transform.parent;
         parentBeforeDray = parentAfterDray.transform;
-        
+
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         imageItem.raycastTarget = false;
@@ -60,8 +63,14 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     }
 
     public void OnEndDrag(PointerEventData eventData)
-    {   
-            
+    {
+        if (parentBeforeDray == slotEqicpment)
+        {
+
+            var objectitem = FindObjectOfType<InventoryPresentCharactor>();
+            Destroy(objectitem.transform.GetChild(0).gameObject);
+
+        }
         transform.SetParent(parentAfterDray);
         imageItem.raycastTarget = true;
     }
