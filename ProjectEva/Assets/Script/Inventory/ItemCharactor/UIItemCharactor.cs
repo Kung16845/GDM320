@@ -64,7 +64,7 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (parentBeforeDray == slotEqicpment)
+        if (parentBeforeDray == slotEqicpment && parentBeforeDray != parentAfterDray)
         {
 
             var objectitem = FindObjectOfType<InventoryPresentCharactor>();

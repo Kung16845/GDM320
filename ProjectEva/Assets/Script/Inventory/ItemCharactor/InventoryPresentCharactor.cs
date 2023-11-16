@@ -11,12 +11,23 @@ public class InventoryPresentCharactor : MonoBehaviour
     [SerializeField] List<ItemsDataCharactor> itemsListCharactors;
     public List<GameObject> slots;
     public GameObject slotsEquipment;
+    public GameObject inventorypage;
+    public bool openInven;
     public UIItemCharactor uIItemCharactorPrefeb;
     public List<UIItemCharactor> uIItemListCharactor;
     private void Start()
     {
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
+    }
+    public void Update()
+    {   
+        
+        if(Input.GetKey(KeyCode.Tab))
+        {   
+            openInven = !openInven;
+            inventorypage.SetActive(openInven);
+        }
     }
     public void UnlockSlot()
     {
@@ -37,7 +48,14 @@ public class InventoryPresentCharactor : MonoBehaviour
     {
         var newEmptyObjectForItem = Instantiate(new GameObject("EmptyObject"), this.transform);
         Type scriptType = Type.GetType(scriptItem);
-        newEmptyObjectForItem.AddComponent(scriptType);
+        var addedComponent = newEmptyObjectForItem.AddComponent(scriptType) as Behaviour; // ให้เป็น Behaviour
+
+        // เปิดใช้งาน Component ที่เพิ่มเข้าไป
+        if (addedComponent != null)
+        {
+            // เปิดใช้งาน Behaviour
+            addedComponent.enabled = true;
+        }
     }
     public void ManageReduceResource(string nameItemReduceCharactor)
     {
