@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Intensity: 5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000031e80b05
+  m_ApplyToSortingLayers: 1560a8de0d7513ab00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -186,6 +186,7 @@ MonoBehaviour:
   isAiming: 0
   isReloading: 0
   SoundWave: {fileID: 0}
+  onOffLight: {fileID: 3779131959267507872}
   isshoot: 0
   soundManager: {fileID: 0}
   trapController: {fileID: 0}
@@ -494,6 +495,7 @@ MonoBehaviour:
   Light: {fileID: 968562542407998013}
   checkLight: 0
   isHave: 0
+  isopen: 0
 --- !u!114 &4488019289891037752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +557,7 @@ Transform:
   m_GameObject: {fileID: 3580195890726593413}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.0002, y: 0.3144, z: 0}
-  m_LocalScale: {x: 0.0018590896, y: 0.0018590896, z: 0.0018590894}
+  m_LocalScale: {x: 0.002, y: 0.002, z: 0.002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5570529014709414470}
