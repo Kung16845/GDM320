@@ -12,27 +12,28 @@ public class Bandage : MonoBehaviour
     private bool isHealing = false; // Flag to track if healing is in progress.
     public GameObject healslider;
     public InventoryPresentCharactor inventoryPresentCharactor;
+
     private void Awake()
     {
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
-        slider.maxValue = maxHealingValue;
-        slider.value = 0f;
         playerHp = FindObjectOfType<Hp>();
         movementScript = FindObjectOfType<NewMovementPlayer>();    
-        healslider.SetActive(false); 
-    }
-    void Start()
-    {
+        Object[] allObjects = GameObject.FindObjectsOfType(typeof(GameObject), true);
+        foreach (GameObject obj in allObjects)
+        {
+            // ตรวจสอบว่า Object นี้ตรงกับเงื่อนไขที่คุณต้องการหรือไม่
+            if (obj.tag == "Sliderbar")
+            {
+                healslider = obj;
+                slider = obj.GetComponent<Slider>();
+            }
+        }
+        slider = healslider.GetComponent<Slider>();
         slider.maxValue = maxHealingValue;
-        slider.value = 0f;
-        playerHp = FindObjectOfType<Hp>();
-        movementScript = FindObjectOfType<NewMovementPlayer>();    
-        healslider.SetActive(false);
+        slider.value = 0f; 
     }
-
     void Update()
     {   
-            
         if (Input.GetKey(KeyCode.B))
         {   
             
