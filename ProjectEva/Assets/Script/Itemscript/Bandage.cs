@@ -15,24 +15,36 @@ public class Bandage : MonoBehaviour
     private void Awake()
     {
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+        playerHp = FindObjectOfType<Hp>();
+        movementScript = FindObjectOfType<NewMovementPlayer>(); 
+        Object[] allObjects = GameObject.FindObjectsOfType(typeof(GameObject), true);
+
+        foreach (GameObject obj in allObjects)
+        {
+            // ตรวจสอบว่า Object นี้ตรงกับเงื่อนไขที่คุณต้องการหรือไม่
+            if (obj.tag == "Trapfilbar")
+            {
+                healslider = obj;
+                slider = obj.GetComponent<Slider>();
+            }
+        }
+
         slider.maxValue = maxHealingValue;
         slider.value = 0f;
-        playerHp = FindObjectOfType<Hp>();
-        movementScript = FindObjectOfType<NewMovementPlayer>();    
-        healslider.SetActive(false); 
+        // healslider.SetActive(false); 
     }
     void Start()
     {
-        slider.maxValue = maxHealingValue;
-        slider.value = 0f;
-        playerHp = FindObjectOfType<Hp>();
-        movementScript = FindObjectOfType<NewMovementPlayer>();    
-        healslider.SetActive(false);
+        // slider.maxValue = maxHealingValue;
+        // slider.value = 0f;
+        // playerHp = FindObjectOfType<Hp>();
+        // movementScript = FindObjectOfType<NewMovementPlayer>();    
+        // healslider.SetActive(false);
     }
 
     void Update()
     {   
-            
+         
         if (Input.GetKey(KeyCode.B))
         {   
             
