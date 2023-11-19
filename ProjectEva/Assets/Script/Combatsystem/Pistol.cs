@@ -20,7 +20,7 @@ public class Pistol : MonoBehaviour
     public bool isReloadCanceled = false;
     private SanityScaleController sanityScaleController;
     public float currentAccuracy = 0.2f;
-    private Transform firePoint;
+    public Transform firePoint;
     private float lastShotTime;
     public bool isAiming;
     public bool isReloading;
@@ -33,10 +33,14 @@ public class Pistol : MonoBehaviour
     private bool playaimsound = false;  
     public SoundManager soundManager;
     public TrapController trapController;
-
+    public InventoryPresentCharactor inventoryPresentCharactor;
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
-    
+
+    void Awake()
+    {   
+        initializevariable();
+    }
     void Start()
     {
         initializevariable();
@@ -207,6 +211,7 @@ public class Pistol : MonoBehaviour
         ammoInChamber++;
         bulletsToReload--;
         currentAmmo--;
+        inventoryPresentCharactor.ManageReduceResource("Pistal Bullets");
         reloadStartTime = Time.time; // Start the reload of the next bullet.
         StartCoroutine(reloadsound());
     }
@@ -219,14 +224,18 @@ public class Pistol : MonoBehaviour
     }
     void initializevariable()
     {
-        firePoint = transform.Find("FirePoint");
+        // firePoint = GameObject.FindGameObjectWithTag("FirePoint").transform;
         lastShotTime = -cooldownTime;
         isAiming = false;
         isReloading = false;
         bulletsToReload = 0;
         sanityScaleController = FindObjectOfType<SanityScaleController>();
+        SoundWave =  FindObjectOfType<ObjectPolling >();
+        onOffLight =  FindObjectOfType<OnOffLight>();
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
+        trapController = FindObjectOfType<TrapController>();
         soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
     void createcrosshaircircle()
     {
@@ -291,4 +300,5 @@ public class Pistol : MonoBehaviour
             accuracyIncreaseRate = 0.2f;
         }
     }
+    
 }

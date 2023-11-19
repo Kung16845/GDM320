@@ -12,6 +12,8 @@ TagManager:
   - Velocrux
   - Leg
   - Sliderbar
+  - FirePoint
+  - Accurancycircle
   layers:
   - Default
   - TransparentFX
