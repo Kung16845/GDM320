@@ -6,13 +6,13 @@ public class Webtrap : MonoBehaviour
 {
     public TrapController trapController;
     public GameObject sceneObject;
-    public bool hasmatches;
+    public bool Canburn;
     public InventoryPresentCharactor inventoryPresentCharactor;
     void Start() 
     {
         trapController = FindObjectOfType<TrapController>();
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
-        hasmatches = false;
+        Canburn = false;
     }
     void OnTriggerStay2D(Collider2D other)
     {
@@ -30,7 +30,7 @@ public class Webtrap : MonoBehaviour
     }
     void Update()
     {
-        if(hasmatches)
+        if(Canburn)
         {
             ShowEButton();
             if (Input.GetKeyDown(KeyCode.E))

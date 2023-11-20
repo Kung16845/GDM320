@@ -49,62 +49,62 @@ public class Pistol : MonoBehaviour
 
     void Update()
     {   
-        if(enable && inventoryPresentCharactor.openInven == false)
+        if(enable && !inventoryPresentCharactor.openInven)
         { 
-        RotateTowardsMouse();
-        Decreasemaxacrrancywhilemoving();
-        if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
-        {   
-            if(!playaimsound)
-            {
-                soundManager.PlaySound("ReadyAim");
-                playaimsound = true;
+            RotateTowardsMouse();
+            Decreasemaxacrrancywhilemoving();
+            if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
+            {   
+                if(!playaimsound)
+                {
+                    soundManager.PlaySound("ReadyAim");
+                    playaimsound = true;
+                }
+                createcrosshaircircle();
             }
-            createcrosshaircircle();
-        }
-        else if(Input.GetMouseButtonUp(1))
-        {
-            gunSpeedManager.RestoreNormalSpeed();
-        }
-        else
-        {   
-            removecrosshaircircle();
-        }
-        float scaledAccuracy = 0.015f / currentAccuracy;
-        accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
+            else if(Input.GetMouseButtonUp(1))
+            {
+                gunSpeedManager.RestoreNormalSpeed();
+            }
+            else
+            {   
+                removecrosshaircircle();
+            }
+            float scaledAccuracy = 0.015f / currentAccuracy;
+            accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
 
-        if (isReloading)
-        {
-            gunSpeedManager.ReduceSpeedDuringReload();
-            if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) // Check if right mouse button is pressed.
+            if (isReloading)
             {
-                StartCoroutine(WaitBeforeNextReload());
-                cancelreload();
+                gunSpeedManager.ReduceSpeedDuringReload();
+                if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) // Check if right mouse button is pressed.
+                {
+                    StartCoroutine(WaitBeforeNextReload());
+                    cancelreload();
+                }
+                else if (Time.time - reloadStartTime >= reloadTime)
+                {
+                    FinishReload();
+                }
             }
-            else if (Time.time - reloadStartTime >= reloadTime)
+            else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning && !isReloadCanceled)
             {
-                FinishReload();
+                Shoot();
+                lastShotTime = Time.time;
             }
-        }
-        else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning && !isReloadCanceled)
-        {
-            Shoot();
-            lastShotTime = Time.time;
-        }
-        else if (Input.GetMouseButtonDown(0) && ammoInChamber == 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
-        {
-            soundManager.PlaySound("Drymag");
-        }
-        else if (Input.GetKeyDown(KeyCode.R) && !gunSpeedManager.isRunning && ammoInChamber < maxAmmo && !isAiming)
-        {
-            // Check if the player has enough total ammo to reload.
-            if (currentAmmo > 0)
+            else if (Input.GetMouseButtonDown(0) && ammoInChamber == 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
             {
-                StartReload();
+                soundManager.PlaySound("Drymag");
             }
-        }
-        movemouseposition();
-        }
+            else if (Input.GetKeyDown(KeyCode.R) && !gunSpeedManager.isRunning && ammoInChamber < maxAmmo && !isAiming)
+            {
+                // Check if the player has enough total ammo to reload.
+                if (currentAmmo > 0)
+                {
+                    StartReload();
+                }
+            }
+            movemouseposition();
+            }
     }
 
     void movemouseposition()

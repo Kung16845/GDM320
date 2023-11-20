@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Matchesbox
   m_EditorClassIdentifier: Assembly-CSharp::ItemsDataCharactor
-  nameItemCharactor: 
-  ItemImage: {fileID: 0}
-  scriptItem: 
-  count: 0
-  maxCount: 0
+  nameItemCharactor: Matches
+  ItemImage: {fileID: 21300000, guid: 005868561c2845642b57975914ea0cce, type: 3}
+  scriptItem: InventoryMatches
+  count: 1
+  maxCount: 5
   isFlashLight: 0
-  isOnhand: 0
+  isOnhand: 1

@@ -8,10 +8,10 @@ public class InventoryMatches : MonoBehaviour
     private void Awake() 
     {
         webtrap = FindAnyObjectByType<Webtrap>();
-        webtrap.hasmatches = true;
+        webtrap.Canburn = true;
     }
     private void OnDestroy() 
     {
-    webtrap.hasmatches = false;
+    webtrap.Canburn = false;
     }
 }
