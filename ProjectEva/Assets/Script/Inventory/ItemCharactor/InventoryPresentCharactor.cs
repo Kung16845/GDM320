@@ -44,9 +44,9 @@ public class InventoryPresentCharactor : MonoBehaviour
         DestroyImmediate(child.gameObject);
         Destroy(slotsEquipment.GetComponentInChildren<UIItemCharactor>().gameObject);
     }
-    public void CreateItemCharactorEquipment(string scriptItem)
+    public void CreateItemCharactorEquipment(string scriptItem,string nameItem)
     {
-        var newEmptyObjectForItem = Instantiate(new GameObject("EmptyObject"), this.transform);
+        var newEmptyObjectForItem = Instantiate(new GameObject(nameItem), this.transform);
         Type scriptType = Type.GetType(scriptItem);
         var addedComponent = newEmptyObjectForItem.AddComponent(scriptType) as Behaviour; // ให้เป็น Behaviour
 

@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AmmoPickup : MonoBehaviour
 {
@@ -7,13 +9,26 @@ public class AmmoPickup : MonoBehaviour
     private Pistol pistol;
     public SoundManager soundManager;
     private bool canPickup;
-
+    public InventoryPresentCharactor inventoryPresentCharactor;
+    public ItemsDataCharactor itemsDataCharactor;
+    public InventoryItemNotePresent inventoryItemNotePresent;
+    public ItemDataNote itemDataNote;
+    public void PickupItemNote()
+    {
+        inventoryItemNotePresent.AddItemsNote(itemDataNote);
+    }
+    public void PickupItemCharactors()
+    {   
+        inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
+    }
     private void Start()
     {
         canPickup = false;
         HideEButton();
         pistol = FindObjectOfType<Pistol>();
         soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+        inventoryItemNotePresent = FindObjectOfType<InventoryItemNotePresent>();
     }
     private void Update()
     {
@@ -21,6 +36,7 @@ public class AmmoPickup : MonoBehaviour
         if (canPickup && Input.GetKeyDown(KeyCode.E))
         {
             PickupAmmo();
+            PickupItemCharactors();
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
