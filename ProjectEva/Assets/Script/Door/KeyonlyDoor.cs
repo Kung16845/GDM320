@@ -8,9 +8,11 @@ public class KeyonlyDoor : MonoBehaviour
     public TextMeshProUGUI instructionText;
     private bool isPlayerNear = false;
     public bool hasLibraryKey = false;
+    public InventoryPresentCharactor inventoryPresentCharactor;
     private void Start()
     {
         instructionText.gameObject.SetActive(false);
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -45,6 +47,7 @@ public class KeyonlyDoor : MonoBehaviour
     {
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasLibraryKey)
         {
+            inventoryPresentCharactor.ManageReduceResource("Libralykey");
             Destroy(this.gameObject);
         }
     }
