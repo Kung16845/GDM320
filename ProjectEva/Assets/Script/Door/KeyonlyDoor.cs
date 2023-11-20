@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using  TMPro;
+using TMPro;
 
 public class KeyonlyDoor : MonoBehaviour
 {
     public TextMeshProUGUI instructionText;
-    public keyinventory playerInventory; // Reference to the TMPro UI object.
-
     private bool isPlayerNear = false;
-
+    public bool hasLibraryKey = false;
     private void Start()
     {
         instructionText.gameObject.SetActive(false);
@@ -20,8 +18,17 @@ public class KeyonlyDoor : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNear = true;
+            
+            if (hasLibraryKey)
+            {
+                instructionText.text = "I have a key.";
+            }
+            else
+            {
+                instructionText.text = "Must find a key. Can't shoot the lock.";
+            }
+
             instructionText.gameObject.SetActive(true);
-            instructionText.text = "Must find A key Can't shoot the lock.";
         }
     }
 
@@ -36,15 +43,9 @@ public class KeyonlyDoor : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && playerInventory.HasKey("Libarykey"))
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasLibraryKey)
         {
             Destroy(this.gameObject);
-            playerInventory.RemoveKey("Libarykey");
         }
-    }
-
-    private void OpenDoorWithForce()
-    {
-        // Add your door opening logic here for force-only doors.
     }
 }

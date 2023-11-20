@@ -15,19 +15,28 @@ public class InventoryPresentCharactor : MonoBehaviour
     public bool openInven;
     public UIItemCharactor uIItemCharactorPrefeb;
     public List<UIItemCharactor> uIItemListCharactor;
+    public float toggleCooldown = 0.5f; // Adjust the cooldown time as needed
+    private float timeSinceLastToggle = 0.5f;
+
     private void Start()
     {
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
     }
-    public void Update()
-    {   
-        
-        if(Input.GetKey(KeyCode.Tab))
-        {   
-            openInven = !openInven;
-            inventorypage.SetActive(openInven);
+    private void Update()
+    {
+        timeSinceLastToggle += Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.Tab) && timeSinceLastToggle >= toggleCooldown)
+        {
+            ToggleInventory();
+            timeSinceLastToggle = 0f;
         }
+    }
+    private void ToggleInventory()
+    {
+        openInven = !openInven;
+        inventorypage.SetActive(openInven);
     }
     public void UnlockSlot()
     {

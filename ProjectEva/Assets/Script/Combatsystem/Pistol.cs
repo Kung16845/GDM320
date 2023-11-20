@@ -49,7 +49,7 @@ public class Pistol : MonoBehaviour
 
     void Update()
     {   
-        if(enable)
+        if(enable && inventoryPresentCharactor.openInven == false)
         { 
         RotateTowardsMouse();
         Decreasemaxacrrancywhilemoving();

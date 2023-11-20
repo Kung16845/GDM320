@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Libarykey : MonoBehaviour
 {
-    public keyinventory inventory;
     public SoundManager soundManager;
+    public InventoryPresentCharactor inventoryPresentCharactor;
+    public ItemsDataCharactor itemsDataCharactor;
     public GameObject sceneObject;
     private bool canPickup;
 
@@ -14,12 +15,11 @@ public class Libarykey : MonoBehaviour
         // Use GetComponentInParent to find the keyinventory script on the player or any parent GameObject.
         HideEButton();
         canPickup = false;
-        inventory = GameObject.FindWithTag("inventory").GetComponent<keyinventory>();
         soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
     private void Update()
     {
-        // Check if the player can pick up the ammo and 'E' is pressed.
         if (canPickup && Input.GetKeyDown(KeyCode.E))
         {
             keypickup();
@@ -42,10 +42,14 @@ public class Libarykey : MonoBehaviour
             canPickup = false;
         }
     }
+    public void PickupItemCharactors()
+    {   
+        inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
+    }
     void keypickup()
     {
-        inventory.AddKey("Libarykey");
         soundManager.PlaySound("Pickupkey");
+        PickupItemCharactors();
         Destroy(this.gameObject); // Remove the collected key from the scene.
     }
     private void ShowEButton()
