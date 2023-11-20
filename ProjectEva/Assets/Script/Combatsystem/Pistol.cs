@@ -20,7 +20,7 @@ public class Pistol : MonoBehaviour
     public bool isReloadCanceled = false;
     private SanityScaleController sanityScaleController;
     public float currentAccuracy = 0.2f;
-    private Transform firePoint;
+    public Transform firePoint;
     private float lastShotTime;
     public bool isAiming;
     public bool isReloading;
@@ -219,7 +219,8 @@ public class Pistol : MonoBehaviour
     }
     void initializevariable()
     {
-        firePoint = transform.Find("FirePoint");
+        // firePoint = transform.Find("FirePoint");
+        firePoint = GameObject.FindGameObjectWithTag("FirePoint").transform;
         lastShotTime = -cooldownTime;
         isAiming = false;
         isReloading = false;

@@ -12,6 +12,7 @@ TagManager:
   - Velocrux
   - Leg
   - Trapfilbar
+  - FirePoint
   layers:
   - Default
   - TransparentFX
