@@ -28,7 +28,7 @@ namespace Enemy_State
        
         private void Update() 
         {
-            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); //ไว้อัปเดตแมพ
+            // navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); //ไว้อัปเดตแมพ
         }
         private IEnumerator EverySeconReduce(float time)
         {
