@@ -17,6 +17,7 @@ public class Pistol : MonoBehaviour
     [SerializeField] float accuracyDecreaseRate = 0.1f;
     [SerializeField] float reloadTime = 2.0f;
     [SerializeField] GameObject accuracyCircle; // Reference to the accuracy circle GameObject.
+    public string bulletname;
     public bool isReloadCanceled = false;
     private SanityScaleController sanityScaleController;
     public float currentAccuracy = 0.2f;
@@ -215,7 +216,7 @@ public class Pistol : MonoBehaviour
         ammoInChamber++;
         bulletsToReload--;
         currentAmmo--;
-        inventoryPresentCharactor.ManageReduceResource("Pistal Bullets");
+        inventoryPresentCharactor.ManageReduceResource(bulletname);
         reloadStartTime = Time.time; // Start the reload of the next bullet.
         StartCoroutine(reloadsound());
     }

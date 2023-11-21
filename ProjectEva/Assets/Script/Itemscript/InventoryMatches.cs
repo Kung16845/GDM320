@@ -5,13 +5,17 @@ using UnityEngine;
 public class InventoryMatches : MonoBehaviour
 {
     public Webtrap webtrap;
+    public Walllamblight wallamblight;
     private void Awake() 
     {
+        wallamblight = FindAnyObjectByType<Walllamblight>();
         webtrap = FindAnyObjectByType<Webtrap>();
         webtrap.Canburn = true;
+        wallamblight.lightquip = true;
     }
     private void OnDestroy() 
     {
-    webtrap.Canburn = false;
+        wallamblight.lightquip = false;
+        webtrap.Canburn = false;
     }
 }

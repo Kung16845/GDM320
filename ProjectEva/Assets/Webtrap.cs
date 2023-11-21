@@ -7,6 +7,7 @@ public class Webtrap : MonoBehaviour
     public TrapController trapController;
     public GameObject sceneObject;
     public bool Canburn;
+    public bool isclose;
     public InventoryPresentCharactor inventoryPresentCharactor;
     void Start() 
     {
@@ -18,19 +19,21 @@ public class Webtrap : MonoBehaviour
     {
         if (other.CompareTag("Leg"))
         {
+            isclose = true;
             trapController.HitbyWebtrap();
         }
     }
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Leg"))
-        {
+        {   
+            isclose = false;
             trapController.PlayerReleaseTrap();
         }
     }
     void Update()
     {
-        if(Canburn)
+        if(Canburn && isclose)
         {
             ShowEButton();
             if (Input.GetKeyDown(KeyCode.E))
