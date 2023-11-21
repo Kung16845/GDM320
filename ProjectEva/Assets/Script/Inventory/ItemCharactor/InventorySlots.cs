@@ -20,12 +20,21 @@ public class InventorySlots : MonoBehaviour, IDropHandler
             {
                 if (uIItemCharactor.isOnhand)
                 {   
-                    if(inventoryPresentCharactor.transform.childCount == 0)
-                        inventoryPresentCharactor.CreateItemCharactorEquipment(uIItemCharactor.scriptItem,uIItemCharactor.nameItem.text);
+                    // if(inventoryPresentCharactor.transform.childCount == 0)
+                    inventoryPresentCharactor.CreateItemCharactorEquipment(uIItemCharactor.scriptItem,uIItemCharactor.nameItem.text);
                     Vector3 newScaleequipment = new Vector3(1.65f, 1.65f, 1.65f);
                     uIItemCharactor.GetComponent<RectTransform>().localScale = newScaleequipment;
                     uIItemCharactor.parentAfterDray = transform;
                     Debug.Log("eqiupment Onhand");
+                }
+                else if(uIItemCharactor.isFlashLight)
+                {
+                    // if(inventoryPresentCharactor.transform.childCount == 0)
+                    inventoryPresentCharactor.CreateItemCharactorEquipment(uIItemCharactor.scriptItem,uIItemCharactor.nameItem.text);
+                    Vector3 newScaleequipment = new Vector3(1.65f, 1.65f, 1.65f);
+                    uIItemCharactor.GetComponent<RectTransform>().localScale = newScaleequipment;
+                    uIItemCharactor.parentAfterDray = transform;
+                    Debug.Log("eqiupment FlashLight");
                 }
                 Debug.Log("eqiupment not null");
             }
@@ -37,3 +46,4 @@ public class InventorySlots : MonoBehaviour, IDropHandler
         }
     }
 }
+    
