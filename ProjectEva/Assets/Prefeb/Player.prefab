@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5562068752312973163}
   - component: {fileID: 5059322504159645731}
-  - component: {fileID: 1147706391403661405}
   - component: {fileID: 8946341916802775782}
   m_Layer: 0
   m_Name: Light 2D
@@ -54,7 +53,7 @@ MonoBehaviour:
   m_Intensity: 5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 1560a8de0d7513ab00000000
+  m_ApplyToSortingLayers: 1560a8de0d7513ab0000000031e80b05
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -84,24 +83,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &1147706391403661405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968562542407998013}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04ff1a97aeb73f048b8d96f574f353f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tranformplayer: {fileID: 6510801991967429543}
-  Anglemouse: 0
-  AnglemouseMin: 0
-  AnglemouseMax: 0
-  playertransfromZ: 0
-  Anglebetween: 0
 --- !u!114 &8946341916802775782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,16 +164,17 @@ MonoBehaviour:
   accuracyCircle: {fileID: 3580195890726593413}
   isReloadCanceled: 0
   currentAccuracy: 0.2
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 5570529014709414470}
   isAiming: 0
   isReloading: 0
   SoundWave: {fileID: 0}
   onOffLight: {fileID: 3779131959267507872}
   isshoot: 0
-  soundManager: {fileID: 0}
+  soundManager: {fileID: 4706538273517572920}
   trapController: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}
   currentAmmo: 0
+  enable: 0
 --- !u!1 &2540481536168168083
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +220,7 @@ Transform:
   - {fileID: 4437102167955631979}
   - {fileID: 2075845765324477134}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8944580823985512740
 SpriteRenderer:
@@ -278,8 +260,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1424788211
+  m_SortingLayer: 3
   m_SortingOrder: 20
   m_Sprite: {fileID: -1847658517, guid: af38ee979d133c048908001bef058912, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -545,11 +527,11 @@ GameObject:
   - component: {fileID: 4506664009372705045}
   m_Layer: 0
   m_Name: circlecrosshair
-  m_TagString: Untagged
+  m_TagString: Accurancycircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4560228581999311438
 Transform:
   m_ObjectHideFlags: 0
@@ -603,8 +585,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1424788211
+  m_SortingLayer: 3
   m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: fd2b3354973938b42b88323a59e34018, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -913,8 +895,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1424788211
+  m_SortingLayer: 3
   m_SortingOrder: 20
   m_Sprite: {fileID: -1847658517, guid: af38ee979d133c048908001bef058912, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1213,7 +1195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9067954830414776689
 Transform:
   m_ObjectHideFlags: 0
@@ -1650,7 +1632,7 @@ GameObject:
   - component: {fileID: 399695485435037876}
   m_Layer: 0
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: FirePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

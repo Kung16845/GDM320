@@ -14,6 +14,7 @@ public class NewRotateLight : MonoBehaviour
     public bool West;
     public bool East;
 
+
     private void Start()
     {
         Player = FindObjectOfType<NewMovementPlayer>().gameObject;

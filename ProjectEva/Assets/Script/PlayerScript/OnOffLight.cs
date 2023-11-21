@@ -7,17 +7,18 @@ public class OnOffLight : MonoBehaviour
     
     public GameObject Light;
     public bool checkLight = false;
-    public bool isHave = false;
     public bool isopen = false;
+    public bool canopen;
 
     void Start() 
     {
-        Light.SetActive(false);      
+        Light.SetActive(false);
+        canopen = false;      
     }
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.F) && isHave == true)
+        if(Input.GetKeyUp(KeyCode.F) && canopen)
         {
             if (checkLight)
             {
