@@ -7454,7 +7454,7 @@ GameObject:
   - component: {fileID: 1781364268}
   - component: {fileID: 1781364269}
   m_Layer: 5
-  m_Name: BgFlashLIght
+  m_Name: BgFlashLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
