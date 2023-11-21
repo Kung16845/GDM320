@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using JetBrains.Annotations;
+using System;
 public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [HideInInspector] public Transform parentAfterDray;
     public Transform parentBeforeDray;
-    public Transform slotEqicpment;
+    public Transform slotEqicpmentOnHand;
+    public Transform slotEqicpmentFlashLight;
 
     [Header("UI")]
     public TextMeshProUGUI nameItem;
@@ -26,7 +28,8 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public object Add { get; internal set; }
     private void Awake()
     {
-        slotEqicpment = GameObject.Find("BgOnHand").transform;
+        slotEqicpmentOnHand = GameObject.Find("BgOnHand").transform;
+        slotEqicpmentFlashLight = GameObject.Find("BgFlashLight").transform;
     }
     public void SetDataUIItemCharactor(ItemsDataCharactor itemsDataCharactor)
     {
@@ -64,12 +67,11 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (parentBeforeDray == slotEqicpment && parentBeforeDray != parentAfterDray)
+        if ((parentBeforeDray == slotEqicpmentOnHand || parentBeforeDray == slotEqicpmentFlashLight) && parentBeforeDray != parentAfterDray)
         {
-
+            Type scriptType = Type.GetType(scriptItem) ;
             var objectitem = FindObjectOfType<InventoryPresentCharactor>();
-            Destroy(objectitem.transform.GetChild(0).gameObject);
-
+            Destroy(objectitem.GetComponentInChildren(scriptType).gameObject);
         }
         transform.SetParent(parentAfterDray);
         imageItem.raycastTarget = true;
