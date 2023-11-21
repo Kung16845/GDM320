@@ -40,16 +40,6 @@ public class Walllamblight : MonoBehaviour
             isclose = true;
         }
     }
-    private void lightthelamp()
-    {
-        inventoryPresentCharactor.ManageReduceResource("Matches");
-        walllampDuration.lightup = true;
-    }
-    private void Refillfuel()
-    {
-        fuelrefill = true;
-        inventoryPresentCharactor.ManageReduceResource("Alcoholbottom");
-    }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -57,6 +47,18 @@ public class Walllamblight : MonoBehaviour
             HideEButton();
             isclose = false;
         }
+    }
+    private void lightthelamp()
+    {
+        inventoryPresentCharactor.DeleteItemCharactorEquipment();
+        soundManager.PlaySound("Firelit");
+        walllampDuration.lightup = true;
+        fuelrefill = false;
+    }
+    private void Refillfuel()
+    {
+        inventoryPresentCharactor.DeleteItemCharactorEquipment();
+        fuelrefill = true;
     }
     private void ShowEButton()
     {

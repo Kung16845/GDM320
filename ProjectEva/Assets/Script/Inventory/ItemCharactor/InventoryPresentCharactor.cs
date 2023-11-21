@@ -47,7 +47,6 @@ public class InventoryPresentCharactor : MonoBehaviour
     }
     public void DeleteItemCharactorEquipment()
     {   
-        
         Debug.Log("DeleteItemCharactorEquipment");
         Transform child = transform.GetChild(0);
         DestroyImmediate(child.gameObject);
@@ -70,7 +69,7 @@ public class InventoryPresentCharactor : MonoBehaviour
     {
 
         // for (int i = 0; i < slots.Count; i++)
-        // {
+        // {D
         //     InventorySlots slot = slots.ElementAt(i).GetComponent<InventorySlots>();
         //     UIItemCharactor itemInSlot = slot.GetComponentInChildren<UIItemCharactor>();
         //     if (itemInSlot != null && itemInSlot.count > 0 

@@ -4,18 +4,37 @@ using UnityEngine;
 
 public class InventoryMatches : MonoBehaviour
 {
-    public Webtrap webtrap;
-    public Walllamblight wallamblight;
-    private void Awake() 
+    private void Awake()
     {
-        wallamblight = FindAnyObjectByType<Walllamblight>();
-        webtrap = FindAnyObjectByType<Webtrap>();
-        webtrap.Canburn = true;
-        wallamblight.lightquip = true;
+        // Find all Walllamblight objects and set their properties
+        Walllamblight[] wallamblights = FindObjectsOfType<Walllamblight>();
+        foreach (Walllamblight wallamblight in wallamblights)
+        {
+            wallamblight.lightquip = true;
+        }
+
+        // Find all Webtrap objects and set their properties
+        Webtrap[] webtraps = FindObjectsOfType<Webtrap>();
+        foreach (Webtrap webtrap in webtraps)
+        {
+            webtrap.Canburn = true;
+        }
     }
-    private void OnDestroy() 
+
+    private void OnDestroy()
     {
-        wallamblight.lightquip = false;
-        webtrap.Canburn = false;
+        // Find all Walllamblight objects and reset their properties
+        Walllamblight[] wallamblights = FindObjectsOfType<Walllamblight>();
+        foreach (Walllamblight wallamblight in wallamblights)
+        {
+            wallamblight.lightquip = false;
+        }
+
+        // Find all Webtrap objects and reset their properties
+        Webtrap[] webtraps = FindObjectsOfType<Webtrap>();
+        foreach (Webtrap webtrap in webtraps)
+        {
+            webtrap.Canburn = false;
+        }
     }
 }

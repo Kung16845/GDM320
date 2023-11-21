@@ -48,7 +48,7 @@ public class Matboxpickup : MonoBehaviour
     }
     void PickupMatchbox()
     {
-        soundManager.PlaySound("Pickupitem");
+        soundManager.PlaySound("Matchespickup");
         Destroy(this.gameObject);
     }
     private void ShowEButton()

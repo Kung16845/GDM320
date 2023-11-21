@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class InventoryAlcoholbottom : MonoBehaviour
 {
-    public Walllamblight wallamblight;
-    private void Awake() 
+    public Walllamblight walllamblight;
+    private void Awake()
     {
-        wallamblight = FindAnyObjectByType<Walllamblight>();
-        wallamblight.fuelequip = true;
+        // Find all Walllamblight objects and set their properties
+        Walllamblight[] wallamblights = FindObjectsOfType<Walllamblight>();
+        foreach (Walllamblight wallamblight in wallamblights)
+        {
+            wallamblight.fuelequip = true;
+        }
     }
-    private void OnDestroy() 
+
+    private void OnDestroy()
     {
-        wallamblight.fuelequip = false;
+        Debug.Log("OnDestroy called");
+        Walllamblight[] wallamblights = FindObjectsOfType<Walllamblight>();
+        foreach (Walllamblight wallamblight in wallamblights)
+        {
+            wallamblight.fuelequip = false;
+        }
     }
 }
