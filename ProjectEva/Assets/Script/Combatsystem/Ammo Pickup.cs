@@ -62,8 +62,6 @@ public class AmmoPickup : MonoBehaviour
             {
                 // Increase the player's current ammo.
                 soundManager.PlaySound("Pickupitem");
-                pistol.currentAmmo += ammoAmount;
-                // Destroy this pickup object.
                 Destroy(gameObject);
             }
     }

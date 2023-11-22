@@ -50,6 +50,7 @@ public class Pistol : MonoBehaviour
 
     void Update()
     {   
+        currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Pistol Ammo");
         if(enable && !inventoryPresentCharactor.openInven)
         { 
             RotateTowardsMouse();
@@ -105,7 +106,7 @@ public class Pistol : MonoBehaviour
                 }
             }
             movemouseposition();
-            }
+        }
     }
 
     void movemouseposition()

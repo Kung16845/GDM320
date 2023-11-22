@@ -8,10 +8,11 @@ public class AmmoDisplay : MonoBehaviour
     public Pistol playerPistol; // Reference to the Pistol script of the player.
     public float uiDisappearTime = 5.0f; // Time in seconds before the UI disappears.
     public float uiDisappearSpeed = 1.0f; // Speed at which the UI becomes transparent when disappearing.
-
+    public InventoryPresentCharactor inventoryPresentCharactor;
     private float lastActionTime; // Time of the last shot or reload action by the player.
     private bool isUIVisible = true; // Flag to track the visibility of the UI.
     private CanvasGroup canvasGroup; // Reference to the CanvasGroup component for UI fading.
+    public int currentAmmo;
 
     void Start()
     {
@@ -21,11 +22,11 @@ public class AmmoDisplay : MonoBehaviour
 
     void Update()
     {
-        // Check if the ammoText and playerPistol references are set.
+        currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Pistol Ammo");
         if (ammoText != null && playerPistol != null)
         {
             // Update the text to display the player's ammo count.
-            ammoText.text = "Ammo: " + playerPistol.ammoInChamber + " / " + playerPistol.currentAmmo;
+            ammoText.text = "Ammo: " + playerPistol.ammoInChamber + " / " + currentAmmo;
 
             // Check if the UI should disappear.
             if (Time.time - lastActionTime >= uiDisappearTime && isUIVisible)

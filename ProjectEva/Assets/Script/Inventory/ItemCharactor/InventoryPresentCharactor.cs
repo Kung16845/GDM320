@@ -33,6 +33,18 @@ public class InventoryPresentCharactor : MonoBehaviour
             timeSinceLastToggle = 0f;
         }
     }
+    public int GetTotalItemCountByName(string itemName)
+    {
+        int totalCount = 0;
+
+        foreach (var item in uIItemListCharactor.Where(uiItem => uiItem.nameItem.text == itemName))
+        {
+            totalCount += item.count;
+        }
+
+        return totalCount;
+    }
+
     private void ToggleInventory()
     {
         openInven = !openInven;
