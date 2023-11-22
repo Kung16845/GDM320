@@ -27,9 +27,12 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public object Add { get; internal set; }
     private void Awake()
-    {
-        slotEqicpmentOnHand = GameObject.Find("BgOnHand").transform;
-        slotEqicpmentFlashLight = GameObject.Find("BgFlashLight").transform;
+    {   
+        if(isFlashLight)
+            slotEqicpmentFlashLight = GameObject.Find("BgFlashLight").transform;
+        if(isOnhand)
+            slotEqicpmentOnHand = GameObject.Find("BgOnHand").transform;
+        
     }
     public void SetDataUIItemCharactor(ItemsDataCharactor itemsDataCharactor)
     {

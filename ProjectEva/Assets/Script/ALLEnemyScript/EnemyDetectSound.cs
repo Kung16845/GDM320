@@ -60,8 +60,8 @@ namespace Enemy_State
                     isRunningReduceSoundValue = true;
                 }
             }
-            if (soundValue > 16)
-                soundValue = 16;
+            if (soundValue > maxSoundValue)
+                soundValue = maxSoundValue;
 
             if (enemy.currentState == enemy.state_Listening)
                 radius = Saveradius / 2;

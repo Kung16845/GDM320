@@ -18,7 +18,7 @@ public class InventorySlots : MonoBehaviour, IDropHandler
             uIItemCharactor.GetComponent<RectTransform>().localScale = newScale;
             if (equipment != null)
             {
-                if (uIItemCharactor.isOnhand)
+                if (uIItemCharactor.isOnhand && equipment.gameObject.transform == uIItemCharactor.slotEqicpmentOnHand)
                 {   
                     // if(inventoryPresentCharactor.transform.childCount == 0)
                     inventoryPresentCharactor.CreateItemCharactorEquipment(uIItemCharactor.scriptItem,uIItemCharactor.nameItem.text);
@@ -27,7 +27,7 @@ public class InventorySlots : MonoBehaviour, IDropHandler
                     uIItemCharactor.parentAfterDray = transform;
                     Debug.Log("eqiupment Onhand");
                 }
-                else if(uIItemCharactor.isFlashLight)
+                else if(uIItemCharactor.isFlashLight && equipment.gameObject.transform == uIItemCharactor.slotEqicpmentFlashLight)
                 {
                     // if(inventoryPresentCharactor.transform.childCount == 0)
                     inventoryPresentCharactor.CreateItemCharactorEquipment(uIItemCharactor.scriptItem,uIItemCharactor.nameItem.text);
