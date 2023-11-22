@@ -40,8 +40,9 @@ public class InventoryPresentCharactor : MonoBehaviour
     {   
         
         Debug.Log("DeleteItemCharactorEquipment");
-        Transform child = transform.GetChild(0);
-        DestroyImmediate(child.gameObject);
+        // Transform child = transform.GetChild(0);
+        // DestroyImmediate(child.gameObject);
+        
         Destroy(slotsEquipment.GetComponentInChildren<UIItemCharactor>().gameObject);
     }
     public void CreateItemCharactorEquipment(string scriptItem,string nameItem)
