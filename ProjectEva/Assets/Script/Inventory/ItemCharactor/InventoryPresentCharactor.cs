@@ -10,6 +10,7 @@ public class InventoryPresentCharactor : MonoBehaviour
     public ItemsDataCharactor[] itemsDataCharactors => itemsListCharactors.ToArray();
     [SerializeField] List<ItemsDataCharactor> itemsListCharactors;
     public List<GameObject> slots;
+    public bool checkIsSlotFull;
     public GameObject slotsEquipment;
     public GameObject inventorypage;
     public bool openInven;
@@ -17,13 +18,11 @@ public class InventoryPresentCharactor : MonoBehaviour
     public List<UIItemCharactor> uIItemListCharactor;
     public float toggleCooldown = 0.5f; // Adjust the cooldown time as needed
     private float timeSinceLastToggle = 0.5f;
-    public bool itemfull;
 
     private void Start()
     {
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
-        itemfull = false;
     }
     private void Update()
     {
@@ -34,6 +33,12 @@ public class InventoryPresentCharactor : MonoBehaviour
             ToggleInventory();
             timeSinceLastToggle = 0f;
         }
+        var checkslotNull = slots.FirstOrDefault(slot => slot.GetComponentInChildren<UIItemCharactor>() == null);
+        if(checkslotNull == null)
+            checkIsSlotFull = true;
+        else 
+            checkIsSlotFull = false;
+        
     }
     public int GetTotalItemCountByName(string itemName)
     {
@@ -60,14 +65,14 @@ public class InventoryPresentCharactor : MonoBehaviour
 
     }
     public void DeleteItemCharactorEquipment()
-    {   
+    {
         Debug.Log("DeleteItemCharactorEquipment");
         // Transform child = transform.GetChild(0);
         // DestroyImmediate(child.gameObject);
-        
+
         Destroy(slotsEquipment.GetComponentInChildren<UIItemCharactor>().gameObject);
     }
-    public void CreateItemCharactorEquipment(string scriptItem,string nameItem)
+    public void CreateItemCharactorEquipment(string scriptItem, string nameItem)
     {
         var newEmptyObjectForItem = Instantiate(new GameObject(nameItem), this.transform);
         Type scriptType = Type.GetType(scriptItem);
@@ -119,11 +124,7 @@ public class InventoryPresentCharactor : MonoBehaviour
         if (ItemAddCharactors == null && slotNull != null)
         {
             SpawnNewItem(itemsDataCharactor, slotNull.GetComponentInChildren<InventorySlots>());
-            // if (slotNull != null && ItemAddCharactors != null)
-            //     {
-            //         itemfull = true;
-            //     }
-            return;
+            // return;
         }
 
         else if (ItemAddCharactors != null)
@@ -139,35 +140,36 @@ public class InventoryPresentCharactor : MonoBehaviour
                 ItemAddCharactors.RefrehCount();
                 sum -= ItemAddCharactors.maxCount;
 
-                var newItemGo = Instantiate(uIItemCharactorPrefeb, slotNull.transform, false);
-
-                newItemGo.SetDataUIItemCharactor(new ItemsDataCharactor
-                (
-                    itemsDataCharactor.nameItemCharactor
-                    , itemsDataCharactor.ItemImage
-                    , sum
-                    , itemsDataCharactor.maxCount
-                    , itemsDataCharactor.scriptItem
-                    , itemsDataCharactor.isFlashLight
-                    , itemsDataCharactor.isOnhand
-                ));
-
-                newItemGo.gameObject.SetActive(true);
-                uIItemListCharactor.Add(newItemGo);
-                if (slotNull != null && ItemAddCharactors != null)
+                if (slotNull != null)
                 {
-                    itemfull = true;
+                    var newItemGo = Instantiate(uIItemCharactorPrefeb, slotNull.transform, false);
+
+                    newItemGo.SetDataUIItemCharactor(new ItemsDataCharactor
+                    (
+                        itemsDataCharactor.nameItemCharactor
+                        , itemsDataCharactor.ItemImage
+                        , sum
+                        , itemsDataCharactor.maxCount
+                        , itemsDataCharactor.scriptItem
+                        , itemsDataCharactor.isFlashLight
+                        , itemsDataCharactor.isOnhand
+                    ));
+
+                    newItemGo.gameObject.SetActive(true);
+                    uIItemListCharactor.Add(newItemGo);
+                    return;
                 }
-                return;
+                
+                // 
             }
         }
-        else
-        {
-            // ถ้าของเต็มให้ทำอะไรบ้างอย่าง 
-            // itemfull = true;
-            return;
-        }
+        // else
+        // {   
+        //     // ถ้าของเต็มให้ทำอะไรบ้างอย่าง 
 
+        //     return;
+        // }
+        
 
         // for (int i = 0; i < slots.Count; i++)
         // {

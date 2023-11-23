@@ -80,7 +80,7 @@ public class ItemDropManager : MonoBehaviour
 
             if (randomNumber <= cumulativePercentage)
             {
-                Debug.Log($"Dropping {itemDrop.itemName} with {cumulativePercentage}% chance");
+                // Debug.Log($"Dropping {itemDrop.itemName} with {cumulativePercentage}% chance");
                 return itemDrop.itemName;
             }
         }

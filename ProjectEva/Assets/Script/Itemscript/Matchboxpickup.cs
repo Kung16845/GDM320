@@ -23,7 +23,7 @@ public class Matboxpickup : MonoBehaviour
     private void Update()
     {
         // Check if the player can pick up the ammo and 'E' is pressed.
-        if (canPickup && Input.GetKeyDown(KeyCode.E))
+        if (canPickup && Input.GetKeyDown(KeyCode.E) && !inventoryPresentCharactor.checkIsSlotFull)
         {
             PickupItemCharactors();
             PickupMatchbox();

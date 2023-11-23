@@ -20,7 +20,7 @@ public class Libarykey : MonoBehaviour
     }
     private void Update()
     {
-        if (canPickup && Input.GetKeyDown(KeyCode.E))
+        if (canPickup && Input.GetKeyDown(KeyCode.E) && !inventoryPresentCharactor.checkIsSlotFull)
         {
             keypickup();
         }

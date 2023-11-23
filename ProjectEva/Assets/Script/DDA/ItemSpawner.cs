@@ -5,7 +5,6 @@ public class ItemPrefab
 {
     public string itemName;
     public GameObject itemPrefab;
-    public Transform customSpawnTransform; // Added variable for custom transform
 }
 
 public class ItemSpawner : MonoBehaviour
@@ -83,13 +82,10 @@ public class ItemSpawner : MonoBehaviour
         // Find the corresponding prefab for the item name
         ItemPrefab itemPrefab = System.Array.Find(itemPrefabs, prefab => prefab.itemName == itemName);
 
-        // If the prefab is found and not null, instantiate it at the specified transform position
+        // If the prefab is found and not null, instantiate it at the current transform position
         if (itemPrefab != null && itemPrefab.itemPrefab != null)
         {
-            // Use the custom transform if provided, otherwise use the current transform
-            Transform spawnTransform = itemPrefab.customSpawnTransform != null ? itemPrefab.customSpawnTransform : transform;
-
-            Instantiate(itemPrefab.itemPrefab, spawnTransform.position, Quaternion.identity);
+            Instantiate(itemPrefab.itemPrefab, transform.position, Quaternion.identity);
         }
         else
         {

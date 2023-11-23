@@ -42,10 +42,10 @@ public class AmmoPickup : MonoBehaviour
     private void Update()
     {
         // Check if the player can pick up the ammo and 'E' is pressed.
-        if (canPickup && Input.GetKeyDown(KeyCode.E) && !inventoryPresentCharactor.itemfull)
+        if (canPickup && Input.GetKeyDown(KeyCode.E) && !inventoryPresentCharactor.checkIsSlotFull)
         {
             PickupItemCharactors();
-            if(!inventoryPresentCharactor.itemfull)
+            if(!inventoryPresentCharactor.checkIsSlotFull)
             {
             PickupAmmo();
             }
