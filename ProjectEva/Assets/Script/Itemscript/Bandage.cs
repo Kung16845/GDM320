@@ -49,7 +49,7 @@ public class Bandage : MonoBehaviour
                 movementScript.ResumeMoving();
                 isHealing = false;
                 healslider.SetActive(false);
-                inventoryPresentCharactor.DeleteItemCharactorEquipment();
+                inventoryPresentCharactor.DeleteItemCharactorEquipment("Bandage");
                 Destroy(this.gameObject);
             }
         }

@@ -18,11 +18,13 @@ public class InventoryPresentCharactor : MonoBehaviour
     public List<UIItemCharactor> uIItemListCharactor;
     public float toggleCooldown = 0.5f; // Adjust the cooldown time as needed
     private float timeSinceLastToggle = 0.5f;
-
+    
     private void Start()
     {
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
+        
+
     }
     private void Update()
     {
@@ -64,11 +66,12 @@ public class InventoryPresentCharactor : MonoBehaviour
         Destroy(slotLock.gameObject);
 
     }
-    public void DeleteItemCharactorEquipment()
+    public void DeleteItemCharactorEquipment(string scriptItem)
     {
         Debug.Log("DeleteItemCharactorEquipment");
-        // Transform child = transform.GetChild(0);
-        // DestroyImmediate(child.gameObject);
+        Type scriptType = Type.GetType(scriptItem);
+        var gameObject = GetComponentInChildren(scriptType).gameObject;
+        Destroy(gameObject);
 
         Destroy(slotsEquipment.GetComponentInChildren<UIItemCharactor>().gameObject);
     }

@@ -50,14 +50,14 @@ public class Walllamblight : MonoBehaviour
     }
     private void lightthelamp()
     {
-        inventoryPresentCharactor.DeleteItemCharactorEquipment();
+        inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryMatches");
         soundManager.PlaySound("Firelit");
         walllampDuration.lightup = true;
         fuelrefill = false;
     }
     private void Refillfuel()
     {
-        inventoryPresentCharactor.DeleteItemCharactorEquipment();
+        inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryAlcoholbottom");
         fuelrefill = true;
     }
     private void ShowEButton()

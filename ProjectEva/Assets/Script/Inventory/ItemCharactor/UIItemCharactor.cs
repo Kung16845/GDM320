@@ -65,7 +65,7 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (!imageItemLock.gameObject.activeInHierarchy)
             transform.position = Input.mousePosition;
-
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)

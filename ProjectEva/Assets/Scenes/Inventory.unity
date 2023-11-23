@@ -2482,7 +2482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPresentCharactor: {fileID: 1488859601}
-  itemsDataCharactor: {fileID: 11400000, guid: 6dc080f30a9138a44a1afa92a5946d3f, type: 2}
+  itemsDataCharactor: {fileID: 11400000, guid: 0a1e258a982bb5045971e62a1f8a2708, type: 2}
   inventoryItemNotePresent: {fileID: 1488859603}
   itemDataNote:
     nameItemNote: 
@@ -6303,11 +6303,13 @@ MonoBehaviour:
   - {fileID: 1734506982}
   - {fileID: 1143286292}
   - {fileID: 1780504515}
+  checkIsSlotFull: 0
   slotsEquipment: {fileID: 705245658}
   inventorypage: {fileID: 1808136918}
   openInven: 0
   uIItemCharactorPrefeb: {fileID: 592793030409710030, guid: e4216cca9de9c87499d0238a8bb21e16, type: 3}
   uIItemListCharactor: []
+  toggleCooldown: 0.5
 --- !u!114 &1488859602
 MonoBehaviour:
   m_ObjectHideFlags: 0
