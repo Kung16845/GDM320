@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistolon
   m_EditorClassIdentifier: Assembly-CSharp::ItemsDataCharactor
   nameItemCharactor: Pistol
-  ItemImage: {fileID: 21300000, guid: 19e4291baa1e320408a61310df48aaae, type: 3}
+  ItemImage: {fileID: 21300000, guid: d7d1187b53539574f8646dc4fc33e112, type: 3}
   scriptItem: InventoryPistol
   count: 1
   maxCount: 1

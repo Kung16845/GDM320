@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Webtrap : MonoBehaviour
 {
     public TrapController trapController;
     public GameObject sceneObject;
+    public TextMeshProUGUI customText;
+    public string custominteractiontext;
     public bool Canburn;
     public bool isclose;
     public InventoryPresentCharactor inventoryPresentCharactor;
@@ -35,12 +37,27 @@ public class Webtrap : MonoBehaviour
     {
         if(Canburn && isclose)
         {
+            customText.text = "I can burn this web.";
             ShowEButton();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                inventoryPresentCharactor.DeleteItemCharactorEquipment();
+                if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") >= 2)
+                {
+                    Debug.Log("reduce by 1");
+                inventoryPresentCharactor.ManageReduceResource("Matches");
+                }
+                else if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") == 1)
+                {
+                    Debug.Log("Delete");
+                inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryMatches");
+                }
                 Destroy(this.gameObject);
             }
+        }
+        else if (!Canburn && isclose)
+        {
+            customText.text = "Gotta find somethings to burn this.";
+            ShowEButton();
         }
         else
         {
@@ -50,10 +67,13 @@ public class Webtrap : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
     }
+
 }
