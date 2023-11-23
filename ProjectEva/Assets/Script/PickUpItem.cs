@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using TMPro;
 public class Pickupitem : MonoBehaviour
 {
     public GameObject sceneObject;
@@ -10,6 +10,8 @@ public class Pickupitem : MonoBehaviour
     public InventoryPresentCharactor inventoryPresentCharactor;
     public ItemsDataCharactor itemsDataCharactor;
     public string Soundname;
+    public TextMeshProUGUI customText;
+    public string custominteractiontext;
     public void PickupItemCharactors()
     {   
         inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
@@ -28,6 +30,7 @@ public class Pickupitem : MonoBehaviour
         {
             PickupItemCharactors();
             soundManager.PlaySound(Soundname);
+            customText.text = "";
             Destroy(this.gameObject);
         }
     }
@@ -36,6 +39,7 @@ public class Pickupitem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ShowEButton();
+            customText.text = custominteractiontext;
             canPickup = true;
         }
     }
@@ -51,10 +55,12 @@ public class Pickupitem : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
     }
 }

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 [System.Serializable]
 public class ItemPrefab
 {
@@ -15,10 +15,13 @@ public class ItemSpawner : MonoBehaviour
     public SoundManager soundManager;
     private bool canPickup;
     public string Soundname;
+    public TextMeshProUGUI customText;
+    public string custominteractiontext;
 
     void Start()
     {
         canPickup = false;
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     void Update()
@@ -51,11 +54,13 @@ public class ItemSpawner : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
     }
 
     public void SpawnItems()
@@ -74,6 +79,8 @@ public class ItemSpawner : MonoBehaviour
 
         // Spawn the corresponding prefab for the dropped item
         SpawnPrefab(itemNameToDrop);
+        customText.text = "";
+        Destroy(this.gameObject);
     }
 
     // Method to spawn a prefab based on the item name

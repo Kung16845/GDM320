@@ -30,10 +30,9 @@ Transform:
   m_LocalPosition: {x: 41.189, y: 80.014, z: 0}
   m_LocalScale: {x: 0.33709, y: 0.33709, z: 0.33709}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4077858194010603544}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1359568950609728252
 SpriteRenderer:
@@ -119,7 +118,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.7262702, y: -2.0556421}
+  m_Offset: {x: -0.25377512, y: -0.19559574}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 11.195603, y: 9.301283}
+  m_Size: {x: 16.140594, y: 13.021376}
   m_EdgeRadius: 0
 --- !u!114 &6705092751826290393
 MonoBehaviour:
@@ -145,93 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPresentCharactor: {fileID: 0}
-  sceneObject: {fileID: 2929101164196183112}
+  sceneObject: {fileID: 0}
   soundManager: {fileID: 0}
-  Soundname: Pickupitem
---- !u!1001 &4693342807968382636
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6457271518661701490}
-    m_Modifications:
-    - target: {fileID: 7603302778178257636, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_Name
-      value: 'Ebutton '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.50020725
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.50020725
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.50020725
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
---- !u!1 &2929101164196183112 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7603302778178257636, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-  m_PrefabInstance: {fileID: 4693342807968382636}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4077858194010603544 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8770034625964539572, guid: 6b478f964ed31bd4ea055269edc8dece, type: 3}
-  m_PrefabInstance: {fileID: 4693342807968382636}
-  m_PrefabAsset: {fileID: 0}
+  Soundname: Fabric
+  customText: {fileID: 0}
+  custominteractiontext: Press E to pickup.

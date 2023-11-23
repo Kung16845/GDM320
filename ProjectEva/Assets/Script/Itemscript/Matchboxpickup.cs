@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using TMPro;
 public class Matboxpickup : MonoBehaviour
 {
     public GameObject sceneObject;
@@ -9,6 +9,8 @@ public class Matboxpickup : MonoBehaviour
     private bool canPickup;
     public InventoryPresentCharactor inventoryPresentCharactor;
     public ItemsDataCharactor itemsDataCharactor;
+    public TextMeshProUGUI customText;
+    public string custominteractiontext;
     public void PickupItemCharactors()
     {   
         inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
@@ -19,6 +21,7 @@ public class Matboxpickup : MonoBehaviour
         HideEButton();
         soundManager = FindObjectOfType<SoundManager>();
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+        
     }
     private void Update()
     {
@@ -26,6 +29,7 @@ public class Matboxpickup : MonoBehaviour
         if (canPickup && Input.GetKeyDown(KeyCode.E) && !inventoryPresentCharactor.checkIsSlotFull)
         {
             PickupItemCharactors();
+            customText.text = "";
             PickupMatchbox();
         }
     }
@@ -54,10 +58,12 @@ public class Matboxpickup : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
     }
 }

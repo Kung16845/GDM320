@@ -38,8 +38,8 @@ public class Webtrap : MonoBehaviour
             ShowEButton();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Destroy(this.gameObject);
                 inventoryPresentCharactor.DeleteItemCharactorEquipment();
+                Destroy(this.gameObject);
             }
         }
         else

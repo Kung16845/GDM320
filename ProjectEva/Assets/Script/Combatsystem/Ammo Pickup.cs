@@ -1,56 +1,54 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class AmmoPickup : MonoBehaviour
 {
-    public int ammoAmount; // The amount of ammo this pickup adds.
+    public int ammoAmount; 
+    private string uiPanelTag = "Interactiontag"; 
+    private string customTextTag = "Interactiontext"; 
     public GameObject sceneObject;
     private Pistol pistol;
     public SoundManager soundManager;
     private bool canPickup;
     public InventoryPresentCharactor inventoryPresentCharactor;
     public ItemsDataCharactor itemsDataCharactor;
-    public InventoryItemNotePresent inventoryItemNotePresent;
-    public ItemDataNote itemDataNote;
-    public void PickupItemNote()
-    {
-        inventoryItemNotePresent.AddItemsNote(itemDataNote);
-    }
+    public TextMeshProUGUI customText;
+
     public void PickupItemCharactors()
-    {   
+    {
         inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
     }
-    public void Awake()
+
+    private void Awake()
     {
         canPickup = false;
+        FindUIElementsByTag();
         HideEButton();
         pistol = FindObjectOfType<Pistol>();
         soundManager = FindObjectOfType<SoundManager>();
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
-        inventoryItemNotePresent = FindObjectOfType<InventoryItemNotePresent>();
     }
+
     private void Start()
     {
-        canPickup = false;
-        HideEButton();
-        pistol = FindObjectOfType<Pistol>();
-        soundManager = FindObjectOfType<SoundManager>();
-        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
-        inventoryItemNotePresent = FindObjectOfType<InventoryItemNotePresent>();
+        customText.text = "Press E to pick up the item.";
     }
+
     private void Update()
     {
-        // Check if the player can pick up the ammo and 'E' is pressed.
         if (canPickup && Input.GetKeyDown(KeyCode.E) && !inventoryPresentCharactor.checkIsSlotFull)
         {
             PickupItemCharactors();
-            if(!inventoryPresentCharactor.checkIsSlotFull)
+            if (!inventoryPresentCharactor.checkIsSlotFull)
             {
-            PickupAmmo();
+                PickupAmmo();
             }
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -68,22 +66,43 @@ public class AmmoPickup : MonoBehaviour
             canPickup = false;
         }
     }
-    void PickupAmmo()
+
+    private void PickupAmmo()
     {
         if (pistol != null)
-            {
-                // Increase the player's current ammo.
-                soundManager.PlaySound("Pickupitem");
-                Destroy(this.gameObject);
-            }
+        {
+            soundManager.PlaySound("Pickupitem");
+            customText.text = "";
+            Destroy(this.gameObject);
+        }
     }
+
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = "Press E to pick up the item.";
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
+    }
+
+    private void FindUIElementsByTag()
+    {
+        // Find UI panel by tag
+        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag(uiPanelTag);
+        if (sceneObjects.Length > 0)
+        {
+            sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
+        }
+
+        // Find custom text by tag
+        GameObject[] customTexts = GameObject.FindGameObjectsWithTag(customTextTag);
+        if (customTexts.Length > 0)
+        {
+            customText = customTexts[0].GetComponent<TextMeshProUGUI>(); // Assuming there is only one custom text with the specified tag
+        }
     }
 }
