@@ -30,10 +30,11 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
     private void Update()
     {
         int totalActionPoints = CalculateTotalActionPoints();
-        AdjustDifficulty(totalActionPoints);
+        Debug.Log(totalActionPoints);
+        // AdjustDifficulty(totalActionPoints);
     }
 
-    private int CalculateTotalActionPoints()
+    public int CalculateTotalActionPoints()
     {
         int totalActionPoints = 0;
 
@@ -46,24 +47,19 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
         return totalActionPoints;
     }
 
-    private void AdjustDifficulty(int totalActionPoints)
-    {
-        if (totalActionPoints >= minActionPointsForHighDifficulty)
-        {
-            // Increase difficulty (implement your logic here)
-            Debug.Log($"High Difficulty! Total Action Points: {totalActionPoints}");
-        }
-        else if (totalActionPoints <= maxActionPointsForLowDifficulty)
-        {
-            // Decrease difficulty (implement your logic here)
-            Debug.Log($"Low Difficulty! Total Action Points: {totalActionPoints}");
-        }
-        else
-        {
-            // Maintain current difficulty (implement your logic here)
-            Debug.Log($"Normal Difficulty. Total Action Points: {totalActionPoints}");
-        }
-    }
+    // private void AdjustDifficulty(int totalActionPoints)
+    // {
+    //     if (totalActionPoints >= minActionPointsForHighDifficulty)
+    //     {
+            
+    //     }
+    //     else if (totalActionPoints <= maxActionPointsForLowDifficulty)
+    //     {
+    //     }
+    //     else
+    //     {
+    //     }
+    // }
 }
 
 #if UNITY_EDITOR
