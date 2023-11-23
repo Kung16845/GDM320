@@ -21,6 +21,15 @@ public class AmmoPickup : MonoBehaviour
     {   
         inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
     }
+    public void Awake()
+    {
+        canPickup = false;
+        HideEButton();
+        pistol = FindObjectOfType<Pistol>();
+        soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+        inventoryItemNotePresent = FindObjectOfType<InventoryItemNotePresent>();
+    }
     private void Start()
     {
         canPickup = false;
@@ -33,10 +42,13 @@ public class AmmoPickup : MonoBehaviour
     private void Update()
     {
         // Check if the player can pick up the ammo and 'E' is pressed.
-        if (canPickup && Input.GetKeyDown(KeyCode.E))
+        if (canPickup && Input.GetKeyDown(KeyCode.E) && !inventoryPresentCharactor.itemfull)
         {
-            PickupAmmo();
             PickupItemCharactors();
+            if(!inventoryPresentCharactor.itemfull)
+            {
+            PickupAmmo();
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -62,7 +74,7 @@ public class AmmoPickup : MonoBehaviour
             {
                 // Increase the player's current ammo.
                 soundManager.PlaySound("Pickupitem");
-                Destroy(gameObject);
+                Destroy(this.gameObject);
             }
     }
     private void ShowEButton()

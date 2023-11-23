@@ -17,11 +17,13 @@ public class InventoryPresentCharactor : MonoBehaviour
     public List<UIItemCharactor> uIItemListCharactor;
     public float toggleCooldown = 0.5f; // Adjust the cooldown time as needed
     private float timeSinceLastToggle = 0.5f;
+    public bool itemfull;
 
     private void Start()
     {
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
+        itemfull = false;
     }
     private void Update()
     {
@@ -117,6 +119,10 @@ public class InventoryPresentCharactor : MonoBehaviour
         if (ItemAddCharactors == null && slotNull != null)
         {
             SpawnNewItem(itemsDataCharactor, slotNull.GetComponentInChildren<InventorySlots>());
+            // if (slotNull != null && ItemAddCharactors != null)
+            //     {
+            //         itemfull = true;
+            //     }
             return;
         }
 
@@ -148,13 +154,17 @@ public class InventoryPresentCharactor : MonoBehaviour
 
                 newItemGo.gameObject.SetActive(true);
                 uIItemListCharactor.Add(newItemGo);
-
+                if (slotNull != null && ItemAddCharactors != null)
+                {
+                    itemfull = true;
+                }
                 return;
             }
         }
-        else if (slotNull != null && ItemAddCharactors != null)
+        else
         {
             // ถ้าของเต็มให้ทำอะไรบ้างอย่าง 
+            // itemfull = true;
             return;
         }
 
