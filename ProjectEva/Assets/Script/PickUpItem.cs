@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using TMPro;
 public class Pickupitem : MonoBehaviour
 {
-    public GameObject sceneObject;
     public SoundManager soundManager;
     private bool canPickup;
     public InventoryPresentCharactor inventoryPresentCharactor;
     public ItemsDataCharactor itemsDataCharactor;
     public string Soundname;
+    public GameObject sceneObject;
     public TextMeshProUGUI customText;
     public string custominteractiontext;
     public void PickupItemCharactors()

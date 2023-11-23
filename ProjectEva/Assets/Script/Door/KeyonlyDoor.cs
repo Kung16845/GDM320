@@ -5,13 +5,17 @@ using TMPro;
 
 public class KeyonlyDoor : MonoBehaviour
 {
-    public TextMeshProUGUI instructionText;
     private bool isPlayerNear = false;
-    public bool hasLibraryKey = false;
+    public int hasKeynumber;
     public InventoryPresentCharactor inventoryPresentCharactor;
+    public GameObject sceneObject;
+    public TextMeshProUGUI customText;
+    public SoundManager soundManager;
+    public string Keyforthisdoor;
+    public int numberofkey;
+    public string custominteractiontext;
     private void Start()
     {
-        instructionText.gameObject.SetActive(false);
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
 
@@ -21,16 +25,15 @@ public class KeyonlyDoor : MonoBehaviour
         {
             isPlayerNear = true;
             
-            if (hasLibraryKey)
+            if (hasKeynumber == numberofkey)
             {
-                instructionText.text = "I have a key.";
+                customText.text = "I have a key.";
             }
             else
             {
-                instructionText.text = "Must find a key. Can't shoot the lock.";
+                customText.text = custominteractiontext;
             }
-
-            instructionText.gameObject.SetActive(true);
+            ShowEButton();
         }
     }
 
@@ -38,17 +41,33 @@ public class KeyonlyDoor : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            HideEButton();
             isPlayerNear = false;
-            instructionText.gameObject.SetActive(false);
         }
+    }
+    private void ShowEButton()
+    {
+        sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
+    }
+
+    private void HideEButton()
+    {
+        sceneObject.SetActive(false);
+        customText.text = "";
     }
 
     private void Update()
     {
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasLibraryKey)
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
         {
-            inventoryPresentCharactor.ManageReduceResource("Libralykey");
+            inventoryPresentCharactor.DeleteItemCharactorEquipment(Keyforthisdoor);
+            soundManager.PlaySound("Dooropen");
             Destroy(this.gameObject);
+        }
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
+        {
+            soundManager.PlaySound("Doorlocked");
         }
     }
 }
