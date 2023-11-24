@@ -21,6 +21,7 @@ public class ItemSpawner : MonoBehaviour
     void Start()
     {
         canPickup = false;
+        itemDropManager = FindObjectOfType<ItemDropManager>();
         soundManager = FindObjectOfType<SoundManager>();
     }
 

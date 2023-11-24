@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using NavMeshPlus.Components;
 
 public class KeyonlyDoor : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class KeyonlyDoor : MonoBehaviour
     public TextMeshProUGUI customText;
     public SoundManager soundManager;
     public string Keyforthisdoor;
+    public NavMeshSurface navMeshSurface;
     public int numberofkey;
     public string custominteractiontext;
     private void Start()
@@ -24,17 +26,22 @@ public class KeyonlyDoor : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNear = true;
-            
-            if (hasKeynumber == numberofkey)
-            {
-                customText.text = "I have a key.";
-            }
-            else
-            {
-                customText.text = custominteractiontext;
-            }
-            ShowEButton();
         }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isPlayerNear)
+            {
+                if (hasKeynumber == numberofkey)
+                {
+                    customText.text = "I have a key for this.";
+                }
+                else if (hasKeynumber != numberofkey)
+                {
+                    customText.text = custominteractiontext;
+                }
+                ShowEButton();
+            }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -48,7 +55,6 @@ public class KeyonlyDoor : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
-        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
@@ -63,6 +69,7 @@ public class KeyonlyDoor : MonoBehaviour
         {
             inventoryPresentCharactor.DeleteItemCharactorEquipment(Keyforthisdoor);
             soundManager.PlaySound("Dooropen");
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
             Destroy(this.gameObject);
         }
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
