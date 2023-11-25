@@ -10,6 +10,7 @@ public class Webtrap : MonoBehaviour
     private string uiPanelTag = "Interactiontag"; 
     private string customTextTag = "Interactiontext"; 
     public string custominteractiontext;
+    public SoundManager soundManager;
     public bool Canburn;
     public bool isclose;
     public InventoryPresentCharactor inventoryPresentCharactor;
@@ -20,6 +21,7 @@ public class Webtrap : MonoBehaviour
         HideEButton();
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
         trapController = FindObjectOfType<TrapController>();
+        soundManager = FindObjectOfType<SoundManager>();
         Canburn = false;
     }
 
@@ -37,6 +39,15 @@ public class Webtrap : MonoBehaviour
         {
             isclose = true;
             trapController.HitbyWebtrap();
+            ShowEButton();
+            if(Canburn && isclose)
+            {
+                customText.text = "I can burn this web.";
+            }
+            else if (!Canburn && isclose)
+            {
+                customText.text = "Gotta find somethings to burn this.";
+            }
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -52,25 +63,20 @@ public class Webtrap : MonoBehaviour
     {
         if(Canburn && isclose)
         {
-            customText.text = "I can burn this web.";
-            ShowEButton();
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") >= 2)
                 {
                 inventoryPresentCharactor.ManageReduceResource("Matches");
+                soundManager.PlaySound("Firelit");
                 }
                 else if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") == 1)
                 {
                 inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryMatches");
+                soundManager.PlaySound("Firelit");
                 }
                 Destroy(this.gameObject);
             }
-        }
-        else if (!Canburn && isclose)
-        {
-            customText.text = "Gotta find somethings to burn this.";
-            ShowEButton();
         }
     }
     private void ShowEButton()
