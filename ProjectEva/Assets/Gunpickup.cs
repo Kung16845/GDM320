@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Gunpickup : MonoBehaviour
 {   
     public InventoryPresentCharactor inventoryPresentCharactor;
@@ -10,6 +10,8 @@ public class Gunpickup : MonoBehaviour
     public ItemDataNote itemDataNote;
     public GameObject sceneObject;
     public SoundManager soundManager;
+    public TextMeshProUGUI customText;
+    public string custominteractiontext;
 
     private bool canPickup = false;
 
@@ -21,7 +23,7 @@ public class Gunpickup : MonoBehaviour
     {
         soundManager = FindObjectOfType<SoundManager>();
         HideEButton();
-        
+        customText.text = custominteractiontext;
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
         inventoryItemNotePresent = FindObjectOfType<InventoryItemNotePresent>();
     }
@@ -45,6 +47,7 @@ public class Gunpickup : MonoBehaviour
     void PickupAmmo()
     {
         soundManager.PlaySound("Pickupitem");
+        customText.text = "";
         Destroy(this.gameObject);
     }
 
@@ -59,10 +62,12 @@ public class Gunpickup : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
     }
 }

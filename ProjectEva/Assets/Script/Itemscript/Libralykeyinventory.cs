@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class Libralykeyinventory : MonoBehaviour
 {
-    public KeyonlyDoor keyonlyDoor;
-    public ForceandkeyDoor forceandkeyDoor;
     private void Awake()
     {
-        keyonlyDoor = FindAnyObjectByType<KeyonlyDoor>();
-        forceandkeyDoor = FindAnyObjectByType<ForceandkeyDoor>();
-        forceandkeyDoor.hasLibraryKey = true;
-        keyonlyDoor.hasLibraryKey = true;
-        gameObject.name = "Libralykey";
+        KeyonlyDoor[] keyonlyDoors = FindObjectsOfType<KeyonlyDoor>();
+        foreach (KeyonlyDoor keyonlyDoor in keyonlyDoors)
+        {
+            keyonlyDoor.hasKeynumber = 1;
+        }
+        ForceandkeyDoor[] forceandkeyDoors = FindObjectsOfType<ForceandkeyDoor>();
+        foreach (ForceandkeyDoor forceandkeyDoor in forceandkeyDoors)
+        {
+            forceandkeyDoor.hasKeynumber = 1;
+        }
     }
     private void OnDestroy() 
     {
-    // ทำงานหลังจาก Object ถูกทำลาย
-        forceandkeyDoor.hasLibraryKey = false;
-        keyonlyDoor.hasLibraryKey = false;
+        KeyonlyDoor[] keyonlyDoors = FindObjectsOfType<KeyonlyDoor>();
+        foreach (KeyonlyDoor keyonlyDoor in keyonlyDoors)
+        {
+                keyonlyDoor.hasKeynumber = 0;
+        }
+        ForceandkeyDoor[] forceandkeyDoors = FindObjectsOfType<ForceandkeyDoor>();
+        foreach (ForceandkeyDoor forceandkeyDoor in forceandkeyDoors)
+        {
+                forceandkeyDoor.hasKeynumber = 0;
+        }
     }
 }

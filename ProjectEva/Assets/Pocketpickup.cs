@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Pocketpickup : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -10,6 +10,8 @@ public class Pocketpickup : MonoBehaviour
     public SoundManager soundManager;
     private bool canPickup;
     public string Soundname;
+    public TextMeshProUGUI customText;
+    public string custominteractiontext;
     void Start()
     {
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
@@ -21,6 +23,7 @@ public class Pocketpickup : MonoBehaviour
         {   
             inventoryPresentCharactor.UnlockSlot();
             soundManager.PlaySound(Soundname);
+            customText.text = "";
             Destroy(this.gameObject);
         }
     }
@@ -44,10 +47,13 @@ public class Pocketpickup : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
     }
+
 }

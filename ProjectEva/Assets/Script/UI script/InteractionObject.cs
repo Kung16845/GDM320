@@ -1,10 +1,12 @@
 using UnityEngine;
-
+using TMPro;
 public class InteractionObject : MonoBehaviour
 {
     public GameObject sceneObject; // The object to be displayed in the scene.
     public GameObject panel; // The panel to be displayed when 'E' is pressed.
     public SoundManager soundManager;
+    public TextMeshProUGUI customText;
+    public string custominteractiontext;
 
     private bool objectVisible = false;
     private bool panelVisible = false;
@@ -75,10 +77,12 @@ public class InteractionObject : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
     }
 }

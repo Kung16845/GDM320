@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Pistol : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Pistol : MonoBehaviour
     [SerializeField] float accuracyIncreaseRate = 0.2f;
     [SerializeField] float accuracyDecreaseRate = 0.1f;
     [SerializeField] float reloadTime = 2.0f;
-    [SerializeField] GameObject accuracyCircle; // Reference to the accuracy circle GameObject.
+    [SerializeField] Image accuracyCircle; // Reference to the accuracy circle GameObject.
     public string bulletname;
     public bool isReloadCanceled = false;
     private SanityScaleController sanityScaleController;
@@ -34,6 +35,7 @@ public class Pistol : MonoBehaviour
     private bool playaimsound = false;  
     public SoundManager soundManager;
     public TrapController trapController;
+    public Canvas canvas;
     public InventoryPresentCharactor inventoryPresentCharactor;
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
@@ -72,7 +74,7 @@ public class Pistol : MonoBehaviour
             {   
                 removecrosshaircircle();
             }
-            float scaledAccuracy = 0.015f / currentAccuracy;
+            float scaledAccuracy = 2.0f /currentAccuracy;
             accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
 
             if (isReloading)
@@ -111,9 +113,14 @@ public class Pistol : MonoBehaviour
 
     void movemouseposition()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure the circle is at the same depth as the player.
-        accuracyCircle.transform.position = mousePosition;
+        // Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // mousePosition.z = 0; // Ensure the circle is at the same depth as the player.
+         // Get the mouse position in screen space
+        Vector3 mousePosition = Input.mousePosition;
+        // Convert the mouse position to Canvas space
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, mousePosition, canvas.worldCamera, out Vector2 canvasMousePosition);
+
+        accuracyCircle.rectTransform.localPosition = canvasMousePosition;
     }
     void RotateTowardsMouse()
     {
@@ -249,7 +256,7 @@ public class Pistol : MonoBehaviour
         {
             gunSpeedManager.ReduceSpeedDuringAimming();
         }
-        accuracyCircle.SetActive(true);
+        accuracyCircle.gameObject.SetActive(true);
         isAiming = true;
         if(currentAccuracy > maxAccuracy)
         {
@@ -266,7 +273,7 @@ public class Pistol : MonoBehaviour
         {
             playaimsound = false;
             isAiming = false;
-            accuracyCircle.SetActive(false);
+            accuracyCircle.gameObject.SetActive(false);
             currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
         }
     }

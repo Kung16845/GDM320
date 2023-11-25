@@ -19,6 +19,8 @@ public class ItemDropManager : MonoBehaviour
     public DynamicDifficultyAdjustment difficultyAdjustment;
     public ItemDrop[] itemDrops; // Items to drop with custom percentages
 
+    public string itemNameToDrop;
+
     private void Start()
     {
         if (difficultyAdjustment == null)
@@ -31,17 +33,11 @@ public class ItemDropManager : MonoBehaviour
     {
         // Calculate difficulty level
         int totalActionPoints = difficultyAdjustment.CalculateTotalActionPoints();
-
         // Get the item to drop based on difficulty level
-        string itemNameToDrop = AdjustItemDrops(totalActionPoints);
-
-        // If itemNameToDrop is not null or empty, you can now spawn or use it as needed.
-        if (!string.IsNullOrEmpty(itemNameToDrop))
-        {
-        }
+        itemNameToDrop = AdjustItemDrops(totalActionPoints);
     }
 
-    private string AdjustItemDrops(int totalActionPoints)
+    public string AdjustItemDrops(int totalActionPoints)
     {
         // Calculate total base drop percentage
         int totalBaseDropPercentage = 0;
@@ -84,7 +80,7 @@ public class ItemDropManager : MonoBehaviour
 
             if (randomNumber <= cumulativePercentage)
             {
-                Debug.Log($"Dropping {itemDrop.itemName} with {cumulativePercentage}% chance");
+                // Debug.Log($"Dropping {itemDrop.itemName} with {cumulativePercentage}% chance");
                 return itemDrop.itemName;
             }
         }

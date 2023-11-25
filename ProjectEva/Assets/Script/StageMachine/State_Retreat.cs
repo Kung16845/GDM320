@@ -30,7 +30,7 @@ namespace Enemy_State
                     enemy.agent.SetDestination(enemy.ResingPoint.position);
                     if (enemy.agent.remainingDistance <= enemy.agent.stoppingDistance && !enemy.agent.pathPending)
                     {
-                        StartCoroutine(WaitInResingPoint(5.0f,enemy));
+                        StartCoroutine(WaitInResingPoint(60.0f,enemy));
                     }
                 }
             }

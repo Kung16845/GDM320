@@ -1,56 +1,49 @@
 using UnityEngine;
 using TMPro;
+using NavMeshPlus.Components;
 
 public class ForceDoor : MonoBehaviour
 {
-    public TextMeshProUGUI instructionText; // Reference to the TMPro UI object.
-
+    public GameObject sceneObject;
+    public TextMeshProUGUI customText;
+    public SoundManager soundManager;
+    public string custominteractiontext;
+    public NavMeshSurface navMeshSurface;
     private bool isPlayerNear = false;
 
-    private void Start()
-    {
-        instructionText.gameObject.SetActive(false);
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             isPlayerNear = true;
-            instructionText.gameObject.SetActive(true);
-            instructionText.text = "The lock look weak maybe I can be able to break it.";
+            customText.text = custominteractiontext;
+            ShowEButton();
         }
         if (collision.CompareTag("Bullet"))
         {
-            // Check if a bullet collided with the door.
-            // Add any additional conditions here, e.g., bullet type.
+            // soundManager = ;
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
             Destroy(this.gameObject); // Destroy the bullet.
-            OpenDoorWithForce(); // Open the door when hit by a bullet.
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
+        {   
+            HideEButton();
             isPlayerNear = false;
-            instructionText.gameObject.SetActive(false);
         }
     }
-
-    private void Update()
+    private void ShowEButton()
     {
-        if (isPlayerNear)
-        {
-            // Open the door using force (without a key).
-            // Add your door opening logic here.
-            OpenDoorWithForce();
-        }
+        sceneObject.SetActive(true);
     }
 
-
-    private void OpenDoorWithForce()
+    private void HideEButton()
     {
-        // Add your door opening logic here for force-only doors.
+        sceneObject.SetActive(false);
+        customText.text = "";
     }
 }

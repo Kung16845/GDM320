@@ -36,7 +36,7 @@ public class NewMovementPlayer : MonoBehaviour
 
     [Header("---------Audiomanager------------")]
     public WalkSoundManager WalkSoundManager;
-    private GameObject currentSoundObject;
+    public GameObject currentSoundObject;
 
 
     private void Start()

@@ -7,6 +7,9 @@ namespace Enemy_State
 {
     public class EnemyNormal : Enemy
     {
+        public bool iswalkingonfloor;
+        public bool iswalkingintunnel;
+
         private void Start()
         {
             this.directorAI = FindObjectOfType<DirectorAI>();
@@ -26,6 +29,7 @@ namespace Enemy_State
             switch (currentState)
             {
                 case State_Hunting:
+                    iswalkingonfloor = true;
                     EnterState(state_Hunting);
                     if (hp <= 0)
                     {
@@ -51,6 +55,7 @@ namespace Enemy_State
                     }
                     break;
                 case State_Searching:
+                    iswalkingonfloor = true;
                     EnterState(state_Searching);
                     if (enemySight.canSee && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                         currentState = state_Hunting;
@@ -68,6 +73,7 @@ namespace Enemy_State
                     }
                     break;
                 case State_SearchingSound:
+                    iswalkingonfloor = true;
                     EnterState(state_SearchingSound);
                     if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                     {
@@ -90,6 +96,7 @@ namespace Enemy_State
                     break;
                 case State_Retreat:
                     EnterState(state_Retreat);
+                    iswalkingonfloor = false;
                     if (!state_Retreat.isRunState_Retreat)
                     {
                         state_Listening.isRunState_Listening = true;

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Walllamblight : MonoBehaviour
 {
     public GameObject sceneObject;
+    public TextMeshProUGUI customText;
+    private string custominteractiontext;
     public bool lightquip;
     public bool fuelequip;
     public bool fuelrefill;
@@ -36,9 +39,44 @@ public class Walllamblight : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ShowEButton();
             isclose = true;
         }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (isclose && walllampDuration.lightup)
+            {
+                HideEButton();
+            }
+            else if (isclose)
+            {
+                ShowEButton();
+
+                if (!fuelequip && !lightquip && !fuelrefill)
+                {
+                    customText.text = "need alcholhal and fire to lit this up.";
+                }
+                else if (fuelequip && !lightquip && !fuelrefill)
+                {
+                    customText.text = "Press E to refill the fuel.";
+                }
+                else if (!fuelequip && lightquip && !fuelrefill)
+                {
+                    customText.text = "Still need to find fuel.";
+                }
+                else if (!fuelequip && !lightquip && fuelrefill)
+                {
+                    customText.text = "Still need to find a source of lighter.";
+                }
+                else if (!fuelequip && lightquip && fuelrefill)
+                {
+                    customText.text = "Press E to light the lamp.";
+                }
+            }
+        }
+
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -50,7 +88,14 @@ public class Walllamblight : MonoBehaviour
     }
     private void lightthelamp()
     {
-        inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryMatches");
+        if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") >= 2)
+        {
+            inventoryPresentCharactor.ManageReduceResource("Matches");
+        }
+        else if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") == 1)
+        {
+            inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryMatches");
+        }
         soundManager.PlaySound("Firelit");
         walllampDuration.lightup = true;
         fuelrefill = false;
@@ -63,11 +108,14 @@ public class Walllamblight : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
     }
+
 }
 

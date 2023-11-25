@@ -71,8 +71,8 @@ public class InventoryPresentCharactor : MonoBehaviour
         Debug.Log("DeleteItemCharactorEquipment");
         Type scriptType = Type.GetType(scriptItem);
         var gameObject = GetComponentInChildren(scriptType).gameObject;
+        uIItemListCharactor.Remove(slotsEquipment.GetComponentInChildren<UIItemCharactor>());
         Destroy(gameObject);
-
         Destroy(slotsEquipment.GetComponentInChildren<UIItemCharactor>().gameObject);
     }
     public void CreateItemCharactorEquipment(string scriptItem, string nameItem)

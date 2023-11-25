@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using NavMeshPlus.Components;
 
 public class KeyonlyDoor : MonoBehaviour
 {
-    public TextMeshProUGUI instructionText;
     private bool isPlayerNear = false;
-    public bool hasLibraryKey = false;
+    public int hasKeynumber;
     public InventoryPresentCharactor inventoryPresentCharactor;
+    public GameObject sceneObject;
+    public TextMeshProUGUI customText;
+    public SoundManager soundManager;
+    public string Keyforthisdoor;
+    public NavMeshSurface navMeshSurface;
+    public int numberofkey;
+    public string custominteractiontext;
     private void Start()
     {
-        instructionText.gameObject.SetActive(false);
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
 
@@ -20,35 +26,55 @@ public class KeyonlyDoor : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNear = true;
-            
-            if (hasLibraryKey)
-            {
-                instructionText.text = "I have a key.";
-            }
-            else
-            {
-                instructionText.text = "Must find a key. Can't shoot the lock.";
-            }
-
-            instructionText.gameObject.SetActive(true);
         }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isPlayerNear)
+            {
+                if (hasKeynumber == numberofkey)
+                {
+                    customText.text = "I have a key for this.";
+                }
+                else if (hasKeynumber != numberofkey)
+                {
+                    customText.text = custominteractiontext;
+                }
+                ShowEButton();
+            }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            HideEButton();
             isPlayerNear = false;
-            instructionText.gameObject.SetActive(false);
         }
+    }
+    private void ShowEButton()
+    {
+        sceneObject.SetActive(true);
+    }
+
+    private void HideEButton()
+    {
+        sceneObject.SetActive(false);
+        customText.text = "";
     }
 
     private void Update()
     {
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasLibraryKey)
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
         {
-            inventoryPresentCharactor.ManageReduceResource("Libralykey");
+            inventoryPresentCharactor.DeleteItemCharactorEquipment(Keyforthisdoor);
+            soundManager.PlaySound("Dooropen");
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
             Destroy(this.gameObject);
+        }
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
+        {
+            soundManager.PlaySound("Doorlocked");
         }
     }
 }
