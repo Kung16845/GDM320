@@ -6188,7 +6188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPresentCharactor: {fileID: 1488859601}
-  itemsDataCharactor: {fileID: 11400000, guid: 4384d12cf676f734eb6496e2b423f14d, type: 2}
+  itemsDataCharactor: {fileID: 11400000, guid: 198e7f3e558ea6c418dbc7d5aa97ddd7, type: 2}
   inventoryItemNotePresent: {fileID: 1488859603}
   itemDataNote:
     nameItemNote: 
