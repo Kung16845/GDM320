@@ -19,7 +19,6 @@ public class Libarykey : MonoBehaviour
         HideEButton();
         customText.text = custominteractiontext;
         canPickup = false;
-        soundManager = FindObjectOfType<SoundManager>();
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
     private void Update()

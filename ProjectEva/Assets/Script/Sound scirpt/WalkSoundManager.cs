@@ -79,7 +79,7 @@ public class WalkSoundManager : MonoBehaviour
     }
     private IEnumerator FollowParent(Transform soundTransform, Transform parent)
     {
-        while (true)
+        while (soundTransform != null)
         {
             // Update the position and rotation of the sound to match its parent
             soundTransform.position = parent.position;

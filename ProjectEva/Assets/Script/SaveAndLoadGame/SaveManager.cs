@@ -12,6 +12,7 @@ public class SaveManager : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] DataSave dataSaveandLoad;   
+
     public GameObject player;
     public GameObject enemy;
     
@@ -27,10 +28,6 @@ public class SaveManager : MonoBehaviour
     }
     public void SaveData()
     {   
-        dataSaveandLoad.currentHpPlayer = player.GetComponentInChildren<Hp>().currenthp;
-        dataSaveandLoad.transformPlayerX = player.transform.position.x;
-        dataSaveandLoad.transformPlayerY = player.transform.position.y;
-
         if (string.IsNullOrEmpty(savePath))
         {
             Debug.LogError("No save path ja");
@@ -46,6 +43,20 @@ public class SaveManager : MonoBehaviour
             Directory.CreateDirectory(directoryPath);
 
         File.WriteAllText(targetFilePath, scoreJson);
+    }
+    public void SaveDataPlayer()
+    {   
+        dataSaveandLoad.currentHpPlayer = player.GetComponentInChildren<Hp>().currenthp;
+        
+        dataSaveandLoad.transformPlayerX = player.transform.position.x;
+        dataSaveandLoad.transformPlayerY = player.transform.position.y;
+    }
+    public void SaveDataEnemy()
+    {
+        dataSaveandLoad.currentHpEnemy = enemy.GetComponent<EnemyNormal>().hp;
+
+        dataSaveandLoad.transformEnemyX = enemy.transform.position.x;
+        dataSaveandLoad.transformEnemyY = enemy.transform.position.y;
     }
     public void LoadData()
     {
@@ -68,9 +79,23 @@ public class SaveManager : MonoBehaviour
         var dataJson = File.ReadAllText(targetFilePath);
         dataSaveandLoad = JsonConvert.DeserializeObject<DataSave>(dataJson);
 
+       
+    }
+    public void LoadDataPlayer()
+    {
         player.GetComponentInChildren<Hp>().currenthp = dataSaveandLoad.currentHpPlayer;
 
         Vector2 newPosition = new Vector2(dataSaveandLoad.transformPlayerX, dataSaveandLoad.transformPlayerY);
         player.transform.position = newPosition;
+    }
+
+    public void LoadDataEnemy()
+    {
+        enemy.GetComponent<EnemyNormal>().hp = dataSaveandLoad.currentHpEnemy;
+
+        Vector2 newPosition = new Vector2(dataSaveandLoad.transformEnemyX,dataSaveandLoad.transformEnemyY);
+        enemy.transform.position = newPosition;
+
+        
     }
 }

@@ -88,11 +88,11 @@ public class Walllamblight : MonoBehaviour
     }
     private void lightthelamp()
     {
-        if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") >= 2)
+        if(inventoryPresentCharactor.GetTotalItemCountByName("Matchesbox") >= 2)
         {
-            inventoryPresentCharactor.ManageReduceResource("Matches");
+            inventoryPresentCharactor.ManageReduceResource("Matchesbox");
         }
-        else if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") == 1)
+        else if(inventoryPresentCharactor.GetTotalItemCountByName("Matchesbox") == 1)
         {
             inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryMatches");
         }

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6772699691818477548
 Transform:
   m_ObjectHideFlags: 0
@@ -85,6 +85,7 @@ MonoBehaviour:
   radiusWalk: 16
   radiusRun: 32
   radiusGun: 64
+  isCreatingSoundWave: 0
   isReducing: 0
   isDetect: 0
   checkMovementPlayer: {fileID: 0}
