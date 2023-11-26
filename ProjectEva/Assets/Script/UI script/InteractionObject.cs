@@ -13,7 +13,7 @@ public class InteractionObject : MonoBehaviour
 
     private void Start()
     {
-        HideObject();
+        HideEButton();
         HidePanel();
         soundManager = FindObjectOfType<SoundManager>();
     }
@@ -22,8 +22,7 @@ public class InteractionObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Enter");
-            ShowObject();
+            ShowEButton();
         }
     }
 
@@ -31,7 +30,7 @@ public class InteractionObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HideObject();
+            HideEButton();
         }
     }
 
@@ -50,18 +49,6 @@ public class InteractionObject : MonoBehaviour
         }
     }
 
-    private void ShowObject()
-    {
-        sceneObject.SetActive(true);
-        objectVisible = true;
-    }
-
-    private void HideObject()
-    {
-        sceneObject.SetActive(false);
-        objectVisible = false;
-    }
-
     private void ShowPanel()
     {
         soundManager.PlaySound("Paperaction");
@@ -78,11 +65,13 @@ public class InteractionObject : MonoBehaviour
     {
         sceneObject.SetActive(true);
         customText.text = custominteractiontext;
+        objectVisible = true;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
         customText.text = "";
+        objectVisible = false;
     }
 }

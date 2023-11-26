@@ -7,9 +7,12 @@ public class EnemyAttack : MonoBehaviour
 {
     public EnemyNormal enemyNormal;
     public Animator animationActtack;
+    public SoundManager soundManager;
+    
     private void Start()
     {
         enemyNormal = FindObjectOfType<EnemyNormal>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
     private void OnTriggerEnter2D(Collider2D player)
     {   
@@ -21,6 +24,7 @@ public class EnemyAttack : MonoBehaviour
         enemyNormal.agent.speed = 1.5f;
         animationActtack.SetBool("isAttack", true);                 //Play Attack Animation
         yield return new WaitForSeconds(waitTime);
+        soundManager.PlaySound("Bite");
         enemyNormal.agent.speed = enemyNormal.speed;
         animationActtack.SetBool("isAttack", false);
         this.GetComponent<BoxCollider2D>().enabled = false;
