@@ -146,18 +146,10 @@ public class InventoryPresentCharactor : MonoBehaviour
                 if (slotNull != null)
                 {
                     var newItemGo = Instantiate(uIItemCharactorPrefeb, slotNull.transform, false);
-
-                    newItemGo.SetDataUIItemCharactor(new ItemsDataCharactor
-                    (
-                        itemsDataCharactor.nameItemCharactor
-                        , itemsDataCharactor.ItemImage
-                        , sum
-                        , itemsDataCharactor.maxCount
-                        , itemsDataCharactor.scriptItem
-                        , itemsDataCharactor.isFlashLight
-                        , itemsDataCharactor.isOnhand
-                    ));
-
+                    
+                    newItemGo.SetDataUIItemCharactor(itemsDataCharactor);
+                    newItemGo.GetComponent<UIItemCharactor>().count = sum;
+                    newItemGo.RefrehCount();
                     newItemGo.gameObject.SetActive(true);
                     uIItemListCharactor.Add(newItemGo);
                     return;
@@ -280,14 +272,14 @@ public class ItemsDataCharactor : ScriptableObject
     public int maxCount;
     public bool isFlashLight;
     public bool isOnhand;
-    public ItemsDataCharactor(string nameItem, Sprite sprite, int count, int maxCount, string scriptItem, bool flashLight, bool Onhand)
-    {
-        this.nameItemCharactor = nameItem;
-        this.ItemImage = sprite;
-        this.count = count;
-        this.maxCount = maxCount;
-        this.scriptItem = scriptItem;
-        this.isFlashLight = flashLight;
-        this.isOnhand = Onhand;
-    }
+    // public void Initialize(string nameItem, Sprite sprite, int countItem, int maxCountItem, string scriptItemCharactor, bool flashLight, bool Onhand)
+    // {
+    //     nameItemCharactor = nameItem;
+    //     ItemImage = sprite;
+    //     count = countItem;
+    //     maxCount = maxCountItem;
+    //     scriptItem = scriptItemCharactor;
+    //     isFlashLight = flashLight;
+    //     isOnhand = Onhand;
+    // }
 }

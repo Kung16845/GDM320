@@ -5,12 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Blueprintfortest.unity
-    guid: f27e2abd1e9c88b4aa67e33dd0fc0914
-  - enabled: 0
-    path: Assets/Scenes/Mainscenev0.3.unity
-    guid: edfc25e11595901439f459db7ac54ed5
   - enabled: 1
     path: Assets/Scenes/Mainsceane0.4.unity
     guid: 982b19d9d3f31014a88643e8753eb37d
