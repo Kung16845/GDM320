@@ -30,7 +30,7 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
     private void Update()
     {
         int totalActionPoints = CalculateTotalActionPoints();
-        Debug.Log(totalActionPoints);
+        // Debug.Log(totalActionPoints);
         // AdjustDifficulty(totalActionPoints);
     }
 

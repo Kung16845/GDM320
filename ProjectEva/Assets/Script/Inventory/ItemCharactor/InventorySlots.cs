@@ -8,6 +8,9 @@ public class InventorySlots : MonoBehaviour, IDropHandler
 {
     public GameObject equipment;
     public InventoryPresentCharactor inventoryPresentCharactor;
+    private void Start() {
+        inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+    }
     public void OnDrop(PointerEventData eventData)
     {
         var slot = GetComponentInChildren<UIItemCharactor>();
@@ -56,18 +59,24 @@ public class InventorySlots : MonoBehaviour, IDropHandler
                     Vector3 newScale = new Vector3(1.65f, 1.65f, 1.65f);
                     slot.GetComponent<RectTransform>().localScale = newScale;
                     uIItemCharactor.parentAfterDray = transform;
+
                     Vector3 newScaleequipment = new Vector3(1f, 1f, 1f);
                     uIItemCharactor.GetComponent<RectTransform>().localScale = newScaleequipment;
+
                     inventoryPresentCharactor.CreateItemCharactorEquipment(slot.scriptItem, slot.nameItem.text);
                 }
                 else if(slot.isFlashLight && uIItemCharactor.isFlashLight)
                 {
+
                     slot.transform.SetParent(uIItemCharactor.parentAfterDray);
                     Vector3 newScale = new Vector3(1.65f, 1.65f, 1.65f);
+
                     slot.GetComponent<RectTransform>().localScale = newScale;
                     uIItemCharactor.parentAfterDray = transform;
+
                     Vector3 newScaleequipment = new Vector3(1f, 1f, 1f);
                     uIItemCharactor.GetComponent<RectTransform>().localScale = newScaleequipment;
+
                     inventoryPresentCharactor.CreateItemCharactorEquipment(slot.scriptItem, slot.nameItem.text);
                 }
             }
