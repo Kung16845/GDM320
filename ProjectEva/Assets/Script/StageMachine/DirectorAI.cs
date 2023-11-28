@@ -17,23 +17,37 @@ namespace Enemy_State
         public float maxYOffset;
         public float Stressvalue;
         public List<SetPosition> setSpawns = new List<SetPosition>();
-        
+
         public List<Room> rooms = new List<Room>();
         private void Start()
         {
             this.player = FindObjectOfType<NewMovementPlayer>().transform;
-            this.enemy = FindObjectOfType<EnemyNormal>().transform;
+            FindInactiveEnemyNormals();
             StartCoroutine(EverySeconReduce(1.0f));
-        }  
-       
-        private void Update() 
+        }
+        private void FindInactiveEnemyNormals()
+        {
+            // หาทุก Object ที่มี script EnemyNormal ในฉาก
+            EnemyNormal[] enemyNormals = GameObject.FindObjectsOfType<EnemyNormal>(true);
+
+            foreach (EnemyNormal enemyNormal in enemyNormals)
+            {
+                // ตรวจสอบว่า Object นี้ไม่ได้ Active
+                if (!enemyNormal.gameObject.activeSelf)
+                {
+                    this.enemy = enemyNormal.transform;
+                   
+                }
+            }
+        }
+        private void Update()
         {
             // navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); //ไว้อัปเดตแมพ
         }
         private IEnumerator EverySeconReduce(float time)
         {
             yield return new WaitForSeconds(time);
-            Stressvalue -=10;
+            Stressvalue -= 10;
             if (Stressvalue < 0)
                 Stressvalue = 0;
         }

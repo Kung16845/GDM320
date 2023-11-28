@@ -26,7 +26,7 @@ namespace Enemy_State
                     enemy.agent.SetDestination(SpawmsClosePlayer);
                     isSetValue = true;
                 }
-                if (enemy.enemyDetectSound.soundValue >= 8)
+                if (enemy.enemyDetectSound.currentsoundValue >= enemy.detectionSound)
                 {       
                     if (enemy.agent.remainingDistance <= enemy.agent.stoppingDistance && !enemy.agent.pathPending)
                     {
