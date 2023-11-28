@@ -74,7 +74,7 @@ public class Pistol : MonoBehaviour
             {   
                 removecrosshaircircle();
             }
-            float scaledAccuracy = 2.0f /currentAccuracy;
+            float scaledAccuracy = 1.0f /currentAccuracy;
             accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
 
             if (isReloading)
