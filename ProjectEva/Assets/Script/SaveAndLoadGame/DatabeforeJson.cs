@@ -15,4 +15,8 @@ public class DataSave
     public float currentHpEnemy;
     public float transformEnemyX;
     public float transformEnemyY;
+
+    [Header("DataInventoryItemCharactor")]
+
+    public string nameItem;
 }
