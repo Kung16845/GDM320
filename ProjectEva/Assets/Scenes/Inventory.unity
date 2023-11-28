@@ -8712,7 +8712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPresentCharactor: {fileID: 1488859601}
-  itemsDataCharactor: {fileID: 11400000, guid: 1d652c510f6ebcd4a9a9a9a7189fe137, type: 2}
+  itemsDataCharactor: {fileID: 11400000, guid: b6663a10b46f3f74fada4382727414a5, type: 2}
   inventoryItemNotePresent: {fileID: 1488859603}
   itemDataNote:
     nameItemNote: 
