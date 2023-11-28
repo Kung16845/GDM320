@@ -6652,7 +6652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'FlashLight
+  m_text: 'Gun
 
 '
   m_isRightToLeft: 0
@@ -8672,7 +8672,7 @@ GameObject:
   - component: {fileID: 2006740423}
   - component: {fileID: 2006740422}
   m_Layer: 5
-  m_Name: AddItemFlashLight (1)
+  m_Name: AddItemGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8696,7 +8696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -279, y: 484}
+  m_AnchoredPosition: {x: -65, y: 484}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2006740422
@@ -8712,7 +8712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPresentCharactor: {fileID: 1488859601}
-  itemsDataCharactor: {fileID: 11400000, guid: 0a1e258a982bb5045971e62a1f8a2708, type: 2}
+  itemsDataCharactor: {fileID: 11400000, guid: 1d652c510f6ebcd4a9a9a9a7189fe137, type: 2}
   inventoryItemNotePresent: {fileID: 1488859603}
   itemDataNote:
     nameItemNote: 
@@ -9297,14 +9297,14 @@ RectTransform:
   - {fileID: 905259501}
   - {fileID: 679602112}
   - {fileID: 2140962150}
-  - {fileID: 1004465448}
   - {fileID: 1404840312}
   - {fileID: 223471013}
   - {fileID: 636233272}
+  - {fileID: 2006740421}
+  - {fileID: 1004465448}
   - {fileID: 2049480554}
   - {fileID: 262527071}
   - {fileID: 1393283125}
-  - {fileID: 2006740421}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

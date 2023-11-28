@@ -16,7 +16,8 @@ namespace Enemy_State
         public float rotateSpeed;
         public float damage;
         public float damageSanity;
-        public float detection;
+        public int onSoundValuechange;
+        public int detectionSound;
         [Header ("---------CheckValue-----------")]
         [Space(25f)]
         public bool isHear;

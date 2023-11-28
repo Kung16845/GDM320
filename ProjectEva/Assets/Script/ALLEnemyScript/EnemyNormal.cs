@@ -23,6 +23,7 @@ namespace Enemy_State
             RandomPositionSpawns(directorAI);
             state_Listening.isRunState_Listening = true;
             currentState = state_Listening;
+            onSoundValuechange = enemyDetectSound.currentsoundValue;
         }
         private void Update()
         {
@@ -38,7 +39,7 @@ namespace Enemy_State
                     }
                     else if (newMovementPlayer.isStaySafeRoom)
                     {
-                        enemyDetectSound.soundValue = 0;
+                        enemyDetectSound.currentsoundValue = 0;
                         state_Searching.isSetValue = false;
                         EnterState(state_Searching);
                         enemySight.canSee = false;
@@ -46,12 +47,16 @@ namespace Enemy_State
                     break;
                 case State_Listening:
                     EnterState(state_Listening);
-                    if (!state_Listening.isRunState_Listening)
+                    if (!state_Listening.isRunState_Listening && enemyDetectSound.currentsoundValue >= detectionSound)
                     {
                         isUsingTunnel = false;
                         SetAreaMask();
                         currentState = state_Searching;
                         EnterState(state_Searching);
+                    }
+                    else if(enemyDetectSound.currentsoundValue != onSoundValuechange){
+                        onSoundValuechange = enemyDetectSound.currentsoundValue;
+                        state_Listening.isSetValue = false;
                     }
                     break;
                 case State_Searching:
@@ -82,7 +87,7 @@ namespace Enemy_State
                     }
                     else if (newMovementPlayer.isStaySafeRoom && currentState != state_Searching)
                     {
-                        enemyDetectSound.soundValue = 0;
+                        enemyDetectSound.currentsoundValue = 0;
                         state_Searching.isSetValue = false;
                         currentState = state_Searching;
                     }
