@@ -144,8 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoAmount: 3
-  uiPanelTag: Interactiontag
-  customTextTag: Interactiontext
   sceneObject: {fileID: 0}
   soundManager: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}

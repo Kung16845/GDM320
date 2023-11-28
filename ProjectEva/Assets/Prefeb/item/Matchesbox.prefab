@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4883755105669867134}
   - component: {fileID: 2272515496708865346}
   - component: {fileID: 8761927451755740249}
-  - component: {fileID: 3284275769891423343}
+  - component: {fileID: 2675522203242993457}
   m_Layer: 0
   m_Name: Matchesbox
   m_TagString: Untagged
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.456649, y: 16.957298}
   m_EdgeRadius: 0
---- !u!114 &3284275769891423343
+--- !u!114 &2675522203242993457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4983937922896719207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f964bf8cbea581e44a6170b680695872, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a71cc803702eb040b3a8faa65ffb118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneObject: {fileID: 0}
@@ -148,4 +148,4 @@ MonoBehaviour:
   inventoryPresentCharactor: {fileID: 0}
   itemsDataCharactor: {fileID: 11400000, guid: 5196057a688178b4caa664aa28e36007, type: 2}
   customText: {fileID: 0}
-  custominteractiontext: Press E to pickup.
+  custominteractiontext: Press E to pickup

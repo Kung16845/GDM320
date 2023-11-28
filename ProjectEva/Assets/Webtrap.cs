@@ -65,12 +65,12 @@ public class Webtrap : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") >= 2)
+                if(inventoryPresentCharactor.GetTotalItemCountByName("Matchesbox") >= 2)
                 {
-                inventoryPresentCharactor.ManageReduceResource("Matches");
+                inventoryPresentCharactor.ManageReduceResource("Matchesbox");
                 soundManager.PlaySound("Firelit");
                 }
-                else if(inventoryPresentCharactor.GetTotalItemCountByName("Matches") == 1)
+                else if(inventoryPresentCharactor.GetTotalItemCountByName("Matchesbox") == 1)
                 {
                 inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryMatches");
                 soundManager.PlaySound("Firelit");

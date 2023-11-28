@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundtriggerEvent : MonoBehaviour
 {
-    public SoundManager soundManager;
+    public SoundManageronce soundManager;
     public string nameofsound;
     private void OnTriggerEnter2D(Collider2D collision)
     {
