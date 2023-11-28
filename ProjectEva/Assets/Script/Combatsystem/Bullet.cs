@@ -38,8 +38,9 @@ public class Bullet : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<EnemyNormal>())
+    {   
+        var enemy = collision.GetComponent<EnemyNormal>();
+        if (enemy != null && enemy.currentState != enemy.state_Listening)
         {
             collision.GetComponent<EnemyNormal>().TakeDamage(damage);
             StartCoroutine(ChangeSpriteColorForOneSecond());
