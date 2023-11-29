@@ -7,6 +7,8 @@ using UnityEditor;
 public class DynamicDifficultyAdjustment : MonoBehaviour
 {
     public InventoryPresentCharactor inventory;
+    public Pistol gun;
+    public  Hp  hp;
 
     [System.Serializable]
     public enum ItemType
@@ -40,9 +42,9 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
 
     private void Update()
     {
-        int totalActionPoints = CalculateTotalActionPoints();
-        int totalMedicinePoints = CalculateTotalMedicinePoints();
-        int totalUtilityPoints = CalculateTotalUtilityPoints();
+        // int totalActionPoints = CalculateTotalActionPoints();
+        // int totalMedicinePoints = CalculateTotalMedicinePoints();
+        // int totalUtilityPoints = CalculateTotalUtilityPoints();
 
         // AdjustDifficulty(totalActionPoints);
     }
@@ -56,7 +58,8 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
             int itemCount = inventory.GetTotalItemCountByName(item.itemName);
             totalActionPoints += itemCount * item.actionPoints;
         }
-
+        totalActionPoints += gun.ammoInChamber * 7;
+        Debug.Log(totalActionPoints);
         return totalActionPoints;
     }
 
@@ -69,7 +72,8 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
             int itemCount = inventory.GetTotalItemCountByName(item.itemName);
             totalMedicinePoints += itemCount * item.medicinePoints;
         }
-
+        int parsedHP = Mathf.RoundToInt(hp.currenthp);
+        totalMedicinePoints += parsedHP / 2;
         return totalMedicinePoints;
     }
 

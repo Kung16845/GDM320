@@ -32,7 +32,7 @@ public class Hp : MonoBehaviour
         if (currenthp < lowHpThreshold)
         {
             // Decrease the alpha of the CanvasGroup.
-            canvasGroup.alpha = 0.3f; // You can adjust the alpha value as needed.
+            canvasGroup.alpha = 0.1f; // You can adjust the alpha value as needed.
         }
         else
         {

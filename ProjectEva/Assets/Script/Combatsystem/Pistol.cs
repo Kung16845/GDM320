@@ -8,7 +8,7 @@ public class Pistol : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float bulletForce = 10f;
     [SerializeField] public int maxAmmo = 10;
-    [SerializeField] public int ammoInChamber = 5;
+    [SerializeField] public int ammoInChamber;
     [SerializeField] float bulletDamage = 1.0f;
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float maxAccuracy = 1.0f;

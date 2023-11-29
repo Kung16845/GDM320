@@ -28,7 +28,6 @@ public class NewRotateLight : MonoBehaviour
     {
         if (transform.hasChanged)
         {
-            Debug.Log("The Rotate has changed!");
             directionX = Player.GetComponent<NewMovementPlayer>().direction.x;
             directionY = Player.GetComponent<NewMovementPlayer>().direction.y;
             if (directionX > 0)

@@ -117,11 +117,11 @@ public class ItemDropManager : MonoBehaviour
 
             if (totalPoints >= itemDrop.minPoints && totalPoints <= itemDrop.maxPoints)
             {
-                totalDropPercentage += increasePercentage;
+                cumulativePercentage += increasePercentage;
             }
             else if (totalPoints > itemDrop.maxPoints)
             {
-                totalDropPercentage -= decreasePercentage;
+                cumulativePercentage -= decreasePercentage;
             }
 
             if (randomNumber <= cumulativePercentage)
@@ -131,8 +131,10 @@ public class ItemDropManager : MonoBehaviour
         }
 
         // Fallback: Choose the item with the highest baseDropPercentage if none are chosen
-        return filteredItemDrops.OrderByDescending(d => d.baseDropPercentage).FirstOrDefault()?.itemName;
+        string fallbackItem = filteredItemDrops.OrderByDescending(d => d.baseDropPercentage).FirstOrDefault()?.itemName;
+        return fallbackItem;
     }
+
 
     private DynamicDifficultyAdjustment.ItemType GetLowestType(int actionPoints, int medicinePoints, int utilityPoints)
     {
