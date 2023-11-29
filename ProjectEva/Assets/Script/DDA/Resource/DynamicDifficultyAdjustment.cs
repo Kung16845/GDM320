@@ -59,7 +59,6 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
             totalActionPoints += itemCount * item.actionPoints;
         }
         totalActionPoints += gun.ammoInChamber * 7;
-        Debug.Log(totalActionPoints);
         return totalActionPoints;
     }
 

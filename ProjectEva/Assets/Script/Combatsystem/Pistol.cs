@@ -81,7 +81,7 @@ public class Pistol : MonoBehaviour
             if (isReloading)
             {
                 gunSpeedManager.ReduceSpeedDuringReload();
-                if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) // Check if right mouse button is pressed.
+                if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) 
                 {
                     StartCoroutine(WaitBeforeNextReload());
                     cancelreload();
