@@ -1,18 +1,21 @@
 using UnityEngine;
-
+using System.Linq;
 [System.Serializable]
-public class ItemDrop
-{
-    public string itemName;
-    [Range(0, 100)]
-    public int baseDropPercentage; // Base drop percentage for the item
-    public int minActionPoints; // Minimum action points for increased drop rate
-    public int maxActionPoints; // Maximum action points for decreased drop rate
-    [Range(0, 100)]
-    public int increasePercentage; // Percentage increase when action points are above minActionPoints
-    [Range(0, 100)]
-    public int decreasePercentage; // Percentage decrease when action points are above maxActionPoints
-}
+    public class ItemDrop
+    {
+        public string itemName;
+        public int priority; // Priority of the item (lower number means higher priority)
+        public DynamicDifficultyAdjustment.ItemType itemType; // ItemType of the item
+        [Range(0, 100)]
+        public int baseDropPercentage; // Base drop percentage for the item
+        [Range(0, 100)]
+        public int increasePercentage; // Percentage increase when points are above minPoints
+        [Range(0, 100)]
+        public int decreasePercentage; // Percentage decrease when points are above maxPoints
+        public int minPoints; // Minimum points for increased drop rate
+        public int maxPoints; // Maximum points for decreased drop rate
+    }
+
 
 public class ItemDropManager : MonoBehaviour
 {
@@ -31,33 +34,56 @@ public class ItemDropManager : MonoBehaviour
 
     private void Update()
     {
-        // Calculate difficulty level
+        // Calculate difficulty levels for action, medicine, and utility points
         int totalActionPoints = difficultyAdjustment.CalculateTotalActionPoints();
-        // Get the item to drop based on difficulty level
-        itemNameToDrop = AdjustItemDrops(totalActionPoints);
-        // Debug.Log(totalActionPoints);
+        int totalMedicinePoints = difficultyAdjustment.CalculateTotalMedicinePoints();
+        int totalUtilityPoints = difficultyAdjustment.CalculateTotalUtilityPoints();
+
+        // Get the item to drop based on the lowest difficulty level
+        itemNameToDrop = AdjustItemDrops(totalActionPoints, totalMedicinePoints, totalUtilityPoints);
     }
 
-    public string AdjustItemDrops(int totalActionPoints)
+    public string AdjustItemDrops(int actionPoints, int medicinePoints, int utilityPoints)
     {
-        // Calculate total base drop percentage
-        int totalBaseDropPercentage = 0;
-        foreach (var itemDrop in itemDrops)
-        {
-            totalBaseDropPercentage += itemDrop.baseDropPercentage;
-        }
+        // Determine the type with the lowest points
+        DynamicDifficultyAdjustment.ItemType lowestType = GetLowestType(actionPoints, medicinePoints, utilityPoints);
 
-        // Calculate total drop percentage considering base and increased/decreased percentages
+        // Filter itemDrops based on the lowest point type
+        var filteredItemDrops = itemDrops.Where(d => d.itemType == lowestType).ToArray();
+
+        // Calculate total base drop percentage for the lowest point type
+        int totalBaseDropPercentage = filteredItemDrops.Sum(d => d.baseDropPercentage);
+
+        // Calculate total drop percentage considering base and increased/decreased percentages for the lowest point type
         int totalDropPercentage = totalBaseDropPercentage;
-        foreach (var itemDrop in itemDrops)
+
+        foreach (var itemDrop in filteredItemDrops)
         {
-            if (totalActionPoints >= itemDrop.minActionPoints && totalActionPoints <= itemDrop.maxActionPoints)
+            int totalPoints = 0;
+            int increasePercentage = itemDrop.increasePercentage;
+            int decreasePercentage = itemDrop.decreasePercentage;
+
+            switch (itemDrop.itemType)
             {
-                totalDropPercentage += itemDrop.increasePercentage;
+                case DynamicDifficultyAdjustment.ItemType.Action:
+                    totalPoints = actionPoints;
+                    break;
+                case DynamicDifficultyAdjustment.ItemType.Medicine:
+                    totalPoints = medicinePoints;
+                    break;
+                case DynamicDifficultyAdjustment.ItemType.Utility:
+                    totalPoints = utilityPoints;
+                    break;
+                // Add more cases for other item types as needed
             }
-            else if (totalActionPoints > itemDrop.maxActionPoints)
+
+            if (totalPoints >= itemDrop.minPoints && totalPoints <= itemDrop.maxPoints)
             {
-                totalDropPercentage -= itemDrop.decreasePercentage;
+                totalDropPercentage += increasePercentage;
+            }
+            else if (totalPoints > itemDrop.maxPoints)
+            {
+                totalDropPercentage -= decreasePercentage;
             }
         }
 
@@ -66,25 +92,61 @@ public class ItemDropManager : MonoBehaviour
 
         // Determine which item to drop based on the random number and drop percentages
         int cumulativePercentage = 0;
-        foreach (var itemDrop in itemDrops)
+
+        foreach (var itemDrop in filteredItemDrops)
         {
             cumulativePercentage += itemDrop.baseDropPercentage;
 
-            if (totalActionPoints >= itemDrop.minActionPoints && totalActionPoints <= itemDrop.maxActionPoints)
+            int totalPoints = 0;
+            int increasePercentage = itemDrop.increasePercentage;
+            int decreasePercentage = itemDrop.decreasePercentage;
+
+            switch (itemDrop.itemType)
             {
-                cumulativePercentage += itemDrop.increasePercentage;
+                case DynamicDifficultyAdjustment.ItemType.Action:
+                    totalPoints = actionPoints;
+                    break;
+                case DynamicDifficultyAdjustment.ItemType.Medicine:
+                    totalPoints = medicinePoints;
+                    break;
+                case DynamicDifficultyAdjustment.ItemType.Utility:
+                    totalPoints = utilityPoints;
+                    break;
+                // Add more cases for other item types as needed
             }
-            else if (totalActionPoints > itemDrop.maxActionPoints)
+
+            if (totalPoints >= itemDrop.minPoints && totalPoints <= itemDrop.maxPoints)
             {
-                cumulativePercentage -= itemDrop.decreasePercentage;
+                totalDropPercentage += increasePercentage;
+            }
+            else if (totalPoints > itemDrop.maxPoints)
+            {
+                totalDropPercentage -= decreasePercentage;
             }
 
             if (randomNumber <= cumulativePercentage)
             {
-                // Debug.Log($"Dropping {itemDrop.itemName} with {cumulativePercentage}% chance");
                 return itemDrop.itemName;
             }
         }
-        return null;
+
+        // Fallback: Choose the item with the highest baseDropPercentage if none are chosen
+        return filteredItemDrops.OrderByDescending(d => d.baseDropPercentage).FirstOrDefault()?.itemName;
+    }
+
+    private DynamicDifficultyAdjustment.ItemType GetLowestType(int actionPoints, int medicinePoints, int utilityPoints)
+    {
+        if (actionPoints <= medicinePoints && actionPoints <= utilityPoints)
+        {
+            return DynamicDifficultyAdjustment.ItemType.Action;
+        }
+        else if (medicinePoints <= actionPoints && medicinePoints <= utilityPoints)
+        {
+            return DynamicDifficultyAdjustment.ItemType.Medicine;
+        }
+        else
+        {
+            return DynamicDifficultyAdjustment.ItemType.Utility;
+        }
     }
 }

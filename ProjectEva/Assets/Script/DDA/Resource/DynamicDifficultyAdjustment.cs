@@ -9,9 +9,18 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
     public InventoryPresentCharactor inventory;
 
     [System.Serializable]
+    public enum ItemType
+    {
+        Action,
+        Medicine,
+        Utility
+    }
+
+    [System.Serializable]
     public class ItemDifficulty
     {
         public string itemName;
+        public ItemType itemType; // Add the ItemType field
         public int actionPoints;
         public int medicinePoints;
         public int utilityPoints;
@@ -105,11 +114,12 @@ public class DynamicDifficultyAdjustmentEditor : Editor
 
         // Draw custom inspector for itemsToTrack list
         EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Customize Action Points for Each Item", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Customize Points for Each Item", EditorStyles.boldLabel);
 
         for (int i = 0; i < script.itemsToTrack.Count; i++)
         {
             script.itemsToTrack[i].itemName = EditorGUILayout.TextField("Item Name", script.itemsToTrack[i].itemName);
+            script.itemsToTrack[i].itemType = (DynamicDifficultyAdjustment.ItemType)EditorGUILayout.EnumPopup("Item Type", script.itemsToTrack[i].itemType);
             script.itemsToTrack[i].actionPoints = EditorGUILayout.IntField("Action Points", script.itemsToTrack[i].actionPoints);
             script.itemsToTrack[i].medicinePoints = EditorGUILayout.IntField("Medicine Points", script.itemsToTrack[i].medicinePoints);
             script.itemsToTrack[i].utilityPoints = EditorGUILayout.IntField("Utility Points", script.itemsToTrack[i].utilityPoints);

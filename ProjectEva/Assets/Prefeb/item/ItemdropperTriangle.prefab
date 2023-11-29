@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 35
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3191387004779853178
 MonoBehaviour:
@@ -55,6 +55,10 @@ MonoBehaviour:
     itemPrefab: {fileID: 360619776744667714, guid: 8ee49d65c0da9ac4f8cd17bea8fe5b6c, type: 3}
   - itemName: AmmoPickUp(4)
     itemPrefab: {fileID: 3491219650522960368, guid: f37301266b592f447a095ada5749c3a7, type: 3}
+  - itemName: Bandage
+    itemPrefab: {fileID: 3853258787167619424, guid: 975429068bc6d1f458c94c7efeaa9f92, type: 3}
+  - itemName: Matchesbox
+    itemPrefab: {fileID: 4983937922896719207, guid: d26ab28588cb27848a715aff2da6ae60, type: 3}
   sceneObject: {fileID: 0}
   soundManager: {fileID: 0}
   Soundname: Fabric
