@@ -142,6 +142,8 @@ public class NewMovementPlayer : MonoBehaviour
     void Crouch()
     {
         transform.Translate(direction * (crouchSpeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
+        WalkSoundManager.StopSound("Walk");
+        WalkSoundManager.StopSound("Run");
     }
     public void StopMoving()
     {

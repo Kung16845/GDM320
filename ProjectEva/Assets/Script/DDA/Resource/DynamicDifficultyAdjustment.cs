@@ -13,6 +13,8 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
     {
         public string itemName;
         public int actionPoints;
+        public int medicinePoints;
+        public int utilityPoints;
     }
 
     public List<ItemDifficulty> itemsToTrack = new List<ItemDifficulty>();
@@ -30,6 +32,9 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
     private void Update()
     {
         int totalActionPoints = CalculateTotalActionPoints();
+        int totalMedicinePoints = CalculateTotalMedicinePoints();
+        int totalUtilityPoints = CalculateTotalUtilityPoints();
+
         // AdjustDifficulty(totalActionPoints);
     }
 
@@ -44,6 +49,32 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
         }
 
         return totalActionPoints;
+    }
+
+    public int CalculateTotalMedicinePoints()
+    {
+        int totalMedicinePoints = 0;
+
+        foreach (var item in itemsToTrack)
+        {
+            int itemCount = inventory.GetTotalItemCountByName(item.itemName);
+            totalMedicinePoints += itemCount * item.medicinePoints;
+        }
+
+        return totalMedicinePoints;
+    }
+
+    public int CalculateTotalUtilityPoints()
+    {
+        int totalUtilityPoints = 0;
+
+        foreach (var item in itemsToTrack)
+        {
+            int itemCount = inventory.GetTotalItemCountByName(item.itemName);
+            totalUtilityPoints += itemCount * item.utilityPoints;
+        }
+
+        return totalUtilityPoints;
     }
 
     // private void AdjustDifficulty(int totalActionPoints)
@@ -80,6 +111,8 @@ public class DynamicDifficultyAdjustmentEditor : Editor
         {
             script.itemsToTrack[i].itemName = EditorGUILayout.TextField("Item Name", script.itemsToTrack[i].itemName);
             script.itemsToTrack[i].actionPoints = EditorGUILayout.IntField("Action Points", script.itemsToTrack[i].actionPoints);
+            script.itemsToTrack[i].medicinePoints = EditorGUILayout.IntField("Medicine Points", script.itemsToTrack[i].medicinePoints);
+            script.itemsToTrack[i].utilityPoints = EditorGUILayout.IntField("Utility Points", script.itemsToTrack[i].utilityPoints);
             EditorGUILayout.Space();
         }
     }

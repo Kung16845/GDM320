@@ -35,6 +35,7 @@ public class ItemDropManager : MonoBehaviour
         int totalActionPoints = difficultyAdjustment.CalculateTotalActionPoints();
         // Get the item to drop based on difficulty level
         itemNameToDrop = AdjustItemDrops(totalActionPoints);
+        // Debug.Log(totalActionPoints);
     }
 
     public string AdjustItemDrops(int totalActionPoints)
