@@ -20,7 +20,8 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public Image imageItemLock;
     public string scriptItem;
     public int count;
-    public int maxCount;
+    public int maxCount; 
+    public int numslot;
     public bool isLock;
     public bool isFlashLight;
     public bool isOnhand;
@@ -28,6 +29,7 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public object Add { get; internal set; }
     private void Awake()
     {   
+        
         if(isFlashLight)
             slotEqicpmentFlashLight = GameObject.Find("BgFlashLight").transform;
         if(isOnhand)
@@ -42,6 +44,7 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         scriptItem = itemsDataCharactor.scriptItem;
         isFlashLight = itemsDataCharactor.isFlashLight;
         isOnhand = itemsDataCharactor.isOnhand;
+        isLock = itemsDataCharactor.isLock;
         RefrehCount();
         imageItem.sprite = itemsDataCharactor.ItemImage;
     }

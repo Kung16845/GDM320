@@ -1,0 +1,101 @@
+[
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "",
+    "scriptItem": "",
+    "numslot": 6,
+    "count": 0,
+    "maxCount": 0,
+    "isFlashLight": false,
+    "isOnhand": false,
+    "isLock": true
+  },
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "",
+    "scriptItem": "",
+    "numslot": 7,
+    "count": 0,
+    "maxCount": 0,
+    "isFlashLight": false,
+    "isOnhand": false,
+    "isLock": true
+  },
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "",
+    "scriptItem": "",
+    "numslot": 8,
+    "count": 0,
+    "maxCount": 0,
+    "isFlashLight": false,
+    "isOnhand": false,
+    "isLock": true
+  },
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "",
+    "scriptItem": "",
+    "numslot": 9,
+    "count": 0,
+    "maxCount": 0,
+    "isFlashLight": false,
+    "isOnhand": false,
+    "isLock": true
+  },
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "",
+    "scriptItem": "",
+    "numslot": 10,
+    "count": 0,
+    "maxCount": 0,
+    "isFlashLight": false,
+    "isOnhand": false,
+    "isLock": true
+  },
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "",
+    "scriptItem": "",
+    "numslot": 11,
+    "count": 0,
+    "maxCount": 0,
+    "isFlashLight": false,
+    "isOnhand": false,
+    "isLock": true
+  },
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "FaiChai",
+    "scriptItem": "Inventoryflashlight",
+    "numslot": 0,
+    "count": 1,
+    "maxCount": 1,
+    "isFlashLight": true,
+    "isOnhand": false,
+    "isLock": false
+  },
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "PistolAmmo",
+    "scriptItem": "",
+    "numslot": 1,
+    "count": 5,
+    "maxCount": 6,
+    "isFlashLight": false,
+    "isOnhand": false,
+    "isLock": false
+  },
+  {
+    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameSprite": "Bandage",
+    "scriptItem": "Bandage",
+    "numslot": 2,
+    "count": 1,
+    "maxCount": 1,
+    "isFlashLight": false,
+    "isOnhand": true,
+    "isLock": false
+  }
+]
