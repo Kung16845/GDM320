@@ -58,6 +58,11 @@ namespace Enemy_State
                         onSoundValuechange = enemyDetectSound.currentsoundValue;
                         state_Listening.isSetValue = false;
                     }
+                    if (hp <= 0)
+                    {
+                        currentState = state_Retreat;
+                        state_Retreat.isRunState_Retreat = true;
+                    }
                     break;
                 case State_Searching:
                     iswalkingonfloor = true;

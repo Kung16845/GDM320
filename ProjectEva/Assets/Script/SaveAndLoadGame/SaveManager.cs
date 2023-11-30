@@ -2,20 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Enemy_State;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.U2D;
 
 public class SaveManager : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] DataSave dataSaveandLoad;
     [SerializeField] List<DataItemCharactor> listItemsDataCharactors;
-
     public GameObject player;
     public GameObject enemy;
+    public SpriteAtlas spriteAtlas;
 
     [Header("Saving")]
     [SerializeField] string savePath;
@@ -36,7 +37,7 @@ public class SaveManager : MonoBehaviour
         {
             DataItemCharactor itemData = new DataItemCharactor();
 
-            itemData.nameItem = dataUI.nameItem.ToString();
+            itemData.nameItem = dataUI.nameItem.text;
             itemData.nameSprite = dataUI.imageItem.sprite != null
             ? dataUI.imageItem.sprite.name : "";
 
@@ -76,8 +77,75 @@ public class SaveManager : MonoBehaviour
 
         File.WriteAllText(targetFilePath, datainventory); // Write the JSON string to the file
     }
+    public void ClearUIandGameObjectInventoryItemCharactor()
+    {
+        var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+        var listUIItem = inventoryPresentCharactor.uIItemListCharactor;
+        listUIItem.Clear();
+        var gameObjectInAllslot = inventoryPresentCharactor.slots;
+        foreach (var itemInSlot in gameObjectInAllslot)
+        {
+            var uiItemComponent = itemInSlot.GetComponentInChildren<UIItemCharactor>();
+            if (uiItemComponent != null)
+            {
+                Destroy(uiItemComponent.gameObject);
+            }
+        }
+    }
+    public void UpLoadAndCreateDataInventoryItemCharactor()
+    {
+        var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+        var gameObjectInAllslot = inventoryPresentCharactor.slots;
+        for (int i = 0; i < listItemsDataCharactors.Count; i++)
+        {
+            var itemDataCharactor = listItemsDataCharactors.ElementAt<DataItemCharactor>(i);
+
+            var slotItem = gameObjectInAllslot.FirstOrDefault
+            (slot => slot.GetComponent<InventorySlots>().numslot == itemDataCharactor.numslot);
+
+            var newItemCharactor = new UIItemCharactor();
+            newItemCharactor = Instantiate(inventoryPresentCharactor.uIItemCharactorPrefeb,
+            slotItem.transform, false);
+
+            var newItem = newItemCharactor.GetComponent<UIItemCharactor>();
+
+            newItem.nameItem.text = itemDataCharactor.nameItem;
+            newItem.scriptItem = itemDataCharactor.scriptItem;
+
+            newItem.count = itemDataCharactor.count;
+            newItem.maxCount = itemDataCharactor.maxCount;
+            newItem.RefrehCount();
+            
+            newItem.isFlashLight = itemDataCharactor.isFlashLight;
+            newItem.isOnhand = itemDataCharactor.isOnhand;
+            newItem.isLock = itemDataCharactor.isLock;
+
+            if (newItem.isLock)
+                newItem.imageItemLock.gameObject.SetActive(true);
+            else
+                newItem.imageItem.sprite = GetSpriteByName(itemDataCharactor.nameSprite);
+
+            newItem.gameObject.SetActive(true);
+
+            inventoryPresentCharactor.uIItemListCharactor.Add(newItem);
+        }
+    }
+    public Sprite GetSpriteByName(string spriteName)
+    {
+        if (spriteAtlas != null && spriteAtlas.GetSprite(spriteName) != null)
+        {
+            return spriteAtlas.GetSprite(spriteName);
+        }
+        else
+        {
+            Debug.LogError("Sprite not found in SpriteAtlas: " + spriteName);
+            return null;
+        }
+    }
+
     public void LoadDataInventory()
     {
+        ClearUIandGameObjectInventoryItemCharactor();
 
         var dataPath = Application.dataPath;
         var targetFilePath = Path.Combine(dataPath, saveInventoryPath);
@@ -98,7 +166,7 @@ public class SaveManager : MonoBehaviour
         var dataJson = File.ReadAllText(targetFilePath);
         listItemsDataCharactors = JsonConvert.DeserializeObject<List<DataItemCharactor>>(dataJson);
 
-
+        UpLoadAndCreateDataInventoryItemCharactor();
     }
     public void SaveData()
     {
@@ -124,7 +192,14 @@ public class SaveManager : MonoBehaviour
 
     public void SaveDataPlayer()
     {
+
         dataSaveandLoad.currentHpPlayer = player.GetComponentInChildren<Hp>().currenthp;
+
+        var playerSanity = player.GetComponentInChildren<Sanity>();
+        dataSaveandLoad.currentSanityPlayer = playerSanity.currentsanity;
+        dataSaveandLoad.currentSanityResistance = playerSanity.SanityResistance;
+
+        dataSaveandLoad.currentPistolAmmoinChamber = player.GetComponentInChildren<Pistol>().ammoInChamber;
 
         dataSaveandLoad.transformPlayerX = player.transform.position.x;
         dataSaveandLoad.transformPlayerY = player.transform.position.y;

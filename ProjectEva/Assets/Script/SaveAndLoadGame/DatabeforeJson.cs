@@ -10,9 +10,11 @@ public class DataSave
 {   
     [Header("DataPlayer")]
     public float currentHpPlayer;
+    public float currentSanityPlayer;
+    public float currentSanityResistance;
     public float transformPlayerX;
     public float transformPlayerY;
-    
+    public int currentPistolAmmoinChamber;
     [Header("DataEnemy")]
     public float currentHpEnemy;
     public float transformEnemyX;
@@ -20,7 +22,8 @@ public class DataSave
     public int currentsoundValue;
     public int currentonSoundValuechange;
     public string currentState;
-
+    [Header("DataSystemInventory")]
+    public string[] lockerItemKey;
 }
 
 [Serializable]

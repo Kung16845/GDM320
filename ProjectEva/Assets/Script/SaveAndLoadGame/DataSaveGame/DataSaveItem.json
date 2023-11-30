@@ -1,6 +1,6 @@
 [
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "NameItem",
     "nameSprite": "",
     "scriptItem": "",
     "numslot": 6,
@@ -11,7 +11,7 @@
     "isLock": true
   },
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "NameItem",
     "nameSprite": "",
     "scriptItem": "",
     "numslot": 7,
@@ -22,7 +22,7 @@
     "isLock": true
   },
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "NameItem",
     "nameSprite": "",
     "scriptItem": "",
     "numslot": 8,
@@ -33,7 +33,7 @@
     "isLock": true
   },
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "NameItem",
     "nameSprite": "",
     "scriptItem": "",
     "numslot": 9,
@@ -44,7 +44,7 @@
     "isLock": true
   },
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "NameItem",
     "nameSprite": "",
     "scriptItem": "",
     "numslot": 10,
@@ -55,7 +55,7 @@
     "isLock": true
   },
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "NameItem",
     "nameSprite": "",
     "scriptItem": "",
     "numslot": 11,
@@ -66,7 +66,7 @@
     "isLock": true
   },
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "Flashlight",
     "nameSprite": "FaiChai",
     "scriptItem": "Inventoryflashlight",
     "numslot": 0,
@@ -77,7 +77,7 @@
     "isLock": false
   },
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "Pistol Ammo",
     "nameSprite": "PistolAmmo",
     "scriptItem": "",
     "numslot": 1,
@@ -88,10 +88,21 @@
     "isLock": false
   },
   {
-    "nameItem": "NameItem (TMPro.TextMeshProUGUI)",
+    "nameItem": "Bandage",
     "nameSprite": "Bandage",
     "scriptItem": "Bandage",
     "numslot": 2,
+    "count": 1,
+    "maxCount": 1,
+    "isFlashLight": false,
+    "isOnhand": true,
+    "isLock": false
+  },
+  {
+    "nameItem": "Bandage",
+    "nameSprite": "Bandage",
+    "scriptItem": "Bandage",
+    "numslot": 3,
     "count": 1,
     "maxCount": 1,
     "isFlashLight": false,
