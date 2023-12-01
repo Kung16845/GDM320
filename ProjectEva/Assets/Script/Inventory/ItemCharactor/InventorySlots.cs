@@ -8,8 +8,15 @@ public class InventorySlots : MonoBehaviour, IDropHandler
 {
     public GameObject equipment;
     public InventoryPresentCharactor inventoryPresentCharactor;
+    public int numslot;
     private void Start() {
         inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+    }
+    public void Update()
+    {
+        var slot = GetComponentInChildren<UIItemCharactor>();
+        if(slot != null)
+            slot.numslot = numslot;
     }
     public void OnDrop(PointerEventData eventData)
     {
@@ -81,7 +88,8 @@ public class InventorySlots : MonoBehaviour, IDropHandler
                 }
             }
             else
-            {
+            {   
+                uIItemCharactor.numslot = numslot;
                 slot.transform.SetParent(uIItemCharactor.parentAfterDray);
                 Vector3 newScale = new Vector3(1f, 1f, 1f);
                 slot.GetComponent<RectTransform>().localScale = newScale;

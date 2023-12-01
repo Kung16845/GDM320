@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 namespace Enemy_State
 {
-    public class State_Listening : StateMachine //มอนเตอร์อยู่ นอกแมพ เตรียมเกิด
+    public class State_Listening : StateMachine 
     {
         public SetPosition AllSpawns = new SetPosition();
         public bool isRunState_Listening = true;

@@ -14,6 +14,7 @@ public class ItemsDataCharactor : ScriptableObject
     public int maxCount;
     public bool isFlashLight;
     public bool isOnhand;
+    public bool isLock;
     // public void Initialize(string nameItem, Sprite sprite, int countItem, int maxCountItem, string scriptItemCharactor, bool flashLight, bool Onhand)
     // {
     //     nameItemCharactor = nameItem;
