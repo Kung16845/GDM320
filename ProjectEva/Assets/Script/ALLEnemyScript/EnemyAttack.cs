@@ -17,12 +17,12 @@ public class EnemyAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D player)
     {   
         if(player.GetComponent<Hp>() != null && enemyNormal.currentState == enemyNormal.state_Hunting)
-            StartCoroutine(EnermyAttack(1.0f));
+            StartCoroutine(EnermyAttack(3.0f));
     }
     private IEnumerator EnermyAttack(float waitTime)
     {   
         enemyNormal.agent.speed = 3.5f;
-        animationActtack.SetBool("isAttack", true);                 //Play Attack Animation
+        animationActtack.SetBool("isAttack", true);                 
         yield return new WaitForSeconds(waitTime);
         soundManager.PlaySound("Bite");
         enemyNormal.agent.speed = enemyNormal.speed;

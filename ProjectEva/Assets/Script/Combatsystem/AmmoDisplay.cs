@@ -6,6 +6,7 @@ public class AmmoDisplay : MonoBehaviour
 {
     public TextMeshProUGUI ammoText; // Reference to the UI text element where you want to display the ammo count.
     public Pistol playerPistol; // Reference to the Pistol script of the player.
+    public Shotgun playerShotgun; // Reference to the Shotgun script of the player (assuming you have a Shotgun script).
     public float uiDisappearTime = 5.0f; // Time in seconds before the UI disappears.
     public float uiDisappearSpeed = 1.0f; // Speed at which the UI becomes transparent when disappearing.
     public InventoryPresentCharactor inventoryPresentCharactor;
@@ -22,11 +23,22 @@ public class AmmoDisplay : MonoBehaviour
 
     void Update()
     {
-        currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Pistol Ammo");
-        if (ammoText != null && playerPistol != null)
+        // Assuming Shotgun is derived from Pistol (similar structure), you might want to handle both cases.
+        if (playerPistol != null && playerPistol.enable)
+        {
+            Debug.Log("gun.enabled");
+            currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Pistol Ammo");
+        }
+        else if (playerShotgun != null && playerShotgun.enable)
+        {
+            Debug.Log("Shotgun.enabled");
+            currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Shotgun Shells");
+        }
+
+        if (ammoText != null)
         {
             // Update the text to display the player's ammo count.
-            ammoText.text = "Ammo: " + playerPistol.ammoInChamber + " / " + currentAmmo;
+            ammoText.text = "Ammo: " + GetCurrentAmmo() + " / " + currentAmmo;
 
             // Check if the UI should disappear.
             if (Time.time - lastActionTime >= uiDisappearTime && isUIVisible)
@@ -35,19 +47,38 @@ public class AmmoDisplay : MonoBehaviour
                 FadeOutUI();
             }
 
-            // Check if the player is aiming (right mouse button) or reloading to make the UI reappear.
-            if (Input.GetMouseButton(1) || playerPistol.isReloading)
+            // Check if the player is aiming or reloading to make the UI reappear.
+            if ((playerPistol != null && Input.GetMouseButton(1)) || 
+                (playerShotgun != null && Input.GetMouseButton(1)) || 
+                (playerPistol != null && playerPistol.isReloading) ||
+                (playerShotgun != null && playerShotgun.isReloading))
             {
                 // Instantly make the UI appear.
                 MakeUIVisible();
             }
-            // Check if the player shoots (left mouse button) to make the UI reappear.
-            else if (Input.GetMouseButtonDown(0))
+            // Check if the player shoots to make the UI reappear.
+            else if ((playerPistol != null && Input.GetMouseButtonDown(0)) ||
+                     (playerShotgun != null && Input.GetMouseButtonDown(0)))
             {
                 // Instantly make the UI appear.
                 MakeUIVisible();
             }
         }
+    }
+
+    string GetCurrentAmmo()
+    {
+        if (playerPistol != null && playerPistol.enable)
+        {
+            Debug.Log("Pistol");
+            return playerPistol.ammoInChamber.ToString();
+        }
+        else if (playerShotgun != null && playerShotgun.enable)
+        {
+            Debug.Log("Shotgun.enabled");
+            return playerShotgun.ammoInChamber.ToString();
+        }
+        return "";
     }
 
     void FadeOutUI()
@@ -76,7 +107,7 @@ public class AmmoDisplay : MonoBehaviour
             // Make the UI text instantly visible.
             ammoText.enabled = true;
             isUIVisible = true;
-            
+
             // Set the CanvasGroup's alpha to 1 (fully visible).
             canvasGroup.alpha = 1;
         }
