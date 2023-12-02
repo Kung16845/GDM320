@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using Unity.VisualScripting;
-namespace Enemy_State
-{
+
 [Serializable] 
 public class DataSave
 {   
@@ -40,4 +39,11 @@ public class DataItemCharactor
     public bool isLock;
     
 }
+[Serializable]
+public class DataItemNote
+{
+    public string nameItem;
+    public string detailsItemNote;
+    public string nameSprite;
+    public Category category;
 }

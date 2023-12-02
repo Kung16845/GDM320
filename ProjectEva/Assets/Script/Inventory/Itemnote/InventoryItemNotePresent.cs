@@ -7,7 +7,7 @@ using UnityEngine;
 public class InventoryItemNotePresent : MonoBehaviour
 {
     public ItemDataNote[] itemsDataNotes => itemsListNotes.ToArray();
-    [SerializeField] List<ItemDataNote> itemsListNotes;
+    [SerializeField] public List<ItemDataNote> itemsListNotes;
     public UIItemNote uIItemNotePrefeb;
     public List<UIItemNote> uIItemListNotes;
     public int currentCategory;

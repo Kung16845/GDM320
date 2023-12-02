@@ -11,16 +11,24 @@ using UnityEngine.U2D;
 
 public class SaveManager : MonoBehaviour
 {
-    [Header("Data")]
-    [SerializeField] DataSave dataSaveandLoad;
-    [SerializeField] List<DataItemCharactor> listItemsDataCharactors;
+    [Header("DataPlayer")]
+    [SerializeField] DataSave dataSaveandLoadPlayerAndEnemy;
     public GameObject player;
     public GameObject enemy;
+
+    [Header("DataItemCharactor")]
+    [SerializeField] List<DataItemCharactor> listDataItemsCharactors;
+    public List<GameObject> allslot;
     public SpriteAtlas spriteAtlas;
 
+    [Header("DataItemNote")]
+    [SerializeField] List<DataItemNote> listDataItemsNotes;
+
+
     [Header("Saving")]
-    [SerializeField] string savePath;
-    [SerializeField] string saveInventoryPath;
+    [SerializeField] string savePlayerAndEnemyPath;
+    [SerializeField] string saveInventoryItemsChractorPath;
+    [SerializeField] string saveInventoryItemsNotePath;
 
 
     // Start is called before the first frame update
@@ -28,10 +36,104 @@ public class SaveManager : MonoBehaviour
     {
         player = FindAnyObjectByType<NewMovementPlayer>().gameObject;
         enemy = FindAnyObjectByType<EnemyNormal>().gameObject;
+
     }
-    void ConventDataUIItemtoItemdata()
+    void ConventUIItemsNoteToDataItemsNotes()
+    {   
+        listDataItemsNotes.Clear();
+        var inventoryItemNotePresent = FindAnyObjectByType<InventoryItemNotePresent>();
+        var listdataItemNote = inventoryItemNotePresent.itemsListNotes;
+
+        foreach (var dataNote in listdataItemNote)
+        {
+            DataItemNote dataItem = new DataItemNote();
+
+            dataItem.nameItem = dataNote.nameItemNote;
+            dataItem.detailsItemNote = dataNote.detailsItemNote;
+
+            dataItem.nameSprite = dataNote.image != null ? dataNote.image.name : " ";
+
+            dataItem.category = dataNote.type;
+
+            listDataItemsNotes.Add(dataItem);
+        }
+    }
+    public void SaveDataInventoryItemsNote()
     {
-        listItemsDataCharactors.Clear();
+        ConventUIItemsNoteToDataItemsNotes();
+
+        if (string.IsNullOrEmpty(saveInventoryItemsNotePath))
+        {
+            Debug.LogError("No save path specified");
+            return;
+        }
+
+        var datainventory = JsonConvert.SerializeObject(listDataItemsNotes, Formatting.Indented); // Serialize the data with pretty print
+        var dataPath = Application.dataPath;
+        var targetFilePath = Path.Combine(dataPath, saveInventoryItemsNotePath);
+
+        var directoryPath = Path.GetDirectoryName(targetFilePath);
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+        File.WriteAllText(targetFilePath, datainventory);
+    }
+    public void LoadDataInventoryItemNote()
+    {
+
+        var dataPath = Application.dataPath;
+        var targetFilePath = Path.Combine(dataPath, saveInventoryItemsNotePath);
+
+        var directoryPath = Path.GetDirectoryName(targetFilePath);
+
+        if (Directory.Exists(directoryPath) == false)
+        {
+            Debug.LogError("No save folder at provided path");
+            return;
+        }
+
+        if (File.Exists(targetFilePath) == false)
+        {
+            Debug.LogError("No save file at provided path");
+            return;
+        }
+
+        var dataJson = File.ReadAllText(targetFilePath);
+        listDataItemsNotes = JsonConvert.DeserializeObject<List<DataItemNote>>(dataJson);
+
+        UpLoadAndCreateDataInventoryItemNote();
+
+    }
+    public void UpLoadAndCreateDataInventoryItemNote()
+    {
+
+        var inventoryItemNote = FindAnyObjectByType<InventoryItemNotePresent>();
+        var dataListItemNote = inventoryItemNote.itemsListNotes;
+        dataListItemNote.Clear();
+
+        for (int i = 0 ; i < listDataItemsNotes.Count ; i++)
+        {
+            var dataItemNote = listDataItemsNotes.ElementAt<DataItemNote>(i);
+
+            var newDataItemsNote = new ItemDataNote();
+
+            newDataItemsNote.nameItemNote = dataItemNote.nameItem;
+            newDataItemsNote.detailsItemNote = dataItemNote.detailsItemNote;
+
+            newDataItemsNote.image = GetSpriteByName(dataItemNote.nameSprite);
+
+            newDataItemsNote.type = dataItemNote.category;
+
+            dataListItemNote.Add(newDataItemsNote);
+        }
+        
+        inventoryItemNote.RefreshUIInventoryItenNote();
+    }
+    void ConventDataUIItemCharactortoDataItemCharactor()
+    {
+        listDataItemsCharactors.Clear();
         var listUIItem = FindAnyObjectByType<InventoryPresentCharactor>().uIItemListCharactor;
         foreach (var dataUI in listUIItem)
         {
@@ -51,23 +153,24 @@ public class SaveManager : MonoBehaviour
             itemData.isOnhand = dataUI.isOnhand;
             itemData.isLock = dataUI.isLock;
 
-            listItemsDataCharactors.Add(itemData);
+            listDataItemsCharactors.Add(itemData);
         }
 
     }
-    public void SaveDataInventory()
+    
+    public void SaveDataInventoryItemsChractor()
     {
-        ConventDataUIItemtoItemdata();
+        ConventDataUIItemCharactortoDataItemCharactor();
 
-        if (string.IsNullOrEmpty(saveInventoryPath))
+        if (string.IsNullOrEmpty(saveInventoryItemsChractorPath))
         {
             Debug.LogError("No save path specified");
             return;
         }
 
-        var datainventory = JsonConvert.SerializeObject(listItemsDataCharactors, Formatting.Indented); // Serialize the data with pretty print
+        var datainventory = JsonConvert.SerializeObject(listDataItemsCharactors, Formatting.Indented); // Serialize the data with pretty print
         var dataPath = Application.dataPath;
-        var targetFilePath = Path.Combine(dataPath, saveInventoryPath);
+        var targetFilePath = Path.Combine(dataPath, saveInventoryItemsChractorPath);
 
         var directoryPath = Path.GetDirectoryName(targetFilePath);
         if (!Directory.Exists(directoryPath))
@@ -77,78 +180,13 @@ public class SaveManager : MonoBehaviour
 
         File.WriteAllText(targetFilePath, datainventory); // Write the JSON string to the file
     }
-    public void ClearUIandGameObjectInventoryItemCharactor()
-    {
-        var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
-        var listUIItem = inventoryPresentCharactor.uIItemListCharactor;
-        listUIItem.Clear();
-        var gameObjectInAllslot = inventoryPresentCharactor.slots;
-        foreach (var itemInSlot in gameObjectInAllslot)
-        {
-            var uiItemComponent = itemInSlot.GetComponentInChildren<UIItemCharactor>();
-            if (uiItemComponent != null)
-            {
-                Destroy(uiItemComponent.gameObject);
-            }
-        }
-    }
-    public void UpLoadAndCreateDataInventoryItemCharactor()
-    {
-        var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
-        var gameObjectInAllslot = inventoryPresentCharactor.slots;
-        for (int i = 0; i < listItemsDataCharactors.Count; i++)
-        {
-            var itemDataCharactor = listItemsDataCharactors.ElementAt<DataItemCharactor>(i);
 
-            var slotItem = gameObjectInAllslot.FirstOrDefault
-            (slot => slot.GetComponent<InventorySlots>().numslot == itemDataCharactor.numslot);
-
-            var newItemCharactor = new UIItemCharactor();
-            newItemCharactor = Instantiate(inventoryPresentCharactor.uIItemCharactorPrefeb,
-            slotItem.transform, false);
-
-            var newItem = newItemCharactor.GetComponent<UIItemCharactor>();
-
-            newItem.nameItem.text = itemDataCharactor.nameItem;
-            newItem.scriptItem = itemDataCharactor.scriptItem;
-
-            newItem.count = itemDataCharactor.count;
-            newItem.maxCount = itemDataCharactor.maxCount;
-            newItem.RefrehCount();
-            
-            newItem.isFlashLight = itemDataCharactor.isFlashLight;
-            newItem.isOnhand = itemDataCharactor.isOnhand;
-            newItem.isLock = itemDataCharactor.isLock;
-
-            if (newItem.isLock)
-                newItem.imageItemLock.gameObject.SetActive(true);
-            else
-                newItem.imageItem.sprite = GetSpriteByName(itemDataCharactor.nameSprite);
-
-            newItem.gameObject.SetActive(true);
-
-            inventoryPresentCharactor.uIItemListCharactor.Add(newItem);
-        }
-    }
-    public Sprite GetSpriteByName(string spriteName)
-    {
-        if (spriteAtlas != null && spriteAtlas.GetSprite(spriteName) != null)
-        {
-            return spriteAtlas.GetSprite(spriteName);
-        }
-        else
-        {
-            Debug.LogError("Sprite not found in SpriteAtlas: " + spriteName);
-            return null;
-        }
-    }
-
-    public void LoadDataInventory()
+    public void LoadDataInventoryItemsChractor()
     {
         ClearUIandGameObjectInventoryItemCharactor();
 
         var dataPath = Application.dataPath;
-        var targetFilePath = Path.Combine(dataPath, saveInventoryPath);
+        var targetFilePath = Path.Combine(dataPath, saveInventoryItemsChractorPath);
 
         var directoryPath = Path.GetDirectoryName(targetFilePath);
         if (Directory.Exists(directoryPath) == false)
@@ -164,24 +202,113 @@ public class SaveManager : MonoBehaviour
         }
 
         var dataJson = File.ReadAllText(targetFilePath);
-        listItemsDataCharactors = JsonConvert.DeserializeObject<List<DataItemCharactor>>(dataJson);
+        listDataItemsCharactors = JsonConvert.DeserializeObject<List<DataItemCharactor>>(dataJson);
 
         UpLoadAndCreateDataInventoryItemCharactor();
+    }
+    public void ClearUIandGameObjectInventoryItemCharactor()
+    {
+        var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+        var listUIItem = inventoryPresentCharactor.uIItemListCharactor;
+        listUIItem.Clear();
+        foreach (var itemInSlot in allslot)
+        {
+            var uiItemComponent = itemInSlot.GetComponentInChildren<UIItemCharactor>();
+            if (uiItemComponent != null)
+            {
+                Destroy(uiItemComponent.gameObject);
+            }
+        }
+    }
+    public void UpLoadAndCreateDataInventoryItemCharactor()
+    {
+        var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+
+        for (int i = 0; i < listDataItemsCharactors.Count; i++)
+        {
+            var itemDataCharactor = listDataItemsCharactors.ElementAt<DataItemCharactor>(i);
+
+            var slotItem = allslot.FirstOrDefault
+            (slot => slot.GetComponent<InventorySlots>().numslot == itemDataCharactor.numslot);
+
+            var newItemCharactor = new UIItemCharactor();
+            newItemCharactor = Instantiate(inventoryPresentCharactor.uIItemCharactorPrefeb,
+            slotItem.transform, false);
+
+            var newItem = newItemCharactor.GetComponent<UIItemCharactor>();
+
+            newItem.nameItem.text = itemDataCharactor.nameItem;
+            newItem.scriptItem = itemDataCharactor.scriptItem;
+
+            newItem.numslot = itemDataCharactor.numslot;
+            newItem.count = itemDataCharactor.count;
+            newItem.maxCount = itemDataCharactor.maxCount;
+            newItem.RefrehCount();
+
+            newItem.isFlashLight = itemDataCharactor.isFlashLight;
+            newItem.isOnhand = itemDataCharactor.isOnhand;
+            newItem.isLock = itemDataCharactor.isLock;
+
+            if (newItem.isLock)
+                newItem.imageItemLock.gameObject.SetActive(true);
+            else
+                newItem.imageItem.sprite = GetSpriteByName(itemDataCharactor.nameSprite);
+
+            newItem.gameObject.SetActive(true);
+
+            if (newItem.numslot == 12 || newItem.numslot == 13)
+            {
+
+                inventoryPresentCharactor.CreateItemCharactorEquipment(newItem.scriptItem, newItem.nameItem.text);
+                Vector3 newScaleequipment = new Vector3(1.65f, 1.65f, 1.65f);
+                newItem.GetComponent<RectTransform>().localScale = newScaleequipment;
+
+            }
+
+            inventoryPresentCharactor.uIItemListCharactor.Add(newItem);
+        }
+    }
+    public string CheckReMoveClone(string nameSpriteItem)
+    {
+        string originalString = nameSpriteItem;
+        string termToRemove = "(Clone)";
+
+        if (originalString.Contains(termToRemove))
+        {
+            int index = originalString.IndexOf(termToRemove);
+            string modifiedString = originalString.Substring(0, index) + originalString.Substring(index + termToRemove.Length);
+
+            nameSpriteItem = modifiedString;
+        }
+        return nameSpriteItem;
+    }
+    public Sprite GetSpriteByName(string spriteName)
+    {
+        spriteName = CheckReMoveClone(spriteName);
+        if (spriteAtlas != null && spriteAtlas.GetSprite(spriteName) != null)
+        {
+            return spriteAtlas.GetSprite(spriteName);
+        }
+        else
+        {
+            Debug.LogError("Sprite not found in SpriteAtlas: " + spriteName);
+            return null;
+        }
     }
     public void SaveData()
     {
         SaveDataPlayer();
         SaveDataEnemy();
 
-        if (string.IsNullOrEmpty(savePath))
+        if (string.IsNullOrEmpty(savePlayerAndEnemyPath))
         {
             Debug.LogError("No save path ja");
             return;
         }
 
-        var data = JsonConvert.SerializeObject(dataSaveandLoad);
+        var data = JsonConvert.SerializeObject(dataSaveandLoadPlayerAndEnemy);
         var dataPath = Application.dataPath;
-        var targetFilePath = Path.Combine(dataPath, savePath);
+        var targetFilePath = Path.Combine(dataPath, savePlayerAndEnemyPath);
 
         var directoryPath = Path.GetDirectoryName(targetFilePath);
         if (Directory.Exists(directoryPath) == false)
@@ -193,29 +320,29 @@ public class SaveManager : MonoBehaviour
     public void SaveDataPlayer()
     {
 
-        dataSaveandLoad.currentHpPlayer = player.GetComponentInChildren<Hp>().currenthp;
+        dataSaveandLoadPlayerAndEnemy.currentHpPlayer = player.GetComponentInChildren<Hp>().currenthp;
 
         var playerSanity = player.GetComponentInChildren<Sanity>();
-        dataSaveandLoad.currentSanityPlayer = playerSanity.currentsanity;
-        dataSaveandLoad.currentSanityResistance = playerSanity.SanityResistance;
+        dataSaveandLoadPlayerAndEnemy.currentSanityPlayer = playerSanity.currentsanity;
+        dataSaveandLoadPlayerAndEnemy.currentSanityResistance = playerSanity.SanityResistance;
 
-        dataSaveandLoad.currentPistolAmmoinChamber = player.GetComponentInChildren<Pistol>().ammoInChamber;
+        dataSaveandLoadPlayerAndEnemy.currentPistolAmmoinChamber = player.GetComponentInChildren<Pistol>().ammoInChamber;
 
-        dataSaveandLoad.transformPlayerX = player.transform.position.x;
-        dataSaveandLoad.transformPlayerY = player.transform.position.y;
+        dataSaveandLoadPlayerAndEnemy.transformPlayerX = player.transform.position.x;
+        dataSaveandLoadPlayerAndEnemy.transformPlayerY = player.transform.position.y;
     }
     public void SaveDataEnemy()
     {
         var enemyNormal = enemy.GetComponent<EnemyNormal>();
-        dataSaveandLoad.currentHpEnemy = enemyNormal.hp;
+        dataSaveandLoadPlayerAndEnemy.currentHpEnemy = enemyNormal.hp;
 
-        dataSaveandLoad.transformEnemyX = enemy.transform.position.x;
-        dataSaveandLoad.transformEnemyY = enemy.transform.position.y;
+        dataSaveandLoadPlayerAndEnemy.transformEnemyX = enemy.transform.position.x;
+        dataSaveandLoadPlayerAndEnemy.transformEnemyY = enemy.transform.position.y;
 
-        dataSaveandLoad.currentsoundValue = enemy.GetComponentInChildren<EnemyDetectSound>().currentsoundValue;
-        dataSaveandLoad.currentonSoundValuechange = enemyNormal.onSoundValuechange;
+        dataSaveandLoadPlayerAndEnemy.currentsoundValue = enemy.GetComponentInChildren<EnemyDetectSound>().currentsoundValue;
+        dataSaveandLoadPlayerAndEnemy.currentonSoundValuechange = enemyNormal.onSoundValuechange;
 
-        dataSaveandLoad.currentState = CheckedAndSaveStateEnemy(enemyNormal);
+        dataSaveandLoadPlayerAndEnemy.currentState = CheckedAndSaveStateEnemy(enemyNormal);
     }
     string CheckedAndSaveStateEnemy(Enemy enemy)
     {
@@ -237,7 +364,7 @@ public class SaveManager : MonoBehaviour
     {
 
         var dataPath = Application.dataPath;
-        var targetFilePath = Path.Combine(dataPath, savePath);
+        var targetFilePath = Path.Combine(dataPath, savePlayerAndEnemyPath);
 
         var directoryPath = Path.GetDirectoryName(targetFilePath);
         if (Directory.Exists(directoryPath) == false)
@@ -253,7 +380,7 @@ public class SaveManager : MonoBehaviour
         }
 
         var dataJson = File.ReadAllText(targetFilePath);
-        dataSaveandLoad = JsonConvert.DeserializeObject<DataSave>(dataJson);
+        dataSaveandLoadPlayerAndEnemy = JsonConvert.DeserializeObject<DataSave>(dataJson);
         LoadDataPlayer();
         LoadDataEnemy();
 
@@ -261,37 +388,37 @@ public class SaveManager : MonoBehaviour
     }
     public void LoadDataPlayer()
     {
-        player.GetComponentInChildren<Hp>().currenthp = dataSaveandLoad.currentHpPlayer;
+        player.GetComponentInChildren<Hp>().currenthp = dataSaveandLoadPlayerAndEnemy.currentHpPlayer;
 
-        Vector2 newPosition = new Vector2(dataSaveandLoad.transformPlayerX, dataSaveandLoad.transformPlayerY);
+        Vector2 newPosition = new Vector2(dataSaveandLoadPlayerAndEnemy.transformPlayerX, dataSaveandLoadPlayerAndEnemy.transformPlayerY);
         player.transform.position = newPosition;
     }
 
     public void LoadDataEnemy()
     {
         var enemyNormal = enemy.GetComponent<EnemyNormal>();
-        enemyNormal.hp = dataSaveandLoad.currentHpEnemy;
+        enemyNormal.hp = dataSaveandLoadPlayerAndEnemy.currentHpEnemy;
 
-        Vector2 newPosition = new Vector2(dataSaveandLoad.transformEnemyX, dataSaveandLoad.transformEnemyY);
+        Vector2 newPosition = new Vector2(dataSaveandLoadPlayerAndEnemy.transformEnemyX, dataSaveandLoadPlayerAndEnemy.transformEnemyY);
         enemy.transform.position = newPosition;
 
-        enemy.GetComponentInChildren<EnemyDetectSound>().currentsoundValue = dataSaveandLoad.currentsoundValue;
-        enemyNormal.onSoundValuechange = dataSaveandLoad.currentonSoundValuechange;
+        enemy.GetComponentInChildren<EnemyDetectSound>().currentsoundValue = dataSaveandLoadPlayerAndEnemy.currentsoundValue;
+        enemyNormal.onSoundValuechange = dataSaveandLoadPlayerAndEnemy.currentonSoundValuechange;
 
         enemy.GetComponent<EnemyNormal>().currentState = LoadStateEnemy(enemyNormal);
 
     }
     StateMachine LoadStateEnemy(Enemy enemy)
     {
-        if (dataSaveandLoad.currentState == "state_Listening")
+        if (dataSaveandLoadPlayerAndEnemy.currentState == "state_Listening")
             return enemy.state_Listening;
-        else if (dataSaveandLoad.currentState == "state_Hunting")
+        else if (dataSaveandLoadPlayerAndEnemy.currentState == "state_Hunting")
             return enemy.state_Hunting;
-        else if (dataSaveandLoad.currentState == "state_Retreat")
+        else if (dataSaveandLoadPlayerAndEnemy.currentState == "state_Retreat")
             return enemy.state_Retreat;
-        else if (dataSaveandLoad.currentState == "state_Searching")
+        else if (dataSaveandLoadPlayerAndEnemy.currentState == "state_Searching")
             return enemy.state_Searching;
-        else if (dataSaveandLoad.currentState == "state_SearchingSound")
+        else if (dataSaveandLoadPlayerAndEnemy.currentState == "state_SearchingSound")
             return enemy.state_SearchingSound;
         return null;
     }
