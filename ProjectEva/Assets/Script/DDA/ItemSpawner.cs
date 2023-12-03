@@ -13,6 +13,8 @@ public class ItemSpawner : MonoBehaviour
     public ItemPrefab[] itemPrefabs;
     public GameObject sceneObject;
     public SoundManager soundManager;
+    private string uiPanelTag = "Interactiontag"; 
+    private string customTextTag = "Interactiontext"; 
     private bool canPickup;
     public string Soundname;
     public TextMeshProUGUI customText;
@@ -74,9 +76,12 @@ public class ItemSpawner : MonoBehaviour
 
         // Calculate difficulty level
         int totalActionPoints = itemDropManager.difficultyAdjustment.CalculateTotalActionPoints();
+        int totalMedicinePoints = itemDropManager.difficultyAdjustment.CalculateTotalMedicinePoints();
+        int totalUtilityPoints = itemDropManager.difficultyAdjustment.CalculateTotalUtilityPoints();
+
 
         // Get the item to drop based on difficulty level
-        string itemNameToDrop = itemDropManager.AdjustItemDrops(totalActionPoints);
+        string itemNameToDrop = itemDropManager.AdjustItemDrops(totalActionPoints, totalMedicinePoints, totalUtilityPoints);
 
         // Spawn the corresponding prefab for the dropped item
         SpawnPrefab(itemNameToDrop);
@@ -100,4 +105,5 @@ public class ItemSpawner : MonoBehaviour
             Debug.LogWarning($"Prefab not found or is null for item name: {itemName}");
         }
     }
+    
 }

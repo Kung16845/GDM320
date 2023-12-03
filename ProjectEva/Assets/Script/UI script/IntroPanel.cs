@@ -5,7 +5,7 @@ using TMPro;
 public class IntroPanel : MonoBehaviour
 {
     public TextMeshProUGUI infoText;
-    private bool gamePaused = true;
+    public bool gamePaused = true;
 
     void Start()
     {
@@ -20,6 +20,7 @@ public class IntroPanel : MonoBehaviour
         if (gamePaused && Input.anyKeyDown)
         {
             ResumeGame();
+            gamePaused = false;
         }
     }
 
@@ -44,7 +45,7 @@ public class IntroPanel : MonoBehaviour
         SetPanelActive(false);
     }
 
-    private void SetPanelActive(bool isActive)
+    public void SetPanelActive(bool isActive)
     {
         // Activate or deactivate the panel and its children
         gameObject.SetActive(isActive);

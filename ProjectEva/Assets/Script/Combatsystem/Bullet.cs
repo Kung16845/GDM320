@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Target object with name 'Enemy/Velo_Sprite' not found!");
+            // Debug.LogError("Target object with name 'Enemy/Velo_Sprite' not found!");
         }
     }
 

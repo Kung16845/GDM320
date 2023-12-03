@@ -64,7 +64,12 @@ public class ForceandkeyDoor : MonoBehaviour
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
         {
             navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+            soundManager.PlaySound("Dooropen");
             Destroy(this.gameObject);
+        }
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber != numberofkey)
+        {
+            soundManager.PlaySound("Doorlocked");
         }
     }
         private void ShowEButton()

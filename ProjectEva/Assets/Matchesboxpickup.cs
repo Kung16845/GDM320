@@ -7,6 +7,8 @@ public class Matboxespickup : MonoBehaviour
     public GameObject sceneObject;
     public SoundManager soundManager;
     private bool canPickup;
+    private string uiPanelTag = "Interactiontag"; 
+    private string customTextTag = "Interactiontext"; 
     public InventoryPresentCharactor inventoryPresentCharactor;
     public ItemsDataCharactor itemsDataCharactor;
     public TextMeshProUGUI customText;
@@ -14,6 +16,14 @@ public class Matboxespickup : MonoBehaviour
     public void PickupItemCharactors()
     {   
         inventoryPresentCharactor.AddItemCharactors(itemsDataCharactor);
+    }
+    private void Awake()
+    {
+        canPickup = false;
+        FindUIElementsByTag();
+        HideEButton();
+        soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
     private void Start()
     {
@@ -64,5 +74,21 @@ public class Matboxespickup : MonoBehaviour
     {
         sceneObject.SetActive(false);
         customText.text = "";
+    }
+    private void FindUIElementsByTag()
+    {
+        // Find UI panel by tag
+        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag(uiPanelTag);
+        if (sceneObjects.Length > 0)
+        {
+            sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
+        }
+
+        // Find custom text by tag
+        GameObject[] customTexts = GameObject.FindGameObjectsWithTag(customTextTag);
+        if (customTexts.Length > 0)
+        {
+            customText = customTexts[0].GetComponent<TextMeshProUGUI>(); // Assuming there is only one custom text with the specified tag
+        }
     }
 }

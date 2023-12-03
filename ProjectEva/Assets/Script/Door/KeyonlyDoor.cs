@@ -72,7 +72,7 @@ public class KeyonlyDoor : MonoBehaviour
             navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
             Destroy(this.gameObject);
         }
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber != numberofkey)
         {
             soundManager.PlaySound("Doorlocked");
         }

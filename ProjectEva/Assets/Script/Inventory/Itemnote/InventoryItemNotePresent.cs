@@ -86,6 +86,7 @@ public class InventoryItemNotePresent : MonoBehaviour
 public class ItemDataNote
 {
     public string nameItemNote;
+    [TextArea(15,20)]
     public string detailsItemNote;
     public Sprite image;
     public Category type;

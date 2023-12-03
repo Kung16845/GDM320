@@ -7,12 +7,25 @@ using UnityEditor;
 public class DynamicDifficultyAdjustment : MonoBehaviour
 {
     public InventoryPresentCharactor inventory;
+    public Pistol gun;
+    public  Hp  hp;
+
+    [System.Serializable]
+    public enum ItemType
+    {
+        Action,
+        Medicine,
+        Utility
+    }
 
     [System.Serializable]
     public class ItemDifficulty
     {
         public string itemName;
+        public ItemType itemType; // Add the ItemType field
         public int actionPoints;
+        public int medicinePoints;
+        public int utilityPoints;
     }
 
     public List<ItemDifficulty> itemsToTrack = new List<ItemDifficulty>();
@@ -29,7 +42,10 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
 
     private void Update()
     {
-        int totalActionPoints = CalculateTotalActionPoints();
+        // int totalActionPoints = CalculateTotalActionPoints();
+        // int totalMedicinePoints = CalculateTotalMedicinePoints();
+        // int totalUtilityPoints = CalculateTotalUtilityPoints();
+
         // AdjustDifficulty(totalActionPoints);
     }
 
@@ -42,8 +58,35 @@ public class DynamicDifficultyAdjustment : MonoBehaviour
             int itemCount = inventory.GetTotalItemCountByName(item.itemName);
             totalActionPoints += itemCount * item.actionPoints;
         }
-
+        totalActionPoints += gun.ammoInChamber * 7;
         return totalActionPoints;
+    }
+
+    public int CalculateTotalMedicinePoints()
+    {
+        int totalMedicinePoints = 0;
+
+        foreach (var item in itemsToTrack)
+        {
+            int itemCount = inventory.GetTotalItemCountByName(item.itemName);
+            totalMedicinePoints += itemCount * item.medicinePoints;
+        }
+        int parsedHP = Mathf.RoundToInt(hp.currenthp);
+        totalMedicinePoints += parsedHP / 2;
+        return totalMedicinePoints;
+    }
+
+    public int CalculateTotalUtilityPoints()
+    {
+        int totalUtilityPoints = 0;
+
+        foreach (var item in itemsToTrack)
+        {
+            int itemCount = inventory.GetTotalItemCountByName(item.itemName);
+            totalUtilityPoints += itemCount * item.utilityPoints;
+        }
+
+        return totalUtilityPoints;
     }
 
     // private void AdjustDifficulty(int totalActionPoints)
@@ -74,12 +117,15 @@ public class DynamicDifficultyAdjustmentEditor : Editor
 
         // Draw custom inspector for itemsToTrack list
         EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Customize Action Points for Each Item", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Customize Points for Each Item", EditorStyles.boldLabel);
 
         for (int i = 0; i < script.itemsToTrack.Count; i++)
         {
             script.itemsToTrack[i].itemName = EditorGUILayout.TextField("Item Name", script.itemsToTrack[i].itemName);
+            script.itemsToTrack[i].itemType = (DynamicDifficultyAdjustment.ItemType)EditorGUILayout.EnumPopup("Item Type", script.itemsToTrack[i].itemType);
             script.itemsToTrack[i].actionPoints = EditorGUILayout.IntField("Action Points", script.itemsToTrack[i].actionPoints);
+            script.itemsToTrack[i].medicinePoints = EditorGUILayout.IntField("Medicine Points", script.itemsToTrack[i].medicinePoints);
+            script.itemsToTrack[i].utilityPoints = EditorGUILayout.IntField("Utility Points", script.itemsToTrack[i].utilityPoints);
             EditorGUILayout.Space();
         }
     }

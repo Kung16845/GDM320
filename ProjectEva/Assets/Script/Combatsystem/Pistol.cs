@@ -8,7 +8,7 @@ public class Pistol : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float bulletForce = 10f;
     [SerializeField] public int maxAmmo = 10;
-    [SerializeField] public int ammoInChamber = 5;
+    [SerializeField] public int ammoInChamber;
     [SerializeField] float bulletDamage = 1.0f;
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float maxAccuracy = 1.0f;
@@ -40,6 +40,7 @@ public class Pistol : MonoBehaviour
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
     public bool enable;
+    private bool canaim;
 
     void Awake()
     {   
@@ -57,7 +58,7 @@ public class Pistol : MonoBehaviour
         { 
             RotateTowardsMouse();
             Decreasemaxacrrancywhilemoving();
-            if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
+            if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning && canaim)
             {   
                 if(!playaimsound)
                 {
@@ -74,13 +75,13 @@ public class Pistol : MonoBehaviour
             {   
                 removecrosshaircircle();
             }
-            float scaledAccuracy = 2.0f /currentAccuracy;
+            float scaledAccuracy = 1.0f /currentAccuracy;
             accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
 
             if (isReloading)
             {
                 gunSpeedManager.ReduceSpeedDuringReload();
-                if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) // Check if right mouse button is pressed.
+                if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) 
                 {
                     StartCoroutine(WaitBeforeNextReload());
                     cancelreload();
@@ -164,10 +165,12 @@ public class Pistol : MonoBehaviour
     }
     IEnumerator Playcockinlastbullet()
     {
+        canaim = false;
         yield return new WaitForSeconds(2);
         soundManager.PlaySound("Pushcyclinder"); 
         yield return new WaitForSeconds(1);
         soundManager.PlaySound("Cock"); 
+        canaim = true;
     }
     IEnumerator PlayPullmag()
     {
@@ -196,7 +199,7 @@ public class Pistol : MonoBehaviour
         {
             decreaseammowhenreload();
             
-            if (bulletsToReload == 0 || currentAmmo == 0)
+            if (bulletsToReload == 0 || currentAmmo == 0 && !canaim) 
             {
                 // No more bullets to reload and only one bullet left in the chamber, play the "Cock" sound.
                 StartCoroutine(Playcockinlastbullet());
@@ -242,6 +245,7 @@ public class Pistol : MonoBehaviour
         isAiming = false;
         isReloading = false;
         bulletsToReload = 0;
+        canaim = true;
         sanityScaleController = FindObjectOfType<SanityScaleController>();
         SoundWave =  FindObjectOfType<ObjectPolling >();
         onOffLight =  FindObjectOfType<OnOffLight>();
