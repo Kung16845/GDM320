@@ -35,8 +35,36 @@ public class SaveManager : MonoBehaviour
     void Start()
     {
         player = FindAnyObjectByType<NewMovementPlayer>().gameObject;
-        enemy = FindAnyObjectByType<EnemyNormal>().gameObject;
+        
+        FindInactiveEnemyNormals();
 
+    }
+    private void FindInactiveEnemyNormals()
+        {
+            // หาทุก Object ที่มี script EnemyNormal ในฉาก
+            EnemyNormal[] enemyNormals = GameObject.FindObjectsOfType<EnemyNormal>(true);
+
+            foreach (EnemyNormal enemyNormal in enemyNormals)
+            {
+                // ตรวจสอบว่า Object นี้ไม่ได้ Active
+                if (!enemyNormal.gameObject.activeSelf)
+                {
+                    this.enemy = enemyNormal.gameObject;
+                   
+                }
+            }
+        }
+    public void AllSave()
+    {
+        SaveDataPlayerAndEnemy();
+        SaveDataInventoryItemsNote();
+        SaveDataInventoryItemsChractor();
+    } 
+    public void AllLoad()
+    {
+        LoadDataPlayerAndEnemy();
+        LoadDataInventoryItemNote();
+        LoadDataInventoryItemsChractor();
     }
     void ConventUIItemsNoteToDataItemsNotes()
     {   
@@ -295,7 +323,7 @@ public class SaveManager : MonoBehaviour
             return null;
         }
     }
-    public void SaveData()
+    public void SaveDataPlayerAndEnemy()
     {
         SaveDataPlayer();
         SaveDataEnemy();
@@ -360,7 +388,7 @@ public class SaveManager : MonoBehaviour
         return null;
     }
 
-    public void LoadData()
+    public void LoadDataPlayerAndEnemy()
     {
 
         var dataPath = Application.dataPath;
