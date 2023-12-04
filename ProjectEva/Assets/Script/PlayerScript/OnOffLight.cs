@@ -6,14 +6,18 @@ public class OnOffLight : MonoBehaviour
 {
     
     public GameObject Light;
+    public GameObject PocketLight;
     public bool checkLight = false;
     public bool isopen = false;
     public bool canopen;
+    public bool pocketcanopen;
 
     void Start() 
     {
         Light.SetActive(false);
-        canopen = false;      
+        PocketLight.SetActive(false);
+        canopen = false; 
+        pocketcanopen = false;     
     }
     // Update is called once per frame
     void Update()
@@ -31,6 +35,19 @@ public class OnOffLight : MonoBehaviour
                 Light.SetActive(true);
                 checkLight = true;
                 isopen = true;
+            } 
+        }
+        if(Input.GetKeyUp(KeyCode.F) && pocketcanopen)
+        {
+            if (checkLight)
+            {
+                PocketLight.SetActive(false);
+                checkLight = false;
+            }
+            else 
+            {
+                PocketLight.SetActive(true);
+                checkLight = true;
             } 
         }
     }
