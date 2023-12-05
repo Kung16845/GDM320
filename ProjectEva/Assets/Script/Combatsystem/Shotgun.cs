@@ -273,7 +273,7 @@ public class Shotgun : MonoBehaviour
             playaimsound = false;
             isAiming = false;
             accuracyCircle.gameObject.SetActive(false);
-            currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
+            currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , (accuracyDecreaseRate * Time.deltaTime)*10);
         }
     }
 }
