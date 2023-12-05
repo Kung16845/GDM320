@@ -16,7 +16,9 @@ public class LockerItemSpawner : MonoBehaviour
     public GameObject sceneObject;
     public SoundManager soundManager;
     public TextMeshProUGUI customText;
+    public InventoryPresentCharactor inventoryPresentCharactor;
     public bool canunlock;
+    public string custominteractiontext;
 
     // Reference to the RandomItemGenerator script
     public RandomItemGenerator randomItemGenerator;
@@ -28,6 +30,7 @@ public class LockerItemSpawner : MonoBehaviour
         canunlock = false;
         FindUIElementsByTag();
         soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
 
     void Update()
@@ -35,6 +38,7 @@ public class LockerItemSpawner : MonoBehaviour
         if (canunlock && Input.GetKeyDown(KeyCode.E))
         {
             SpawnNextItem();
+            inventoryPresentCharactor.DeleteItemCharactorEquipment("Inventorypicklock");
             Destroy(this.gameObject);
         }
     }
@@ -86,7 +90,14 @@ public class LockerItemSpawner : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
-        customText.text = "Press E to pick up the item.";
+        if(canunlock)
+        {
+            customText.text = "I can unlock this.";
+        }
+        else
+        {
+        customText.text = custominteractiontext;
+        }
     }
 
     private void HideEButton()
