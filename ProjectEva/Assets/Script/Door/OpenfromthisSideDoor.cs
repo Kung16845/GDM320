@@ -7,11 +7,17 @@ using NavMeshPlus.Components;
 public class OpenfromthisSideDoor : MonoBehaviour
 {
     private bool isPlayerNear = false;
+    private string uiPanelTag = "Interactiontag"; 
+    private string customTextTag = "Interactiontext";
     public GameObject sceneObject;
     public TextMeshProUGUI customText;
     public SoundManager soundManager;
     public NavMeshSurface navMeshSurface;
     public string custominteractiontext;
+    public void Awake()
+    {
+        FindUIElementsByTag();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -46,6 +52,22 @@ public class OpenfromthisSideDoor : MonoBehaviour
             soundManager.PlaySound("Dooropen");
             navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
             Destroy(this.gameObject);
+        }
+    }
+    private void FindUIElementsByTag()
+    {
+        // Find UI panel by tag
+        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag(uiPanelTag);
+        if (sceneObjects.Length > 0)
+        {
+            sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
+        }
+
+        // Find custom text by tag
+        GameObject[] customTexts = GameObject.FindGameObjectsWithTag(customTextTag);
+        if (customTexts.Length > 0)
+        {
+            customText = customTexts[0].GetComponent<TextMeshProUGUI>(); // Assuming there is only one custom text with the specified tag
         }
     }
 }
