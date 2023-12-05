@@ -1,3 +1,4 @@
+using Enemy_State;
 using UnityEngine;
 
 public class PlayerTeleport : MonoBehaviour
@@ -9,8 +10,10 @@ public class PlayerTeleport : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (currentTeleporter != null)
-            {
+            {   
+                var diractorAI = FindAnyObjectByType<DirectorAI>();
                 transform.position = currentTeleporter.GetComponent<ChangeFloor>().GetDestination().position;
+                diractorAI.ChangeFloor();
             }
         }
     }

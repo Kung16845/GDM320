@@ -28,29 +28,34 @@ namespace Enemy_State
             navMeshSurface = FindAnyObjectByType<NavMeshSurface>();
             StartCoroutine(EverySeconReduce(1.0f));
         }
+        public void ChangeFloor()
+        {
+            MovePositionEnemyChangeFloor();
+            CheckClosestResingPoint();
+        }
         public void MovePositionEnemyChangeFloor()
         {
-            var enemyNormal = GetComponent<EnemyNormal>();
+            var enemyNormal = enemy.GetComponent<EnemyNormal>();
 
             var setposition = new SetPosition();
             var position = setposition.FindClosestPosition(setSpawns, player);
 
-            enemyNormal.currentState = enemyNormal.state_Searching;
+            enemyNormal.EnterState(enemyNormal.state_Searching);
             enemyNormal.agent.Warp(position.position);
 
         }
         public void CheckClosestResingPoint()
         {
-            var enemynormal = GetComponent<EnemyNormal>();
+            var enemynormal = enemy.GetComponent<EnemyNormal>();
             Transform newRestingPoint = allResingPoint.ElementAt<Transform>(0);
-            float distanceRestingPoint = 0;
-            foreach (var position in allResingPoint)
+            float distanceRestingPoint = float.MaxValue;
+            foreach (var positionResingPoint in allResingPoint)
             {
-                float positionDistance = Vector3.Distance(position.position, enemy.position);
-                if (distanceRestingPoint < positionDistance)
+                float positionDistance = Vector3.Distance(positionResingPoint.position,enemynormal.transform.position);
+                if (positionDistance < distanceRestingPoint  )
                 {   
                     distanceRestingPoint = positionDistance;
-                    newRestingPoint = position;
+                    newRestingPoint = positionResingPoint;
                 }
             }
 
