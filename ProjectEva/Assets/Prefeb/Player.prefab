@@ -222,7 +222,7 @@ Transform:
   - {fileID: 4437102167955631979}
   - {fileID: 2075845765324477134}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8944580823985512740
 SpriteRenderer:
@@ -518,6 +518,8 @@ MonoBehaviour:
   currentsanity: 100
   SanityResistance: 0
   sanityText: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  lowSanityThreshold: 30
 --- !u!1 &3580195890726593413
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47447d70bdbb7d4e962f1f94cf58fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHandItemHolder: {fileID: 0}
+  GunHolder: {fileID: 895377242920529984}
 --- !u!114 &4768181465436222030
 MonoBehaviour:
   m_ObjectHideFlags: 0

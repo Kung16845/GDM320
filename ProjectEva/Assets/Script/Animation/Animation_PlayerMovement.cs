@@ -11,29 +11,50 @@ public class Animation_PlayerMovement : MonoBehaviour
     Vector2 mPmovement;
     Transform player;
     bool isAiming = false;
+    public GameObject OnHandItemHolder;
+
+    public Pistol GunHolder;
+
+    string currentActiveLayer = "nothing";
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform; 
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
+        OnHandItemHolder = FindInActiveObjectByName("BgOnHand");
     }
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetMouseButton(1)&& !gunSpeedManager.isRunning){ isAiming = true; animator.SetBool("isAiming", true); }
-        else { isAiming= false; animator.SetBool("isAiming", false); }
-
         if (Input.GetKey(KeyCode.LeftShift)) { animator.SetBool("isRunning", true); }
         else { animator.SetBool("isRunning", false); }
-
         if(Input.GetKey(KeyCode.LeftControl)) { animator.SetBool("isSlow", true); }
         else { animator.SetBool("isSlow", false); }
 
-        if (isAiming) { aimRotate(); }
+        if (OnHandItemHolder.transform.childCount > 0)
+        {
+            switch (checkItemOnHand())
+            {
+                case "Pistol": resetAnimLayerTo("HoldGun"); break;
+
+                default: resetAnimLayerTo("HoldItem"); break;
+            }
+        }
+        else { resetAnimLayerTo("nothing"); }
+
+        if (currentActiveLayer == "HoldGun"|| currentActiveLayer == "AimGun"|| currentActiveLayer == "ReloadGun")
+        {
+            if (GunHolder.isAiming) { resetAnimLayerTo("AimGun"); }
+            else if (GunHolder.isReloading) { resetAnimLayerTo("ReloadGun"); }
+            else { resetAnimLayerTo("HoldGun"); }
+        }
+        
+        if (GunHolder.isAiming) { aimRotate(); }
         else { normalRotate(); }
+
+       
         
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
@@ -63,5 +84,34 @@ public class Animation_PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", mPmovement.x);
         animator.SetFloat("Vertical", mPmovement.y);
         transform.position = new Vector3(player.position.x, player.position.y);
+    }
+
+    string checkItemOnHand()
+    {
+        var slot = OnHandItemHolder.GetComponentInChildren<UIItemCharactor>();
+
+        return slot.nameItem.text;
+    }
+    void resetAnimLayerTo(string newAnim)
+    {
+        animator.SetLayerWeight(animator.GetLayerIndex(currentActiveLayer), 0);
+        animator.SetLayerWeight(animator.GetLayerIndex(newAnim), 1);
+        currentActiveLayer = newAnim;
+    }
+
+    GameObject FindInActiveObjectByName(string name)
+    {
+        Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if (objs[i].hideFlags == HideFlags.None)
+            {
+                if (objs[i].name == name)
+                {
+                    return objs[i].gameObject;
+                }
+            }
+        }
+        return null;
     }
 }

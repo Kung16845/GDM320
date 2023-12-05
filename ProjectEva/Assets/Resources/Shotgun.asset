@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6e4b1a07f30ba44a47cea51108526d, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  nameItemCharactor: 
+  nameItemCharactor: Shotgun
   ItemImage: {fileID: 0}
   scriptItem: 
   count: 0
   maxCount: 0
   isFlashLight: 0
   isOnhand: 0
+  isLock: 0
