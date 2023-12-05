@@ -51,7 +51,7 @@ namespace Enemy_State
         }
         public void RandomPositionSpawns(DirectorAI directorAI)
         {
-            var RandomPosition = Random.Range(1, directorAI.setSpawns.Count);
+            var RandomPosition = Random.Range(1, 9);
             var position = directorAI.setSpawns.ElementAt(RandomPosition);
 
             this.agent.Warp(position.point.position);

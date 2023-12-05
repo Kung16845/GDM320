@@ -23,6 +23,7 @@ namespace Enemy_State
         {
             this.player = FindObjectOfType<NewMovementPlayer>().transform;
             FindInactiveEnemyNormals();
+            navMeshSurface = FindAnyObjectByType<NavMeshSurface>();
             StartCoroutine(EverySeconReduce(1.0f));
         }
         private void FindInactiveEnemyNormals()
