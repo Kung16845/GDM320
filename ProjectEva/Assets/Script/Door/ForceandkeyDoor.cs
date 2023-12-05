@@ -23,8 +23,11 @@ public class ForceandkeyDoor : MonoBehaviour
     {
         FindUIElementsByTag();
     }
-    private void Start()
+     private void Start()
     {
+        FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();;
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

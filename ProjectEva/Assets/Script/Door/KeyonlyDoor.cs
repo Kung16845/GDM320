@@ -25,6 +25,8 @@ public class KeyonlyDoor : MonoBehaviour
     }
     private void Start()
     {
+        FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();;
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
 
