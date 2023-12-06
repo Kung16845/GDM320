@@ -32,7 +32,7 @@ public class AmmoDisplay : MonoBehaviour
         else if (playerShotgun != null && playerShotgun.enable)
         {
             Debug.Log("Shotgun.enabled");
-            currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Shotgun Shells");
+            currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("ShotgunAmmo");
         }
 
         if (ammoText != null)
