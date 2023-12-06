@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using System.Linq;
 public class LockerItemSpawner : MonoBehaviour
 {
     [System.Serializable]
@@ -19,13 +21,11 @@ public class LockerItemSpawner : MonoBehaviour
     public InventoryPresentCharactor inventoryPresentCharactor;
     public bool canunlock;
     public string custominteractiontext;
-
+    public bool isclose;
     // Reference to the RandomItemGenerator script
     public RandomItemGenerator randomItemGenerator;
 
-    private int currentItemIndex = 0; // Track the current item index in the generated sequence
-
-    void Start()
+    private void Start()
     {
         canunlock = false;
         FindUIElementsByTag();
@@ -33,17 +33,17 @@ public class LockerItemSpawner : MonoBehaviour
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (canunlock && Input.GetKeyDown(KeyCode.E))
-        {
-            SpawnNextItem();
+        if (canunlock && Input.GetKeyDown(KeyCode.E) && isclose)
+        { 
+            SpawnItem();
             inventoryPresentCharactor.DeleteItemCharactorEquipment("Inventorypicklock");
             Destroy(this.gameObject);
         }
     }
 
-    void SpawnNextItem()
+    private void SpawnItem()
     {
         // Check if the RandomItemGenerator script is assigned
         if (randomItemGenerator == null)
@@ -56,18 +56,19 @@ public class LockerItemSpawner : MonoBehaviour
         string[] generatedSequence = randomItemGenerator.GetGeneratedSequence();
 
         // Check if there are more items to spawn
-        if (currentItemIndex < generatedSequence.Length)
+        if (generatedSequence.Length > 0)
         {
             // Find the corresponding item prefab based on the item name
-            GameObject itemPrefab = FindItemPrefab(generatedSequence[currentItemIndex]);
+            GameObject itemPrefab = FindItemPrefab(generatedSequence[0]);
 
             // Spawn the item at the position of the LockerItemSpawner
             if (itemPrefab != null)
             {
                 Instantiate(itemPrefab, transform.position, Quaternion.identity);
-            }
 
-            currentItemIndex++;
+                // Remove the spawned item from the RandomItemGenerator sequence
+                randomItemGenerator.RemoveItem(generatedSequence[0]);
+            }
         }
     }
 
@@ -75,6 +76,7 @@ public class LockerItemSpawner : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isclose = true;
             ShowEButton();
         }
     }
@@ -83,6 +85,7 @@ public class LockerItemSpawner : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isclose = false;
             HideEButton();
         }
     }
@@ -90,13 +93,13 @@ public class LockerItemSpawner : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
-        if(canunlock)
+        if (canunlock)
         {
             customText.text = "I can unlock this.";
         }
         else
         {
-        customText.text = custominteractiontext;
+            customText.text = custominteractiontext;
         }
     }
 
@@ -109,21 +112,21 @@ public class LockerItemSpawner : MonoBehaviour
     private void FindUIElementsByTag()
     {
         // Find UI panel by tag
-        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag(uiPanelTag);
+        GameObject[] sceneObjects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.CompareTag(uiPanelTag)).ToArray();
         if (sceneObjects.Length > 0)
         {
             sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
         }
 
         // Find custom text by tag
-        GameObject[] customTexts = GameObject.FindGameObjectsWithTag(customTextTag);
+        TextMeshProUGUI[] customTexts = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>().Where(obj => obj.CompareTag(customTextTag)).ToArray();
         if (customTexts.Length > 0)
         {
-            customText = customTexts[0].GetComponent<TextMeshProUGUI>(); // Assuming there is only one custom text with the specified tag
+            customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
         }
     }
 
-    GameObject FindItemPrefab(string itemName)
+    private GameObject FindItemPrefab(string itemName)
     {
         // Find the item prefab based on the custom name
         foreach (ItemPrefabInfo prefabInfo in itemPrefabs)

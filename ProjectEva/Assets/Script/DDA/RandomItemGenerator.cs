@@ -7,7 +7,7 @@ public class RandomItemGenerator : MonoBehaviour
     public int sequenceLength = 5; // Length of the sequence
     public bool allowRepeats = false; // Allow repeating items in the sequence
 
-    public string[] generatedSequence; // Store the generated sequence
+    private string[] generatedSequence; // Store the generated sequence
 
     void Start()
     {
@@ -72,7 +72,25 @@ public class RandomItemGenerator : MonoBehaviour
         }
         return false;
     }
-        public string[] GetGeneratedSequence()
+
+    // Method to remove the specified item from the generated sequence
+    public void RemoveItem(string itemName)
+    {
+        int index = System.Array.IndexOf(generatedSequence, itemName);
+        if (index != -1)
+        {
+            // Shift all elements to the left, effectively removing the specified item
+            for (int i = index; i < generatedSequence.Length - 1; i++)
+            {
+                generatedSequence[i] = generatedSequence[i + 1];
+            }
+
+            // Set the last element to null or an empty string
+            generatedSequence[generatedSequence.Length - 1] = null; // Change this to an empty string if needed
+        }
+    }
+
+    public string[] GetGeneratedSequence()
     {
         return generatedSequence;
     }
