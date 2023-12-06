@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using TMPro;
 public class Interactionpanel : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Interactionpanel : MonoBehaviour
     public void Awake()
     {
         FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();
     }
      private void Start()
     {
@@ -57,17 +59,17 @@ public class Interactionpanel : MonoBehaviour
     private void FindUIElementsByTag()
     {
         // Find UI panel by tag
-        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag(uiPanelTag);
+        GameObject[] sceneObjects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.CompareTag(uiPanelTag)).ToArray();
         if (sceneObjects.Length > 0)
         {
             sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
         }
 
         // Find custom text by tag
-        GameObject[] customTexts = GameObject.FindGameObjectsWithTag(customTextTag);
+        TextMeshProUGUI[] customTexts = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>().Where(obj => obj.CompareTag(customTextTag)).ToArray();
         if (customTexts.Length > 0)
         {
-            customText = customTexts[0].GetComponent<TextMeshProUGUI>(); // Assuming there is only one custom text with the specified tag
+            customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
         }
     }
 }
