@@ -8,10 +8,11 @@ using JetBrains.Annotations;
 using System;
 public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [HideInInspector] public Transform parentAfterDray;
+    public Transform parentAfterDray; //[HideInInspector]
     public Transform parentBeforeDray;
     public Transform slotEqicpmentOnHand;
     public Transform slotEqicpmentFlashLight;
+    public Transform boxInventory;
 
     [Header("UI")]
     public TextMeshProUGUI nameItem;
@@ -34,7 +35,18 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             slotEqicpmentFlashLight = GameObject.Find("BgFlashLight").transform;
         if(isOnhand)
             slotEqicpmentOnHand = GameObject.Find("BgOnHand").transform;
-        
+        FindboxInventory();
+    }
+    public void FindboxInventory()
+    {
+        var boxes = GameObject.FindObjectsOfType<BoxItemsCharactor>(true);
+
+        foreach(var box in boxes)
+        {
+            
+            boxInventory = box.transform;
+            
+        }
     }
     public void SetDataUIItemCharactor(ItemsDataCharactor itemsDataCharactor)
     {
@@ -79,7 +91,9 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             var objectitem = FindObjectOfType<InventoryPresentCharactor>();
             Destroy(objectitem.GetComponentInChildren(scriptType).gameObject);
         }
+        
         transform.SetParent(parentAfterDray);
+        
         imageItem.raycastTarget = true;
     }
 }

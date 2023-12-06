@@ -1871,7 +1871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &511521078
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5789,6 +5789,7 @@ MonoBehaviour:
   openInven: 0
   uIItemCharactorPrefeb: {fileID: 592793030409710030, guid: e4216cca9de9c87499d0238a8bb21e16, type: 3}
   uIItemListCharactor: []
+  uIItemListCharactorInboxs: []
   toggleCooldown: 0.5
 --- !u!114 &1488859602
 MonoBehaviour:
@@ -5988,7 +5989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1529611089
 RectTransform:
   m_ObjectHideFlags: 0
