@@ -8,10 +8,11 @@ public class BoxItemsCharactor : MonoBehaviour, IDropHandler
     {
         GameObject uIitem = eventData.pointerDrag;
         UIItemCharactor uIItemCharactor = uIitem.GetComponent<UIItemCharactor>();
-
+        uIItemCharactor.parentAfterDray = transform;
+        
         MoveVariableFromlistCharactorToListCharactorBoxs(uIItemCharactor);
 
-        uIItemCharactor.parentAfterDray = transform;
+        
     }
     
     public void MoveVariableFromlistCharactorToListCharactorBoxs(UIItemCharactor variableToMove)
@@ -26,7 +27,7 @@ public class BoxItemsCharactor : MonoBehaviour, IDropHandler
 
     }
     
-    public void MoveVariableFromListCharactorBoxsTolistCharactor(UIItemCharactor variableToMove)
+    public void MoveVariableFromListCharactorBoxsToListCharactor(UIItemCharactor variableToMove)
     {
          var inventoryItemsCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
         // ลบตัวแปรจาก List 1

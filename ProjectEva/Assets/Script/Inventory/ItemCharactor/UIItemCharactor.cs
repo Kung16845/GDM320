@@ -91,7 +91,11 @@ public class UIItemCharactor : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             var objectitem = FindObjectOfType<InventoryPresentCharactor>();
             Destroy(objectitem.GetComponentInChildren(scriptType).gameObject);
         }
-        
+        // if(parentBeforeDray == boxInventory && parentAfterDray != parentBeforeDray)
+        // {
+        //     var boxItems = boxInventory.GetComponent<BoxItemsCharactor>();
+        //     boxItems.MoveVariableFromListCharactorBoxsToListCharactor(this); 
+        // }
         transform.SetParent(parentAfterDray);
         
         imageItem.raycastTarget = true;

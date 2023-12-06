@@ -9,13 +9,14 @@ public class InventorySlots : MonoBehaviour, IDropHandler
     public GameObject equipment;
     public InventoryPresentCharactor inventoryPresentCharactor;
     public int numslot;
-    private void Start() {
+    private void Start()
+    {
         inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
     }
     public void Update()
     {
         var slot = GetComponentInChildren<UIItemCharactor>();
-        if(slot != null)
+        if (slot != null)
             slot.numslot = numslot;
     }
     public void OnDrop(PointerEventData eventData)
@@ -25,11 +26,12 @@ public class InventorySlots : MonoBehaviour, IDropHandler
         UIItemCharactor uIItemCharactor = uIitem.GetComponent<UIItemCharactor>();
         if (slot == null)
         {
-
+             Debug.Log("1");
             Vector3 newScale = new Vector3(1f, 1f, 1f);
             uIItemCharactor.GetComponent<RectTransform>().localScale = newScale;
             if (equipment != null)
             {
+                Debug.Log("1.1");
                 if (uIItemCharactor.isOnhand && equipment.gameObject.transform == uIItemCharactor.slotEqicpmentOnHand)
                 {
 
@@ -51,17 +53,25 @@ public class InventorySlots : MonoBehaviour, IDropHandler
 
             }
             else if (!uIItemCharactor.imageItemLock.gameObject.activeInHierarchy && equipment == null)
+            {   
+                Debug.Log("1.2");     
                 uIItemCharactor.parentAfterDray = transform;
+                var boxItems = uIItemCharactor.boxInventory.GetComponent<BoxItemsCharactor>();
+                boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
+            }
         }
 
         else if (slot != null && !slot.isLock && equipment == null)
         {
+
             if ((uIItemCharactor.isFlashLight || uIItemCharactor.isOnhand) &&
             (uIItemCharactor.parentBeforeDray == uIItemCharactor.slotEqicpmentOnHand ||
             uIItemCharactor.parentBeforeDray == uIItemCharactor.slotEqicpmentFlashLight))
             {
+
                 if (slot.isOnhand && uIItemCharactor.isOnhand)
                 {
+
                     slot.transform.SetParent(uIItemCharactor.parentAfterDray);
                     Vector3 newScale = new Vector3(1.65f, 1.65f, 1.65f);
                     slot.GetComponent<RectTransform>().localScale = newScale;
@@ -72,7 +82,7 @@ public class InventorySlots : MonoBehaviour, IDropHandler
 
                     inventoryPresentCharactor.CreateItemCharactorEquipment(slot.scriptItem, slot.nameItem.text);
                 }
-                else if(slot.isFlashLight && uIItemCharactor.isFlashLight)
+                else if (slot.isFlashLight && uIItemCharactor.isFlashLight)
                 {
 
                     slot.transform.SetParent(uIItemCharactor.parentAfterDray);
@@ -88,16 +98,24 @@ public class InventorySlots : MonoBehaviour, IDropHandler
                 }
             }
             else
-            {   
+            {
+                Debug.Log("2.2");
+                var boxItems = uIItemCharactor.boxInventory.GetComponent<BoxItemsCharactor>();
                 uIItemCharactor.numslot = numslot;
+
                 slot.transform.SetParent(uIItemCharactor.parentAfterDray);
                 Vector3 newScale = new Vector3(1f, 1f, 1f);
                 slot.GetComponent<RectTransform>().localScale = newScale;
                 uIItemCharactor.parentAfterDray = transform;
+
+                
+                boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
+                boxItems.MoveVariableFromlistCharactorToListCharactorBoxs(slot);
             }
         }
         else if (slot != null && equipment != null && !slot.isLock)
         {
+
             if (slot.isOnhand && uIItemCharactor.isOnhand)
             {
                 slot.transform.SetParent(uIItemCharactor.parentAfterDray);
