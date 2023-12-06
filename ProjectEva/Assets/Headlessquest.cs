@@ -9,6 +9,7 @@ public class Headlessquest : MonoBehaviour
     private string customTextTag = "Interactiontext";
     public GameObject sceneObject;
     public GameObject itemPrefab;
+    public GameObject itemPrefabsecond;
     public SoundManager soundManager;
     public TextMeshProUGUI customText;
     public InventoryPresentCharactor inventoryPresentCharactor;
@@ -17,6 +18,8 @@ public class Headlessquest : MonoBehaviour
     public bool Headwitheyeequip;
     public bool iseyeequip;
     public bool isheadequip;
+    public bool fusedroped;
+    public bool iswineequip;
     private void Start()
     {
         isclose = false;
@@ -47,6 +50,14 @@ public class Headlessquest : MonoBehaviour
         {
             custominteractiontext = "I can equip it.";
         }
+        else if(fusedroped && isclose && !iswineequip)
+        {
+            custominteractiontext = "This sculper is crying,The tear smell like....wine ?";
+        }
+        else if(iswineequip && fusedroped && isclose)
+        {
+            custominteractiontext = "Maybe I can fill this wine into this bottle";
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -61,6 +72,11 @@ public class Headlessquest : MonoBehaviour
         if(isclose && Headwitheyeequip && Input.GetKeyDown(KeyCode.E))
         {
              Instantiate(itemPrefab, transform.position, Quaternion.identity);
+             fusedroped = true;
+        }
+        if(isclose && iswineequip && Input.GetKeyDown(KeyCode.E) && fusedroped)
+        {
+             Instantiate(itemPrefabsecond, transform.position, Quaternion.identity);
              Destroy(this.gameObject);
         }
     }
