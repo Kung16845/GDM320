@@ -98,14 +98,15 @@ public class ForceandkeyDoor : MonoBehaviour
     private void FindUIElementsByTag()
     {
         // Find UI panel by tag
-        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag(uiPanelTag);
+        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag( "Interactiontag");
         if (sceneObjects.Length > 0)
-        {
+        {   
+            Debug.Log("Not NUll");
             sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
         }
 
         // Find custom text by tag
-        GameObject[] customTexts = GameObject.FindGameObjectsWithTag(customTextTag);
+        GameObject[] customTexts = GameObject.FindGameObjectsWithTag("Interactiontext");
         if (customTexts.Length > 0)
         {
             customText = customTexts[0].GetComponent<TextMeshProUGUI>(); // Assuming there is only one custom text with the specified tag
