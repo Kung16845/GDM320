@@ -21,7 +21,6 @@ public class InventorySlots : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         var slot = GetComponentInChildren<UIItemCharactor>();
-        string name = slot.nameItem.name;
         GameObject uIitem = eventData.pointerDrag;
         UIItemCharactor uIItemCharactor = uIitem.GetComponent<UIItemCharactor>();
         if (slot == null)
