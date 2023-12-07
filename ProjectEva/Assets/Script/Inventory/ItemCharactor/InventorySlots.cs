@@ -27,7 +27,7 @@ public class InventorySlots : MonoBehaviour, IDropHandler
         var listUIITemsInbox = inventoryPresentCharactor.uIItemListCharactorInboxs;
         GameObject uIitem = eventData.pointerDrag;
         UIItemCharactor uIItemCharactor = uIitem.GetComponent<UIItemCharactor>();
-        if (slot == null)
+        if (slot == null && uIItemCharactor != null)
         {
             Debug.Log("1");
 
