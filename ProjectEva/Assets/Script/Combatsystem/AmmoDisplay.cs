@@ -48,8 +48,8 @@ public class AmmoDisplay : MonoBehaviour
             }
 
             // Check if the player is aiming or reloading to make the UI reappear.
-            if ((playerPistol != null && Input.GetMouseButton(1)) || 
-                (playerShotgun != null && Input.GetMouseButton(1)) || 
+            if ((playerPistol != null && playerPistol.isAiming) || 
+                (playerShotgun != null && playerShotgun.isAiming) || 
                 (playerPistol != null && playerPistol.isReloading) ||
                 (playerShotgun != null && playerShotgun.isReloading))
             {

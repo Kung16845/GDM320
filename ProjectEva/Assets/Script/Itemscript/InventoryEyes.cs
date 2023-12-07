@@ -32,7 +32,7 @@ public class InventoryEyes : MonoBehaviour
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
         headless = FindObjectOfType<Headlessquest>();
         movementScript = FindObjectOfType<NewMovementPlayer>();
-        headless.isheadequip = true;
+        headless.iseyeequip = true;
         Object[] allObjects = GameObject.FindObjectsOfType(typeof(GameObject), true);
         foreach (GameObject obj in allObjects)
         {
@@ -95,7 +95,7 @@ public class InventoryEyes : MonoBehaviour
     private void OnDestroy()
     {
         sceneObject.SetActive(false);
-        headless.isheadequip = false;
+        headless.iseyeequip = false;
         customText.text = "";
     }
         private void FindUIElementsByTag()

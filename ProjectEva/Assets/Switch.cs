@@ -9,7 +9,6 @@ public class Switch: MonoBehaviour
     private string uiPanelTag = "Interactiontag";
     private string customTextTag = "Interactiontext";
     public GameObject sceneObject;
-    public GameObject itemPrefab;
     public Fusequest fusequest;
     public Fuelquest fuelquest;
     public GameObject redlight;
@@ -20,6 +19,8 @@ public class Switch: MonoBehaviour
     public InventoryPresentCharactor inventoryPresentCharactor;
     public string custominteractiontext;
     public bool isclose;
+    public bool fusehasequiped;
+    public bool fuelhasequiped;
     public bool allset;
     private void Start()
     {
@@ -40,17 +41,25 @@ public class Switch: MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(fuelquest.isfuelquip && isclose && fusequest.isfusequip)
+        if(allset && isclose )
         {   
             custominteractiontext = "I can turn this switch down finally I can get out of here.";
         }
-        else if(!fuelquest.isfuelquip && isclose && fusequest.isfusequip)
+        else if(!fuelhasequiped && isclose && fusehasequiped)
         {
             custominteractiontext = "I still need to find the fuel the turn this switch down.";
         }
-        else if(fuelquest.isfuelquip && isclose && !fusequest.isfusequip)
+        else if(fuelhasequiped && isclose && !fusehasequiped)
         {
             custominteractiontext = "I still need to find the fuse the turn this switch down.";
+        }
+        else if(!fuelquest.isfuelquip && isclose && fusequest.isfusequip)
+        {
+            custominteractiontext = "I can equip this fuse in the genarator room.";
+        }
+        else if(fuelquest.isfuelquip && isclose && !fusequest.isfusequip)
+        {
+            custominteractiontext = "I can refill the genarator.";
         }
         else if(!fuelquest.isfuelquip && isclose && !fusequest.isfusequip)
         {
@@ -67,7 +76,15 @@ public class Switch: MonoBehaviour
     }
     void Update()
     {
-        if(fuelquest.isfuelquip && fusequest.isfusequip)
+        if(fuelquest.isfuelquip)
+        {
+            fuelhasequiped = true;
+        }
+        if(fusequest.isfusequip)
+        {
+            fusehasequiped = true;
+        }
+        if(fuelhasequiped  && fuelhasequiped)
         {
             allset = true;
         }

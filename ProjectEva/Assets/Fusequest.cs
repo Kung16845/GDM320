@@ -9,7 +9,6 @@ public class Fusequest : MonoBehaviour
     private string uiPanelTag = "Interactiontag";
     private string customTextTag = "Interactiontext";
     public GameObject sceneObject;
-    public GameObject itemPrefab;
     public SoundManager soundManager;
     public TextMeshProUGUI customText;
     public InventoryPresentCharactor inventoryPresentCharactor;
@@ -55,7 +54,6 @@ public class Fusequest : MonoBehaviour
     {
         if(isclose && isfusequip && Input.GetKeyDown(KeyCode.E))
         {
-             Instantiate(itemPrefab, transform.position, Quaternion.identity);
              Destroy(this.gameObject);
         }
     }
