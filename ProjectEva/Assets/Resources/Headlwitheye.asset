@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6e4b1a07f30ba44a47cea51108526d, type: 3}
   m_Name: Headlwitheye
   m_EditorClassIdentifier: 
-  nameItemCharactor: 
+  nameItemCharactor: Headwitheyes
   ItemImage: {fileID: 0}
-  scriptItem: 
-  count: 0
-  maxCount: 0
+  scriptItem: InventoryHeadwitheyes
+  count: 1
+  maxCount: 1
   isFlashLight: 0
-  isOnhand: 0
+  isOnhand: 1
   isLock: 0
