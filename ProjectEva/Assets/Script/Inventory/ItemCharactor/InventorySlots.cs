@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -22,11 +23,13 @@ public class InventorySlots : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         var slot = GetComponentInChildren<UIItemCharactor>();
+        var listUIITems = inventoryPresentCharactor.uIItemListCharactor;
+        var listUIITemsInbox = inventoryPresentCharactor.uIItemListCharactorInboxs;
         GameObject uIitem = eventData.pointerDrag;
         UIItemCharactor uIItemCharactor = uIitem.GetComponent<UIItemCharactor>();
         if (slot == null)
         {
-             Debug.Log("1");
+            Debug.Log("1");
             Vector3 newScale = new Vector3(1f, 1f, 1f);
             uIItemCharactor.GetComponent<RectTransform>().localScale = newScale;
             if (equipment != null)
@@ -53,12 +56,16 @@ public class InventorySlots : MonoBehaviour, IDropHandler
 
             }
             else if (!uIItemCharactor.imageItemLock.gameObject.activeInHierarchy && equipment == null)
-            {   
-                Debug.Log("1.2");     
+            {
+                Debug.Log("1.2");
                 uIItemCharactor.parentAfterDray = transform;
-                var boxItems = uIItemCharactor.boxInventory.GetComponent<BoxItemsCharactor>();
-                boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
+
+
             }
+            var boxItems = uIItemCharactor.boxInventory.GetComponent<BoxItemsCharactor>();
+            var checkUIitem = listUIITems.FirstOrDefault(uIitem => uIitem == uIItemCharactor);
+            if (uIItemCharactor.parentAfterDray.transform == this.transform && checkUIitem == null)
+                boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
         }
 
         else if (slot != null && !slot.isLock && equipment == null)
@@ -107,10 +114,15 @@ public class InventorySlots : MonoBehaviour, IDropHandler
                 Vector3 newScale = new Vector3(1f, 1f, 1f);
                 slot.GetComponent<RectTransform>().localScale = newScale;
                 uIItemCharactor.parentAfterDray = transform;
+                var checkUIitemInbox = listUIITemsInbox.FirstOrDefault(uIitem => uIitem == slot);
+                var checkUIitem = listUIITems.FirstOrDefault(uIitem => uIitem == uIItemCharactor);
 
-                
-                boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
-                boxItems.MoveVariableFromlistCharactorToListCharactorBoxs(slot);
+                if (uIItemCharactor.parentAfterDray.transform == this.transform
+                && checkUIitemInbox == null && checkUIitem == null)
+                {
+                    boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
+                    boxItems.MoveVariableFromlistCharactorToListCharactorBoxs(slot);
+                }
             }
         }
         else if (slot != null && equipment != null && !slot.isLock)

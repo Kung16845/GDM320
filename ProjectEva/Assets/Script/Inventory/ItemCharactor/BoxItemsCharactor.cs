@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 public class BoxItemsCharactor : MonoBehaviour, IDropHandler
@@ -8,16 +9,21 @@ public class BoxItemsCharactor : MonoBehaviour, IDropHandler
     {
         GameObject uIitem = eventData.pointerDrag;
         UIItemCharactor uIItemCharactor = uIitem.GetComponent<UIItemCharactor>();
-        uIItemCharactor.parentAfterDray = transform;
+        var listUIITemsInbox = FindAnyObjectByType<InventoryPresentCharactor>().uIItemListCharactorInboxs;
         
-        MoveVariableFromlistCharactorToListCharactorBoxs(uIItemCharactor);
+        var checkUIitemInbox = listUIITemsInbox.FirstOrDefault(uIitem => uIitem == uIItemCharactor);
+        if (uIItemCharactor != null)
+        {   
+            uIItemCharactor.parentAfterDray = transform;
+            if(uIItemCharactor.parentAfterDray.transform == this.transform && checkUIitemInbox == null)
+                MoveVariableFromlistCharactorToListCharactorBoxs(uIItemCharactor);
+        }
 
-        
+
     }
-    
     public void MoveVariableFromlistCharactorToListCharactorBoxs(UIItemCharactor variableToMove)
     {
-        
+
         var inventoryItemsCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
         // ลบตัวแปรจาก List 1
         inventoryItemsCharactor.uIItemListCharactor.Remove(variableToMove);
@@ -26,10 +32,10 @@ public class BoxItemsCharactor : MonoBehaviour, IDropHandler
         inventoryItemsCharactor.uIItemListCharactorInboxs.Add(variableToMove);
 
     }
-    
+
     public void MoveVariableFromListCharactorBoxsToListCharactor(UIItemCharactor variableToMove)
     {
-         var inventoryItemsCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+        var inventoryItemsCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
         // ลบตัวแปรจาก List 1
         inventoryItemsCharactor.uIItemListCharactorInboxs.Remove(variableToMove);
 
