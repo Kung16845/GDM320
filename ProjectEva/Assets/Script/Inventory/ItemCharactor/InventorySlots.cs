@@ -30,8 +30,7 @@ public class InventorySlots : MonoBehaviour, IDropHandler
         if (slot == null)
         {
             Debug.Log("1");
-            Vector3 newScale = new Vector3(1f, 1f, 1f);
-            uIItemCharactor.GetComponent<RectTransform>().localScale = newScale;
+
             if (equipment != null)
             {
                 Debug.Log("1.1");
@@ -58,14 +57,16 @@ public class InventorySlots : MonoBehaviour, IDropHandler
             else if (!uIItemCharactor.imageItemLock.gameObject.activeInHierarchy && equipment == null)
             {
                 Debug.Log("1.2");
+                Vector3 newScale = new Vector3(1f, 1f, 1f);
+                uIItemCharactor.GetComponent<RectTransform>().localScale = newScale;
                 uIItemCharactor.parentAfterDray = transform;
-
+                var boxItems = uIItemCharactor.boxInventory.GetComponent<BoxItemsCharactor>();
+                var checkUIitem = listUIITems.FirstOrDefault(uIitem => uIitem == uIItemCharactor);
+                if (uIItemCharactor.parentAfterDray.transform == this.transform && checkUIitem == null)
+                    boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
 
             }
-            var boxItems = uIItemCharactor.boxInventory.GetComponent<BoxItemsCharactor>();
-            var checkUIitem = listUIITems.FirstOrDefault(uIitem => uIitem == uIItemCharactor);
-            if (uIItemCharactor.parentAfterDray.transform == this.transform && checkUIitem == null)
-                boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
+
         }
 
         else if (slot != null && !slot.isLock && equipment == null)
