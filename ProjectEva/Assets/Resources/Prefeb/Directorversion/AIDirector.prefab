@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7655221317180087037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2673167350644442885}
+  - component: {fileID: 5030009214622785825}
+  m_Layer: 0
+  m_Name: AIDirector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2673167350644442885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655221317180087037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5030009214622785825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655221317180087037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f274c98f6326d24ea237c46abe03c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  navMeshSurface: {fileID: 0}
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  transferPosition: {x: 0, y: 0}
+  maxXOffset: 0
+  maxYOffset: 0
+  Stressvalue: 0
+  setSpawns:
+  - namePoint: Spawn_1
+    point: {fileID: 2393156089643770697, guid: 593acabc183739148a52ee8a19983cfa, type: 3}
+  - namePoint: Spawn_2
+    point: {fileID: 1248141930581200558, guid: c39ec8a317d7edf4fb0fcfaf243aecf2, type: 3}
+  - namePoint: Spawn_3
+    point: {fileID: 5410357008232515296, guid: 97207b09e004e4e4f952ed0e779fc8d0, type: 3}
+  - namePoint: Spawn_4
+    point: {fileID: 882712991392526034, guid: 5f20cde8b3ba4b045a51648782ed1380, type: 3}
+  - namePoint: Spawn_5
+    point: {fileID: 129165185852935058, guid: 0dbfa3e1e55b98e4eb2342ac37fd70f3, type: 3}
+  - namePoint: Spawn_6
+    point: {fileID: 5047869444455787792, guid: 21e9e3af774513a49ae93b5af3538ecc, type: 3}
+  - namePoint: Spawn_8
+    point: {fileID: 2999564903342387964, guid: ac6f41add40792f469c85871e51198a0, type: 3}
+  - namePoint: Spawn_9
+    point: {fileID: 6986997900671536545, guid: 1ba0700ec45d5d94c934fa3476ed0557, type: 3}
+  - namePoint: Spawn_10
+    point: {fileID: 385558756596111403, guid: d5d3be4d0bd492343a321cfef0360605, type: 3}
+  - namePoint: Spawn_11
+    point: {fileID: 913148491900223632, guid: 1ccc6c22fb3b3f545adedd2a06e2cba8, type: 3}
+  - namePoint: Spawn_12
+    point: {fileID: 4261717083939029264, guid: 8ddf9b58b4bfe954b96b31026ff033ce, type: 3}
+  - namePoint: Spawn_13
+    point: {fileID: 8108171202575035261, guid: 7448e89c829ec3a43b50c6ed92cf5578, type: 3}
+  - namePoint: Spawn_14
+    point: {fileID: 8387453868249634148, guid: 553d72682a6b8fb4d8d9c308a6a39279, type: 3}
+  - namePoint: Spawn_15
+    point: {fileID: 6940569088276402215, guid: 30bae75e4e4d7354eabe65e27763b0f6, type: 3}
+  - namePoint: Spawn_16
+    point: {fileID: 2575874849134521071, guid: 0d48aa949da94f043b810c724cf29e82, type: 3}
+  - namePoint: Spawn_17
+    point: {fileID: 8959589329729194246, guid: 31ef3bc3d509b4d42a57685775173aed, type: 3}
+  - namePoint: Spawn_18
+    point: {fileID: 6626356719382326687, guid: af5e7045efcd4a4478fac730a93565b9, type: 3}
+  - namePoint: Spawn_19
+    point: {fileID: 7048426695878234157, guid: 9d52e30005f279442aaa5a0bc21b6053, type: 3}
+  - namePoint: Spawn_20
+    point: {fileID: 405304503215672598, guid: 77f4da9017d65914993e1616bdab7f1a, type: 3}
+  - namePoint: Spawn_21
+    point: {fileID: 7420661489123869202, guid: f0c837f698613294982625a765b6a6e0, type: 3}
+  - namePoint: Spawn_22
+    point: {fileID: 2570911452796520019, guid: 90988b4ef618e654e92f15e325645a47, type: 3}
+  - namePoint: Spawn_23
+    point: {fileID: 7947015998693057478, guid: 15a56b76baceaef46a2904c7c43ddfe5, type: 3}
+  rooms:
+  - nameRoom: Room1
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room2
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room3
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+  - nameRoom: Room4
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+  - nameRoom: Room5
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room6
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+  - nameRoom: Room7
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room8
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room9
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room10
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+  - nameRoom: Room11
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+  - nameRoom: Room12
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room13
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room14
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Room15
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom: []
+  - nameRoom: Room16
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom: []

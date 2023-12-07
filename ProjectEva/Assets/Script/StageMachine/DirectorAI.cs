@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NavMeshPlus.Components;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,6 +17,7 @@ namespace Enemy_State
         public float maxXOffset;
         public float maxYOffset;
         public float Stressvalue;
+        public List<Transform> allResingPoint;
         public List<SetPosition> setSpawns = new List<SetPosition>();
 
         public List<Room> rooms = new List<Room>();
@@ -23,7 +25,41 @@ namespace Enemy_State
         {
             this.player = FindObjectOfType<NewMovementPlayer>().transform;
             FindInactiveEnemyNormals();
+            navMeshSurface = FindAnyObjectByType<NavMeshSurface>();
             StartCoroutine(EverySeconReduce(1.0f));
+        }
+        public void ChangeFloor()
+        {
+            MovePositionEnemyChangeFloor();
+            CheckClosestResingPoint();
+        }
+        public void MovePositionEnemyChangeFloor()
+        {
+            var enemyNormal = enemy.GetComponent<EnemyNormal>();
+
+            var setposition = new SetPosition();
+            var position = setposition.FindClosestPosition(setSpawns, player);
+
+            enemyNormal.EnterState(enemyNormal.state_Searching);
+            enemyNormal.agent.Warp(position.position);
+
+        }
+        public void CheckClosestResingPoint()
+        {
+            var enemynormal = enemy.GetComponent<EnemyNormal>();
+            Transform newRestingPoint = allResingPoint.ElementAt<Transform>(0);
+            float distanceRestingPoint = float.MaxValue;
+            foreach (var positionResingPoint in allResingPoint)
+            {
+                float positionDistance = Vector3.Distance(positionResingPoint.position,enemynormal.transform.position);
+                if (positionDistance < distanceRestingPoint  )
+                {   
+                    distanceRestingPoint = positionDistance;
+                    newRestingPoint = positionResingPoint;
+                }
+            }
+
+            enemynormal.ResingPoint = newRestingPoint;
         }
         private void FindInactiveEnemyNormals()
         {
@@ -36,7 +72,7 @@ namespace Enemy_State
                 if (!enemyNormal.gameObject.activeSelf)
                 {
                     this.enemy = enemyNormal.transform;
-                   
+
                 }
             }
         }

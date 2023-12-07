@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Bullet(1)
   m_EditorClassIdentifier: 
   nameItemCharactor: Pistol Ammo
-  ItemImage: {fileID: 21300000, guid: 3b19d95082de1974bbadae8b98f66a76, type: 3}
+  ItemImage: {fileID: 21300000, guid: 0708d101c58fcad42b66309cbc3a15b7, type: 3}
   scriptItem: 
   count: 1
   maxCount: 6
   isFlashLight: 0
   isOnhand: 0
+  isLock: 0

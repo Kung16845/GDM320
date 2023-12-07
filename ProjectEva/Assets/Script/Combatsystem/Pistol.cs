@@ -36,11 +36,11 @@ public class Pistol : MonoBehaviour
     public SoundManager soundManager;
     public TrapController trapController;
     public Canvas canvas;
+    public bool cylinderplaying;
     public InventoryPresentCharactor inventoryPresentCharactor;
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
     public bool enable;
-    private bool canaim;
 
     void Awake()
     {   
@@ -58,7 +58,7 @@ public class Pistol : MonoBehaviour
         { 
             RotateTowardsMouse();
             Decreasemaxacrrancywhilemoving();
-            if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning && canaim)
+            if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
             {   
                 if(!playaimsound)
                 {
@@ -165,12 +165,15 @@ public class Pistol : MonoBehaviour
     }
     IEnumerator Playcockinlastbullet()
     {
-        canaim = false;
+        if(!cylinderplaying)
+        {
+        cylinderplaying = true;
         yield return new WaitForSeconds(2);
         soundManager.PlaySound("Pushcyclinder"); 
         yield return new WaitForSeconds(1);
         soundManager.PlaySound("Cock"); 
-        canaim = true;
+        cylinderplaying = false;
+        }
     }
     IEnumerator PlayPullmag()
     {
@@ -199,7 +202,7 @@ public class Pistol : MonoBehaviour
         {
             decreaseammowhenreload();
             
-            if (bulletsToReload == 0 || currentAmmo == 0 && !canaim) 
+            if (bulletsToReload == 0 || currentAmmo == 0 && !cylinderplaying) 
             {
                 // No more bullets to reload and only one bullet left in the chamber, play the "Cock" sound.
                 StartCoroutine(Playcockinlastbullet());
@@ -245,7 +248,6 @@ public class Pistol : MonoBehaviour
         isAiming = false;
         isReloading = false;
         bulletsToReload = 0;
-        canaim = true;
         sanityScaleController = FindObjectOfType<SanityScaleController>();
         SoundWave =  FindObjectOfType<ObjectPolling >();
         onOffLight =  FindObjectOfType<OnOffLight>();

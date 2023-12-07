@@ -14,6 +14,7 @@ public class DamageArea : MonoBehaviour
 
     private void Start()
     {
+        cantakedamage = true;
         playerSanity = FindObjectOfType<Sanity>();
         gameManager = FindObjectOfType<GameManager>();
     }

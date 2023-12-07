@@ -16,6 +16,7 @@ TagManager:
   - Accurancycircle
   - Interactiontag
   - Interactiontext
+  - Teleporter
   layers:
   - Default
   - TransparentFX

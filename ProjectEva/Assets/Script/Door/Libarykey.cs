@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 public class Libarykey : MonoBehaviour
 {
     public SoundManager soundManager;
@@ -67,4 +68,5 @@ public class Libarykey : MonoBehaviour
         sceneObject.SetActive(false);
         customText.text = "";
     }
+    
 }

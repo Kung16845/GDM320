@@ -55,11 +55,10 @@ public class Shotgun : MonoBehaviour
 
     void Update()
     {   
-        currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Pistol Ammo");
+        currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("ShotgunAmmo");
         if(enable && !inventoryPresentCharactor.openInven)
         { 
             RotateTowardsMouse();
-            Decreasemaxacrrancywhilemoving();
             if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning && canaim)
             {   
                 if(!playaimsound)
@@ -100,7 +99,7 @@ public class Shotgun : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(0) && ammoInChamber == 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
             {
-                soundManager.PlaySound("Drymag");
+                soundManager.PlaySound("Shotgundry");
             }
             else if (Input.GetKeyDown(KeyCode.R) && !gunSpeedManager.isRunning && ammoInChamber < maxAmmo && !isAiming)
             {
@@ -142,7 +141,7 @@ public class Shotgun : MonoBehaviour
         }
         SoundWave.SpawnFromPool("Sound Wave Gun", this.transform.position, Quaternion.identity);
          ammoInChamber--;
-        soundManager.PlaySound("Fire");
+        soundManager.PlaySound("Shotgunfire");
         StartCoroutine(ResetShootFlagAfterDelay());
     }
 
@@ -150,10 +149,6 @@ public class Shotgun : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         isshoot = false;
-         if(ammoInChamber > 0)
-        {
-            soundManager.PlaySound("Cock"); 
-        }
     }
 
     private void StartReload()
@@ -168,26 +163,21 @@ public class Shotgun : MonoBehaviour
             // Decrease current ammo when starting a reload.
         }
     }
-    IEnumerator Playcockinlastbullet()
-    {
-        canaim = false;
-        yield return new WaitForSeconds(2);
-        soundManager.PlaySound("Pushcyclinder"); 
-        yield return new WaitForSeconds(1);
-        soundManager.PlaySound("Cock"); 
-        canaim = true;
-    }
     IEnumerator PlayPullmag()
     {
         yield return new WaitForSeconds(0.4f);
-        soundManager.PlaySound("Pullmag"); 
+        soundManager.PlaySound("Openloader");
+        yield return new WaitForSeconds(0.4f); 
+        soundManager.PlaySound("Shelldrop");
+    }
+    IEnumerator Closeloader()
+    {
         yield return new WaitForSeconds(0.8f);
-        soundManager.PlaySound("Ammoshelldrop");
+        soundManager.PlaySound("Closeloader");
     }
     IEnumerator WaitBeforeNextReload()
     {
         isReloadCanceled = true;
-        StartCoroutine(Playcockinlastbullet());
         yield return new WaitForSeconds(3f); // Wait for 3 seconds
         isReloadCanceled = false; // Reset the reload canceled flag after waiting
     }
@@ -204,10 +194,9 @@ public class Shotgun : MonoBehaviour
         {
             decreaseammowhenreload();
             
-            if (bulletsToReload == 0 || currentAmmo == 0 && !canaim) 
+            if (bulletsToReload == 0 || currentAmmo == 0) 
             {
-                // No more bullets to reload and only one bullet left in the chamber, play the "Cock" sound.
-                StartCoroutine(Playcockinlastbullet());
+                StartCoroutine(Closeloader());
             }
         }
         else
@@ -235,16 +224,14 @@ public class Shotgun : MonoBehaviour
         ammoInChamber++;
         bulletsToReload--;
         currentAmmo--;
-        // inventoryPresentCharactor.ManageReduceResource(bulletname);
+        inventoryPresentCharactor.ManageReduceResource("ShotgunAmmo");
         reloadStartTime = Time.time; // Start the reload of the next bullet.
         StartCoroutine(reloadsound());
     }
     IEnumerator reloadsound()
     {
-        soundManager.PlaySound("Reload");
+        soundManager.PlaySound("Shellload");
         yield return new WaitForSeconds(0.8f);
-        soundManager.PlaySound("Cylinder");
-        yield return new WaitForSeconds(0.5f);
     }
     void initializevariable()
     {
@@ -286,44 +273,7 @@ public class Shotgun : MonoBehaviour
             playaimsound = false;
             isAiming = false;
             accuracyCircle.gameObject.SetActive(false);
-            currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
+            currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , (accuracyDecreaseRate * Time.deltaTime)*10);
         }
     }
-    void Decreasemaxacrrancywhilemoving()
-    {
-        if(!gunSpeedManager.IsPlayerNotMoving() && !onOffLight.isopen)
-        {
-            maxAccuracy = 0.4f;
-            if(currentAccuracy > maxAccuracy)
-            {
-                accuracyIncreaseRate = 0;
-                accuracyDecreaseRate = 15;
-            }
-
-        }
-        else if(!gunSpeedManager.IsPlayerNotMoving() && onOffLight.isopen)
-        {
-            maxAccuracy = 0.2f;
-            if(currentAccuracy > maxAccuracy)
-            {
-                accuracyIncreaseRate = 0;
-                accuracyDecreaseRate = 15;
-            }
-
-        }
-        else if(gunSpeedManager.IsPlayerNotMoving() && onOffLight.isopen)
-        {
-            maxAccuracy = 0.8f;
-            accuracyDecreaseRate = 3;
-            accuracyIncreaseRate = 0.2f;
-
-        }
-        else 
-        {
-            maxAccuracy = 1;
-            accuracyDecreaseRate = 3;
-            accuracyIncreaseRate = 0.2f;
-        }
-    }
-    
 }
