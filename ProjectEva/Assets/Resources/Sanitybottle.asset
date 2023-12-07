@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sanitybottle
   m_EditorClassIdentifier: 
   nameItemCharactor: Sanitybottle
-  ItemImage: {fileID: 21300000, guid: e13e65f099dca654a84b781229ed00de, type: 3}
+  ItemImage: {fileID: 21300000, guid: 19e2d68728a9eb14489da99ee9b0286f, type: 3}
   scriptItem: Sanitybottle
   count: 1
   maxCount: 1

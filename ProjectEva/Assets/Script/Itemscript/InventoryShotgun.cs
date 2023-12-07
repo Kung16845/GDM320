@@ -11,6 +11,6 @@ public class InventoryShotgun : MonoBehaviour
     }
     private void OnDestroy() {
     // ทำงานหลังจาก Object ถูกทำลาย
-    shotgun.enable = false;
+        shotgun.enable = false;
     }
 }

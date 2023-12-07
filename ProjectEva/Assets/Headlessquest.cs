@@ -71,11 +71,13 @@ public class Headlessquest : MonoBehaviour
     {
         if(isclose && Headwitheyeequip && Input.GetKeyDown(KeyCode.E))
         {
+            inventoryPresentCharactor.DeleteItemCharactorEquipment("InventoryHeadwitheyes");
              Instantiate(itemPrefab, transform.position, Quaternion.identity);
              fusedroped = true;
         }
         if(isclose && iswineequip && Input.GetKeyDown(KeyCode.E) && fusedroped)
         {
+            inventoryPresentCharactor.DeleteItemCharactorEquipment("Inventorywine");
              Instantiate(itemPrefabsecond, transform.position, Quaternion.identity);
              Destroy(this.gameObject);
         }

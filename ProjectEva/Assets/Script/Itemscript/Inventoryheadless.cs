@@ -23,7 +23,7 @@ public class Inventoryheadless : MonoBehaviour
 
     // Serialized field for the prefab path
     [SerializeField]
-    private string itemPrefabName = "Eyes";
+    private string itemPrefabName = "Headlesswitheye";
 
     private void Awake()
     {
@@ -70,7 +70,7 @@ public class Inventoryheadless : MonoBehaviour
                 movementScript.ResumeMoving();
                 iscrafting = false;
                 healslider.SetActive(false);
-                // inventoryPresentCharactor.ManageReduceResource("Eyes");
+                inventoryPresentCharactor.ManageReduceResource("Eyes");
                 inventoryPresentCharactor.DeleteItemCharactorEquipment("Inventoryheadless");
                 GameObject prefab = Resources.Load<GameObject>("Prefeb/item/" + itemPrefabName);
                 Debug.Log("Load path: " + "Prefeb/item/" + itemPrefabName);

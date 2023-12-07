@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Headless
   m_EditorClassIdentifier: 
   nameItemCharactor: Maindenhead
-  ItemImage: {fileID: 0}
+  ItemImage: {fileID: 21300000, guid: 7e55eeb3c7457c5478f17f35c45a324f, type: 3}
   scriptItem: Inventoryheadless
   count: 1
   maxCount: 1

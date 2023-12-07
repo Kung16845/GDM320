@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Undergroundkey
   m_EditorClassIdentifier: 
   nameItemCharactor: Undergroundkey
-  ItemImage: {fileID: 0}
+  ItemImage: {fileID: 21300000, guid: 99dabf50ee6d11e45890e7c5c772c634, type: 3}
   scriptItem: Inventoryundergroundkey
   count: 1
   maxCount: 1

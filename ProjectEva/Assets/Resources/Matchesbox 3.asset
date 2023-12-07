@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Matchesbox 3
   m_EditorClassIdentifier: 
   nameItemCharactor: Matchesbox
-  ItemImage: {fileID: 21300000, guid: 005868561c2845642b57975914ea0cce, type: 3}
+  ItemImage: {fileID: 21300000, guid: 74f4b6ad525af20418fb4fc1bf8f2be9, type: 3}
   scriptItem: InventoryMatches
   count: 3
   maxCount: 5

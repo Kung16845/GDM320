@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bolt cutter
   m_EditorClassIdentifier: 
   nameItemCharactor: Bolt Cutter
-  ItemImage: {fileID: 0}
+  ItemImage: {fileID: 21300000, guid: b85048a993a33a84f91a8c132f9a0c88, type: 3}
   scriptItem: InventoryBoltcutter
   count: 1
   maxCount: 1

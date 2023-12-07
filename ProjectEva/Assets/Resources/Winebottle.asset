@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Winebottle
   m_EditorClassIdentifier: 
   nameItemCharactor: Winebottle
-  ItemImage: {fileID: 0}
-  scriptItem: 
+  ItemImage: {fileID: 21300000, guid: 3938d7254b5c1344183c6c3ed73071b6, type: 3}
+  scriptItem: Inventorywine
   count: 1
   maxCount: 1
   isFlashLight: 0

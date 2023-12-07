@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   nameItemCharactor: Pistol
-  ItemImage: {fileID: 21300000, guid: d7d1187b53539574f8646dc4fc33e112, type: 3}
+  ItemImage: {fileID: 21300000, guid: 704c64d70d3c86b44ae6e9b3a77a699c, type: 3}
   scriptItem: InventoryPistol
   count: 1
   maxCount: 1
   isFlashLight: 0
   isOnhand: 1
+  isLock: 0

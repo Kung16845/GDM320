@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Bandage
   m_EditorClassIdentifier: 
   nameItemCharactor: Bandage
-  ItemImage: {fileID: 21300000, guid: 043e542c3e76bb945b1c3a1f51ab23b0, type: 3}
+  ItemImage: {fileID: 21300000, guid: 6c239416d77450947ae76f051f338040, type: 3}
   scriptItem: Bandage
   count: 1
   maxCount: 1
   isFlashLight: 0
   isOnhand: 1
+  isLock: 0
