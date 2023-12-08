@@ -8,7 +8,7 @@ using System.Linq;
 public class ForceandkeyDoor : MonoBehaviour
 {
     private bool isPlayerNear = false;
-    private string uiPanelTag = "Interactiontag"; 
+    private string uiPanelTag = "Interactiontag";
     private string customTextTag = "Interactiontext";
     public int hasKeynumber;
     public InventoryPresentCharactor inventoryPresentCharactor;
@@ -26,7 +26,7 @@ public class ForceandkeyDoor : MonoBehaviour
         soundManager = FindObjectOfType<SoundManager>();
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
-     private void Start()
+    private void Start()
     {
         FindUIElementsByTag();
         soundManager = FindObjectOfType<SoundManager>();
@@ -49,17 +49,17 @@ public class ForceandkeyDoor : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (isPlayerNear)
+        {
+            if (hasKeynumber == numberofkey)
             {
-                if (hasKeynumber == numberofkey)
-                {
-                    customText.text = "I have a key for this.";
-                }
-                else if(hasKeynumber != numberofkey)
-                {
-                    customText.text = custominteractiontext;
-                }
-                ShowEButton();
+                customText.text = "I have a key for this.";
             }
+            else if (hasKeynumber != numberofkey)
+            {
+                customText.text = custominteractiontext;
+            }
+            ShowEButton();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -75,9 +75,9 @@ public class ForceandkeyDoor : MonoBehaviour
     {
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
         {
-            if(removekey)
+            if (removekey)
             {
-            inventoryPresentCharactor.DeleteItemCharactorEquipment(Keyforthisdoor);
+                inventoryPresentCharactor.DeleteItemCharactorEquipment(Keyforthisdoor);
             }
             navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
             soundManager.PlaySound("Dooropen");
@@ -88,7 +88,7 @@ public class ForceandkeyDoor : MonoBehaviour
             soundManager.PlaySound("Doorlocked");
         }
     }
-        private void ShowEButton()
+    private void ShowEButton()
     {
         sceneObject.SetActive(true);
     }
@@ -113,5 +113,12 @@ public class ForceandkeyDoor : MonoBehaviour
         {
             customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
         }
+    }
+
+    private void OnDestroy()
+    {
+        var datainScean = FindAnyObjectByType<SaveAndLoadScean>();
+        var dataobj = datainScean.objectforload.FirstOrDefault(objid => objid.objectID == 1);
+        dataobj.isDestroy = true;
     }
 }
