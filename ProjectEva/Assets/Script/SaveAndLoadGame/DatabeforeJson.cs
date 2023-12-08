@@ -47,3 +47,10 @@ public class DataItemNote
     public string nameSprite;
     public Category category;
 }
+
+[Serializable]
+public class DataObjectLoad
+{   
+    public int objectID;
+    public bool isDestroy;
+}

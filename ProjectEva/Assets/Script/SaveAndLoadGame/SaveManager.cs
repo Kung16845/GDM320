@@ -105,7 +105,7 @@ public class SaveManager : MonoBehaviour
         {
             Directory.CreateDirectory(directoryPath);
         }
-
+        
         File.WriteAllText(targetFilePath, datainventory);
     }
     public void LoadDataInventoryItemNote()
