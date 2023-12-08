@@ -119,7 +119,7 @@ public class InventoryPresentCharactor : MonoBehaviour
     {
 
         var ItemAddCharactors = uIItemListCharactor.Where(name => name.nameItem.text == itemsDataCharactor.nameItemCharactor
-        && name.count != name.maxCount).
+        && name.count != name.maxCount && name.numslot != 14).
         OrderByDescending(num => num.count).FirstOrDefault();
 
         var slotNull = slots.FirstOrDefault(slot => slot.GetComponentInChildren<UIItemCharactor>() == null);
