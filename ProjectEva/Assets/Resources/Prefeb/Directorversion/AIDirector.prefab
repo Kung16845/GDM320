@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5030009214622785825
 MonoBehaviour:
@@ -54,51 +54,26 @@ MonoBehaviour:
   maxXOffset: 0
   maxYOffset: 0
   Stressvalue: 0
+  allResingPoint:
+  - {fileID: 0}
+  - {fileID: 0}
   setSpawns:
   - namePoint: Spawn_1
-    point: {fileID: 2393156089643770697, guid: 593acabc183739148a52ee8a19983cfa, type: 3}
+    point: {fileID: 0}
   - namePoint: Spawn_2
-    point: {fileID: 1248141930581200558, guid: c39ec8a317d7edf4fb0fcfaf243aecf2, type: 3}
+    point: {fileID: 0}
   - namePoint: Spawn_3
-    point: {fileID: 5410357008232515296, guid: 97207b09e004e4e4f952ed0e779fc8d0, type: 3}
+    point: {fileID: 0}
   - namePoint: Spawn_4
-    point: {fileID: 882712991392526034, guid: 5f20cde8b3ba4b045a51648782ed1380, type: 3}
+    point: {fileID: 0}
   - namePoint: Spawn_5
-    point: {fileID: 129165185852935058, guid: 0dbfa3e1e55b98e4eb2342ac37fd70f3, type: 3}
+    point: {fileID: 0}
   - namePoint: Spawn_6
-    point: {fileID: 5047869444455787792, guid: 21e9e3af774513a49ae93b5af3538ecc, type: 3}
+    point: {fileID: 0}
   - namePoint: Spawn_8
-    point: {fileID: 2999564903342387964, guid: ac6f41add40792f469c85871e51198a0, type: 3}
+    point: {fileID: 0}
   - namePoint: Spawn_9
-    point: {fileID: 6986997900671536545, guid: 1ba0700ec45d5d94c934fa3476ed0557, type: 3}
-  - namePoint: Spawn_10
-    point: {fileID: 385558756596111403, guid: d5d3be4d0bd492343a321cfef0360605, type: 3}
-  - namePoint: Spawn_11
-    point: {fileID: 913148491900223632, guid: 1ccc6c22fb3b3f545adedd2a06e2cba8, type: 3}
-  - namePoint: Spawn_12
-    point: {fileID: 4261717083939029264, guid: 8ddf9b58b4bfe954b96b31026ff033ce, type: 3}
-  - namePoint: Spawn_13
-    point: {fileID: 8108171202575035261, guid: 7448e89c829ec3a43b50c6ed92cf5578, type: 3}
-  - namePoint: Spawn_14
-    point: {fileID: 8387453868249634148, guid: 553d72682a6b8fb4d8d9c308a6a39279, type: 3}
-  - namePoint: Spawn_15
-    point: {fileID: 6940569088276402215, guid: 30bae75e4e4d7354eabe65e27763b0f6, type: 3}
-  - namePoint: Spawn_16
-    point: {fileID: 2575874849134521071, guid: 0d48aa949da94f043b810c724cf29e82, type: 3}
-  - namePoint: Spawn_17
-    point: {fileID: 8959589329729194246, guid: 31ef3bc3d509b4d42a57685775173aed, type: 3}
-  - namePoint: Spawn_18
-    point: {fileID: 6626356719382326687, guid: af5e7045efcd4a4478fac730a93565b9, type: 3}
-  - namePoint: Spawn_19
-    point: {fileID: 7048426695878234157, guid: 9d52e30005f279442aaa5a0bc21b6053, type: 3}
-  - namePoint: Spawn_20
-    point: {fileID: 405304503215672598, guid: 77f4da9017d65914993e1616bdab7f1a, type: 3}
-  - namePoint: Spawn_21
-    point: {fileID: 7420661489123869202, guid: f0c837f698613294982625a765b6a6e0, type: 3}
-  - namePoint: Spawn_22
-    point: {fileID: 2570911452796520019, guid: 90988b4ef618e654e92f15e325645a47, type: 3}
-  - namePoint: Spawn_23
-    point: {fileID: 7947015998693057478, guid: 15a56b76baceaef46a2904c7c43ddfe5, type: 3}
+    point: {fileID: 0}
   rooms:
   - nameRoom: Room1
     pointCenterRoom: {fileID: 0}
@@ -171,14 +146,68 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
   - nameRoom: Room14
-    pointCenterRoom: {fileID: 0}
+    pointCenterRoom: {fileID: 3622221584425645615, guid: ff6a158fc141e8d4eb747a88203c389d, type: 3}
     AllpointInRoom:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 8511054795209085508, guid: 0f946f2be1ac3694b896178096303905, type: 3}
+    - {fileID: 3079932953251984096, guid: c3dbe502b4aa42148988b42e7518471a, type: 3}
+    - {fileID: 1826842683431002456, guid: 0aa255f8a9e670641950ab061c132de2, type: 3}
   - nameRoom: Room15
-    pointCenterRoom: {fileID: 0}
-    AllpointInRoom: []
+    pointCenterRoom: {fileID: 9120358319846779160, guid: 4ff2d9e137d3f404ba0cd498550541bd, type: 3}
+    AllpointInRoom:
+    - {fileID: 2215085595761000254, guid: f6bddd29225893c44b13c7cf12ef9d1c, type: 3}
+    - {fileID: 8303142625518524493, guid: 5bfd3cecd879c9546ae65524b94d01bf, type: 3}
+    - {fileID: 509786780562869124, guid: d4c369bde0258a648a22dd6c48d44deb, type: 3}
   - nameRoom: Room16
-    pointCenterRoom: {fileID: 0}
+    pointCenterRoom: {fileID: 3664965799574908344, guid: fd408015a0b10714cb9f18fae7d2f124, type: 3}
+    AllpointInRoom:
+    - {fileID: 4258983631469362658, guid: dfe6b1409fc8d7640a1e462ee7c33bcc, type: 3}
+    - {fileID: 4758650679862619676, guid: 0f676bae20c400049a91ceff51cee921, type: 3}
+    - {fileID: 422308447157577189, guid: fa067fffe0015fd4e8137b93b5dc2a39, type: 3}
+    - {fileID: 1155875152765203501, guid: b2cc90f8638e3e34bb01d3aee2eb77d6, type: 3}
+  - nameRoom: Room17
+    pointCenterRoom: {fileID: 3622337485282726958, guid: c461c80ab65c0bb4d8cf91813f7c9408, type: 3}
+    AllpointInRoom:
+    - {fileID: 5411608436033227840, guid: 580d7f6a405aa7e40bde5c4c2eb11827, type: 3}
+    - {fileID: 3471921295552807391, guid: 241fa9726e8f6a848bb5f6c56a621cbe, type: 3}
+    - {fileID: 3595380640876784008, guid: 2531f7d4e085639409890ebeb9ad1f1f, type: 3}
+    - {fileID: 8916042006643873857, guid: 45f540256ecea254f8116d3ae2f1939e, type: 3}
+    - {fileID: 1501196954743170401, guid: 5defc37b7820bf74a987e375decee2ff, type: 3}
+  - nameRoom: Room18
+    pointCenterRoom: {fileID: 629956576526864944, guid: 68d9d2e6a76abd348a6dc26e6089933b, type: 3}
+    AllpointInRoom:
+    - {fileID: 1389701019927139361, guid: 484195849463e7449a2aee2f807497b2, type: 3}
+    - {fileID: 3986738205101364423, guid: 467feb63dcf52a3439bed343f0322da9, type: 3}
+    - {fileID: 3156383445582318721, guid: ca6f9fd3bd81d8544bec1282b314382d, type: 3}
+  - nameRoom: Room19
+    pointCenterRoom: {fileID: 7092367555782930935, guid: aa90490a148d00d4781af675e2de0c95, type: 3}
+    AllpointInRoom:
+    - {fileID: 2339124275480645589, guid: 88fa6e0b0ac3d4448b76ba9aff0f7458, type: 3}
+    - {fileID: 6655025007603943269, guid: f00d173459a78f3408368c82e6a19449, type: 3}
+  - nameRoom: Room20
+    pointCenterRoom: {fileID: 8656827747934786661, guid: e15604d2ba3b62343b7d6f583a101701, type: 3}
+    AllpointInRoom:
+    - {fileID: 590625421341053892, guid: bb19b3016f6ebf345ae60ee86789603f, type: 3}
+    - {fileID: 9052797216356455810, guid: 2bd65eb954b65af4eb1672859774ce93, type: 3}
+  - nameRoom: Room21
+    pointCenterRoom: {fileID: 3250111999601767751, guid: 64bd1c6882d16614eb73f4e5138d70e9, type: 3}
+    AllpointInRoom:
+    - {fileID: 3287372338720371761, guid: f77893d35eab3c141a9fef71d69303b2, type: 3}
+    - {fileID: 8807044851829574547, guid: 59ab6ac8401c14e48b389fc63aace03a, type: 3}
+    - {fileID: 7865578295319858622, guid: c7beb9a4f2fcc58419465925e1b7885b, type: 3}
+  - nameRoom: Room22
+    pointCenterRoom: {fileID: 4735699054215990571, guid: 80090f46d051ed148a689d03d1c0d91e, type: 3}
+    AllpointInRoom:
+    - {fileID: 7981301460788332609, guid: a8b9a8c0ad2e4af4688364e9da3b20e9, type: 3}
+    - {fileID: 2274307558070627255, guid: 3b30ea37f03ae554b8d2807ce249a35c, type: 3}
+  - nameRoom: Room23
+    pointCenterRoom: {fileID: 6922896799404303565, guid: e2433e8f1d56a79499cd6514dabaed82, type: 3}
+    AllpointInRoom:
+    - {fileID: 6089062570375512192, guid: ee0953bd83f0ebf40adbe02cc204a834, type: 3}
+    - {fileID: 7449333090052547250, guid: f77fe129aeff92148aae236f73822571, type: 3}
+  - nameRoom: Room23
+    pointCenterRoom: {fileID: 3622337485282726958, guid: c461c80ab65c0bb4d8cf91813f7c9408, type: 3}
     AllpointInRoom: []
+  - nameRoom: Room24
+    pointCenterRoom: {fileID: 7889357863490118508, guid: af98db3b4ef9b2c40bbd7dcaa3b2bd35, type: 3}
+    AllpointInRoom:
+    - {fileID: 5616480538269336652, guid: 96093a6521ed8534dbdc4cb97f7a160b, type: 3}

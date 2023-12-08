@@ -24,7 +24,7 @@ public class BoxItemsCharactor : MonoBehaviour, IDropHandler
         {
             uIItemCharactor.parentAfterDray = transform;
         }
-
+        
 
     }
 }
