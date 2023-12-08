@@ -23,8 +23,7 @@ public class InventorySlots : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         var slot = GetComponentInChildren<UIItemCharactor>();
-        var listUIITems = inventoryPresentCharactor.uIItemListCharactor;
-        var listUIITemsInbox = inventoryPresentCharactor.uIItemListCharactorInboxs;
+        
         GameObject uIitem = eventData.pointerDrag;
         UIItemCharactor uIItemCharactor = uIitem.GetComponent<UIItemCharactor>();
         if (slot == null && uIItemCharactor != null)
@@ -60,10 +59,7 @@ public class InventorySlots : MonoBehaviour, IDropHandler
                 Vector3 newScale = new Vector3(1f, 1f, 1f);
                 uIItemCharactor.GetComponent<RectTransform>().localScale = newScale;
                 uIItemCharactor.parentAfterDray = transform;
-                var boxItems = uIItemCharactor.boxInventory.GetComponent<BoxItemsCharactor>();
-                var checkUIitem = listUIITems.FirstOrDefault(uIitem => uIitem == uIItemCharactor);
-                if (uIItemCharactor.parentAfterDray.transform == this.transform && checkUIitem == null)
-                    boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
+
 
             }
 
@@ -115,15 +111,6 @@ public class InventorySlots : MonoBehaviour, IDropHandler
                 Vector3 newScale = new Vector3(1f, 1f, 1f);
                 slot.GetComponent<RectTransform>().localScale = newScale;
                 uIItemCharactor.parentAfterDray = transform;
-                var checkUIitemInbox = listUIITemsInbox.FirstOrDefault(uIitem => uIitem == slot);
-                var checkUIitem = listUIITems.FirstOrDefault(uIitem => uIitem == uIItemCharactor);
-
-                if (uIItemCharactor.parentAfterDray.transform == this.transform
-                && checkUIitemInbox == null && checkUIitem == null)
-                {
-                    boxItems.MoveVariableFromListCharactorBoxsToListCharactor(uIItemCharactor);
-                    boxItems.MoveVariableFromlistCharactorToListCharactorBoxs(slot);
-                }
             }
         }
         else if (slot != null && equipment != null && !slot.isLock)

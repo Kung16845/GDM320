@@ -16,7 +16,6 @@ public class InventoryPresentCharactor : MonoBehaviour
     public bool openInven;
     public UIItemCharactor uIItemCharactorPrefeb;
     public List<UIItemCharactor> uIItemListCharactor;
-    public List<UIItemCharactor> uIItemListCharactorInboxs;
     public float toggleCooldown = 0.5f; // Adjust the cooldown time as needed
     private float timeSinceLastToggle = 0.5f;
     
@@ -120,7 +119,7 @@ public class InventoryPresentCharactor : MonoBehaviour
     {
 
         var ItemAddCharactors = uIItemListCharactor.Where(name => name.nameItem.text == itemsDataCharactor.nameItemCharactor
-        && name.count != name.maxCount).
+        && name.count != name.maxCount && name.numslot != 14).
         OrderByDescending(num => num.count).FirstOrDefault();
 
         var slotNull = slots.FirstOrDefault(slot => slot.GetComponentInChildren<UIItemCharactor>() == null);
