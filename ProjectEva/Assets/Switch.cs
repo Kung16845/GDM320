@@ -15,6 +15,7 @@ public class Switch: MonoBehaviour
     public GameObject greenlight;
     public GameObject yellowlight;
     public SoundManager soundManager;
+    public GameObject objecttoremove;
     public TextMeshProUGUI customText;
     public InventoryPresentCharactor inventoryPresentCharactor;
     public string custominteractiontext;
@@ -22,6 +23,7 @@ public class Switch: MonoBehaviour
     public bool fusehasequiped;
     public bool fuelhasequiped;
     public bool allset;
+    public bool yellowon;
     private void Start()
     {
         isclose = false;
@@ -30,6 +32,7 @@ public class Switch: MonoBehaviour
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
         greenlight.SetActive(false);
         yellowlight.SetActive(false);
+        bool yellowon = false;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -90,12 +93,14 @@ public class Switch: MonoBehaviour
         }
         if(isclose && allset && Input.GetKeyDown(KeyCode.E)) 
         {
+            yellowon = true;
+            objecttoremove.SetActive(false);
             greenlight.SetActive(true);
             yellowlight.SetActive(false);
         }
-        else if(allset == true)
+        else if(allset == true && !yellowon)
         {   
-            yellowlight.SetActive(true);
+            yellowlight.SetActive(true) ;
             redlight.SetActive(false);
         }
     }
