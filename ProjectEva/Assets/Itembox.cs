@@ -9,14 +9,17 @@ public class Itembox : MonoBehaviour
     private string customTextTag = "Interactiontext";
     public GameObject sceneObject;
     public SoundManager soundManager;
+    public GameObject Motherinvent;
     public GameObject invent;
     public GameObject Chest;
     public GameObject Closeequipment;
     public TextMeshProUGUI customText;
     public string custominteractiontext;
     public bool isclose;
+    public bool inventisopen;
     private void Start()
     {
+        inventisopen = false;
         isclose = false;
         FindUIElementsByTag();
         soundManager = FindObjectOfType<SoundManager>();
@@ -41,13 +44,21 @@ public class Itembox : MonoBehaviour
     {
         if(isclose && Input.GetKeyDown(KeyCode.E))
         {
+            if(!inventisopen)
+            {
+            sceneObject.SetActive(false);
+            Motherinvent.SetActive(true);
             invent.SetActive(true);
             Chest.SetActive(true);
             Closeequipment.SetActive(false);
-            if(Input.GetKeyDown(KeyCode.E))
+            inventisopen = true;
+            }
+            else
             {
-                invent.SetActive(false);
                 Chest.SetActive(false);
+                Closeequipment.SetActive(true);
+                Motherinvent.SetActive(false);
+                inventisopen = false;
             }
         }
     }
@@ -59,9 +70,10 @@ public class Itembox : MonoBehaviour
 
     private void HideEButton()
     {
-        invent.SetActive(false);
+        invent.SetActive(true);
         Chest.SetActive(false);
         Closeequipment.SetActive(true);
+        Motherinvent.SetActive(false);
         sceneObject.SetActive(false);
         customText.text = "";
         
