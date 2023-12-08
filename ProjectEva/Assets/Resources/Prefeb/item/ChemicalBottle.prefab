@@ -145,8 +145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}
-  itemsDataCharactor: {fileID: 0}
-  Soundname: 
+  itemsDataCharactor: {fileID: 11400000, guid: 9aaea7dc510929944b5009569d5e2469, type: 2}
+  Soundname: Bottlepickup
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
-  custominteractiontext: 
+  custominteractiontext: Chemical bottle ?

@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemImage: {fileID: 21300000, guid: d82bb0a5bcfef6b4896e5c3ad50c0041, type: 3}
   scriptItem: Inventorycloth
   count: 1
-  maxCount: 1
+  maxCount: 3
   isFlashLight: 0
   isOnhand: 1
   isLock: 0

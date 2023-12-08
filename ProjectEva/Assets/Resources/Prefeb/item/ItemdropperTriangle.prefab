@@ -59,6 +59,12 @@ MonoBehaviour:
     itemPrefab: {fileID: 3853258787167619424, guid: 975429068bc6d1f458c94c7efeaa9f92, type: 3}
   - itemName: Matchesbox
     itemPrefab: {fileID: 4983937922896719207, guid: d26ab28588cb27848a715aff2da6ae60, type: 3}
+  - itemName: Sanitybottle
+    itemPrefab: {fileID: 3808701206220360571, guid: 23526c1241c2bda49a5a6c916ad83262, type: 3}
+  - itemName: Chemicalbottle
+    itemPrefab: {fileID: 302327245651969114, guid: 8bc7e5d04aa47494e9e903399a7c7fb8, type: 3}
+  - itemName: Cloth
+    itemPrefab: {fileID: 3755858615590644053, guid: 9429fc06d5043e041bdcf07caea26453, type: 3}
   sceneObject: {fileID: 0}
   soundManager: {fileID: 0}
   Soundname: Fabric
