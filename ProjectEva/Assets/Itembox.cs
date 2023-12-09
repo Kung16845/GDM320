@@ -17,12 +17,16 @@ public class Itembox : MonoBehaviour
     public string custominteractiontext;
     public bool isclose;
     public bool inventisopen;
+    public CanvasGroup introCanvasGroup;
+    private bool firsttime = false;
     private void Start()
     {
         inventisopen = false;
         isclose = false;
         FindUIElementsByTag();
         soundManager = FindObjectOfType<SoundManager>();
+        introCanvasGroup.alpha = 0f;
+        introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -35,7 +39,7 @@ public class Itembox : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-        {
+        { 
             isclose = false;
             HideEButton();
         }
@@ -46,6 +50,12 @@ public class Itembox : MonoBehaviour
         {
             if(!inventisopen)
             {
+            if (!firsttime)
+            {
+            introCanvasGroup.alpha = 1f;
+            StartCoroutine(StartCounting());
+            firsttime = true;
+            }
             sceneObject.SetActive(false);
             Motherinvent.SetActive(true);
             invent.SetActive(true);
@@ -93,5 +103,23 @@ public class Itembox : MonoBehaviour
         {
             customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
         }
+    }
+    IEnumerator StartCounting()
+    {
+        yield return new WaitForSecondsRealtime(7f);
+
+        // Gradually decrease alpha over 1 second
+        float fadeDuration = 3f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            introCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the alpha is 0 when fading is complete
+        introCanvasGroup.alpha = 0f;
     }
 }
