@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapDuration: 15
-  sliderFillRate: 400
+  sliderFillRate: 750
   trapController: {fileID: 0}
   slider: {fileID: 0}
   sliderImage: {fileID: 0}
