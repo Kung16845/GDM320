@@ -455,7 +455,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentAfterDray: {fileID: 0}
   parentBeforeDray: {fileID: 0}
-  Onhand: {fileID: 0}
+  slotEqicpmentOnHand: {fileID: 0}
+  slotEqicpmentFlashLight: {fileID: 0}
+  boxInventory: {fileID: 0}
   nameItem: {fileID: 6164139961213261642}
   countItemText: {fileID: 6830344284479711957}
   imageItem: {fileID: 7905602635943586498}
@@ -463,6 +465,7 @@ MonoBehaviour:
   scriptItem: 
   count: 0
   maxCount: 0
+  numslot: 0
   isLock: 0
   isFlashLight: 0
   isOnhand: 0
@@ -532,7 +535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: baab8ca504bd8bc47afc41413ebdf42a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 432d6f5f8e2238a4c8d988e2a53cc64d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

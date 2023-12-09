@@ -1,23 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+
 
 public class IntroPanel : MonoBehaviour
 {
     public TextMeshProUGUI infoText;
     public bool gamePaused = true;
+    private bool canclose = false;
 
     void Start()
     {
         // Set the panel as active and pause the game
         SetPanelActive(true);
+        StartCoroutine(StartCounting());
         PauseGame();
     }
 
     void Update()
     {
         // Check for any key press to resume the game
-        if (gamePaused && Input.anyKeyDown)
+        if (gamePaused && Input.anyKeyDown && canclose)
         {
             ResumeGame();
             gamePaused = false;
@@ -28,14 +33,13 @@ public class IntroPanel : MonoBehaviour
     {
         // Pause the game by setting time scale to 0
         Time.timeScale = 0f;
-
-        // Show a message in the TextMeshProUGUI text
-        if (infoText != null)
-        {
-            infoText.text = "Game Paused\nPress any key to resume";
-        }
     }
-
+    private IEnumerator StartCounting()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        canclose = true;
+        
+    }
     private void ResumeGame()
     {
         // Resume the game by setting time scale to 1
