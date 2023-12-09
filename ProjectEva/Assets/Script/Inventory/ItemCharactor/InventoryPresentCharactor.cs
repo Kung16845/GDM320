@@ -26,7 +26,7 @@ public class InventoryPresentCharactor : MonoBehaviour
     {
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
-         introCanvasGroup.alpha = 0f;
+        introCanvasGroup.alpha = 0f;
         introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
 
     }
