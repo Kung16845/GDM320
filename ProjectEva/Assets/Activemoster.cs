@@ -13,6 +13,7 @@ public class Activemonter : MonoBehaviour
         {
             MonsterToActivate.SetActive(true);
             directorAI.MovePositionEnemyChangeFloor();
+            Destroy(this.gameObject);
         }
     }
 }
