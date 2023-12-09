@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -7,7 +9,6 @@ public class Hp : MonoBehaviour
 {
     public float maxhp;
     public float currenthp;
-    public GameObject player;
     public TextMeshProUGUI healthText;
     public CanvasGroup canvasGroup; // Reference to the CanvasGroup component.
     public float lowHpThreshold = 30f; // HP threshold for triggering the alpha change.
@@ -17,13 +18,19 @@ public class Hp : MonoBehaviour
     private float timeRemaining = 3f; // Time remaining before reloading the scene.
     private bool isReloading = false;
 
+    GameObject ThatPlayer;
+    Animation_PlayerMovement player;
+
     void Start()
     {
         currenthp = maxhp;
         sanityScaleController = FindObjectOfType<SanityScaleController>();
         canvasGroup.alpha = 0f; // Assuming this script is attached to the same GameObject as the CanvasGroup.
+
+        ThatPlayer = GameObject.FindGameObjectWithTag("Player_Sprite");
+        player = ThatPlayer.GetComponent<Animation_PlayerMovement>();
     }
-    
+
     void Update()
     {
         UpdateHealthText();
@@ -42,6 +49,8 @@ public class Hp : MonoBehaviour
 
         if (currenthp <= 0f && !isReloading)
         {
+            player.DEAD();
+
             isReloading = true;
             reloadScript.StartReloadScene(); // Call the function in the ReloadSceneOnZeroHP script.
         }
@@ -52,6 +61,9 @@ public class Hp : MonoBehaviour
         if (currenthp > 0)
         {
             currenthp -= damage * sanityScaleController.GetDamageScale();
+
+            player.GetHurt();
+            StartCoroutine(OneSec());
             // currenthp = Mathf.Clamp(currenthp, 0, maxhp);
         }
         else
@@ -86,5 +98,12 @@ public class Hp : MonoBehaviour
             // Reload the scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+
+    IEnumerator OneSec()
+    {
+        yield return new WaitForSeconds(0.5f);
+        player.exitSpecial();
     }
 }
