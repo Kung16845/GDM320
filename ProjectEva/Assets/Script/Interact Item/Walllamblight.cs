@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class Walllamblight : MonoBehaviour
 {
     public GameObject sceneObject;
     public TextMeshProUGUI customText;
     private string custominteractiontext;
+    private string uiPanelTag = "Interactiontag";
+    private string customTextTag = "Interactiontext";
     public bool lightquip;
     public bool fuelequip;
     public bool fuelrefill;
@@ -17,6 +20,7 @@ public class Walllamblight : MonoBehaviour
     public SoundManager soundManager;
     private void Start()
     {
+        FindUIElementsByTag();
         lightquip = false;
         fuelequip = false;
         HideEButton();
@@ -115,6 +119,22 @@ public class Walllamblight : MonoBehaviour
     {
         sceneObject.SetActive(false);
         customText.text = "";
+    }
+    private void FindUIElementsByTag()
+    {
+        // Find UI panel by tag
+        GameObject[] sceneObjects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.CompareTag(uiPanelTag)).ToArray();
+        if (sceneObjects.Length > 0)
+        {
+            sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
+        }
+
+        // Find custom text by tag
+        TextMeshProUGUI[] customTexts = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>().Where(obj => obj.CompareTag(customTextTag)).ToArray();
+        if (customTexts.Length > 0)
+        {
+            customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
+        }
     }
 
 }
