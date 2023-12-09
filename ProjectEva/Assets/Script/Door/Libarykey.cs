@@ -16,10 +16,20 @@ public class Libarykey : MonoBehaviour
     public string custominteractiontext;
     private bool canPickup;
 
+    private void Awake()
+    {
+        FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();
+        HideEButton();
+        customText.text = custominteractiontext;
+        canPickup = false;
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+    }
     private void Start()
     {
         // Use GetComponentInParent to find the keyinventory script on the player or any parent GameObject.
         FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();
         HideEButton();
         customText.text = custominteractiontext;
         canPickup = false;

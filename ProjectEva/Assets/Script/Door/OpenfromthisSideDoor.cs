@@ -17,10 +17,12 @@ public class OpenfromthisSideDoor : MonoBehaviour
     public string custominteractiontext;
     public void Awake()
     {
+        soundManager = FindAnyObjectByType<SoundManager>();
         FindUIElementsByTag();
     }
     public void Start()
     {
+        soundManager = FindAnyObjectByType<SoundManager>();
         FindUIElementsByTag();
     }
     private void OnTriggerEnter2D(Collider2D collision)
