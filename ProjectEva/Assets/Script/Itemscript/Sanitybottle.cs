@@ -15,6 +15,15 @@ public class Sanitybottle : MonoBehaviour
     public GameObject healslider;
     public InventoryPresentCharactor inventoryPresentCharactor;
 
+    GameObject ThatPlayer;
+    Animation_PlayerMovement player;
+
+    public void Start()
+    {
+        ThatPlayer = GameObject.FindGameObjectWithTag("Player_Sprite");
+        player = ThatPlayer.GetComponent<Animation_PlayerMovement>();
+    }
+
     private void Awake()
     {
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
@@ -38,13 +47,15 @@ public class Sanitybottle : MonoBehaviour
     {   
         if (Input.GetKey(KeyCode.B))
         {   
-            
+            player.GetSanityBottle();
             healslider.SetActive(true);
             isHealing = true;
             slider.value += drinkSpeed * Time.deltaTime;
             movementScript.StopMoving();
             if (slider.value >= maxHealingValue)
-            {   
+            {
+                player.exitSpecial();
+
                 // Heal the player and reset the slider.
                 playersanity.HealSanity(healAmount);
                 slider.value = 0f;
@@ -64,6 +75,8 @@ public class Sanitybottle : MonoBehaviour
                 isHealing = false;
                 healslider.SetActive(false);
                 movementScript.ResumeMoving(); // Resume player movement.
+
+                player.exitSpecial();
             }
         }
     }

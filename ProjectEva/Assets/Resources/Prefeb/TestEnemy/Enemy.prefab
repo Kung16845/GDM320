@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6061143507162268784
 Transform:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 3}
+  m_Size: {x: 2, y: 2.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8a5a9cb0943ac4f94e1faf7beef10c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VeloWithScript: {fileID: 4920418984444432624}
   agent: {fileID: 2459817810504981418}
   velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &4920418984444432624
@@ -697,7 +698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3198771864972284519
 Transform:
   m_ObjectHideFlags: 0

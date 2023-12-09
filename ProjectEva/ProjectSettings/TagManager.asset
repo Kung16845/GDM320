@@ -17,6 +17,7 @@ TagManager:
   - Interactiontag
   - Interactiontext
   - Teleporter
+  - Player_Sprite
   layers:
   - Default
   - TransparentFX
