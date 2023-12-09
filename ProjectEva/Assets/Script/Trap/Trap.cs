@@ -14,11 +14,18 @@ public class Trap : MonoBehaviour
     public float sliderValue = 0.0f;
     public SoundManager soundManager;
 
+
+    GameObject ThatPlayer;
+    Animation_PlayerMovement player;
+
     void Start()
     {
         soundManager = FindObjectOfType<SoundManager>();
+        ThatPlayer = GameObject.FindGameObjectWithTag("Player_Sprite");
+        player = ThatPlayer.GetComponent<Animation_PlayerMovement>();
+
     }
-    
+
     void Update()
     {
         if (isActivated)
@@ -68,6 +75,7 @@ public class Trap : MonoBehaviour
             soundManager.PlaySound("Trapped");
             isActivated = true;
             trapController.PlayerHitByTrap();
+            player.HitByTrap();
         }
     }
 
@@ -77,8 +85,8 @@ public class Trap : MonoBehaviour
         sliderValue = 0.0f;
         currentDuration = 0.0f;
 
+        player.exitSpecial();
         // Reset the child Image color to its normal state
-
         trapController.PlayerReleaseTrap();
     }
 

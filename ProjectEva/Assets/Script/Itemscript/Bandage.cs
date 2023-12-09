@@ -13,6 +13,15 @@ public class Bandage : MonoBehaviour
     public GameObject healslider;
     public InventoryPresentCharactor inventoryPresentCharactor;
 
+    GameObject ThatPlayer;
+    Animation_PlayerMovement player;
+
+    public void Start()
+    {
+        ThatPlayer = GameObject.FindGameObjectWithTag("Player_Sprite");
+        player = ThatPlayer.GetComponent<Animation_PlayerMovement>();
+    }
+
     private void Awake()
     {
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
@@ -35,14 +44,15 @@ public class Bandage : MonoBehaviour
     void Update()
     {   
         if (Input.GetKey(KeyCode.B))
-        {   
-            
+        {
+            player.GetBandage();
             healslider.SetActive(true);
             isHealing = true;
             slider.value += healingSpeed * Time.deltaTime;
             movementScript.StopMoving();
             if (slider.value >= maxHealingValue)
-            {   
+            {
+                player.exitSpecial();
                 // Heal the player and reset the slider.
                 playerHp.HealHp(healAmount);
                 slider.value = 0f;
@@ -57,6 +67,8 @@ public class Bandage : MonoBehaviour
         {
             if (isHealing)
             {
+                player.exitSpecial();
+
                 // Cancel healing if the button is released before the slider reaches its maximum value.
                 slider.value = 0f;
                 isHealing = false;
