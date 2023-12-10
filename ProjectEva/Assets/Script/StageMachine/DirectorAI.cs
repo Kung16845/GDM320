@@ -30,8 +30,9 @@ namespace Enemy_State
         }
         public void ChangeFloor()
         {
-            CheckClosestResingPoint();
+            
             MovePositionEnemyChangeFloor();
+            CheckClosestResingPoint();
         }
         public void MovePositionEnemyChangeFloor()
         {
@@ -52,7 +53,7 @@ namespace Enemy_State
             foreach (var positionResingPoint in allResingPoint)
             {
                 float positionDistance = Vector3.Distance(positionResingPoint.position,enemynormal.transform.position);
-                if (positionDistance < distanceRestingPoint  )
+                if (positionDistance < distanceRestingPoint )
                 {   
                     distanceRestingPoint = positionDistance;
                     newRestingPoint = positionResingPoint;

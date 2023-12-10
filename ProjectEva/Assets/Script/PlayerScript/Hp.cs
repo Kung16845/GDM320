@@ -18,6 +18,8 @@ public class Hp : MonoBehaviour
     private float timeRemaining = 3f; // Time remaining before reloading the scene.
     private bool isReloading = false;
 
+    public NewMovementPlayer PlayerMovement;
+
     GameObject ThatPlayer;
     Animation_PlayerMovement player;
 
@@ -50,6 +52,7 @@ public class Hp : MonoBehaviour
         if (currenthp <= 0f && !isReloading)
         {
             player.DEAD();
+            PlayerMovement.speed = 0f;
 
             isReloading = true;
             reloadScript.StartReloadScene(); // Call the function in the ReloadSceneOnZeroHP script.
@@ -68,6 +71,9 @@ public class Hp : MonoBehaviour
         }
         else
         {
+            player.DEAD();
+            PlayerMovement.speed = 0f;
+
             // Call the StartReloadScene function when HP reaches 0.
             reloadScript.StartReloadScene();
         }

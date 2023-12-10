@@ -18,6 +18,7 @@ public class Animation_PlayerMovement : MonoBehaviour
     public Animation_ItemWithPlayer item;
 
     public Pistol GunHolder;
+    public Shotgun ShotGunHolder;
 
     string currentActiveLayer = "nothing";
 
@@ -44,7 +45,7 @@ public class Animation_PlayerMovement : MonoBehaviour
                 switch (checkItemOnHand())
                 {
                     case "Pistol": resetAnimLayerTo("HoldGun"); break;
-
+                    case "Shotgun": resetAnimLayerTo("ShotGun"); break;
                     default: resetAnimLayerTo("HoldItem"); 
                         
                         //PlayerOnItemHolder.SetActive(true); item.changItemOnHandTo(checkItemOnHand());
@@ -57,6 +58,12 @@ public class Animation_PlayerMovement : MonoBehaviour
             {
                 if (GunHolder.isAiming) { resetAnimLayerTo("AimGun"); }
                 else if (GunHolder.isReloading) { resetAnimLayerTo("ReloadGun"); }
+                else { resetAnimLayerTo("HoldGun"); }
+            }
+
+            if (currentActiveLayer == "ShotGun" || currentActiveLayer == "ReloadShotGun")
+            {
+                if (GunHolder.isReloading) { resetAnimLayerTo("ReloadGun"); }
                 else { resetAnimLayerTo("HoldGun"); }
             }
 
