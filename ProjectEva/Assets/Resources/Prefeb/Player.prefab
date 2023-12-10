@@ -607,6 +607,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 0}
   lowHpThreshold: 30
   reloadScript: {fileID: 0}
+  PlayerMovement: {fileID: 7537813483175652853}
 --- !u!114 &8069690571805258274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,6 +981,7 @@ MonoBehaviour:
   PlayerOnItemHolder: {fileID: 1963964718688978218}
   item: {fileID: 5149480646510549963}
   GunHolder: {fileID: 0}
+  ShotGunHolder: {fileID: 0}
 --- !u!114 &4768181465436222030
 MonoBehaviour:
   m_ObjectHideFlags: 0
