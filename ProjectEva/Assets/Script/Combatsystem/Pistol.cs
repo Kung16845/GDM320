@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Pistol : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float bulletForce = 10f;
     [SerializeField] public int maxAmmo = 10;
-    [SerializeField] public int ammoInChamber = 5;
+    [SerializeField] public int ammoInChamber;
     [SerializeField] float bulletDamage = 1.0f;
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float maxAccuracy = 1.0f;
@@ -16,10 +17,12 @@ public class Pistol : MonoBehaviour
     [SerializeField] float accuracyIncreaseRate = 0.2f;
     [SerializeField] float accuracyDecreaseRate = 0.1f;
     [SerializeField] float reloadTime = 2.0f;
-    [SerializeField] GameObject accuracyCircle; // Reference to the accuracy circle GameObject.
+    [SerializeField] Image accuracyCircle; // Reference to the accuracy circle GameObject.
+    public string bulletname;
+    public bool isReloadCanceled = false;
     private SanityScaleController sanityScaleController;
     public float currentAccuracy = 0.2f;
-    private Transform firePoint;
+    public Transform firePoint;
     private float lastShotTime;
     public bool isAiming;
     public bool isReloading;
@@ -27,70 +30,98 @@ public class Pistol : MonoBehaviour
     private int bulletsToReload;
     private GunSpeedManager gunSpeedManager;
     public ObjectPolling SoundWave;
+    public OnOffLight onOffLight;
     public bool isshoot = false;
+    private bool playaimsound = false;  
     public SoundManager soundManager;
     public TrapController trapController;
-
+    public Canvas canvas;
+    public bool cylinderplaying;
+    public InventoryPresentCharactor inventoryPresentCharactor;
     // New variables for ammo
     public int currentAmmo; // Current total ammo the player has.
-    
+    public bool enable;
+
+    void Awake()
+    {   
+        initializevariable();
+    }
     void Start()
     {
         initializevariable();
     }
 
     void Update()
-    {
-        RotateTowardsMouse();
-        Decreasemaxacrrancywhilemoving();
-        if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
-        {   
-            createcrosshaircircle();
-        }
-        else
-        {   
-            removecrosshaircircle();
-        }
-        float scaledAccuracy = 0.05f / currentAccuracy;
-        accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
+    {   
+        currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Pistol Ammo");
+        if(enable && !inventoryPresentCharactor.openInven)
+        { 
+            RotateTowardsMouse();
+            Decreasemaxacrrancywhilemoving();
+            if (Input.GetMouseButton(1) && !gunSpeedManager.isRunning)
+            {   
+                if(!playaimsound)
+                {
+                    soundManager.PlaySound("ReadyAim");
+                    playaimsound = true;
+                }
+                createcrosshaircircle();
+            }
+            else if(Input.GetMouseButtonUp(1))
+            {
+                gunSpeedManager.RestoreNormalSpeed();
+            }
+            else
+            {   
+                removecrosshaircircle();
+            }
+            float scaledAccuracy = 1.0f /currentAccuracy;
+            accuracyCircle.transform.localScale = new Vector3(scaledAccuracy, scaledAccuracy, 1f);
 
-        if (isReloading)
-        {
-            gunSpeedManager.ReduceSpeedDuringReload();
-            if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) // Check if right mouse button is pressed.
+            if (isReloading)
             {
-                cancelreload();
+                gunSpeedManager.ReduceSpeedDuringReload();
+                if (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.LeftShift)) 
+                {
+                    StartCoroutine(WaitBeforeNextReload());
+                    cancelreload();
+                }
+                else if (Time.time - reloadStartTime >= reloadTime)
+                {
+                    FinishReload();
+                }
             }
-            else if (Time.time - reloadStartTime >= reloadTime)
+            else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning && !isReloadCanceled)
             {
-                FinishReload();
+                Shoot();
+                lastShotTime = Time.time;
             }
-        }
-        else if (Input.GetMouseButtonDown(0) && ammoInChamber > 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
-        {
-            Shoot();
-            lastShotTime = Time.time;
-        }
-        else if (Input.GetMouseButtonDown(0) && ammoInChamber == 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
-        {
-            soundManager.PlaySound("Drymag");
-        }
-        else if (Input.GetKeyDown(KeyCode.R) && !gunSpeedManager.isRunning && ammoInChamber < maxAmmo && !isAiming)
-        {
-            // Check if the player has enough total ammo to reload.
-            if (currentAmmo > 0)
+            else if (Input.GetMouseButtonDown(0) && ammoInChamber == 0 && Time.time - lastShotTime >= cooldownTime && !gunSpeedManager.isRunning)
             {
-                StartReload();
+                soundManager.PlaySound("Drymag");
             }
+            else if (Input.GetKeyDown(KeyCode.R) && !gunSpeedManager.isRunning && ammoInChamber < maxAmmo && !isAiming)
+            {
+                // Check if the player has enough total ammo to reload.
+                if (currentAmmo > 0)
+                {
+                    StartReload();
+                }
+            }
+            movemouseposition();
         }
-        movemouseposition();
     }
 
     void movemouseposition()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure the circle is at the same depth as the player.
-        accuracyCircle.transform.position = mousePosition;
+        // Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // mousePosition.z = 0; // Ensure the circle is at the same depth as the player.
+         // Get the mouse position in screen space
+        Vector3 mousePosition = Input.mousePosition;
+        // Convert the mouse position to Canvas space
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, mousePosition, canvas.worldCamera, out Vector2 canvasMousePosition);
+
+        accuracyCircle.rectTransform.localPosition = canvasMousePosition;
     }
     void RotateTowardsMouse()
     {
@@ -134,8 +165,15 @@ public class Pistol : MonoBehaviour
     }
     IEnumerator Playcockinlastbullet()
     {
-        yield return new WaitForSeconds(1.5f);
-            soundManager.PlaySound("Cock"); 
+        if(!cylinderplaying)
+        {
+        cylinderplaying = true;
+        yield return new WaitForSeconds(2);
+        soundManager.PlaySound("Pushcyclinder"); 
+        yield return new WaitForSeconds(1);
+        soundManager.PlaySound("Cock"); 
+        cylinderplaying = false;
+        }
     }
     IEnumerator PlayPullmag()
     {
@@ -143,6 +181,13 @@ public class Pistol : MonoBehaviour
         soundManager.PlaySound("Pullmag"); 
         yield return new WaitForSeconds(0.8f);
         soundManager.PlaySound("Ammoshelldrop");
+    }
+    IEnumerator WaitBeforeNextReload()
+    {
+        isReloadCanceled = true;
+        StartCoroutine(Playcockinlastbullet());
+        yield return new WaitForSeconds(3f); // Wait for 3 seconds
+        isReloadCanceled = false; // Reset the reload canceled flag after waiting
     }
     void cancelreload()
     {
@@ -157,7 +202,7 @@ public class Pistol : MonoBehaviour
         {
             decreaseammowhenreload();
             
-            if (bulletsToReload == 0 || currentAmmo == 0)
+            if (bulletsToReload == 0 || currentAmmo == 0 && !cylinderplaying) 
             {
                 // No more bullets to reload and only one bullet left in the chamber, play the "Cock" sound.
                 StartCoroutine(Playcockinlastbullet());
@@ -166,8 +211,6 @@ public class Pistol : MonoBehaviour
         else
         {
             isReloading = false;
-            // Restore the player's normal speed when the reload is finished.
-            Debug.Log("I call");   
             gunSpeedManager.RestoreNormalSpeed();
         }
     }
@@ -187,19 +230,31 @@ public class Pistol : MonoBehaviour
         ammoInChamber++;
         bulletsToReload--;
         currentAmmo--;
+        inventoryPresentCharactor.ManageReduceResource(bulletname);
         reloadStartTime = Time.time; // Start the reload of the next bullet.
+        StartCoroutine(reloadsound());
+    }
+    IEnumerator reloadsound()
+    {
         soundManager.PlaySound("Reload");
+        yield return new WaitForSeconds(0.8f);
+        soundManager.PlaySound("Cylinder");
+        yield return new WaitForSeconds(0.5f);
     }
     void initializevariable()
     {
-        firePoint = transform.Find("FirePoint");
+        // firePoint = GameObject.FindGameObjectWithTag("FirePoint").transform;
         lastShotTime = -cooldownTime;
         isAiming = false;
         isReloading = false;
         bulletsToReload = 0;
         sanityScaleController = FindObjectOfType<SanityScaleController>();
+        SoundWave =  FindObjectOfType<ObjectPolling >();
+        onOffLight =  FindObjectOfType<OnOffLight>();
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
+        trapController = FindObjectOfType<TrapController>();
         soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
     void createcrosshaircircle()
     {
@@ -207,7 +262,7 @@ public class Pistol : MonoBehaviour
         {
             gunSpeedManager.ReduceSpeedDuringAimming();
         }
-        accuracyCircle.SetActive(true);
+        accuracyCircle.gameObject.SetActive(true);
         isAiming = true;
         if(currentAccuracy > maxAccuracy)
         {
@@ -222,15 +277,15 @@ public class Pistol : MonoBehaviour
     {
         if(!trapController.stuck)
         {
-            gunSpeedManager.RestoreNormalSpeed();
+            playaimsound = false;
             isAiming = false;
-            accuracyCircle.SetActive(false);
+            accuracyCircle.gameObject.SetActive(false);
             currentAccuracy = Mathf.Lerp(currentAccuracy, minAccuracy , accuracyDecreaseRate * Time.deltaTime);
         }
     }
     void Decreasemaxacrrancywhilemoving()
     {
-        if(!gunSpeedManager.IsPlayerNotMoving())
+        if(!gunSpeedManager.IsPlayerNotMoving() && !onOffLight.isopen)
         {
             maxAccuracy = 0.4f;
             if(currentAccuracy > maxAccuracy)
@@ -238,12 +293,31 @@ public class Pistol : MonoBehaviour
                 accuracyIncreaseRate = 0;
                 accuracyDecreaseRate = 15;
             }
+
         }
-        else if(gunSpeedManager.IsPlayerNotMoving())
+        else if(!gunSpeedManager.IsPlayerNotMoving() && onOffLight.isopen)
+        {
+            maxAccuracy = 0.2f;
+            if(currentAccuracy > maxAccuracy)
+            {
+                accuracyIncreaseRate = 0;
+                accuracyDecreaseRate = 15;
+            }
+
+        }
+        else if(gunSpeedManager.IsPlayerNotMoving() && onOffLight.isopen)
+        {
+            maxAccuracy = 0.8f;
+            accuracyDecreaseRate = 3;
+            accuracyIncreaseRate = 0.2f;
+
+        }
+        else 
         {
             maxAccuracy = 1;
             accuracyDecreaseRate = 3;
             accuracyIncreaseRate = 0.2f;
         }
     }
+    
 }

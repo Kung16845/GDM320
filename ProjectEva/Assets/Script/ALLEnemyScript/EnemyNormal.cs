@@ -2,12 +2,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
-using Unity.VisualScripting;
 
 namespace Enemy_State
 {
     public class EnemyNormal : Enemy
     {
+        public bool iswalkingonfloor;
+        public bool iswalkingontunnel;
+        public bool iswalkingintunnel;
+
         private void Start()
         {
             this.directorAI = FindObjectOfType<DirectorAI>();
@@ -21,12 +24,14 @@ namespace Enemy_State
             RandomPositionSpawns(directorAI);
             state_Listening.isRunState_Listening = true;
             currentState = state_Listening;
+            onSoundValuechange = enemyDetectSound.currentsoundValue;
         }
         private void Update()
         {
             switch (currentState)
             {
                 case State_Hunting:
+                    iswalkingonfloor = true;
                     EnterState(state_Hunting);
                     if (hp <= 0)
                     {
@@ -35,7 +40,7 @@ namespace Enemy_State
                     }
                     else if (newMovementPlayer.isStaySafeRoom)
                     {
-                        enemyDetectSound.soundValue = 0;
+                        enemyDetectSound.currentsoundValue = 0;
                         state_Searching.isSetValue = false;
                         EnterState(state_Searching);
                         enemySight.canSee = false;
@@ -43,15 +48,27 @@ namespace Enemy_State
                     break;
                 case State_Listening:
                     EnterState(state_Listening);
-                    if (!state_Listening.isRunState_Listening)
+                    iswalkingonfloor = false;
+                    iswalkingontunnel = true;
+                    if (!state_Listening.isRunState_Listening && enemyDetectSound.currentsoundValue >= detectionSound)
                     {
                         isUsingTunnel = false;
                         SetAreaMask();
                         currentState = state_Searching;
                         EnterState(state_Searching);
                     }
+                    else if(enemyDetectSound.currentsoundValue != onSoundValuechange){
+                        onSoundValuechange = enemyDetectSound.currentsoundValue;
+                        state_Listening.isSetValue = false;
+                    }
+                    if (hp <= 0)
+                    {
+                        currentState = state_Retreat;
+                        state_Retreat.isRunState_Retreat = true;
+                    }
                     break;
                 case State_Searching:
+                    iswalkingonfloor = true;
                     EnterState(state_Searching);
                     if (enemySight.canSee && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                         currentState = state_Hunting;
@@ -69,6 +86,7 @@ namespace Enemy_State
                     }
                     break;
                 case State_SearchingSound:
+                    iswalkingonfloor = true;
                     EnterState(state_SearchingSound);
                     if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                     {
@@ -77,7 +95,7 @@ namespace Enemy_State
                     }
                     else if (newMovementPlayer.isStaySafeRoom && currentState != state_Searching)
                     {
-                        enemyDetectSound.soundValue = 0;
+                        enemyDetectSound.currentsoundValue = 0;
                         state_Searching.isSetValue = false;
                         currentState = state_Searching;
                     }
@@ -91,6 +109,7 @@ namespace Enemy_State
                     break;
                 case State_Retreat:
                     EnterState(state_Retreat);
+                    iswalkingonfloor = true;
                     if (!state_Retreat.isRunState_Retreat)
                     {
                         state_Listening.isRunState_Listening = true;

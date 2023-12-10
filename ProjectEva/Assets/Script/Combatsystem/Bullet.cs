@@ -6,10 +6,12 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 10f;  // Bullet speed.
     public float damage = 1.0f; // Bullet damage.
-    private SpriteRenderer targetSpriteRenderer; // Reference to the target object's SpriteRenderer component.
+    public SoundManager soundmanager;
+    public SpriteRenderer targetSpriteRenderer; // Reference to the target object's SpriteRenderer component.
 
     void Start()
     {
+        soundmanager = FindObjectOfType<SoundManager>();
         // Find the target object by its name and get its SpriteRenderer component.
         GameObject targetObject = GameObject.Find("Enemy/Velo_Sprite");
         if (targetObject != null)
@@ -22,7 +24,7 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Target object with name 'Enemy/Velo_Sprite' not found!");
+             Debug.Log("Target object with name 'Enemy/Velo_Sprite' not found!");
         }
     }
 
@@ -38,8 +40,9 @@ public class Bullet : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<EnemyNormal>())
+    {   
+        var enemy = collision.GetComponent<EnemyNormal>();
+        if (enemy != null && enemy.currentState != enemy.state_Listening)
         {
             collision.GetComponent<EnemyNormal>().TakeDamage(damage);
             StartCoroutine(ChangeSpriteColorForOneSecond());
@@ -54,10 +57,8 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator ChangeSpriteColorForOneSecond()
     {
-        targetSpriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("Colour");
-        targetSpriteRenderer.color = Color.white;
+        soundmanager.PlaySound("Monster hurt");
+        yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
     }
 }

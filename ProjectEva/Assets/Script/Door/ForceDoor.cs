@@ -1,56 +1,72 @@
 using UnityEngine;
 using TMPro;
+using System.Linq;
+using NavMeshPlus.Components;
 
 public class ForceDoor : MonoBehaviour
 {
-    public TextMeshProUGUI instructionText; // Reference to the TMPro UI object.
-
+    public GameObject sceneObject;
+    public TextMeshProUGUI customText;
+    private string uiPanelTag = "Interactiontag"; 
+    private string customTextTag = "Interactiontext";
+    public SoundManager soundManager;
+    public string custominteractiontext;
+    public NavMeshSurface navMeshSurface;
     private bool isPlayerNear = false;
 
-    private void Start()
+    public void Awake()
     {
-        instructionText.gameObject.SetActive(false);
+        FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             isPlayerNear = true;
-            instructionText.gameObject.SetActive(true);
-            instructionText.text = "The lock look weak maybe I can be able to break it.";
+            customText.text = custominteractiontext;
+            ShowEButton();
         }
         if (collision.CompareTag("Bullet"))
         {
-            // Check if a bullet collided with the door.
-            // Add any additional conditions here, e.g., bullet type.
+            // soundManager = ;
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
             Destroy(this.gameObject); // Destroy the bullet.
-            OpenDoorWithForce(); // Open the door when hit by a bullet.
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
+        {   
+            HideEButton();
             isPlayerNear = false;
-            instructionText.gameObject.SetActive(false);
         }
     }
-
-    private void Update()
+    private void ShowEButton()
     {
-        if (isPlayerNear)
+        sceneObject.SetActive(true);
+    }
+
+    private void HideEButton()
+    {
+        sceneObject.SetActive(false);
+        customText.text = "";
+    }
+    private void FindUIElementsByTag()
+    {
+        // Find UI panel by tag
+        GameObject[] sceneObjects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.CompareTag(uiPanelTag)).ToArray();
+        if (sceneObjects.Length > 0)
         {
-            // Open the door using force (without a key).
-            // Add your door opening logic here.
-            OpenDoorWithForce();
+            sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
         }
-    }
 
-
-    private void OpenDoorWithForce()
-    {
-        // Add your door opening logic here for force-only doors.
+        // Find custom text by tag
+        TextMeshProUGUI[] customTexts = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>().Where(obj => obj.CompareTag(customTextTag)).ToArray();
+        if (customTexts.Length > 0)
+        {
+            customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
+        }
     }
 }

@@ -1,0 +1,20 @@
+[
+  {
+    "nameItem": "1",
+    "detailsItemNote": "rewq",
+    "nameSprite": "ico_4",
+    "category": 1
+  },
+  {
+    "nameItem": "2",
+    "detailsItemNote": "qwer",
+    "nameSprite": "ico_5",
+    "category": 2
+  },
+  {
+    "nameItem": "3",
+    "detailsItemNote": "asdf",
+    "nameSprite": "ico_6",
+    "category": 3
+  }
+]

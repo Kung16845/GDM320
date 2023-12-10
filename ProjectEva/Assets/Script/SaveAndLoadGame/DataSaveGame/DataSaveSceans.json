@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": 1,
+    "isDestroy": true
+  },
+  {
+    "objectID": 2,
+    "isDestroy": true
+  },
+  {
+    "objectID": 3,
+    "isDestroy": true
+  },
+  {
+    "objectID": 4,
+    "isDestroy": true
+  },
+  {
+    "objectID": 5,
+    "isDestroy": false
+  },
+  {
+    "objectID": 6,
+    "isDestroy": false
+  },
+  {
+    "objectID": 7,
+    "isDestroy": false
+  },
+  {
+    "objectID": 8,
+    "isDestroy": false
+  },
+  {
+    "objectID": 9,
+    "isDestroy": false
+  },
+  {
+    "objectID": 10,
+    "isDestroy": false
+  },
+  {
+    "objectID": 11,
+    "isDestroy": false
+  },
+  {
+    "objectID": 12,
+    "isDestroy": false
+  },
+  {
+    "objectID": 13,
+    "isDestroy": false
+  },
+  {
+    "objectID": 14,
+    "isDestroy": false
+  }
+]

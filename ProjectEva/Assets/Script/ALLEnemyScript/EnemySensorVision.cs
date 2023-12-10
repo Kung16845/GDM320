@@ -12,9 +12,7 @@ namespace Enemy_State
         
         public LayerMask targetMask;
         public LayerMask obstrctionMask;
-
         public bool canSeePlayer;
-
         private void Start()
         {
             player = FindObjectOfType<NewMovementPlayer>().gameObject;

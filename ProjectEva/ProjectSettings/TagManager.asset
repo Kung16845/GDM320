@@ -10,6 +10,15 @@ TagManager:
   - Bullet
   - inventory
   - Velocrux
+  - Leg
+  - Sliderbar
+  - FirePoint
+  - Accurancycircle
+  - Interactiontag
+  - Interactiontext
+  - Teleporter
+  - Player_Sprite
+  - PlayerHitbox
   layers:
   - Default
   - TransparentFX
@@ -19,7 +28,7 @@ TagManager:
   - UI
   - obstacleLayer
   - Sound
-  - 
+  - UI
   - 
   - 
   - 
@@ -47,12 +56,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 2870179085
+  - name: BG
+    uniqueID: 3735576597
     locked: 0
   - name: Map
     uniqueID: 84666417
     locked: 0
-  - name: BG
-    uniqueID: 3735576597
+  - name: Player
+    uniqueID: 2870179085
     locked: 0
