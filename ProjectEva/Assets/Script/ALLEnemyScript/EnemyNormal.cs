@@ -20,9 +20,9 @@ namespace Enemy_State
             this.hp = this.maxhp;
             this.spriteRenderer = FindObjectOfType<Velo_movement>().GetComponent<SpriteRenderer>();
             this.newMovementPlayer = FindAnyObjectByType<NewMovementPlayer>();
-            RandomPositionSpawns(directorAI);
-            state_Listening.isRunState_Listening = true;
-            currentState = state_Listening;
+            // RandomPositionSpawns(directorAI);
+            // state_Listening.isRunState_Listening = true;
+            // currentState = state_Listening;
             onSoundValuechange = enemyDetectSound.currentsoundValue;
         }
         private void Update()

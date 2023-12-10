@@ -26,7 +26,7 @@ public class BasicMovement : MonoBehaviour
 
     private void Update()
     {
-        if (canClose && Input.anyKeyDown)
+        if (canClose)
         {
             introCanvasGroup.alpha = 0f; // Set alpha to 0 when closing
             canClose = false;
@@ -36,10 +36,10 @@ public class BasicMovement : MonoBehaviour
 
     IEnumerator StartCounting()
     {
-        yield return new WaitForSecondsRealtime(7f);
+        yield return new WaitForSecondsRealtime(10f);
 
         // Gradually decrease alpha over 1 second
-        float fadeDuration = 3f;
+        float fadeDuration = 4f;
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration)
