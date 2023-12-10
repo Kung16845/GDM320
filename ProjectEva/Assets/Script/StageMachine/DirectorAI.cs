@@ -27,6 +27,7 @@ namespace Enemy_State
             FindInactiveEnemyNormals();
             navMeshSurface = FindAnyObjectByType<NavMeshSurface>();
             StartCoroutine(EverySeconReduce(1.0f));
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
         }
         public void ChangeFloor()
         {

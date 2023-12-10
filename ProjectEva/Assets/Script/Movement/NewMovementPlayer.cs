@@ -47,7 +47,6 @@ public class NewMovementPlayer : MonoBehaviour
         originalSpeed = speed;
         originalCrouchSpeed = crouchSpeed;
         originalRunSpeed = runspeed;
-
         
     }
 
