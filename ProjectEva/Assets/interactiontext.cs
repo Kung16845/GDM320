@@ -10,17 +10,14 @@ public class Interactiontext : MonoBehaviour
     private string customTextTag = "Interactiontext";
     public GameObject sceneObject;
     public TextMeshProUGUI customText;
-    public SoundManager soundManager;
     public string custominteractiontext;
     public void Awake()
     {
         FindUIElementsByTag();
-        soundManager = FindObjectOfType<SoundManager>();
     }
      private void Start()
     {
         FindUIElementsByTag();
-        soundManager = FindObjectOfType<SoundManager>();;
     }
      private void OnTriggerEnter2D(Collider2D collision)
     {

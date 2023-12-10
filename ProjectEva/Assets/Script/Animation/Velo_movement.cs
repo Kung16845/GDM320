@@ -15,7 +15,7 @@ public class Velo_movement : MonoBehaviour
     public NavMeshAgent agent;
     public Vector3 velocity;
 
-    bool isRoaming = false;
+    public bool isRoaming = false;
     void Start()
     {
         animator = GetComponent<Animator>();

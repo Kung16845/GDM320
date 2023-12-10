@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7778326317934704378}
   - component: {fileID: 4354376269416499038}
-  - component: {fileID: 5465469686309313479}
   m_Layer: 0
   m_Name: Trapactive
   m_TagString: Untagged
@@ -31,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4354376269416499038
 BoxCollider2D:
@@ -78,20 +77,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 4.059601}
   m_EdgeRadius: 0
---- !u!114 &5465469686309313479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534445357388835478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a46181213787c3848855dc34edfea5f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsToActivate:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  numberOfObjectsToActivate: 2
