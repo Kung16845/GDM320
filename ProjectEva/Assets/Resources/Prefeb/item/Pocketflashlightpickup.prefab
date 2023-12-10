@@ -94,7 +94,7 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}
   itemsDataCharactor: {fileID: 11400000, guid: d2aaee01bdc7d0847b216e8654273cc0, type: 2}
-  Soundname: Pickupitem
+  Soundname: GrabItem
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
   custominteractiontext: Press E to pickup.

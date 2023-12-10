@@ -67,7 +67,7 @@ MonoBehaviour:
     itemPrefab: {fileID: 3755858615590644053, guid: 9429fc06d5043e041bdcf07caea26453, type: 3}
   sceneObject: {fileID: 0}
   soundManager: {fileID: 0}
-  Soundname: Fabric
+  Soundname: Draweropen
   customText: {fileID: 0}
   custominteractiontext: Press E to open.
 --- !u!61 &2696520549827069364

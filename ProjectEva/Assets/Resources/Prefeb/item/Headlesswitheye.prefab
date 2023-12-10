@@ -49,7 +49,7 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}
   itemsDataCharactor: {fileID: 11400000, guid: cb2df85835ee2e748bce64a1ff0f8200, type: 2}
-  Soundname: 
+  Soundname: GrabItem
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
   custominteractiontext: That should do.

@@ -7,6 +7,7 @@ using TMPro;
 public class BasicMovement : MonoBehaviour
 {
     public CanvasGroup introCanvasGroup;
+    public int tutorialduratuion;
     private bool canClose = false;
 
     private void Start()
@@ -36,7 +37,7 @@ public class BasicMovement : MonoBehaviour
 
     IEnumerator StartCounting()
     {
-        yield return new WaitForSecondsRealtime(10f);
+        yield return new WaitForSecondsRealtime(tutorialduratuion);
 
         // Gradually decrease alpha over 1 second
         float fadeDuration = 4f;

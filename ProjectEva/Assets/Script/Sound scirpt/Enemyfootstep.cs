@@ -25,7 +25,7 @@ public class Enemyfootstep : MonoBehaviour
         {
             if (currentSoundObject == null || !currentSoundObject.GetComponent<AudioSource>().isPlaying)
             {
-                currentSoundObject = soundManager.PlaySound("Spiderwalk",transform);
+                currentSoundObject = soundManager.PlaySound(nameofsound,transform);
             }
         }
     }   

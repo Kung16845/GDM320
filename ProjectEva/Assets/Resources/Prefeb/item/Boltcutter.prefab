@@ -146,7 +146,7 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}
   itemsDataCharactor: {fileID: 11400000, guid: 73583625b9c23e44cb5148dc3cf7a901, type: 2}
-  Soundname: 
+  Soundname: GrabItem
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
   custominteractiontext: Bolt cutter?

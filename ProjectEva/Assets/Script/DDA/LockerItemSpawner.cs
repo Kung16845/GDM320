@@ -39,7 +39,7 @@ public class LockerItemSpawner : MonoBehaviour
         { 
             SpawnItem();
             inventoryPresentCharactor.DeleteItemCharactorEquipment("Inventorypicklock");
-            Destroy(this.gameObject);
+            StartCoroutine(PlayLockersound());
         }
     }
 
@@ -108,7 +108,14 @@ public class LockerItemSpawner : MonoBehaviour
         sceneObject.SetActive(false);
         customText.text = "";
     }
-
+    IEnumerator PlayLockersound()
+    {
+        yield return new WaitForSeconds(0.4f);
+        soundManager.PlaySound("Lockerkey"); 
+        yield return new WaitForSeconds(0.8f);
+        soundManager.PlaySound("Lockeropen");
+        Destroy(this.gameObject);
+    }
     private void FindUIElementsByTag()
     {
         // Find UI panel by tag

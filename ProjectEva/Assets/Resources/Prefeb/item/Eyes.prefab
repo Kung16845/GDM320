@@ -49,10 +49,10 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}
   itemsDataCharactor: {fileID: 11400000, guid: 68d53eb9c059d264cbfdcb1189dd56bf, type: 2}
-  Soundname: 
+  Soundname: GrabItem
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
-  custominteractiontext: 
+  custominteractiontext: Eyes
 --- !u!61 &8866234582497442902
 BoxCollider2D:
   m_ObjectHideFlags: 0
