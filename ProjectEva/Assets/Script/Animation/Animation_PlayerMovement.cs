@@ -15,7 +15,7 @@ public class Animation_PlayerMovement : MonoBehaviour
     bool isDead = false;
     public GameObject OnHandItemHolder;
     public GameObject PlayerOnItemHolder;
-
+    public Animation_ItemWithPlayer item;
 
     public Pistol GunHolder;
 
@@ -45,10 +45,13 @@ public class Animation_PlayerMovement : MonoBehaviour
                 {
                     case "Pistol": resetAnimLayerTo("HoldGun"); break;
 
-                    default: resetAnimLayerTo("HoldItem"); PlayerOnItemHolder.SetActive(true); break;
+                    default: resetAnimLayerTo("HoldItem"); 
+                        
+                        //PlayerOnItemHolder.SetActive(true); item.changItemOnHandTo(checkItemOnHand());
+                        break;
                 }
             }
-            else { resetAnimLayerTo("nothing"); }
+            else { resetAnimLayerTo("nothing"); PlayerOnItemHolder.SetActive(false); }
 
             if (currentActiveLayer == "HoldGun" || currentActiveLayer == "AimGun" || currentActiveLayer == "ReloadGun")
             {
