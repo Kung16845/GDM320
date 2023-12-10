@@ -46,7 +46,7 @@ public class KeyonlyDoor : MonoBehaviour
             {
                 if (hasKeynumber == numberofkey)
                 {
-                    customText.text = "I have a key for this.";
+                    customText.text = "I can unlock this.";
                 }
                 else if (hasKeynumber != numberofkey)
                 {
@@ -82,6 +82,10 @@ public class KeyonlyDoor : MonoBehaviour
             if(removekey)
             {
             inventoryPresentCharactor.DeleteItemCharactorEquipment(Keyforthisdoor);
+            }
+            if(hasKeynumber == 4)
+            {   
+                soundManager.PlaySound("Chaindrop");
             }
             soundManager.PlaySound("Dooropen");
             navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);

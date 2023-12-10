@@ -8,6 +8,7 @@ namespace Enemy_State
     public class EnemyNormal : Enemy
     {
         public bool iswalkingonfloor;
+        public bool iswalkingontunnel;
         public bool iswalkingintunnel;
 
         private void Start()
@@ -47,6 +48,8 @@ namespace Enemy_State
                     break;
                 case State_Listening:
                     EnterState(state_Listening);
+                    iswalkingonfloor = false;
+                    iswalkingontunnel = true;
                     if (!state_Listening.isRunState_Listening && enemyDetectSound.currentsoundValue >= detectionSound)
                     {
                         isUsingTunnel = false;
@@ -106,7 +109,7 @@ namespace Enemy_State
                     break;
                 case State_Retreat:
                     EnterState(state_Retreat);
-                    iswalkingonfloor = false;
+                    iswalkingonfloor = true;
                     if (!state_Retreat.isRunState_Retreat)
                     {
                         state_Listening.isRunState_Listening = true;

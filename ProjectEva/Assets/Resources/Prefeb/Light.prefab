@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7356272889845455530
 SpriteRenderer:
@@ -101,7 +101,7 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}
   itemsDataCharactor: {fileID: 11400000, guid: 0a1e258a982bb5045971e62a1f8a2708, type: 2}
-  Soundname: Pickupitem
+  Soundname: GrabItem
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
   custominteractiontext: Press E to pick up the item.

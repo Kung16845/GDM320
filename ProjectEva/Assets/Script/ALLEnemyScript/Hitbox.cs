@@ -6,6 +6,7 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {   
     public EnemyNormal enemyNormal;
+    private bool damagetaken = false;
     private void Start() {
         enemyNormal = GameObject.FindAnyObjectByType<EnemyNormal>();
     }
@@ -13,7 +14,14 @@ public class Hitbox : MonoBehaviour
     {   
 
         if(player.GetComponent<Hp>() != null && enemyNormal.currentState == enemyNormal.state_Hunting)
+        {
+            if(!damagetaken)
+            {
+            damagetaken = true;
             player.GetComponent<Hp>().TakeDamage(enemyNormal.damage);
+            damagetaken = false;
+            }
+        }
 
     }
 }

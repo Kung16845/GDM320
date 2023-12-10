@@ -978,6 +978,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   OnHandItemHolder: {fileID: 0}
   PlayerOnItemHolder: {fileID: 1963964718688978218}
+  item: {fileID: 5149480646510549963}
   GunHolder: {fileID: 0}
 --- !u!114 &4768181465436222030
 MonoBehaviour:

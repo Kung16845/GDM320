@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5092527753862796631}
   - component: {fileID: 1428550495510939714}
-  - component: {fileID: 5256309775654164222}
   - component: {fileID: 2967695886423293359}
   - component: {fileID: 8755768403868863156}
   - component: {fileID: 7910316648108333978}
+  - component: {fileID: 4547904490907587759}
   m_Layer: 0
   m_Name: old stuff room(key&force)
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5020311797405074096}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -45.5, y: 42.41837, z: 0}
   m_LocalScale: {x: 2.8719733, y: 4.786622, z: 4.786622}
   m_ConstrainProportionsScale: 0
@@ -88,27 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5256309775654164222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5020311797405074096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eba9e406c69a8f24283de78a7fb33008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasKeynumber: 0
-  inventoryPresentCharactor: {fileID: 0}
-  sceneObject: {fileID: 0}
-  customText: {fileID: 0}
-  navMeshSurface: {fileID: 0}
-  soundManager: {fileID: 0}
-  Keyforthisdoor: Libralykeyinventory
-  numberofkey: 1
-  custominteractiontext: I need to find a key to open this door.
 --- !u!114 &2967695886423293359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,3 +194,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.009402, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4547904490907587759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020311797405074096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b915a58cb568b0408342b63fd6bf842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneObject: {fileID: 0}
+  customText: {fileID: 0}
+  soundManager: {fileID: 0}
+  custominteractiontext: The lock look weak maybe I can find some thing to break
+    it.
+  navMeshSurface: {fileID: 0}

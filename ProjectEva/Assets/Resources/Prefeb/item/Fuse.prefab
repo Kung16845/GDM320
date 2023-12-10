@@ -94,10 +94,10 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   inventoryPresentCharactor: {fileID: 0}
   itemsDataCharactor: {fileID: 11400000, guid: 2e34305d782d8ec4d80cafbc1ef7888c, type: 2}
-  Soundname: 
+  Soundname: GrabItem
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
-  custominteractiontext: 
+  custominteractiontext: The fuse I need.
 --- !u!212 &7534868018709839567
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using System.Linq;
 
 public class Triggerevent : MonoBehaviour
 {
-    public SoundManager soundManager;
+    public SoundManageronce soundManager;
     public bool canPickup;
     public GameObject Destroyspriteofficer;
     public GameObject enebleofficer;
@@ -20,14 +20,14 @@ public class Triggerevent : MonoBehaviour
         canPickup = false;
         introCanvasGroup.alpha = 0f;
         introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = FindObjectOfType<SoundManageronce>();
     }
     private void Start()
     {
         canPickup = false;
         introCanvasGroup.alpha = 0f;
         introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = FindObjectOfType<SoundManageronce>();
     }
     private void Update()
     {
@@ -38,6 +38,7 @@ public class Triggerevent : MonoBehaviour
             Destroy(Destroydoor.gameObject);
             enebleofficer.SetActive(true);
             enableblood.SetActive(true);
+            StartCoroutine(Playsound());
             
         }
     }
@@ -76,12 +77,10 @@ public class Triggerevent : MonoBehaviour
 
         canClose = true;
     }
-    // IEnumerator Playsound()
-    // {
-    //     soundManager.PlaySound();
-    //     yield return new WaitForSeconds(1);
-    //     soundManager.PlaySound();
-    //     yield return new WaitForSeconds(1);
-
-    // }
+    IEnumerator Playsound()
+    {
+        soundManager.PlaySound("Officer hurt");
+        soundManager.PlaySound("Doorbroke");
+        yield return new WaitForSeconds(0.8f);
+    }
 }

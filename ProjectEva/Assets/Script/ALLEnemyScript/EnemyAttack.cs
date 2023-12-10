@@ -7,6 +7,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public EnemyNormal enemyNormal;
     public Animator animationActtack;
+    private bool isattackcalled = false;
     public SoundManager soundManager;
     
     private void Start()
@@ -16,19 +17,24 @@ public class EnemyAttack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D player)
     {   
+        if(!isattackcalled)
+        {
         if(player.GetComponent<Hp>() != null && enemyNormal.currentState == enemyNormal.state_Hunting)
-            StartCoroutine(EnermyAttack(3.0f));
+        StartCoroutine(EnermyAttack(2.0f));
+        }
     }
     private IEnumerator EnermyAttack(float waitTime)
     {   
-        enemyNormal.agent.speed = 3.5f;
-        animationActtack.SetBool("isAttack", true);                 
+        isattackcalled = true;
+        animationActtack.SetBool("isAttack", true);
+        enemyNormal.agent.speed = 4.5f;                 
         yield return new WaitForSeconds(waitTime);
         soundManager.PlaySound("Bite");
         enemyNormal.agent.speed = enemyNormal.speed;
         animationActtack.SetBool("isAttack", false);
         this.GetComponent<BoxCollider2D>().enabled = false;
         this.GetComponent<BoxCollider2D>().enabled = true;
+        isattackcalled = false;
     }
 
 }

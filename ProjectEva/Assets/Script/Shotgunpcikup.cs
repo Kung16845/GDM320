@@ -32,6 +32,7 @@ public class Shotgunpickup : MonoBehaviour
         // Check if the player can pick up the ammo and 'E' is pressed.
         if (canPickup && Input.GetKeyDown(KeyCode.E))
         {
+            soundManager.PlaySound("GrabItem");
             PickupAmmo();
             PickupItemCharactors();
         }

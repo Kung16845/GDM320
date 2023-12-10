@@ -13,8 +13,10 @@ public class Itembox : MonoBehaviour
     public GameObject invent;
     public GameObject Chest;
     public GameObject Closeequipment;
+    public GameObject destroycanva;
     public TextMeshProUGUI customText;
     public string custominteractiontext;
+    public int tutorialduratuion;
     public bool isclose;
     public bool inventisopen;
     public CanvasGroup introCanvasGroup;
@@ -106,12 +108,24 @@ public class Itembox : MonoBehaviour
     }
     IEnumerator StartCounting()
     {
-        yield return new WaitForSecondsRealtime(7f);
-
-        // Gradually decrease alpha over 1 second
         float fadeDuration = 3f;
         float elapsedTime = 0f;
 
+        while (elapsedTime < fadeDuration)
+        {
+            introCanvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the alpha is 1 when fading is complete
+        introCanvasGroup.alpha = 1f;
+
+        // Wait for 7 seconds
+        yield return new WaitForSecondsRealtime(tutorialduratuion);
+
+        // Gradually decrease alpha over 1 second
+        elapsedTime = 0f;
         while (elapsedTime < fadeDuration)
         {
             introCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
@@ -121,5 +135,7 @@ public class Itembox : MonoBehaviour
 
         // Ensure the alpha is 0 when fading is complete
         introCanvasGroup.alpha = 0f;
+
+        Destroy(destroycanva);
     }
 }
