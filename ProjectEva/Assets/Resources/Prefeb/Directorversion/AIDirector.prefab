@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5030009214622785825
 MonoBehaviour:
@@ -102,6 +102,24 @@ MonoBehaviour:
     point: {fileID: 2570911452796520019, guid: 90988b4ef618e654e92f15e325645a47, type: 3}
   - namePoint: Spawn_23
     point: {fileID: 7947015998693057478, guid: 15a56b76baceaef46a2904c7c43ddfe5, type: 3}
+  - namePoint: Spawn_24
+    point: {fileID: 3522893293409767734, guid: cb93a6cc868070d4aab44a83408e75e0, type: 3}
+  - namePoint: Spawn_25
+    point: {fileID: 3302112126832888246, guid: 07a4435cb6209724c8d04b4bea5e08a0, type: 3}
+  - namePoint: Spawn_26
+    point: {fileID: 4661183924168552403, guid: 8a49b2eb7c42dd049b672413432f8e6b, type: 3}
+  - namePoint: Spawn_27
+    point: {fileID: 3939344986113502952, guid: 160d03a1a33cb6a4ab9723f5a3fc8fdb, type: 3}
+  - namePoint: Spawn_28
+    point: {fileID: 671770636708109757, guid: c4fbfba22f91b4048baacdea8bfc3289, type: 3}
+  - namePoint: Spawn_29
+    point: {fileID: 671655105253854611, guid: bec0dece83df31741a1c7583a89671a8, type: 3}
+  - namePoint: Spawn_30
+    point: {fileID: 4076003816343120661, guid: aa30ab119e5df864cb07d82554076592, type: 3}
+  - namePoint: Spawn_31
+    point: {fileID: 2149266587014716053, guid: 4bc21107cc7643443bf0ea4b5c0af86d, type: 3}
+  - namePoint: Spawn_32
+    point: {fileID: 7585197447461260221, guid: 92f3c32f55d21bf40ac8a926a5a88721, type: 3}
   rooms:
   - nameRoom: Room1
     pointCenterRoom: {fileID: 0}
@@ -239,3 +257,55 @@ MonoBehaviour:
     pointCenterRoom: {fileID: 7889357863490118508, guid: af98db3b4ef9b2c40bbd7dcaa3b2bd35, type: 3}
     AllpointInRoom:
     - {fileID: 5616480538269336652, guid: 96093a6521ed8534dbdc4cb97f7a160b, type: 3}
+  - nameRoom: Powerroom
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Bedroom
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Pumproom
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+  - nameRoom: 'DiamondBedroom '
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Chainbedroom
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Maidenrightsite
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Wineroom
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Stuffroom
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+  - nameRoom: Mainhall
+    pointCenterRoom: {fileID: 0}
+    AllpointInRoom:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}

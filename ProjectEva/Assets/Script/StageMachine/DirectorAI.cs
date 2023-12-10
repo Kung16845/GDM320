@@ -30,8 +30,8 @@ namespace Enemy_State
         }
         public void ChangeFloor()
         {
-            MovePositionEnemyChangeFloor();
             CheckClosestResingPoint();
+            MovePositionEnemyChangeFloor();
         }
         public void MovePositionEnemyChangeFloor()
         {
@@ -58,7 +58,6 @@ namespace Enemy_State
                     newRestingPoint = positionResingPoint;
                 }
             }
-
             enemynormal.ResingPoint = newRestingPoint;
         }
         private void FindInactiveEnemyNormals()
