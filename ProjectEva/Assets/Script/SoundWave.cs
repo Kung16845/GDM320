@@ -12,7 +12,7 @@ public class SoundWave : MonoBehaviour
 
     [Header("-----------RadiusCollider----------")]
     [Space(25f)]
-    public float radiusWalk;
+    public float radiusWalk = 16;
     public float radiusRun;
     public float radiusGun;
     public float radiusshotGun;
@@ -34,10 +34,11 @@ public class SoundWave : MonoBehaviour
         checkMovementPlayer = FindObjectOfType<NewMovementPlayer>();
         checkShoot = FindObjectOfType<Pistol>();
         shotGun = FindObjectOfType<Shotgun>();
-        if (this.gameObject.activeInHierarchy == true && !isReducing)
+        if (this.gameObject.activeInHierarchy && !isReducing && !isCreatingSoundWave)
         {   
             CheckCreateSoundWave();
         }
+        
     }
     void CheckCreateSoundWave()
     {
@@ -53,7 +54,8 @@ public class SoundWave : MonoBehaviour
             StartCoroutine(CreateCircleCollder2DSound(radiusshotGun));
     }
     IEnumerator CreateCircleCollder2DSound(float radius)
-    {
+    {   
+        Debug.Log(radius);
         yield return new WaitForSeconds(delayTimeIncreateRadius);
         isCreatingSoundWave = true;
         this.GetComponent<CircleCollider2D>().radius = radius;
@@ -69,12 +71,14 @@ public class SoundWave : MonoBehaviour
             this.GetComponent<CircleCollider2D>().radius -= reduceradius;      
             StartCoroutine(ReduceSoundWave(reduceradius));
         }
-        else
-        {
+        else if(this.GetComponent<CircleCollider2D>().radius < 0.5)
+        {   
+            this.gameObject.SetActive(false);
             isReducing = false;
             isDetect =false;
+             Debug.Log("Object is not active");
             // Destroy(this.gameObject);
-            this.gameObject.SetActive(false);
+            
         }
 
     }
