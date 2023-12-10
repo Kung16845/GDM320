@@ -7,11 +7,13 @@ using TMPro;
 public class BasicMovement : MonoBehaviour
 {
     public CanvasGroup introCanvasGroup;
+    public GameObject  destroycanva;
     public int tutorialduratuion;
     private bool canClose = false;
 
     private void Start()
     {
+        destroycanva.SetActive(true);
         introCanvasGroup.alpha = 0f;
         introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
     }
@@ -21,7 +23,7 @@ public class BasicMovement : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             introCanvasGroup.alpha = 1f;
-            StartCoroutine(StartCounting());
+            StartCoroutine(FadeInCanvas());
         }
     }
 
@@ -31,18 +33,31 @@ public class BasicMovement : MonoBehaviour
         {
             introCanvasGroup.alpha = 0f; // Set alpha to 0 when closing
             canClose = false;
+            Destroy(destroycanva);
             Destroy(this.gameObject);
         }
     }
 
-    IEnumerator StartCounting()
+    IEnumerator FadeInCanvas()
     {
+        float fadeDuration = 3f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            introCanvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the alpha is 1 when fading is complete
+        introCanvasGroup.alpha = 1f;
+
+        // Wait for 7 seconds
         yield return new WaitForSecondsRealtime(tutorialduratuion);
 
         // Gradually decrease alpha over 1 second
-        float fadeDuration = 4f;
-        float elapsedTime = 0f;
-
+        elapsedTime = 0f;
         while (elapsedTime < fadeDuration)
         {
             introCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
@@ -53,6 +68,7 @@ public class BasicMovement : MonoBehaviour
         // Ensure the alpha is 0 when fading is complete
         introCanvasGroup.alpha = 0f;
 
-        canClose = true;
+        Destroy(destroycanva);
+        Destroy(this.gameObject);
     }
 }
