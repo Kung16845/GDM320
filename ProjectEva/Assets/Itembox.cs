@@ -13,7 +13,6 @@ public class Itembox : MonoBehaviour
     public GameObject invent;
     public GameObject Chest;
     public GameObject Closeequipment;
-    public GameObject destroycanva;
     public TextMeshProUGUI customText;
     public string custominteractiontext;
     public int tutorialduratuion;
@@ -136,6 +135,5 @@ public class Itembox : MonoBehaviour
         // Ensure the alpha is 0 when fading is complete
         introCanvasGroup.alpha = 0f;
 
-        Destroy(destroycanva);
     }
 }
