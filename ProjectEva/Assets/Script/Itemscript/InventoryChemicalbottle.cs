@@ -22,9 +22,19 @@ public class InventoryChemicalbottle : MonoBehaviour
     private bool isHealing = false; // Flag to track if healing is in progress.
     public GameObject healslider;
     public InventoryPresentCharactor inventoryPresentCharactor;
+    GameObject ThatPlayer;
+    Animation_PlayerMovement player;
+
+    public void Start()
+    {
+        ThatPlayer = GameObject.FindGameObjectWithTag("Player_Sprite");
+        player = ThatPlayer.GetComponent<Animation_PlayerMovement>();
+    }
+
 
     private void Awake()
     {
+        player.GetBandage();
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
         playersanity = FindObjectOfType<Sanity>();
         movementScript = FindObjectOfType<NewMovementPlayer>();    
@@ -56,6 +66,7 @@ public class InventoryChemicalbottle : MonoBehaviour
             if (slider.value >= maxHealingValue)
             {   
                 // Heal the player and reset the slider.
+                player.exitSpecial();
                 playersanity.HealSanity(healAmount);
                 slider.value = 0f;
                 movementScript.ResumeMoving();
@@ -77,6 +88,7 @@ public class InventoryChemicalbottle : MonoBehaviour
             if (isHealing)
             {
                 // Cancel healing if the button is released before the slider reaches its maximum value.
+                player.exitSpecial();
                 slider.value = 0f;
                 isHealing = false;
                 healslider.SetActive(false);
