@@ -49,6 +49,7 @@ public class Itembox : MonoBehaviour
     {
         if(isclose && Input.GetKeyDown(KeyCode.E))
         {
+            Cursor.visible = true;
             if(!inventisopen)
             {
             if (!firsttime)
@@ -66,6 +67,7 @@ public class Itembox : MonoBehaviour
             }
             else
             {
+                Cursor.visible = false;
                 Chest.SetActive(false);
                 Closeequipment.SetActive(true);
                 Motherinvent.SetActive(false);

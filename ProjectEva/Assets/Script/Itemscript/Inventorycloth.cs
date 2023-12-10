@@ -66,13 +66,13 @@ public class Inventorycloth : MonoBehaviour
                 iscrafting = false;
                 healslider.SetActive(false);
                 inventoryPresentCharactor.ManageReduceResource("Chemicalbottle");
-                if(inventoryPresentCharactor.GetTotalItemCountByName("Cloath") == 1)
+                if(inventoryPresentCharactor.GetTotalItemCountByName("Cloth") == 1)
                 {
                 inventoryPresentCharactor.DeleteItemCharactorEquipment("Inventorycloth");
                 }
-                else if(inventoryPresentCharactor.GetTotalItemCountByName("Cloath") >= 2)
+                else if(inventoryPresentCharactor.GetTotalItemCountByName("Cloth") >= 2)
                 {
-                inventoryPresentCharactor.ManageReduceResource("Cloath");
+                inventoryPresentCharactor.ManageReduceResource("Cloth");
                 }
                 GameObject prefab = Resources.Load<GameObject>("Prefeb/item/" + itemPrefabName);
                 Debug.Log("Load path: " + "Prefeb/item/" + itemPrefabName);
