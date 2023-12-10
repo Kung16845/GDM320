@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -18,12 +19,15 @@ public class InventoryPresentCharactor : MonoBehaviour
     public List<UIItemCharactor> uIItemListCharactor;
     public float toggleCooldown = 0.5f; // Adjust the cooldown time as needed
     private float timeSinceLastToggle = 0.5f;
+    public CanvasGroup introCanvasGroup;
+    private bool firsttime = false;
     
     private void Start()
     {
         uIItemCharactorPrefeb.gameObject.SetActive(false);
         RefreshUIInventoryCharactor();
-        
+        introCanvasGroup.alpha = 0f;
+        introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
 
     }
     private void Update()
@@ -57,6 +61,13 @@ public class InventoryPresentCharactor : MonoBehaviour
     private void ToggleInventory()
     {
         openInven = !openInven;
+
+        if (!firsttime)
+            {
+            introCanvasGroup.alpha = 1f;
+            StartCoroutine(StartCounting());
+            firsttime = true;
+            }
         inventorypage.SetActive(openInven);
     }
     public void UnlockSlot()
@@ -258,6 +269,24 @@ public class InventoryPresentCharactor : MonoBehaviour
         foreach (var uiItem in uIItemListCharactor)
             Destroy(uiItem.gameObject);
         uIItemListCharactor.Clear();
+    }
+    IEnumerator StartCounting()
+    {
+        yield return new WaitForSecondsRealtime(7f);
+
+        // Gradually decrease alpha over 1 second
+        float fadeDuration = 3f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            introCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the alpha is 0 when fading is complete
+        introCanvasGroup.alpha = 0f;
     }
 }
 

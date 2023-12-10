@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5030009214622785825
 MonoBehaviour:
@@ -74,6 +74,34 @@ MonoBehaviour:
     point: {fileID: 0}
   - namePoint: Spawn_9
     point: {fileID: 0}
+  - namePoint: Spawn_10
+    point: {fileID: 385558756596111403, guid: d5d3be4d0bd492343a321cfef0360605, type: 3}
+  - namePoint: Spawn_11
+    point: {fileID: 913148491900223632, guid: 1ccc6c22fb3b3f545adedd2a06e2cba8, type: 3}
+  - namePoint: Spawn_12
+    point: {fileID: 4261717083939029264, guid: 8ddf9b58b4bfe954b96b31026ff033ce, type: 3}
+  - namePoint: Spawn_13
+    point: {fileID: 8108171202575035261, guid: 7448e89c829ec3a43b50c6ed92cf5578, type: 3}
+  - namePoint: Spawn_14
+    point: {fileID: 8387453868249634148, guid: 553d72682a6b8fb4d8d9c308a6a39279, type: 3}
+  - namePoint: Spawn_15
+    point: {fileID: 6940569088276402215, guid: 30bae75e4e4d7354eabe65e27763b0f6, type: 3}
+  - namePoint: Spawn_16
+    point: {fileID: 2575874849134521071, guid: 0d48aa949da94f043b810c724cf29e82, type: 3}
+  - namePoint: Spawn_17
+    point: {fileID: 8959589329729194246, guid: 31ef3bc3d509b4d42a57685775173aed, type: 3}
+  - namePoint: Spawn_18
+    point: {fileID: 6626356719382326687, guid: af5e7045efcd4a4478fac730a93565b9, type: 3}
+  - namePoint: Spawn_19
+    point: {fileID: 7048426695878234157, guid: 9d52e30005f279442aaa5a0bc21b6053, type: 3}
+  - namePoint: Spawn_20
+    point: {fileID: 405304503215672598, guid: 77f4da9017d65914993e1616bdab7f1a, type: 3}
+  - namePoint: Spawn_21
+    point: {fileID: 7420661489123869202, guid: f0c837f698613294982625a765b6a6e0, type: 3}
+  - namePoint: Spawn_22
+    point: {fileID: 2570911452796520019, guid: 90988b4ef618e654e92f15e325645a47, type: 3}
+  - namePoint: Spawn_23
+    point: {fileID: 7947015998693057478, guid: 15a56b76baceaef46a2904c7c43ddfe5, type: 3}
   rooms:
   - nameRoom: Room1
     pointCenterRoom: {fileID: 0}

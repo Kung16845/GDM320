@@ -115,10 +115,10 @@ public class ForceandkeyDoor : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        var datainScean = FindAnyObjectByType<SaveAndLoadScean>();
-        var dataobj = datainScean.objectforload.FirstOrDefault(objid => objid.objectID == 1);
-        dataobj.isDestroy = true;
-    }
+    // private void OnDestroy()
+    // {
+    //     var datainScean = FindAnyObjectByType<SaveAndLoadScean>();
+    //     var dataobj = datainScean.objectforload.FirstOrDefault(objid => objid.objectID == 1);
+    //     dataobj.isDestroy = true;
+    // }
 }
