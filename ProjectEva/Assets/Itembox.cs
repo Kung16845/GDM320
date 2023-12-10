@@ -77,6 +77,7 @@ public class Itembox : MonoBehaviour
     }
     private void ShowEButton()
     {
+        Cursor.visible = false;
         sceneObject.SetActive(true);
         customText.text = custominteractiontext;
     }

@@ -55,6 +55,7 @@ public class Fuelquest : MonoBehaviour
         if(isclose && isfuelquip && Input.GetKeyDown(KeyCode.E))
         {
             inventoryPresentCharactor.DeleteItemCharactorEquipment("Inventoryfuel");
+            soundManager.PlaySound("Pour fuel");
              Destroy(this.gameObject);
         }
     }
