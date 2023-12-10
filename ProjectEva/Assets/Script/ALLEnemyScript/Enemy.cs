@@ -16,7 +16,8 @@ namespace Enemy_State
         public float rotateSpeed;
         public float damage;
         public float damageSanity;
-        public float detection;
+        public int onSoundValuechange;
+        public int detectionSound;
         [Header ("---------CheckValue-----------")]
         [Space(25f)]
         public bool isHear;
@@ -50,7 +51,7 @@ namespace Enemy_State
         }
         public void RandomPositionSpawns(DirectorAI directorAI)
         {
-            var RandomPosition = Random.Range(1, directorAI.setSpawns.Count);
+            var RandomPosition = Random.Range(0, 8);
             var position = directorAI.setSpawns.ElementAt(RandomPosition);
 
             this.agent.Warp(position.point.position);

@@ -10,6 +10,14 @@ TagManager:
   - Bullet
   - inventory
   - Velocrux
+  - Leg
+  - Sliderbar
+  - FirePoint
+  - Accurancycircle
+  - Interactiontag
+  - Interactiontext
+  - Teleporter
+  - Player_Sprite
   layers:
   - Default
   - TransparentFX
@@ -19,7 +27,7 @@ TagManager:
   - UI
   - obstacleLayer
   - Sound
-  - 
+  - UI
   - 
   - 
   - 

@@ -5,5 +5,4 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public float gameDifficulty = 1.0f;
-    
 }

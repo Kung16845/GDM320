@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 namespace Enemy_State
 {
-    public class State_Listening : StateMachine //มอนเตอร์อยู่ นอกแมพ เตรียมเกิด
+    public class State_Listening : StateMachine 
     {
         public SetPosition AllSpawns = new SetPosition();
         public bool isRunState_Listening = true;
@@ -26,7 +26,7 @@ namespace Enemy_State
                     enemy.agent.SetDestination(SpawmsClosePlayer);
                     isSetValue = true;
                 }
-                if (enemy.enemyDetectSound.soundValue >= 8)
+                if (enemy.enemyDetectSound.currentsoundValue >= enemy.detectionSound)
                 {       
                     if (enemy.agent.remainingDistance <= enemy.agent.stoppingDistance && !enemy.agent.pathPending)
                     {

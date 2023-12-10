@@ -7,30 +7,28 @@ public class EnemyAttack : MonoBehaviour
 {
     public EnemyNormal enemyNormal;
     public Animator animationActtack;
-    public GameObject hitbox;
+    public SoundManager soundManager;
+    
     private void Start()
     {
         enemyNormal = FindObjectOfType<EnemyNormal>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
     private void OnTriggerEnter2D(Collider2D player)
-    {
-        // StartCoroutine(EnemyAttack(2.0f,player));
-        
-        if (player.GetComponent<Hp>() != null)
-        {
-            if (enemyNormal.currentState == enemyNormal.state_Hunting)
-            {
-               // player.GetComponent<Hp>().TakeDamage(enemyNormal.damage);
-                Debug.Log("Enermy Attack");
-
-            }
-        }
+    {   
+        if(player.GetComponent<Hp>() != null && enemyNormal.currentState == enemyNormal.state_Hunting)
+            StartCoroutine(EnermyAttack(3.0f));
     }
     private IEnumerator EnermyAttack(float waitTime)
-    {
-        animationActtack.SetBool("isAttack", true);                 //Play Attack Animation
-        yield return new WaitForSeconds(2f);
+    {   
+        enemyNormal.agent.speed = 3.5f;
+        animationActtack.SetBool("isAttack", true);                 
+        yield return new WaitForSeconds(waitTime);
+        soundManager.PlaySound("Bite");
+        enemyNormal.agent.speed = enemyNormal.speed;
         animationActtack.SetBool("isAttack", false);
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        this.GetComponent<BoxCollider2D>().enabled = true;
     }
 
 }

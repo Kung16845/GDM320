@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NavMeshPlus.Components;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,24 +17,73 @@ namespace Enemy_State
         public float maxXOffset;
         public float maxYOffset;
         public float Stressvalue;
+        public List<Transform> allResingPoint;
         public List<SetPosition> setSpawns = new List<SetPosition>();
-        
+
         public List<Room> rooms = new List<Room>();
         private void Start()
         {
             this.player = FindObjectOfType<NewMovementPlayer>().transform;
-            this.enemy = FindObjectOfType<EnemyNormal>().transform;
+            FindInactiveEnemyNormals();
+            navMeshSurface = FindAnyObjectByType<NavMeshSurface>();
             StartCoroutine(EverySeconReduce(1.0f));
-        }  
-       
-        private void Update() 
+        }
+        public void ChangeFloor()
         {
-            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); //ไว้อัปเดตแมพ
+            MovePositionEnemyChangeFloor();
+            CheckClosestResingPoint();
+        }
+        public void MovePositionEnemyChangeFloor()
+        {
+            var enemyNormal = enemy.GetComponent<EnemyNormal>();
+
+            var setposition = new SetPosition();
+            var position = setposition.FindClosestPosition(setSpawns, player);
+
+            enemyNormal.EnterState(enemyNormal.state_Searching);
+            enemyNormal.agent.Warp(position.position);
+
+        }
+        public void CheckClosestResingPoint()
+        {
+            var enemynormal = enemy.GetComponent<EnemyNormal>();
+            Transform newRestingPoint = allResingPoint.ElementAt<Transform>(0);
+            float distanceRestingPoint = float.MaxValue;
+            foreach (var positionResingPoint in allResingPoint)
+            {
+                float positionDistance = Vector3.Distance(positionResingPoint.position,enemynormal.transform.position);
+                if (positionDistance < distanceRestingPoint  )
+                {   
+                    distanceRestingPoint = positionDistance;
+                    newRestingPoint = positionResingPoint;
+                }
+            }
+
+            enemynormal.ResingPoint = newRestingPoint;
+        }
+        private void FindInactiveEnemyNormals()
+        {
+            // หาทุก Object ที่มี script EnemyNormal ในฉาก
+            EnemyNormal[] enemyNormals = GameObject.FindObjectsOfType<EnemyNormal>(true);
+
+            foreach (EnemyNormal enemyNormal in enemyNormals)
+            {
+                // ตรวจสอบว่า Object นี้ไม่ได้ Active
+                if (!enemyNormal.gameObject.activeSelf)
+                {
+                    this.enemy = enemyNormal.transform;
+
+                }
+            }
+        }
+        private void Update()
+        {
+            // navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData); //ไว้อัปเดตแมพ
         }
         private IEnumerator EverySeconReduce(float time)
         {
             yield return new WaitForSeconds(time);
-            Stressvalue -=10;
+            Stressvalue -= 10;
             if (Stressvalue < 0)
                 Stressvalue = 0;
         }

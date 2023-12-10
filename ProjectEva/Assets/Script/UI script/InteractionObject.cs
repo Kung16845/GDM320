@@ -1,17 +1,19 @@
 using UnityEngine;
-
+using TMPro;
 public class InteractionObject : MonoBehaviour
 {
     public GameObject sceneObject; // The object to be displayed in the scene.
     public GameObject panel; // The panel to be displayed when 'E' is pressed.
     public SoundManager soundManager;
+    public TextMeshProUGUI customText;
+    public string custominteractiontext;
 
     private bool objectVisible = false;
     private bool panelVisible = false;
 
     private void Start()
     {
-        HideObject();
+        HideEButton();
         HidePanel();
         soundManager = FindObjectOfType<SoundManager>();
     }
@@ -20,8 +22,7 @@ public class InteractionObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Enter");
-            ShowObject();
+            ShowEButton();
         }
     }
 
@@ -29,7 +30,7 @@ public class InteractionObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HideObject();
+            HideEButton();
         }
     }
 
@@ -48,18 +49,6 @@ public class InteractionObject : MonoBehaviour
         }
     }
 
-    private void ShowObject()
-    {
-        sceneObject.SetActive(true);
-        objectVisible = true;
-    }
-
-    private void HideObject()
-    {
-        sceneObject.SetActive(false);
-        objectVisible = false;
-    }
-
     private void ShowPanel()
     {
         soundManager.PlaySound("Paperaction");
@@ -75,10 +64,14 @@ public class InteractionObject : MonoBehaviour
     private void ShowEButton()
     {
         sceneObject.SetActive(true);
+        customText.text = custominteractiontext;
+        objectVisible = true;
     }
 
     private void HideEButton()
     {
         sceneObject.SetActive(false);
+        customText.text = "";
+        objectVisible = false;
     }
 }

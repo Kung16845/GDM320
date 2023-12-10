@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Target object with name 'Enemy/Velo_Sprite' not found!");
+            // Debug.LogError("Target object with name 'Enemy/Velo_Sprite' not found!");
         }
     }
 
@@ -38,8 +38,9 @@ public class Bullet : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<EnemyNormal>())
+    {   
+        var enemy = collision.GetComponent<EnemyNormal>();
+        if (enemy != null && enemy.currentState != enemy.state_Listening)
         {
             collision.GetComponent<EnemyNormal>().TakeDamage(damage);
             StartCoroutine(ChangeSpriteColorForOneSecond());

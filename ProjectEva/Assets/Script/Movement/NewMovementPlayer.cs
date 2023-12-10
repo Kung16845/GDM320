@@ -36,7 +36,7 @@ public class NewMovementPlayer : MonoBehaviour
 
     [Header("---------Audiomanager------------")]
     public WalkSoundManager WalkSoundManager;
-    private GameObject currentSoundObject;
+    public GameObject currentSoundObject;
 
 
     private void Start()
@@ -142,20 +142,32 @@ public class NewMovementPlayer : MonoBehaviour
     void Crouch()
     {
         transform.Translate(direction * (crouchSpeed * sanityScaleController.GetSpeedScale()) * Time.deltaTime);
+        WalkSoundManager.StopSound("Walk");
+        WalkSoundManager.StopSound("Run");
     }
     public void StopMoving()
     {
-        Debug.Log("Stuck");
         speed = 0f;
         crouchSpeed = 0f;
         runspeed = 0f;
     }
     public void ResumeMoving()
     {
-        Debug.Log("released");
         speed = originalSpeed;
         crouchSpeed = originalCrouchSpeed;
         runspeed = originalRunSpeed;
+    }
+    public void Decreasespeedbyscale(float decresescale)
+    {   
+        speed *= decresescale;
+        crouchSpeed *=  decresescale;
+        runspeed *= decresescale;
+    }
+    public void Permadecreasespeed(float decreasevalue)
+    {
+        speed = decreasevalue;
+        runspeed = decreasevalue;
+        crouchSpeed =  decreasevalue;
     }
 }
 

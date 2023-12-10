@@ -10,6 +10,8 @@ public class Sanity : MonoBehaviour
     public float currentsanity;
     public float SanityResistance;
     public TextMeshProUGUI sanityText;
+    public CanvasGroup canvasGroup;
+    public float lowSanityThreshold = 30f;
 
     void Start()
     {
@@ -19,6 +21,16 @@ public class Sanity : MonoBehaviour
     void Update()
     {
         UpdateSanityText();
+        if (currentsanity < lowSanityThreshold)
+        {
+            // Decrease the alpha of the CanvasGroup.
+            canvasGroup.alpha = 0.1f; // You can adjust the alpha value as needed.
+        }
+        else
+        {
+            // Reset the alpha to full when HP is above the threshold.
+            canvasGroup.alpha = 0f;
+        }
     }
 
     public void TakeSanity(float sanityDamage)

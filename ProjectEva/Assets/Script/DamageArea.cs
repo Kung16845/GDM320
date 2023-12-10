@@ -6,7 +6,7 @@ public class DamageArea : MonoBehaviour
     public float damageInterval;
     public float damageAmount;
     public float delayBeforeTakingDamage;
-
+    public bool cantakedamage;
     public Sanity playerSanity;
     public GameManager gameManager;
 
@@ -14,13 +14,17 @@ public class DamageArea : MonoBehaviour
 
     private void Start()
     {
+        cantakedamage = true;
         playerSanity = FindObjectOfType<Sanity>();
         gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        if(cantakedamage)
+        {
         HandlePlayerCollision(other);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D player)

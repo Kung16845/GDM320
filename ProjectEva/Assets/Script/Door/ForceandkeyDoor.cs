@@ -1,34 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NavMeshPlus.Components;
 using TMPro;
+using System.Linq;
 
 public class ForceandkeyDoor : MonoBehaviour
 {
-   public TextMeshProUGUI instructionText;
-   public keyinventory playerInventory; // Reference to the TMPro UI object.
-
     private bool isPlayerNear = false;
-
+    private string uiPanelTag = "Interactiontag";
+    private string customTextTag = "Interactiontext";
+    public int hasKeynumber;
+    public InventoryPresentCharactor inventoryPresentCharactor;
+    public GameObject sceneObject;
+    public TextMeshProUGUI customText;
+    public NavMeshSurface navMeshSurface;
+    public SoundManager soundManager;
+    public string Keyforthisdoor;
+    public bool removekey;
+    public int numberofkey;
+    public string custominteractiontext;
+    public void Awake()
+    {
+        FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+    }
     private void Start()
     {
-        instructionText.gameObject.SetActive(false);
+        FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            ShowEButton();
             isPlayerNear = true;
-            instructionText.gameObject.SetActive(true);
-            instructionText.text = "It's lock Must find A key or maybe...";
         }
         if (collision.CompareTag("Bullet"))
         {
-            // Check if a bullet collided with the door.
-            // Add any additional conditions here, e.g., bullet type.
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
             Destroy(this.gameObject); // Destroy the bullet.
-            OpenDoorWithForce(); // Open the door when hit by a bullet.
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isPlayerNear)
+        {
+            if (hasKeynumber == numberofkey)
+            {
+                customText.text = "I have a key for this.";
+            }
+            else if (hasKeynumber != numberofkey)
+            {
+                customText.text = custominteractiontext;
+            }
+            ShowEButton();
         }
     }
 
@@ -36,22 +66,59 @@ public class ForceandkeyDoor : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            HideEButton();
             isPlayerNear = false;
-            instructionText.gameObject.SetActive(false);
         }
     }
 
     private void Update()
     {
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && playerInventory.HasKey("Libarykey"))
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber == numberofkey)
         {
+            if (removekey)
+            {
+                inventoryPresentCharactor.DeleteItemCharactorEquipment(Keyforthisdoor);
+            }
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+            soundManager.PlaySound("Dooropen");
             Destroy(this.gameObject);
-             // Remove the used key from the inventory.
+        }
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && hasKeynumber != numberofkey)
+        {
+            soundManager.PlaySound("Doorlocked");
+        }
+    }
+    private void ShowEButton()
+    {
+        sceneObject.SetActive(true);
+    }
+
+    private void HideEButton()
+    {
+        sceneObject.SetActive(false);
+        customText.text = "";
+    }
+    private void FindUIElementsByTag()
+    {
+        // Find UI panel by tag
+        GameObject[] sceneObjects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.CompareTag(uiPanelTag)).ToArray();
+        if (sceneObjects.Length > 0)
+        {
+            sceneObject = sceneObjects[0]; // Assuming there is only one UI panel with the specified tag
+        }
+
+        // Find custom text by tag
+        TextMeshProUGUI[] customTexts = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>().Where(obj => obj.CompareTag(customTextTag)).ToArray();
+        if (customTexts.Length > 0)
+        {
+            customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
         }
     }
 
-    private void OpenDoorWithForce()
-    {
-        // Add your door opening logic here for force-only doors.
-    }
+    // private void OnDestroy()
+    // {
+    //     var datainScean = FindAnyObjectByType<SaveAndLoadScean>();
+    //     var dataobj = datainScean.objectforload.FirstOrDefault(objid => objid.objectID == 1);
+    //     dataobj.isDestroy = true;
+    // }
 }

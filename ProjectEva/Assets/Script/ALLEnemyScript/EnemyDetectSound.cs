@@ -11,8 +11,8 @@ namespace Enemy_State
         [Space(25f)]
         public float radius;
         public float Saveradius;
-        public float soundValue;
-        public float maxSoundValue;
+        public int currentsoundValue;
+        public int maxSoundValue;
         public bool isCountingValueSound;
         public bool isRunningReduceSoundValue;
         public NewMovementPlayer newMovementPlayer;
@@ -41,7 +41,7 @@ namespace Enemy_State
                     Collider2DCheckSound.GetComponent<SoundWave>().isDetect = true;
                     StartCoroutine(DelayTimeCountSoundValue());
                 }
-                if (soundValue >= maxSoundValue)
+                if (currentsoundValue >= maxSoundValue)
                 {
                     if (enemy.currentState != enemy.state_SearchingSound)
                         enemy.isHear = true;
@@ -53,18 +53,18 @@ namespace Enemy_State
                 Debug.Log("Sound Is Not Hear");
                 time = time + 1f * Time.deltaTime;
 
-                if (time >= timeDelay && !enemy.isHear && soundValue > 0)
+                if (time >= timeDelay && !enemy.isHear && currentsoundValue > 0)
                 {
                     time = 0;
                     StartCoroutine(ReduceSoundValue(enemy));
                     isRunningReduceSoundValue = true;
                 }
             }
-            if (soundValue > 16)
-                soundValue = 16;
+            if (currentsoundValue > maxSoundValue)
+                currentsoundValue = maxSoundValue;
 
             if (enemy.currentState == enemy.state_Listening)
-                radius = Saveradius / 2;
+                radius = Saveradius * 2;
             else
                 radius = Saveradius;
         }
@@ -74,32 +74,32 @@ namespace Enemy_State
             if (newMovementPlayer.isRunning)
             {
                 if (enemy.currentState = enemy.state_Listening)
-                    soundValue += 16;
+                    currentsoundValue += 16;
                 else
-                    soundValue += 8;
+                    currentsoundValue += 8;
             }
             else if (pistol.isshoot)
-                soundValue += 16;
+                currentsoundValue += 16;
 
             else if (newMovementPlayer.isWalking)
             {
                 if (enemy.currentState = enemy.state_Listening)
-                    soundValue += 4 * 2;
+                    currentsoundValue += 4 * 2;
                 else
-                    soundValue += 4;
+                    currentsoundValue += 4;
             }
             else
-                soundValue += 0;
+                currentsoundValue += 0;
             yield return new WaitForSeconds(4.0f);
             isCountingValueSound = false;
         }
         IEnumerator ReduceSoundValue(Enemy enemy)
         {
-            soundValue -= 1;
+            currentsoundValue -= 1;
             Debug.Log("ReduceSoundValue");
             time = 0;
             yield return new WaitForSeconds(1.0f);
-            if (soundValue > 0 && isRunningReduceSoundValue)
+            if (currentsoundValue > 0 && isRunningReduceSoundValue)
                 StartCoroutine(ReduceSoundValue(enemy));
         }
         private void OnDrawGizmos()
