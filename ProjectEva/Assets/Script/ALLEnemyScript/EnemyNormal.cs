@@ -70,6 +70,7 @@ namespace Enemy_State
                 case State_Searching:
                     iswalkingonfloor = true;
                     EnterState(state_Searching);
+                    SetAlpha(255);
                     if (enemySight.canSee && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                         currentState = state_Hunting;
                     else if (isHear && hp > 0)
