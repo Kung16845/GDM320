@@ -28,6 +28,7 @@ public class InventoryPresentCharactor : MonoBehaviour
         RefreshUIInventoryCharactor();
         introCanvasGroup.alpha = 0f;
         introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
+        Cursor.visible = false;
 
     }
     private void Update()
@@ -68,7 +69,9 @@ public class InventoryPresentCharactor : MonoBehaviour
             StartCoroutine(StartCounting());
             firsttime = true;
             }
+        Cursor.visible = openInven ;
         inventorypage.SetActive(openInven);
+        
     }
     public void UnlockSlot()
     {
