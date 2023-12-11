@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "nameItem": "<b> A Gentle Request</b>.",
+    "detailsItemNote": "<b>Dear [Dina Lowen],\n\n\nI hope this message finds you well. Your exceptional dedication to the maintenance of our cherished mansion has not gone unnoticed, and I am sincerely grateful for your unwavering efforts. I kindly request your meticulous care in preserving the beauty of the statues adorning our halls, as they hold sentimental value to me. I am confident that your touch will enhance their radiance, and as a token of my appreciation, a small gift awaits you in your quarters. Thank you for your continued commitment to our home's upkeep; your efforts do not go unnoticed.\n\n\nWarm regards.</b>.",
+    "nameSprite": "8_mail(Clone)",
+    "category": 2
+  },
+  {
+    "nameItem": "<b><color=\"red\">*Missing underground key</color=\"red\"></b>.",
+    "detailsItemNote": "<b>Dear Dina,\n\n\nSeems I've misplaced my key . Would you mind lending your keen eye to its search? I believe <color=#005500>I might have left it in the statue room on the second floor</color=#005500>. Your assistance is greatly appreciated.\n\n\nBest regards,\nLuke,\n.</b>.",
+    "nameSprite": "8_note(Clone)",
+    "category": 2
+  },
+  {
+    "nameItem": "<b>Genarator bills</b>.",
+    "detailsItemNote": "<b>\nDate: lllllllllll\r\n\r\nTo: Mr. Luke\r\n\r\nAddress: llllllllllll\r\n\r\nDescription\tQuantity\tUnit Price\tTotal\r\nFuel Generator\t\t250000 \t   1\r\r\n\r\nTotal Amount Due: lllllllllll\r\n\r\nPlease remit payment at your earliest convenience. Thank you for choosing our services.\n</b>",
+    "nameSprite": "8_note(Clone)",
+    "category": 2
+  }
+]
