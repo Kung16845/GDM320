@@ -26,12 +26,15 @@ public class SaveAndLoadScean : MonoBehaviour
         {
             if (!objInScean.isDestroy)
             {
-                Instantiate(objInScean.objectinScean, this.transform);
+                var newObject = Instantiate(objInScean.objectinScean, this.transform);
 
                 var newDataObj = new DataObjectLoad();
 
                 newDataObj.objectID = objInScean.objectID;
                 newDataObj.isDestroy = objInScean.isDestroy;
+
+                if (!newObject.activeInHierarchy) // เช็คกับดัก 
+                    newDataObj.isNotActiveInSceans = true;
 
                 dataObjectInSceans.Add(newDataObj);
             }
@@ -106,8 +109,11 @@ public class SaveAndLoadScean : MonoBehaviour
             if (!dataobj.isDestroy)
             {
                 var objInScean = objectforload.FirstOrDefault(objid => objid.objectID == dataobj.objectID);
-                Instantiate(objInScean.objectinScean, this.transform);
-
+                var loadObj = Instantiate(objInScean.objectinScean, this.transform);
+                if (!dataobj.isNotActiveInSceans)
+                {
+                    loadObj.SetActive(true);
+                }
             }
         }
     }

@@ -15,6 +15,7 @@ public class Webtrap : MonoBehaviour
     public bool Canburn;
     public bool isclose;
     public InventoryPresentCharactor inventoryPresentCharactor;
+    public int PrefabID;
     
     private void Awake()
     {
@@ -33,6 +34,13 @@ public class Webtrap : MonoBehaviour
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
         trapController = FindObjectOfType<TrapController>();
         Canburn = false;
+        DataCheckActive();
+    }
+    public void DataCheckActive()
+    {
+        var dataScean = FindObjectOfType<SaveAndLoadScean>();
+        var dataobj = dataScean.dataObjectInSceans.FirstOrDefault(objid => objid.objectID == PrefabID);
+        dataobj.isNotActiveInSceans = false;
     }
     void OnTriggerStay2D(Collider2D other)
     {

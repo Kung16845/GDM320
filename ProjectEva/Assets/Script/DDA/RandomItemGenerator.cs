@@ -7,14 +7,9 @@ public class RandomItemGenerator : MonoBehaviour
     public int sequenceLength = 5; // Length of the sequence
     public bool allowRepeats = false; // Allow repeating items in the sequence
 
-    private string[] generatedSequence; // Store the generated sequence
+    public string[] generatedSequence; // Store the generated sequence  
 
-    void Start()
-    {
-        GenerateRandomSequence();
-    }
-
-    void GenerateRandomSequence()
+    public void GenerateRandomSequence()
     {
         if (itemNames.Length == 0 || sequenceLength <= 0)
         {

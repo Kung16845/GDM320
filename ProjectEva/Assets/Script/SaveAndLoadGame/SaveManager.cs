@@ -15,6 +15,7 @@ public class SaveManager : MonoBehaviour
     [SerializeField] DataSave dataSaveandLoadPlayerAndEnemy;
     public GameObject player;
     public GameObject enemy;
+    public GameObject locker;
 
     [Header("DataItemCharactor")]
     [SerializeField] List<DataItemCharactor> listDataItemsCharactors;
@@ -355,9 +356,14 @@ public class SaveManager : MonoBehaviour
         dataSaveandLoadPlayerAndEnemy.currentSanityResistance = playerSanity.SanityResistance;
 
         dataSaveandLoadPlayerAndEnemy.currentPistolAmmoinChamber = player.GetComponentInChildren<Pistol>().ammoInChamber;
+        dataSaveandLoadPlayerAndEnemy.currentShotgunAmmoinChamber = player.GetComponentInChildren<Shotgun>().ammoInChamber;
 
         dataSaveandLoadPlayerAndEnemy.transformPlayerX = player.transform.position.x;
         dataSaveandLoadPlayerAndEnemy.transformPlayerY = player.transform.position.y;
+
+        var lockerArray = FindObjectOfType<RandomItemGenerator>();
+
+        dataSaveandLoadPlayerAndEnemy.lockerItemKey = lockerArray.generatedSequence; 
     }
     public void SaveDataEnemy()
     {
@@ -415,11 +421,20 @@ public class SaveManager : MonoBehaviour
 
     }
     public void LoadDataPlayer()
-    {
+    {   
+        
         player.GetComponentInChildren<Hp>().currenthp = dataSaveandLoadPlayerAndEnemy.currentHpPlayer;
+
+        player.GetComponentInChildren<Pistol>().ammoInChamber = dataSaveandLoadPlayerAndEnemy.currentPistolAmmoinChamber; 
+        player.GetComponentInChildren<Shotgun>().ammoInChamber = dataSaveandLoadPlayerAndEnemy.currentShotgunAmmoinChamber;
 
         Vector2 newPosition = new Vector2(dataSaveandLoadPlayerAndEnemy.transformPlayerX, dataSaveandLoadPlayerAndEnemy.transformPlayerY);
         player.transform.position = newPosition;
+
+
+        var lockerArray = FindObjectOfType<RandomItemGenerator>();
+
+        lockerArray.generatedSequence = dataSaveandLoadPlayerAndEnemy.lockerItemKey; 
     }
 
     public void LoadDataEnemy()

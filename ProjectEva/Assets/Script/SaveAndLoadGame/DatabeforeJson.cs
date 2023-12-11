@@ -14,6 +14,7 @@ public class DataSave
     public float transformPlayerX;
     public float transformPlayerY;
     public int currentPistolAmmoinChamber;
+    public int currentShotgunAmmoinChamber;
     [Header("DataEnemy")]
     public float currentHpEnemy;
     public float transformEnemyX;
@@ -51,6 +52,7 @@ public class DataItemNote
 [Serializable]
 public class DataObjectLoad
 {   
-    public int objectID;
+    public int objectID; 
+    public bool isNotActiveInSceans;
     public bool isDestroy;
 }
