@@ -66,56 +66,12 @@
     "isLock": true
   },
   {
-    "nameItem": "Flashlight",
-    "nameSprite": "FaiChai(Clone)",
-    "scriptItem": "Inventoryflashlight",
-    "numslot": 12,
-    "count": 1,
-    "maxCount": 1,
-    "isFlashLight": true,
-    "isOnhand": false,
-    "isLock": false
-  },
-  {
-    "nameItem": "Matchesbox",
-    "nameSprite": "5_lightmatch(Clone)",
-    "scriptItem": "InventoryMatches",
-    "numslot": 2,
-    "count": 2,
-    "maxCount": 5,
-    "isFlashLight": false,
-    "isOnhand": true,
-    "isLock": false
-  },
-  {
-    "nameItem": "Pistol Ammo",
-    "nameSprite": "6_pistol_ammo(Clone)",
-    "scriptItem": "",
+    "nameItem": "Chemicalbottle",
+    "nameSprite": "1_chemical_black",
+    "scriptItem": "InventoryChemicalbottle",
     "numslot": 0,
     "count": 1,
-    "maxCount": 6,
-    "isFlashLight": false,
-    "isOnhand": false,
-    "isLock": false
-  },
-  {
-    "nameItem": "Chemicalbottle",
-    "nameSprite": "1_chemical_black(Clone)",
-    "scriptItem": "InventoryChemicalbottle",
-    "numslot": 1,
-    "count": 2,
     "maxCount": 5,
-    "isFlashLight": false,
-    "isOnhand": true,
-    "isLock": false
-  },
-  {
-    "nameItem": "Diamondkey",
-    "nameSprite": "3_key_diamond",
-    "scriptItem": "InvenroyDiamondkey",
-    "numslot": 3,
-    "count": 1,
-    "maxCount": 1,
     "isFlashLight": false,
     "isOnhand": true,
     "isLock": false

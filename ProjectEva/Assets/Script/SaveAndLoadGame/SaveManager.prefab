@@ -132,10 +132,6 @@ MonoBehaviour:
     isDestroy: 0
     nameObjects: MaidenKitchen
     objectinScean: {fileID: 5020311797405074096, guid: 0a8bd8fb284451a43b5ddfde50f7210d, type: 3}
-  - objectID: 9
-    isDestroy: 0
-    nameObjects: EventDoor
-    objectinScean: {fileID: 1264254657530091383, guid: 7c244d7a85ab2c44c955249f85664258, type: 3}
   - objectID: 10
     isDestroy: 0
     nameObjects: Trophy room
@@ -856,10 +852,6 @@ MonoBehaviour:
     isDestroy: 0
     nameObjects: Old
     objectinScean: {fileID: 4285144064167576475, guid: 7a3c8a2731f0a3f4bba43af613f62f69, type: 3}
-  - objectID: 191
-    isDestroy: 0
-    nameObjects: Old
-    objectinScean: {fileID: 6938252979678344535, guid: 9de50a05e1579ed41b7ea2bee3736518, type: 3}
   - objectID: 193
     isDestroy: 0
     nameObjects: Old
@@ -928,17 +920,49 @@ MonoBehaviour:
     isDestroy: 0
     nameObjects: Old
     objectinScean: {fileID: 4463361823043187186, guid: 4bd7d708102210a4e84a244a6c87b75f, type: 3}
-  - objectID: 217
+  - objectID: 210
     isDestroy: 0
     nameObjects: Old
-    objectinScean: {fileID: 4021416827029012940, guid: dc7c8d74d14d3c243a7a020376fbadb8, type: 3}
+    objectinScean: {fileID: 1928063464856214544, guid: 8fee9936db0b15d4b973af1599c92633, type: 3}
+  - objectID: 211
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 6960613710328152046, guid: 3aaa45761d2581d4da31b69ce2db2ae3, type: 3}
+  - objectID: 212
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 9177446224355175235, guid: d884593973f9e394193390ccc50d479e, type: 3}
+  - objectID: 213
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 6728614641112956441, guid: b8922fc1f585bef4f99679ec6147e9cc, type: 3}
+  - objectID: 214
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 6207830711744957164, guid: 0c6b1e3b79db20649a0a1f32a940b39c, type: 3}
+  - objectID: 215
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 6236175600201990051, guid: c703d658f630086429c552494966a0ac, type: 3}
   - objectID: 216
     isDestroy: 0
     nameObjects: Old
-    objectinScean: {fileID: 2796048154756367153, guid: ec9a7b9db7b8a8746b745e46f0d17e7a, type: 3}
+    objectinScean: {fileID: 2217090394625216405, guid: 4b7429611d7e48c4690cd34d29133be8, type: 3}
+  - objectID: 217
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 5694643886634928794, guid: ad09e61906bdbd34ca699bd5845b7dfe, type: 3}
   - objectID: 218
     isDestroy: 0
     nameObjects: Old
-    objectinScean: {fileID: 89995541394162800, guid: d1ad7a979ecf1b54fb0104304886d25b, type: 3}
+    objectinScean: {fileID: 2142276418926186904, guid: da4e62c6b0bf9e9428b60684f707450d, type: 3}
+  - objectID: 219
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 7020238998367181751, guid: 21390e37f8eda30458d1691011f06de4, type: 3}
+  - objectID: 220
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 7063276031348148363, guid: 046b325be802c204d860b3274dfbbed1, type: 3}
   saveDataObjects: Script/SaveAndLoadGame/DataSaveGame/DataSaveSceans.json
   navMeshSurface: {fileID: 0}

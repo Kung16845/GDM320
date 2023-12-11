@@ -5,40 +5,73 @@ using System.Collections.Generic;
 using TMPro;
 using System.Linq;
 
+
 public class Triggerevent : MonoBehaviour
 {
-    public SoundManageronce soundManager;
+    public SoundManageronce2 soundManager;
     public bool canPickup;
     public GameObject Destroyspriteofficer;
     public GameObject enebleofficer;
     public GameObject enableblood;
+    public GameObject enableblood1;
+    public GameObject enableblood2;
     public GameObject Destroydoor; 
+    public GameObject Destroysound; 
+    public Transform newTransform; 
     public CanvasGroup introCanvasGroup;
+    public string canvatag;
     private bool canClose = false;
     private void Awake()
     {
         canPickup = false;
-        introCanvasGroup.alpha = 0f;
-        introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
-        soundManager = FindObjectOfType<SoundManageronce>();
+        Destroydoor = GameObject.FindWithTag("Destroydoor");
+        Destroyspriteofficer = GameObject.FindWithTag("policesit");
+        enableblood = GameObject.FindWithTag("Bloodtranfrom");
+        enableblood1 = GameObject.FindWithTag("Bloodtranfrom1");
+        enableblood2 = GameObject.FindWithTag("Bloodtranfrom2");
+        Destroysound = GameObject.FindWithTag("eventsound");
+        enebleofficer = GameObject.FindWithTag("1"); // Corrected tag
+        enebleofficer.SetActive(false);
+         GameObject foundObject = GameObject.FindWithTag(canvatag);
+
+        // Check if the object is found
+        if (foundObject != null)
+        {
+            // Get the CanvasGroup component from the found object
+            introCanvasGroup = foundObject.GetComponent<CanvasGroup>();
+            introCanvasGroup.alpha = 0f;
+        }
+        soundManager = FindObjectOfType<SoundManageronce2>();
     }
-    private void Start()
-    {
-        canPickup = false;
-        introCanvasGroup.alpha = 0f;
-        introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
-        soundManager = FindObjectOfType<SoundManageronce>();
-    }
+    // private void Start()
+    // {
+    //     canPickup = false;
+    //     introCanvasGroup.alpha = 0f;
+    //     Destroydoor = GameObject.FindWithTag("Destroydoor");
+    //     Destroyspriteofficer = GameObject.FindWithTag("policesit");
+    //     enableblood = GameObject.FindWithTag("Bloodtranfrom");
+    //     enableblood1 = GameObject.FindWithTag("Bloodtranfrom1");
+    //     enableblood2 = GameObject.FindWithTag("Bloodtranfrom2");
+    //     Destroysound = GameObject.FindWithTag("eventsound");
+    //     enebleofficer = GameObject.FindWithTag("1"); // Corrected tag
+    //     enebleofficer.SetActive(false);
+    //     introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
+    //     soundManager = FindObjectOfType<SoundManageronce2>();
+    // }
     private void Update()
     {
         if(canPickup && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("destroyed");
-            Destroy(Destroyspriteofficer.gameObject);
-            Destroy(Destroydoor.gameObject);
             enebleofficer.SetActive(true);
+            
             enableblood.SetActive(true);
+            enableblood1.SetActive(true);
+            enableblood2.SetActive(true);
+            Destroy(Destroydoor);
+            Destroy(Destroyspriteofficer);
             StartCoroutine(Playsound());
+            Destroy(this.gameObject);
             
         }
     }
@@ -81,6 +114,7 @@ public class Triggerevent : MonoBehaviour
     {
         soundManager.PlaySound("Officer hurt");
         soundManager.PlaySound("Doorbroke");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(Destroysound);
     }
 }

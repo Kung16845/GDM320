@@ -9,13 +9,25 @@ public class Healingsection : MonoBehaviour
     public GameObject destroycanva;
     public Hp hp;
     public int tutorialduratuion;
+    public string canvatag;
     private bool firsttime = false;
 
     private void Start()
     {
-        introCanvasGroup.alpha = 0f;
         hp = FindObjectOfType<Hp>();
-        introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
+        GameObject foundObject = GameObject.FindWithTag(canvatag);
+
+        // Check if the object is found
+        if (foundObject != null)
+        {
+            // Get the CanvasGroup component from the found object
+            introCanvasGroup = foundObject.GetComponent<CanvasGroup>();
+            introCanvasGroup.alpha = 0f;
+        }
+        else
+        {
+            Debug.LogError("Object with tag not found.");
+        }
     }
 
     private void Update()
@@ -57,8 +69,6 @@ public class Healingsection : MonoBehaviour
 
         // Ensure the alpha is 0 when fading is complete
         introCanvasGroup.alpha = 0f;
-
-        Destroy(destroycanva);
         Destroy(this.gameObject);
     }
 }

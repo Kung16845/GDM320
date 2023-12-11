@@ -71,8 +71,9 @@ MonoBehaviour:
     Left Ctrl</b>: Hold down the Left Ctrl key to make your character crouch while
     walking. This allows for quieter and more stealthy movement, especially useful
     in certain situations.\n\n<b>Press E to Interact</b>:\r\nExplore the environment
-    and press E to interact with various objects in the game.\n\n<b>Press Tab to
-    open Inventory</b>\nOpen Invent and equip flashlight.\n"
+    and press E to interact with various objects in the game.A bit weird but You
+    al so has to press E to change floor.\n\n<b>Press Tab to open Inventory</b>\nOpen
+    Invent and equip flashlight.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5.95
+  m_fontSize: 5.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -155,7 +156,7 @@ GameObject:
   - component: {fileID: 2067899730025270313}
   m_Layer: 5
   m_Name: movement
-  m_TagString: Untagged
+  m_TagString: movmenttag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

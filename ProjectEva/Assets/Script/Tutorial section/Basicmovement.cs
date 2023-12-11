@@ -7,15 +7,26 @@ using TMPro;
 public class BasicMovement : MonoBehaviour
 {
     public CanvasGroup introCanvasGroup;
-    public GameObject  destroycanva;
+    public string canvatag;
     public int tutorialduratuion;
     private bool canClose = false;
 
     private void Start()
     {
-        destroycanva.SetActive(true);
-        introCanvasGroup.alpha = 0f;
-        introCanvasGroup = introCanvasGroup ?? GetComponent<CanvasGroup>();
+        // Find the GameObject with the specified tag
+        GameObject foundObject = GameObject.FindWithTag(canvatag);
+
+        // Check if the object is found
+        if (foundObject != null)
+        {
+            // Get the CanvasGroup component from the found object
+            introCanvasGroup = foundObject.GetComponent<CanvasGroup>();
+            introCanvasGroup.alpha = 0f;
+        }
+        else
+        {
+            Debug.LogError("Object with tag not found.");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,7 +44,6 @@ public class BasicMovement : MonoBehaviour
         {
             introCanvasGroup.alpha = 0f; // Set alpha to 0 when closing
             canClose = false;
-            Destroy(destroycanva);
             Destroy(this.gameObject);
         }
     }
@@ -53,7 +63,7 @@ public class BasicMovement : MonoBehaviour
         // Ensure the alpha is 1 when fading is complete
         introCanvasGroup.alpha = 1f;
 
-        // Wait for 7 seconds
+        // Wait for the specified duration
         yield return new WaitForSecondsRealtime(tutorialduratuion);
 
         // Gradually decrease alpha over 1 second
@@ -67,8 +77,6 @@ public class BasicMovement : MonoBehaviour
 
         // Ensure the alpha is 0 when fading is complete
         introCanvasGroup.alpha = 0f;
-
-        Destroy(destroycanva);
-        Destroy(this.gameObject);
+        canClose = true;
     }
 }

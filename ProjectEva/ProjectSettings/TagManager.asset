@@ -19,6 +19,22 @@ TagManager:
   - Teleporter
   - Player_Sprite
   - PlayerHitbox
+  - movmenttag
+  - survivetip
+  - craftingtag
+  - Using bandage
+  - Bloodtranfrom
+  - Bloodtranfrom1
+  - Bloodtranfrom2
+  - police_hang
+  - monsteractive
+  - policesit
+  - eventsound
+  - Destroydoor
+  - policehang
+  - Bloodmid
+  - Bloodstart
+  - 1
   layers:
   - Default
   - TransparentFX
