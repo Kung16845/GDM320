@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1228527751802980388}
   - component: {fileID: 9089179568792628608}
-  - component: {fileID: 7903234465168545096}
+  - component: {fileID: -1871625538554014321}
   - component: {fileID: 5642943234544113712}
   m_Layer: 0
   m_Name: Trapactive Stuck
@@ -79,7 +79,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.562828, y: 0.5733948}
   m_EdgeRadius: 0
---- !u!114 &7903234465168545096
+--- !u!114 &-1871625538554014321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,21 +88,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4021416827029012940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a46181213787c3848855dc34edfea5f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 185404774308ad8448108e6833ac37a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToActivate:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  objectsToActivate: []
   numberOfObjectsToActivate: 8
 --- !u!114 &5642943234544113712
 MonoBehaviour:
@@ -116,4 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4569d901927dd43b94872ec4b7d2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabID: 0
+  PrefabID: 217

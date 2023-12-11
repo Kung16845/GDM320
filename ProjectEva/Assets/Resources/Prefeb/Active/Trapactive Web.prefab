@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &655876874540262159
 BoxCollider2D:
@@ -92,16 +92,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToActivate:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 874461794100227704, guid: a12fa917e3f1eac45b89efa2f01d62fa, type: 3}
+  - {fileID: 1437595605420108274, guid: 3c36b5545ca271b428bb5864b2c3cefc, type: 3}
+  - {fileID: 754247714877947643, guid: 905ffe2aeb8a0324f9687505c8810864, type: 3}
+  - {fileID: 3979514305286130792, guid: 1bbde0cfdac538b4aa0ed84c981f207a, type: 3}
+  - {fileID: 3688131257700713723, guid: 5b62a6738b7722b4491961956f8b6f84, type: 3}
+  - {fileID: 6735803861782957976, guid: 566bf37a8852acf4597e0c7285580403, type: 3}
+  - {fileID: 7661630107535885929, guid: e03f45768ce5b4a4e932daee83344302, type: 3}
+  - {fileID: 2573944029312435154, guid: a652ee8ce73e2de4e82d27fba323225a, type: 3}
+  - {fileID: 8452059916992686210, guid: 9518f9d7095592d4699d3785238c608e, type: 3}
+  - {fileID: 3105326488741862170, guid: 449cdf2756a9a4b4ba0c4bace3e1623a, type: 3}
   numberOfObjectsToActivate: 7
 --- !u!114 &-3495377392273415248
 MonoBehaviour:
@@ -115,4 +115,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4569d901927dd43b94872ec4b7d2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabID: 0
+  PrefabID: 218

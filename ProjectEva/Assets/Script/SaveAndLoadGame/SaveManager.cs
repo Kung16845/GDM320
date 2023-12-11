@@ -450,6 +450,7 @@ public class SaveManager : MonoBehaviour
         enemyNormal.onSoundValuechange = dataSaveandLoadPlayerAndEnemy.currentonSoundValuechange;
 
         enemy.GetComponent<EnemyNormal>().currentState = LoadStateEnemy(enemyNormal);
+        enemy.SetActive(true);
 
     }
     StateMachine LoadStateEnemy(Enemy enemy)

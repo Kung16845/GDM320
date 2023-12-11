@@ -412,12 +412,12 @@
   {
     "objectID": 83,
     "isNotActiveInSceans": false,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 84,
     "isNotActiveInSceans": false,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 85,
@@ -867,7 +867,7 @@
   {
     "objectID": 175,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 176,
@@ -1067,6 +1067,6 @@
   {
     "objectID": 216,
     "isNotActiveInSceans": false,
-    "isDestroy": false
+    "isDestroy": true
   }
 ]

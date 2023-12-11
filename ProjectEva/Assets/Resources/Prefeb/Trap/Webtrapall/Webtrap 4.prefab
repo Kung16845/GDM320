@@ -1452,6 +1452,7 @@ MonoBehaviour:
   Canburn: 0
   isclose: 0
   inventoryPresentCharactor: {fileID: 0}
+  PrefabID: 37
 --- !u!114 &428895597679117493
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -107,6 +107,7 @@ MonoBehaviour:
   sliderImage: {fileID: 0}
   sliderValue: 0
   soundManager: {fileID: 0}
+  PrefabID: 205
 --- !u!61 &6606655447825657827
 BoxCollider2D:
   m_ObjectHideFlags: 0

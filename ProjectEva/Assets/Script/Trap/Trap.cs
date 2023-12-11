@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using TMPro;
+using System.Linq;
 
 public class Trap : MonoBehaviour
 {
@@ -13,6 +16,7 @@ public class Trap : MonoBehaviour
     private float currentDuration = 0.0f;
     public float sliderValue = 0.0f;
     public SoundManager soundManager;
+    public int PrefabID;
 
 
     GameObject ThatPlayer;
@@ -25,7 +29,12 @@ public class Trap : MonoBehaviour
         player = ThatPlayer.GetComponent<Animation_PlayerMovement>();
 
     }
-
+    public void DataCheckActive()
+    {
+        var dataScean = FindObjectOfType<SaveAndLoadScean>();
+        var dataobj = dataScean.dataObjectInSceans.FirstOrDefault(objid => objid.objectID == PrefabID);
+        dataobj.isNotActiveInSceans = false;
+    }
     void Update()
     {
         if (isActivated)
