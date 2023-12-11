@@ -21,6 +21,7 @@ public class DataSave
     public float transformEnemyY;
     public int currentsoundValue;
     public int currentonSoundValuechange;
+    public bool enemyIsActiveInScean;
     public string currentState;
     [Header("DataSystemInventory")]
     public string[] lockerItemKey;

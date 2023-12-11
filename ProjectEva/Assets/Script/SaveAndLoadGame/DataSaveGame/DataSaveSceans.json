@@ -227,17 +227,17 @@
   {
     "objectID": 46,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 47,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 48,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 49,
@@ -412,17 +412,17 @@
   {
     "objectID": 83,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 84,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 85,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 86,
@@ -487,7 +487,7 @@
   {
     "objectID": 98,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 99,
@@ -1052,7 +1052,7 @@
   {
     "objectID": 212,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 213,
@@ -1067,6 +1067,6 @@
   {
     "objectID": 216,
     "isNotActiveInSceans": false,
-    "isDestroy": true
+    "isDestroy": false
   }
 ]

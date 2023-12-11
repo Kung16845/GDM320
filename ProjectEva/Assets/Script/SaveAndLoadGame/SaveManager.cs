@@ -40,27 +40,27 @@ public class SaveManager : MonoBehaviour
 
     }
     private void FindInactiveEnemyNormals()
-        {
-            // หาทุก Object ที่มี script EnemyNormal ในฉาก
-            EnemyNormal[] enemyNormals = GameObject.FindObjectsOfType<EnemyNormal>(true);
+    {
+        // หาทุก Object ที่มี script EnemyNormal ในฉาก
+        EnemyNormal[] enemyNormals = GameObject.FindObjectsOfType<EnemyNormal>(true);
 
-            foreach (EnemyNormal enemyNormal in enemyNormals)
+        foreach (EnemyNormal enemyNormal in enemyNormals)
+        {
+            // ตรวจสอบว่า Object นี้ไม่ได้ Active
+            if (!enemyNormal.gameObject.activeSelf)
             {
-                // ตรวจสอบว่า Object นี้ไม่ได้ Active
-                if (!enemyNormal.gameObject.activeSelf)
-                {
-                    this.enemy = enemyNormal.gameObject;
-                   
-                }
+                this.enemy = enemyNormal.gameObject;
+
             }
         }
+    }
     public void AllSave()
     {
         SaveDataPlayerAndEnemy();
         SaveDataInventoryItemsNote();
         SaveDataInventoryItemsChractor();
         saveAndLoadScean.SaveDataObjectINScean();
-    } 
+    }
     public void AllLoad()
     {
         LoadDataPlayerAndEnemy();
@@ -69,7 +69,7 @@ public class SaveManager : MonoBehaviour
         saveAndLoadScean.LoadDataObjectINScean();
     }
     void ConventUIItemsNoteToDataItemsNotes()
-    {   
+    {
         listDataItemsNotes.Clear();
         var inventoryItemNotePresent = FindAnyObjectByType<InventoryItemNotePresent>();
         var listdataItemNote = inventoryItemNotePresent.itemsListNotes;
@@ -107,7 +107,7 @@ public class SaveManager : MonoBehaviour
         {
             Directory.CreateDirectory(directoryPath);
         }
-        
+
         File.WriteAllText(targetFilePath, datainventory);
     }
     public void LoadDataInventoryItemNote()
@@ -143,7 +143,7 @@ public class SaveManager : MonoBehaviour
         var dataListItemNote = inventoryItemNote.itemsListNotes;
         dataListItemNote.Clear();
 
-        for (int i = 0 ; i < listDataItemsNotes.Count ; i++)
+        for (int i = 0; i < listDataItemsNotes.Count; i++)
         {
             var dataItemNote = listDataItemsNotes.ElementAt<DataItemNote>(i);
 
@@ -158,7 +158,7 @@ public class SaveManager : MonoBehaviour
 
             dataListItemNote.Add(newDataItemsNote);
         }
-        
+
         inventoryItemNote.RefreshUIInventoryItenNote();
     }
     void ConventDataUIItemCharactortoDataItemCharactor()
@@ -187,7 +187,7 @@ public class SaveManager : MonoBehaviour
         }
 
     }
-    
+
     public void SaveDataInventoryItemsChractor()
     {
         ConventDataUIItemCharactortoDataItemCharactor();
@@ -247,6 +247,13 @@ public class SaveManager : MonoBehaviour
             if (uiItemComponent != null)
             {
                 Destroy(uiItemComponent.gameObject);
+            }
+            if (itemInSlot.GetComponent<BoxItemsCharactor>() != null)
+            {
+                foreach (Transform child in itemInSlot.transform)
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
     }
@@ -364,7 +371,7 @@ public class SaveManager : MonoBehaviour
 
         var lockerArray = FindObjectOfType<RandomItemGenerator>();
 
-        dataSaveandLoadPlayerAndEnemy.lockerItemKey = lockerArray.generatedSequence; 
+        dataSaveandLoadPlayerAndEnemy.lockerItemKey = lockerArray.generatedSequence;
     }
     public void SaveDataEnemy()
     {
@@ -378,6 +385,9 @@ public class SaveManager : MonoBehaviour
         dataSaveandLoadPlayerAndEnemy.currentonSoundValuechange = enemyNormal.onSoundValuechange;
 
         dataSaveandLoadPlayerAndEnemy.currentState = CheckedAndSaveStateEnemy(enemyNormal);
+
+        if(enemy.activeInHierarchy) 
+            dataSaveandLoadPlayerAndEnemy.enemyIsActiveInScean = true;
     }
     string CheckedAndSaveStateEnemy(Enemy enemy)
     {
@@ -422,11 +432,11 @@ public class SaveManager : MonoBehaviour
 
     }
     public void LoadDataPlayer()
-    {   
-        
+    {
+
         player.GetComponentInChildren<Hp>().currenthp = dataSaveandLoadPlayerAndEnemy.currentHpPlayer;
 
-        player.GetComponentInChildren<Pistol>().ammoInChamber = dataSaveandLoadPlayerAndEnemy.currentPistolAmmoinChamber; 
+        player.GetComponentInChildren<Pistol>().ammoInChamber = dataSaveandLoadPlayerAndEnemy.currentPistolAmmoinChamber;
         player.GetComponentInChildren<Shotgun>().ammoInChamber = dataSaveandLoadPlayerAndEnemy.currentShotgunAmmoinChamber;
 
         Vector2 newPosition = new Vector2(dataSaveandLoadPlayerAndEnemy.transformPlayerX, dataSaveandLoadPlayerAndEnemy.transformPlayerY);
@@ -435,7 +445,7 @@ public class SaveManager : MonoBehaviour
 
         var lockerArray = FindObjectOfType<RandomItemGenerator>();
 
-        lockerArray.generatedSequence = dataSaveandLoadPlayerAndEnemy.lockerItemKey; 
+        lockerArray.generatedSequence = dataSaveandLoadPlayerAndEnemy.lockerItemKey;
     }
 
     public void LoadDataEnemy()
@@ -450,7 +460,11 @@ public class SaveManager : MonoBehaviour
         enemyNormal.onSoundValuechange = dataSaveandLoadPlayerAndEnemy.currentonSoundValuechange;
 
         enemy.GetComponent<EnemyNormal>().currentState = LoadStateEnemy(enemyNormal);
-        enemy.SetActive(true);
+
+        if(dataSaveandLoadPlayerAndEnemy.enemyIsActiveInScean)
+            enemy.SetActive(true);
+        else 
+            enemy.SetActive(false);
 
     }
     StateMachine LoadStateEnemy(Enemy enemy)
