@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5676739767896185421}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -248,10 +248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b915a58cb568b0408342b63fd6bf842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrefabID: 13
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
   soundManager: {fileID: 0}
-  custominteractiontext: The lock is look week maybe I can break it with force.
+  custominteractiontext: The lock seems pretty fragile, maybe I can break it.
   navMeshSurface: {fileID: 0}
 --- !u!61 &6691695303380252817
 BoxCollider2D:

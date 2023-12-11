@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba9e406c69a8f24283de78a7fb33008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrefabID: 1
   hasKeynumber: 0
   inventoryPresentCharactor: {fileID: 0}
   sceneObject: {fileID: 0}

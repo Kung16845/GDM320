@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9731c62a0415feb46a6d1106857a3501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrefabID: 12
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
   soundManager: {fileID: 0}
@@ -212,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c0c3f4b27759f499305b46f0694bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrefabID: 0
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
   soundManager: {fileID: 0}

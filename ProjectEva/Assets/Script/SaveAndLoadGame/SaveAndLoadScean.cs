@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Enemy_State;
+using NavMeshPlus.Components;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Networking;
 using UnityEngine.U2D;
 public class SaveAndLoadScean : MonoBehaviour
@@ -16,7 +18,7 @@ public class SaveAndLoadScean : MonoBehaviour
 
     [Header("Saving")]
     [SerializeField] string saveDataObjects;
-
+    public NavMeshSurface navMeshSurface;
     public void LoadObjectToStartScean()
     {
 
@@ -34,6 +36,7 @@ public class SaveAndLoadScean : MonoBehaviour
                 dataObjectInSceans.Add(newDataObj);
             }
         }
+        navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
     }
     public void SaveObjectIsDestroy()
     {

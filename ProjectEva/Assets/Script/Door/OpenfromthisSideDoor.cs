@@ -20,6 +20,7 @@ public class OpenfromthisSideDoor : MonoBehaviour
     {
         soundManager = FindAnyObjectByType<SoundManager>();
         FindUIElementsByTag();
+        navMeshSurface = FindAnyObjectByType<NavMeshSurface>();
     }
     public void Start()
     {

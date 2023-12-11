@@ -19,6 +19,7 @@ public class ForceDoor : MonoBehaviour
     {
         FindUIElementsByTag();
         soundManager = FindObjectOfType<SoundManager>();
+        navMeshSurface = FindAnyObjectByType<NavMeshSurface>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
