@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4065542870082904711
 MonoBehaviour:
@@ -58,6 +58,7 @@ MonoBehaviour:
     transformEnemyY: 0
     currentsoundValue: 0
     currentonSoundValuechange: 0
+    enemyIsActiveInScean: 0
     currentState: 
     lockerItemKey: []
   player: {fileID: 0}
@@ -859,10 +860,6 @@ MonoBehaviour:
     isDestroy: 0
     nameObjects: Old
     objectinScean: {fileID: 6938252979678344535, guid: 9de50a05e1579ed41b7ea2bee3736518, type: 3}
-  - objectID: 192
-    isDestroy: 0
-    nameObjects: Old
-    objectinScean: {fileID: 4021416827029012940, guid: dc7c8d74d14d3c243a7a020376fbadb8, type: 3}
   - objectID: 193
     isDestroy: 0
     nameObjects: Old
@@ -931,29 +928,17 @@ MonoBehaviour:
     isDestroy: 0
     nameObjects: Old
     objectinScean: {fileID: 4463361823043187186, guid: 4bd7d708102210a4e84a244a6c87b75f, type: 3}
-  - objectID: 210
+  - objectID: 217
     isDestroy: 0
     nameObjects: Old
-    objectinScean: {fileID: 8767041661540558647, guid: 440a8908b357d994fabc6ada899d0316, type: 3}
-  - objectID: 211
-    isDestroy: 0
-    nameObjects: Old
-    objectinScean: {fileID: 1314247059997086693, guid: 1dcfc68032714404ba931f5578273bfe, type: 3}
-  - objectID: 212
-    isDestroy: 0
-    nameObjects: Old
-    objectinScean: {fileID: 545607834014529549, guid: 92cbcc2d91ec5ad4a8353ee39fa06e3e, type: 3}
-  - objectID: 213
-    isDestroy: 0
-    nameObjects: Old
-    objectinScean: {fileID: 1695436813665251382, guid: dda4a0c1f28a3324596b5c310612a86d, type: 3}
-  - objectID: 214
-    isDestroy: 0
-    nameObjects: Old
-    objectinScean: {fileID: 7233648736217688048, guid: 72a1babb71cb59644aa520ac28fb4fa8, type: 3}
+    objectinScean: {fileID: 4021416827029012940, guid: dc7c8d74d14d3c243a7a020376fbadb8, type: 3}
   - objectID: 216
     isDestroy: 0
     nameObjects: Old
     objectinScean: {fileID: 2796048154756367153, guid: ec9a7b9db7b8a8746b745e46f0d17e7a, type: 3}
+  - objectID: 218
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 89995541394162800, guid: d1ad7a979ecf1b54fb0104304886d25b, type: 3}
   saveDataObjects: Script/SaveAndLoadGame/DataSaveGame/DataSaveSceans.json
   navMeshSurface: {fileID: 0}

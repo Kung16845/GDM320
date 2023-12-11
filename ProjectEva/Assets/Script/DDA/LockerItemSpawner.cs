@@ -24,9 +24,18 @@ public class LockerItemSpawner : MonoBehaviour
     public bool isclose;
     // Reference to the RandomItemGenerator script
     public RandomItemGenerator randomItemGenerator;
+     private void Awake()
+    {
+        randomItemGenerator = FindAnyObjectByType<RandomItemGenerator>();
+        canunlock = false;
+        FindUIElementsByTag();
+        soundManager = FindObjectOfType<SoundManager>();
+        inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
+    }
 
     private void Start()
     {
+        randomItemGenerator = FindAnyObjectByType<RandomItemGenerator>();
         canunlock = false;
         FindUIElementsByTag();
         soundManager = FindObjectOfType<SoundManager>();

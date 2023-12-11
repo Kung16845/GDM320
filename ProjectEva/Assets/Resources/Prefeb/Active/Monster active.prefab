@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7978863944276828706}
   - component: {fileID: 1504739153762322107}
-  - component: {fileID: 5490447888134062319}
   - component: {fileID: -3332767845843024187}
+  - component: {fileID: -8404052245684794974}
   m_Layer: 0
   m_Name: Monster active
   m_TagString: Untagged
@@ -79,22 +79,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 23.264084, y: 0.20575714}
   m_EdgeRadius: 0
---- !u!114 &5490447888134062319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6938252979678344535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a46181213787c3848855dc34edfea5f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsToActivate:
-  - {fileID: 0}
-  - {fileID: 0}
-  numberOfObjectsToActivate: 2
 --- !u!114 &-3332767845843024187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,3 +92,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabID: 191
+--- !u!114 &-8404052245684794974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938252979678344535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af30075364a71d7479792fb61d6de7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
