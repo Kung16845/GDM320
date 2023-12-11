@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 public class Interactionpanel : MonoBehaviour
 {
+    public int PrefabID;
     private bool isPlayerNear = false;
     private string uiPanelTag = "Interactiontag"; 
     private string customTextTag = "Interactiontext";
@@ -71,5 +72,11 @@ public class Interactionpanel : MonoBehaviour
         {
             customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
         }
+    }
+      private void OnDestroy()
+    {
+        var datainScean = FindAnyObjectByType<SaveAndLoadScean>();
+        var dataobj = datainScean.objectforload.FirstOrDefault(objid => objid.objectID == PrefabID);
+        dataobj.isDestroy = true;
     }
 }

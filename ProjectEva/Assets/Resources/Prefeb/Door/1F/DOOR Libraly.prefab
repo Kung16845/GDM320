@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7369366146332158089}
   - component: {fileID: 8234755627562261306}
-  - component: {fileID: 4298374292275057089}
   - component: {fileID: 2382513745000361658}
   - component: {fileID: 2468956435788957367}
   - component: {fileID: 5704781506119561010}
+  - component: {fileID: 9001321621135794147}
   m_Layer: 0
   m_Name: DOOR Libraly
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210277548117035103}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -36.61, y: 38.46, z: 0}
   m_LocalScale: {x: 2.8719733, y: 4.9851165, z: 4.786622}
   m_ConstrainProportionsScale: 0
@@ -88,27 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4298374292275057089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210277548117035103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2c641dd2766b9c41bbdfc1e719063b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasKeynumber: 0
-  inventoryPresentCharactor: {fileID: 0}
-  sceneObject: {fileID: 0}
-  customText: {fileID: 0}
-  soundManager: {fileID: 0}
-  Keyforthisdoor: Libralykeyinventory
-  navMeshSurface: {fileID: 0}
-  numberofkey: 1
-  custominteractiontext: Need a librakey
 --- !u!61 &2382513745000361658
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0055108443, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -152,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28, y: 1}
+  m_Size: {x: 0.1293609, y: 1}
   m_EdgeRadius: 0
 --- !u!61 &2468956435788957367
 BoxCollider2D:
@@ -186,7 +165,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.19913071, y: 0}
+  m_Offset: {x: -0.3415289, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -197,7 +176,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8249905, y: 1}
+  m_Size: {x: 0.2422542, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &5704781506119561010
 MonoBehaviour:
@@ -215,3 +194,21 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &9001321621135794147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210277548117035103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9731c62a0415feb46a6d1106857a3501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabID: 4
+  sceneObject: {fileID: 0}
+  customText: {fileID: 0}
+  soundManager: {fileID: 0}
+  navMeshSurface: {fileID: 0}
+  custominteractiontext: Open !
