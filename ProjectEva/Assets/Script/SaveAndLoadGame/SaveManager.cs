@@ -257,25 +257,23 @@ public class SaveManager : MonoBehaviour
             }
         }
     }
-    public void UpLoadAndCreateDataInventoryItemCharactor()
+   public void UpLoadAndCreateDataInventoryItemCharactor()
+{
+    var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+
+    for (int i = 0; i < listDataItemsCharactors.Count; i++)
     {
-        var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
+        var itemDataCharactor = listDataItemsCharactors.ElementAt<DataItemCharactor>(i);
 
-        for (int i = 0; i < listDataItemsCharactors.Count; i++)
+        // Use FirstOrDefault to find the slotItem
+        var slotItem = allslot.FirstOrDefault(
+            slot => slot.GetComponent<InventorySlots>()?.numslot == itemDataCharactor.numslot ||
+                    slot.GetComponent<BoxItemsCharactor>()?.numslot == itemDataCharactor.numslot);
+
+        // Check if slotItem is null before accessing its properties
+        if (slotItem != null)
         {
-            var itemDataCharactor = listDataItemsCharactors.ElementAt<DataItemCharactor>(i);
-
-            var slotItem = allslot.FirstOrDefault(slot =>
-            {
-                var numslot = slot.GetComponent<InventorySlots>().numslot;
-                return (numslot == 14) ? slot.GetComponent<BoxItemsCharactor>() : slot.GetComponent<InventorySlots>();
-            });
-
-
-            var newItemCharactor = new UIItemCharactor();
-            newItemCharactor = Instantiate(inventoryPresentCharactor.uIItemCharactorPrefeb,
-            slotItem.transform, false);
-
+            var newItemCharactor = Instantiate(inventoryPresentCharactor.uIItemCharactorPrefeb, slotItem.transform, false);
             var newItem = newItemCharactor.GetComponent<UIItemCharactor>();
 
             newItem.nameItem.text = itemDataCharactor.nameItem;
@@ -299,16 +297,16 @@ public class SaveManager : MonoBehaviour
 
             if (newItem.numslot == 12 || newItem.numslot == 13)
             {
-
                 inventoryPresentCharactor.CreateItemCharactorEquipment(newItem.scriptItem, newItem.nameItem.text);
                 Vector3 newScaleequipment = new Vector3(1.65f, 1.65f, 1.65f);
                 newItem.GetComponent<RectTransform>().localScale = newScaleequipment;
-
             }
 
             inventoryPresentCharactor.uIItemListCharactor.Add(newItem);
         }
     }
+}
+
     public string CheckReMoveClone(string nameSpriteItem)
     {
         string originalString = nameSpriteItem;
