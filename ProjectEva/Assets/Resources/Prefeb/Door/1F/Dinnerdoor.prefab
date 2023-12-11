@@ -29,12 +29,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2778970497529622126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.969999, y: 53.56, z: 0}
+  m_LocalPosition: {x: 13.970001, y: 53.56, z: 0}
   m_LocalScale: {x: 6.2158527, y: 5.6669, z: 5.6669}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5628665538375837455
 SpriteRenderer:
@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c641dd2766b9c41bbdfc1e719063b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrefabID: 3
   hasKeynumber: 0
   inventoryPresentCharactor: {fileID: 0}
   sceneObject: {fileID: 0}
@@ -214,4 +215,5 @@ MonoBehaviour:
   Keyforthisdoor: Dinnerkeyinventory
   navMeshSurface: {fileID: 0}
   numberofkey: 2
-  custominteractiontext: It's locked must find a key.
+  removekey: 1
+  custominteractiontext: I need to find a key to open this door

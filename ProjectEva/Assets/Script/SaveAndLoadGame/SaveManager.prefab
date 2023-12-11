@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4065542870082904711
 MonoBehaviour:
@@ -126,30 +126,146 @@ MonoBehaviour:
     objectinScean: {fileID: 4982737576891640451, guid: 2fb1a7b2daa3d254e8d4a63e131477f7, type: 3}
   - objectID: 8
     isDestroy: 0
-    nameObjects: old stuff room(key&force)
+    nameObjects: MaidenKitchen
     objectinScean: {fileID: 5020311797405074096, guid: 24893f69cb3a22447bc35cb60f8fb06f, type: 3}
   - objectID: 9
     isDestroy: 0
-    nameObjects: old stuff room(key&force)
-    objectinScean: {fileID: 5020311797405074096, guid: 24893f69cb3a22447bc35cb60f8fb06f, type: 3}
+    nameObjects: EventDoor
+    objectinScean: {fileID: 0}
   - objectID: 10
-    isDestroy: 0
-    nameObjects: PianiroomDoor
-    objectinScean: {fileID: 377720268516751027, guid: 06beffc94a5731542a3ab0adf30f155d, type: 3}
-  - objectID: 11
     isDestroy: 0
     nameObjects: Trophy room
     objectinScean: {fileID: 5793434512534949880, guid: 3a95a21acf138a74b830fc0368fb0b94, type: 3}
-  - objectID: 12
+  - objectID: 11
     isDestroy: 0
     nameObjects: Underground Door
     objectinScean: {fileID: 3373404974349273682, guid: 3398523b876461e408c03ddc2d9e65c3, type: 3}
-  - objectID: 13
+  - objectID: 12
     isDestroy: 0
     nameObjects: Winebackdoor
     objectinScean: {fileID: 1362711645963452315, guid: cffa64b4cd1a22e4e86288efd70e1c3a, type: 3}
-  - objectID: 14
+  - objectID: 13
     isDestroy: 0
     nameObjects: Wineroomdoor(force)
     objectinScean: {fileID: 5676739767896185421, guid: 046ceb012a17910488bb96e6e5023c0c, type: 3}
+  - objectID: 14
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 15
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 16
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 17
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 18
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 19
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 20
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 21
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 22
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 23
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 24
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 25
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 26
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 27
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 28
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 29
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 30
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 31
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 32
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 33
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 34
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 35
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 36
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 37
+    isDestroy: 0
+    nameObjects: OLD
+    objectinScean: {fileID: 0}
+  - objectID: 38
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 39
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 40
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 41
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 42
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
+  - objectID: 43
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
   saveDataObjects: Script/SaveAndLoadGame/DataSaveGame/DataSaveSceans.json
