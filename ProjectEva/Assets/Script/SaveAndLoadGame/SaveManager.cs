@@ -15,7 +15,6 @@ public class SaveManager : MonoBehaviour
     [SerializeField] DataSave dataSaveandLoadPlayerAndEnemy;
     public GameObject player;
     public GameObject enemy;
-    public GameObject locker;
 
     [Header("DataItemCharactor")]
     [SerializeField] List<DataItemCharactor> listDataItemsCharactors;
