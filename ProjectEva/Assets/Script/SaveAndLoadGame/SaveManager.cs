@@ -265,8 +265,12 @@ public class SaveManager : MonoBehaviour
         {
             var itemDataCharactor = listDataItemsCharactors.ElementAt<DataItemCharactor>(i);
 
-            var slotItem = allslot.FirstOrDefault
-            (slot => slot.GetComponent<InventorySlots>().numslot == itemDataCharactor.numslot);
+            var slotItem = allslot.FirstOrDefault(slot =>
+            {
+                var numslot = slot.GetComponent<InventorySlots>().numslot;
+                return (numslot == 14) ? slot.GetComponent<BoxItemsCharactor>() : slot.GetComponent<InventorySlots>();
+            });
+
 
             var newItemCharactor = new UIItemCharactor();
             newItemCharactor = Instantiate(inventoryPresentCharactor.uIItemCharactorPrefeb,
@@ -386,7 +390,7 @@ public class SaveManager : MonoBehaviour
 
         dataSaveandLoadPlayerAndEnemy.currentState = CheckedAndSaveStateEnemy(enemyNormal);
 
-        if(enemy.activeInHierarchy) 
+        if (enemy.activeInHierarchy)
             dataSaveandLoadPlayerAndEnemy.enemyIsActiveInScean = true;
     }
     string CheckedAndSaveStateEnemy(Enemy enemy)
@@ -461,9 +465,9 @@ public class SaveManager : MonoBehaviour
 
         enemy.GetComponent<EnemyNormal>().currentState = LoadStateEnemy(enemyNormal);
 
-        if(dataSaveandLoadPlayerAndEnemy.enemyIsActiveInScean)
+        if (dataSaveandLoadPlayerAndEnemy.enemyIsActiveInScean)
             enemy.SetActive(true);
-        else 
+        else
             enemy.SetActive(false);
 
     }
