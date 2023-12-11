@@ -10,7 +10,8 @@ public class RandomItemGenerator : MonoBehaviour
     public string[] generatedSequence; // Store the generated sequence  
 
     public void GenerateRandomSequence()
-    {
+    {   
+        Debug.Log("GenerateRandomSequence");
         if (itemNames.Length == 0 || sequenceLength <= 0)
         {
             Debug.LogError("Please set valid values for itemNames and sequenceLength in the Inspector.");

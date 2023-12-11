@@ -31,12 +31,12 @@ public class SaveManager : MonoBehaviour
     [SerializeField] string saveInventoryItemsChractorPath;
     [SerializeField] string saveInventoryItemsNotePath;
 
-    
+    public SaveAndLoadScean saveAndLoadScean;
     // Start is called before the first frame update
     void Start()
     {
         player = FindAnyObjectByType<NewMovementPlayer>().gameObject;
-        
+        saveAndLoadScean = FindObjectOfType<SaveAndLoadScean>();
         FindInactiveEnemyNormals();
 
     }
@@ -60,12 +60,14 @@ public class SaveManager : MonoBehaviour
         SaveDataPlayerAndEnemy();
         SaveDataInventoryItemsNote();
         SaveDataInventoryItemsChractor();
+        saveAndLoadScean.SaveDataObjectINScean();
     } 
     public void AllLoad()
     {
         LoadDataPlayerAndEnemy();
         LoadDataInventoryItemNote();
         LoadDataInventoryItemsChractor();
+        saveAndLoadScean.LoadDataObjectINScean();
     }
     void ConventUIItemsNoteToDataItemsNotes()
     {   

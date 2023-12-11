@@ -21,7 +21,8 @@ public class SaveAndLoadScean : MonoBehaviour
     public NavMeshSurface navMeshSurface;
     public void LoadObjectToStartScean()
     {
-
+        var itemGenerator = FindObjectOfType<RandomItemGenerator>();
+        itemGenerator.GenerateRandomSequence();
         foreach (var objInScean in objectforload)
         {
             if (!objInScean.isDestroy)
@@ -39,7 +40,9 @@ public class SaveAndLoadScean : MonoBehaviour
                 dataObjectInSceans.Add(newDataObj);
             }
         }
+
         navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+        
     }
     public void SaveObjectIsDestroy()
     {
