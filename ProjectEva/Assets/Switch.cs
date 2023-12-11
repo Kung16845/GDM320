@@ -26,6 +26,8 @@ public class Switch: MonoBehaviour
     public bool yellowon;
     private void Start()
     {
+        fuelquest = FindObjectOfType<Fuelquest>();
+        fusequest = FindObjectOfType<Fusequest>();
         isclose = false;
         FindUIElementsByTag();
         soundManager = FindObjectOfType<SoundManager>();

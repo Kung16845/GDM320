@@ -33,7 +33,7 @@ Transform:
   - {fileID: 2434355815177038813}
   - {fileID: 1599000006734817466}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7875623205226483049
 MonoBehaviour:
@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f9faa28ed2f1c48920c9bb0edb8dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCanvasGroup: {fileID: 0}
-  destroycanva: {fileID: 0}
+  introCanvasGroup: {fileID: 2067899730025270313, guid: eb7395e43d062144f846b97e6ba98cd1, type: 3}
+  destroycanva: {fileID: 9076028055757812532, guid: eb7395e43d062144f846b97e6ba98cd1, type: 3}
   tutorialduratuion: 10
 --- !u!1 &4335034442572446864
 GameObject:
@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f9faa28ed2f1c48920c9bb0edb8dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCanvasGroup: {fileID: 0}
-  destroycanva: {fileID: 0}
+  introCanvasGroup: {fileID: 8325663523037160263, guid: 87ccaaefe20135d468289cd4be421242, type: 3}
+  destroycanva: {fileID: 232238990886433048, guid: 87ccaaefe20135d468289cd4be421242, type: 3}
   tutorialduratuion: 7
 --- !u!1 &7547081976502026672
 GameObject:
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d376fbb37604b4aa7b936969539c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCanvasGroup: {fileID: 0}
-  destroycanva: {fileID: 0}
+  introCanvasGroup: {fileID: 4651186073739407753, guid: df9894eb317f4374eae1472cf18d7310, type: 3}
+  destroycanva: {fileID: 8698045114456944981, guid: df9894eb317f4374eae1472cf18d7310, type: 3}
   hp: {fileID: 0}
   tutorialduratuion: 15

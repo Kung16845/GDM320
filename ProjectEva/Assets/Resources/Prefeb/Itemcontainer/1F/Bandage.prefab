@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 193608129069191484}
   - component: {fileID: 4534106798774197366}
   - component: {fileID: 7900255863238767505}
-  - component: {fileID: 1442489040406244277}
   - component: {fileID: 6397460499213966178}
   - component: {fileID: 4304835098388826847}
   m_Layer: 0
@@ -107,25 +106,6 @@ MonoBehaviour:
   sceneObject: {fileID: 0}
   customText: {fileID: 0}
   custominteractiontext: That the bandage that I need.
---- !u!114 &1442489040406244277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5226843729671848176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 376efa332ce75854fb8903c68e69f5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundManager: {fileID: 0}
-  canPickup: 0
-  Destroyspriteofficer: {fileID: 0}
-  enebleofficer: {fileID: 0}
-  enableblood: {fileID: 0}
-  Destroydoor: {fileID: 0}
-  introCanvasGroup: {fileID: 0}
 --- !u!61 &6397460499213966178
 BoxCollider2D:
   m_ObjectHideFlags: 0

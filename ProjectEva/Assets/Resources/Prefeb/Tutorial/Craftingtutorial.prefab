@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f9faa28ed2f1c48920c9bb0edb8dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCanvasGroup: {fileID: 0}
-  destroycanva: {fileID: 0}
+  introCanvasGroup: {fileID: 2973334231388474063, guid: 9543e6c36f1a15044b7d2d7020495a9b, type: 3}
+  destroycanva: {fileID: 5708925019374290705, guid: 9543e6c36f1a15044b7d2d7020495a9b, type: 3}
   tutorialduratuion: 10
 --- !u!114 &3601419253911155335
 MonoBehaviour:
