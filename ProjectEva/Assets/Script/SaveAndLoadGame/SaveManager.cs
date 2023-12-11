@@ -30,7 +30,7 @@ public class SaveManager : MonoBehaviour
     [SerializeField] string saveInventoryItemsChractorPath;
     [SerializeField] string saveInventoryItemsNotePath;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {

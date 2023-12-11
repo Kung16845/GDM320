@@ -1,11 +1,11 @@
 [
   {
     "objectID": 1,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 2,
-    "isDestroy": true
+    "isDestroy": false
   },
   {
     "objectID": 3,
@@ -17,11 +17,11 @@
   },
   {
     "objectID": 5,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 6,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 7,
@@ -33,7 +33,7 @@
   },
   {
     "objectID": 9,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 10,
