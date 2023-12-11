@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5546800310419492957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4508650694303736555}
+  - component: {fileID: 8777466238743019347}
+  - component: {fileID: 6059225978823249961}
+  - component: {fileID: 456666459457606632}
+  m_Layer: 0
+  m_Name: Locker 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &4508650694303736555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546800310419492957}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 44.1121, y: 83.715775, z: 0}
+  m_LocalScale: {x: 2.8719733, y: 4.786622, z: 4.786622}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &8777466238743019347
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546800310419492957}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.008232167, y: 0.043177083}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.047487576, y: 0.5700537}
+  m_EdgeRadius: 0
+--- !u!114 &6059225978823249961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546800310419492957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ce00bd90b5a7a4dbf9d4d3fa07b6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefabs:
+  - customName: Diamondkey
+    prefab: {fileID: 8474385165576348815, guid: bed03be91d5f0294689b2765ab4ef6ef, type: 3}
+  - customName: Maidenkey
+    prefab: {fileID: 3346631275196436118, guid: 6d6efbd5efb1ec743ac932a2f333023b, type: 3}
+  - customName: BoltCutter
+    prefab: {fileID: 8907052732083791296, guid: 62cfb9e72c8a0184587ecdb25e0572cb, type: 3}
+  - customName: Pocketbag
+    prefab: {fileID: 2209397237780057855, guid: c93412cd36e4dc940a112e3eab23e8d6, type: 3}
+  - customName: Pocketflashlight
+    prefab: {fileID: 8520424027521831066, guid: 0b675f3b977ae364288d9f9666675326, type: 3}
+  sceneObject: {fileID: 0}
+  soundManager: {fileID: 0}
+  customText: {fileID: 0}
+  inventoryPresentCharactor: {fileID: 0}
+  canunlock: 0
+  custominteractiontext: There is stuff in this locker.
+  isclose: 0
+  randomItemGenerator: {fileID: 0}
+--- !u!114 &456666459457606632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546800310419492957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4569d901927dd43b94872ec4b7d2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabID: 188
