@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &822989867193641638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2279190133256468967}
+  - component: {fileID: 4065542870082904711}
+  - component: {fileID: 2097483166712633825}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2279190133256468967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822989867193641638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4065542870082904711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822989867193641638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4acb572e3085641886320a551a9bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataSaveandLoadPlayerAndEnemy:
+    currentHpPlayer: 0
+    currentSanityPlayer: 0
+    currentSanityResistance: 0
+    transformPlayerX: 0
+    transformPlayerY: 0
+    currentPistolAmmoinChamber: 0
+    currentHpEnemy: 0
+    transformEnemyX: 0
+    transformEnemyY: 0
+    currentsoundValue: 0
+    currentonSoundValuechange: 0
+    currentState: 
+    lockerItemKey: []
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  listDataItemsCharactors: []
+  allslot:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spriteAtlas: {fileID: 100100200, guid: 93db98b5cc36ba2449edbb97e981eb91, type: 3}
+  listDataItemsNotes: []
+  savePlayerAndEnemyPath: Script/SaveAndLoadGame/DataSaveGame/DataSave.json
+  saveInventoryItemsChractorPath: Script/SaveAndLoadGame/DataSaveGame/DataSaveItemCharactor.json
+  saveInventoryItemsNotePath: Script/SaveAndLoadGame/DataSaveGame/DataSaveItemNote.json
+--- !u!114 &2097483166712633825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822989867193641638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93905d32d332d646b46470eab2bb518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataObjectInSceans: []
+  objectforload:
+  - objectID: 1
+    isDestroy: 0
+    nameObjects: 1f statue room
+    objectinScean: {fileID: 8842124074810650933, guid: ae6542d3f5ae75948ad4ba764bf2737b, type: 3}
+  - objectID: 2
+    isDestroy: 0
+    nameObjects: 1f statue room rightsite
+    objectinScean: {fileID: 190745019785536465, guid: 03fe14e4b1186ef43849f972f6c37143, type: 3}
+  - objectID: 3
+    isDestroy: 0
+    nameObjects: Dinnerdoor
+    objectinScean: {fileID: 2778970497529622126, guid: 4c748db1bae10384b80547973aa1ed2c, type: 3}
+  - objectID: 4
+    isDestroy: 0
+    nameObjects: DOOR Libraly
+    objectinScean: {fileID: 210277548117035103, guid: a2ee4fdc904014041abe3e73093482c2, type: 3}
+  - objectID: 5
+    isDestroy: 0
+    nameObjects: Kitchendoor
+    objectinScean: {fileID: 8969381285025092174, guid: cc3c52363bce7cf4491389231ae77fe8, type: 3}
+  - objectID: 6
+    isDestroy: 0
+    nameObjects: Libraly door
+    objectinScean: {fileID: 1167708031031183122, guid: 71ae6a7b04526d6419af45da11057a3f, type: 3}
+  - objectID: 7
+    isDestroy: 0
+    nameObjects: Libraly door front
+    objectinScean: {fileID: 4982737576891640451, guid: 2fb1a7b2daa3d254e8d4a63e131477f7, type: 3}
+  - objectID: 8
+    isDestroy: 0
+    nameObjects: old stuff room(key&force)
+    objectinScean: {fileID: 5020311797405074096, guid: 24893f69cb3a22447bc35cb60f8fb06f, type: 3}
+  - objectID: 9
+    isDestroy: 0
+    nameObjects: old stuff room(key&force)
+    objectinScean: {fileID: 5020311797405074096, guid: 24893f69cb3a22447bc35cb60f8fb06f, type: 3}
+  - objectID: 10
+    isDestroy: 0
+    nameObjects: PianiroomDoor
+    objectinScean: {fileID: 377720268516751027, guid: 06beffc94a5731542a3ab0adf30f155d, type: 3}
+  - objectID: 11
+    isDestroy: 0
+    nameObjects: Trophy room
+    objectinScean: {fileID: 5793434512534949880, guid: 3a95a21acf138a74b830fc0368fb0b94, type: 3}
+  - objectID: 12
+    isDestroy: 0
+    nameObjects: Underground Door
+    objectinScean: {fileID: 3373404974349273682, guid: 3398523b876461e408c03ddc2d9e65c3, type: 3}
+  - objectID: 13
+    isDestroy: 0
+    nameObjects: Winebackdoor
+    objectinScean: {fileID: 1362711645963452315, guid: cffa64b4cd1a22e4e86288efd70e1c3a, type: 3}
+  - objectID: 14
+    isDestroy: 0
+    nameObjects: Wineroomdoor(force)
+    objectinScean: {fileID: 5676739767896185421, guid: 046ceb012a17910488bb96e6e5023c0c, type: 3}
+  saveDataObjects: Script/SaveAndLoadGame/DataSaveGame/DataSaveSceans.json

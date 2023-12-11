@@ -7,6 +7,7 @@ using System.Linq;
 
 public class KeyonlyDoor : MonoBehaviour
 {
+    public int PrefabID;
     private bool isPlayerNear = false;
     public int hasKeynumber;
     private string uiPanelTag = "Interactiontag"; 
@@ -111,5 +112,11 @@ public class KeyonlyDoor : MonoBehaviour
         {
             customText = customTexts[0]; // Assuming there is only one custom text with the specified tag
         }
+    }
+    private void OnDestroy()
+    {
+        var datainScean = FindAnyObjectByType<SaveAndLoadScean>();
+        var dataobj = datainScean.objectforload.FirstOrDefault(objid => objid.objectID == PrefabID);
+        dataobj.isDestroy = true;
     }
 }

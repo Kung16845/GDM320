@@ -7,6 +7,7 @@ using System.Linq;
 
 public class ForceandkeyDoor : MonoBehaviour
 {
+    public int PrefabID;
     private bool isPlayerNear = false;
     private string uiPanelTag = "Interactiontag";
     private string customTextTag = "Interactiontext";
@@ -115,10 +116,10 @@ public class ForceandkeyDoor : MonoBehaviour
         }
     }
 
-    // private void OnDestroy()
-    // {
-    //     var datainScean = FindAnyObjectByType<SaveAndLoadScean>();
-    //     var dataobj = datainScean.objectforload.FirstOrDefault(objid => objid.objectID == 1);
-    //     dataobj.isDestroy = true;
-    // }
+    private void OnDestroy()
+    {
+        var datainScean = FindAnyObjectByType<SaveAndLoadScean>();
+        var dataobj = datainScean.objectforload.FirstOrDefault(objid => objid.objectID == PrefabID);
+        dataobj.isDestroy = true;
+    }
 }
