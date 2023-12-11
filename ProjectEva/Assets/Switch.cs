@@ -95,6 +95,7 @@ public class Switch: MonoBehaviour
         {
             yellowon = true;
             objecttoremove.SetActive(false);
+            soundManager.PlaySound("Switchdown");
             greenlight.SetActive(true);
             yellowlight.SetActive(false);
         }

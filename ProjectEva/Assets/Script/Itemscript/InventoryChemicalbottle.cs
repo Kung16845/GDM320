@@ -23,6 +23,7 @@ public class InventoryChemicalbottle : MonoBehaviour
     public GameObject healslider;
     public InventoryPresentCharactor inventoryPresentCharactor;
 
+
     private void Awake()
     {
         inventoryPresentCharactor = FindObjectOfType<InventoryPresentCharactor>();
@@ -55,7 +56,6 @@ public class InventoryChemicalbottle : MonoBehaviour
             movementScript.StopMoving();
             if (slider.value >= maxHealingValue)
             {   
-                // Heal the player and reset the slider.
                 playersanity.HealSanity(healAmount);
                 slider.value = 0f;
                 movementScript.ResumeMoving();

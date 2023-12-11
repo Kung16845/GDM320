@@ -54,9 +54,11 @@ namespace Enemy_State
             // Debug.Log("AfterCheck If");
         }
         IEnumerator WaitInResingPoint(float time,Enemy enemy)
-        {
+        {   
+            enemy.agent.speed = 0;
             yield return new WaitForSeconds(time);
             isRunState_Retreat = false;
+            enemy.agent.speed = enemy.speed;
             enemy.hp = enemy.maxhp;
         }
 
