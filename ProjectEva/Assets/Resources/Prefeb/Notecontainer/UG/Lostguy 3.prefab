@@ -57,11 +57,12 @@ MonoBehaviour:
     nameItemNote: <b><color="red">*A strange note 2 </color="red"></b>
     detailsItemNote: '<b>
 
-      Quiet. Gotta be quiet. It''s hunting by sound. Every
-      step echoes like a damn alarm. <color=#005500>Keep silent, avoid the noise.
-      Don''t give it a reason to find you.</color=#005500> If you want to live, keep
-      quiet. I''m telling myself this, and if anyone find this note, Remember Keep
-      silent it won''t hear you.
+      Quiet. Gotta be quiet. It''s hunting by sound and
+      eyes. Every step echoes like a damn alarm. <color=#005500>Keep silent, avoid
+      the noise. Don''t give it a reason to find you.Also I must remember to close
+      light while it searching for me Gotta stay dark while it searching too</color=#005500>
+      If you want to live, keep quiet. I''m telling myself this, and if anyone find
+      this note, Remember Keep silent it won''t hear you.
 
       </b>'
     image: {fileID: 21300000, guid: 411a290951f4eba4eae1f0bb119c7a4e, type: 3}

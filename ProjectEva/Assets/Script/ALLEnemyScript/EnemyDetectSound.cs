@@ -17,6 +17,7 @@ namespace Enemy_State
         public bool isRunningReduceSoundValue;
         public NewMovementPlayer newMovementPlayer;
         public Pistol pistol;
+        public Shotgun shotgun;
         public Enemy enemy;
         public LayerMask layerMask;
 
@@ -80,6 +81,8 @@ namespace Enemy_State
             }
             else if (pistol.isshoot)
                 currentsoundValue += 16;
+            else if (shotgun.isshoot)
+                currentsoundValue += 32;
 
             else if (newMovementPlayer.isWalking)
             {

@@ -68,9 +68,9 @@ namespace Enemy_State
                     }
                     break;
                 case State_Searching:
-                    iswalkingonfloor = true;
                     EnterState(state_Searching);
                     SetAlpha(255);
+                    iswalkingonfloor = true;
                     if (enemySight.canSee && hp > 0 && !newMovementPlayer.isStaySafeRoom)
                         currentState = state_Hunting;
                     else if (isHear && hp > 0)
@@ -110,6 +110,7 @@ namespace Enemy_State
                     break;
                 case State_Retreat:
                     EnterState(state_Retreat);
+                    enemySight.currentDetection = 0f;
                     iswalkingonfloor = true;
                     if (!state_Retreat.isRunState_Retreat)
                     {
