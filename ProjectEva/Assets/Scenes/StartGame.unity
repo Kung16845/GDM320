@@ -1613,3 +1613,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isNewScean: 0
   isLoadScean: 0
+  savePlayerAndEnemyPath: Script/SaveAndLoadGame/DataSaveGame/DataSave.json

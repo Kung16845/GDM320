@@ -40,11 +40,12 @@ public class SaveManager : MonoBehaviour
         loadScene = FindObjectOfType<LoadScene>();
         FindInactiveEnemyNormals();
         
-        if(loadScene.isNewScean)
+        if(loadScene.isNewScene)
             saveAndLoadScean.LoadObjectToStartScean();
-        else if(loadScene.isLoadScean)
+        else if(loadScene.isLoadScene)
             AllLoad();
         
+        saveAndLoadScean.navMeshSurface.UpdateNavMesh(saveAndLoadScean.navMeshSurface.navMeshData);
     }
     private void FindInactiveEnemyNormals()
     {
