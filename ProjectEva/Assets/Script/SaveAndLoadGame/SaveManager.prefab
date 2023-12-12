@@ -132,6 +132,10 @@ MonoBehaviour:
     isDestroy: 0
     nameObjects: MaidenKitchen
     objectinScean: {fileID: 5020311797405074096, guid: 0a8bd8fb284451a43b5ddfde50f7210d, type: 3}
+  - objectID: 9
+    isDestroy: 0
+    nameObjects: Old
+    objectinScean: {fileID: 0}
   - objectID: 10
     isDestroy: 0
     nameObjects: Trophy room

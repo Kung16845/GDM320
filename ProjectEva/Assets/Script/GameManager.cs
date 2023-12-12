@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
-            {
+            {   
+                Cursor.visible = true;
                 PauseGame();
                 uIMenuGame.SetActive(true);
                 isPaused = true;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
                 ContinueGame();
                 uIMenuGame.SetActive(false);
                 isPaused = false;
+                Cursor.visible = false;
             }
         }
 

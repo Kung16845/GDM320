@@ -66,14 +66,14 @@
     "isLock": true
   },
   {
-    "nameItem": "Chemicalbottle",
-    "nameSprite": "1_chemical_black",
-    "scriptItem": "InventoryChemicalbottle",
+    "nameItem": "Flashlight",
+    "nameSprite": "FaiChai",
+    "scriptItem": "Inventoryflashlight",
     "numslot": 0,
     "count": 1,
-    "maxCount": 5,
-    "isFlashLight": false,
-    "isOnhand": true,
+    "maxCount": 1,
+    "isFlashLight": true,
+    "isOnhand": false,
     "isLock": false
   }
 ]

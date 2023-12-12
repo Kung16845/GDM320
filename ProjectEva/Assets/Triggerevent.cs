@@ -32,8 +32,10 @@ public class Triggerevent : MonoBehaviour
         Destroysound = GameObject.FindWithTag("eventsound");
         enebleofficer = GameObject.FindWithTag("1"); // Corrected tag
         enebleofficer.SetActive(false);
-         GameObject foundObject = GameObject.FindWithTag(canvatag);
-
+        GameObject foundObject = GameObject.FindWithTag(canvatag);
+        enableblood.SetActive(false);
+        enableblood1.SetActive(false);
+        enableblood2.SetActive(false);
         // Check if the object is found
         if (foundObject != null)
         {
