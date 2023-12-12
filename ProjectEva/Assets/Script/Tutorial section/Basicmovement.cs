@@ -10,11 +10,12 @@ public class BasicMovement : MonoBehaviour
     public string canvatag;
     public int tutorialduratuion;
     private bool canClose = false;
+    public GameObject foundObject;
 
     private void Start()
     {
         // Find the GameObject with the specified tag
-        GameObject foundObject = GameObject.FindWithTag(canvatag);
+        foundObject = GameObject.FindWithTag(canvatag);
 
         // Check if the object is found
         if (foundObject != null)
@@ -42,9 +43,11 @@ public class BasicMovement : MonoBehaviour
     {
         if (canClose)
         {
-            introCanvasGroup.alpha = 0f; // Set alpha to 0 when closing
             canClose = false;
+            introCanvasGroup.alpha = 0f;
+            foundObject.SetActive(false);
             Destroy(this.gameObject);
+
         }
     }
 
@@ -74,9 +77,6 @@ public class BasicMovement : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // Ensure the alpha is 0 when fading is complete
-        introCanvasGroup.alpha = 0f;
         canClose = true;
     }
 }

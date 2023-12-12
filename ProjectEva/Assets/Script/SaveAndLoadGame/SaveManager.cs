@@ -69,12 +69,6 @@ public class SaveManager : MonoBehaviour
         SaveDataInventoryItemsChractor();
         saveAndLoadScean.SaveDataObjectINScean();
     }
-    public void AllLoadDead()
-    {   
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex );  
-        Debug.Log("Load Data SceanDie");
-        Invoke("AllLoad",2f); 
-    }
     public void AllLoad()
     {   
         Debug.Log("Load Data Scean");
