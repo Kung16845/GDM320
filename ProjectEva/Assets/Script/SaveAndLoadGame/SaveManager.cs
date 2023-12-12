@@ -45,6 +45,7 @@ public class SaveManager : MonoBehaviour
         else if(loadScene.isLoadScean)
             AllLoad();
         
+        saveAndLoadScean.navMeshSurface.UpdateNavMesh(saveAndLoadScean.navMeshSurface.navMeshData);
     }
     private void FindInactiveEnemyNormals()
     {
