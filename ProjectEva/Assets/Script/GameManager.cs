@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviour
             else
             {
                 ContinueGame();
-                uIMenuGame.SetActive(false);
-                isPaused = false;
-                Cursor.visible = false;
             }
         }
 
@@ -39,7 +36,9 @@ public class GameManager : MonoBehaviour
     public void ContinueGame()
     {
         Time.timeScale = 1;
-
+        uIMenuGame.SetActive(false);
+        Cursor.visible = false;
+        isPaused = false;
     }
     public void ExitGame()
     {

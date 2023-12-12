@@ -1284,6 +1284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f74de61ed44c6746817987aa09a5c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveManager: {fileID: 0}
   isNewScean: 0
   isLoadScean: 0
+  savePlayerAndEnemyPath: Script/SaveAndLoadGame/DataSaveGame/DataSave.json
