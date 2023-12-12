@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public float gameDifficulty = 1.0f;
     public GameObject uIMenuGame;
     private bool isPaused = false;
+    public  bool actionperform = false;
 
     private void Update()
     {
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
-            {   
+            {   actionperform = true;
                 Cursor.visible = true;
                 PauseGame();
                 uIMenuGame.SetActive(true);
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     }
     public void ContinueGame()
     {
+        actionperform = false;
         Time.timeScale = 1;
         uIMenuGame.SetActive(false);
         Cursor.visible = false;

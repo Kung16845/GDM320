@@ -31,6 +31,7 @@ public class Pistol : MonoBehaviour
     private GunSpeedManager gunSpeedManager;
     public ObjectPolling SoundWave;
     public OnOffLight onOffLight;
+    public GameManager gameManager;
     public bool isshoot = false;
     private bool playaimsound = false;  
     public SoundManager soundManager;
@@ -54,7 +55,7 @@ public class Pistol : MonoBehaviour
     void Update()
     {   
         currentAmmo = inventoryPresentCharactor.GetTotalItemCountByName("Pistol Ammo");
-        if(enable && !inventoryPresentCharactor.openInven)
+        if(enable && !inventoryPresentCharactor.openInven && !gameManager.actionperform)
         { 
             RotateTowardsMouse();
             Decreasemaxacrrancywhilemoving();
@@ -244,6 +245,7 @@ public class Pistol : MonoBehaviour
     void initializevariable()
     {
         // firePoint = GameObject.FindGameObjectWithTag("FirePoint").transform;
+        gameManager = FindObjectOfType<GameManager>();
         lastShotTime = -cooldownTime;
         isAiming = false;
         isReloading = false;

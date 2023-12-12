@@ -13,6 +13,7 @@ public class Itembox : MonoBehaviour
     public GameObject invent;
     public GameObject Chest;
     public GameObject Closeequipment;
+    public GameManager gameManager;
     public TextMeshProUGUI customText;
     public string custominteractiontext;
     public int tutorialduratuion;
@@ -22,6 +23,7 @@ public class Itembox : MonoBehaviour
     private bool firsttime = false;
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         inventisopen = false;
         isclose = false;
         FindUIElementsByTag();
@@ -50,6 +52,7 @@ public class Itembox : MonoBehaviour
         if(isclose && Input.GetKeyDown(KeyCode.E))
         {
             Cursor.visible = true;
+            gameManager.actionperform = true;
             if(!inventisopen)
             {
             if (!firsttime)
@@ -68,6 +71,7 @@ public class Itembox : MonoBehaviour
             else
             {
                 Cursor.visible = false;
+                gameManager.actionperform = false;
                 Chest.SetActive(false);
                 Closeequipment.SetActive(true);
                 Motherinvent.SetActive(false);

@@ -38,7 +38,16 @@ public class NewMovementPlayer : MonoBehaviour
     public WalkSoundManager WalkSoundManager;
     public GameObject currentSoundObject;
 
-
+    private void Awake()
+    {
+        gunSpeedManager = FindObjectOfType<GunSpeedManager>();
+        sanityScaleController = FindObjectOfType<SanityScaleController>();
+        WalkSoundManager = FindObjectOfType<WalkSoundManager>();
+        originalSpeed = speed;
+        originalCrouchSpeed = crouchSpeed;
+        originalRunSpeed = runspeed;
+        
+    }
     private void Start()
     {
         gunSpeedManager = FindObjectOfType<GunSpeedManager>();
