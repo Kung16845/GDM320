@@ -31,13 +31,20 @@ public class SaveManager : MonoBehaviour
     [SerializeField] string saveInventoryItemsNotePath;
 
     public SaveAndLoadScean saveAndLoadScean;
+    public LoadScene loadScene;
     // Start is called before the first frame update
     void Start()
     {
         player = FindAnyObjectByType<NewMovementPlayer>().gameObject;
         saveAndLoadScean = FindObjectOfType<SaveAndLoadScean>();
+        loadScene = FindObjectOfType<LoadScene>();
         FindInactiveEnemyNormals();
-
+        
+        if(loadScene.isNewScean)
+            saveAndLoadScean.LoadObjectToStartScean();
+        else if(loadScene.isLoadScean)
+            AllLoad();
+        
     }
     private void FindInactiveEnemyNormals()
     {
@@ -62,7 +69,8 @@ public class SaveManager : MonoBehaviour
         saveAndLoadScean.SaveDataObjectINScean();
     }
     public void AllLoad()
-    {
+    {   
+        Debug.Log("Load Data Scean");
         LoadDataPlayerAndEnemy();
         LoadDataInventoryItemNote();
         LoadDataInventoryItemsChractor();
@@ -159,7 +167,7 @@ public class SaveManager : MonoBehaviour
             dataListItemNote.Add(newDataItemsNote);
         }
 
-        inventoryItemNote.RefreshUIInventoryItenNote();
+        // inventoryItemNote.RefreshUIInventoryItenNote();
     }
     void ConventDataUIItemCharactortoDataItemCharactor()
     {

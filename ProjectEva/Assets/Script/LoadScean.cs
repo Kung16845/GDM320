@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LoadScene : MonoBehaviour
 {
-    public SaveManager saveManager;
     public bool isNewScean;
     public bool isLoadScean;
     private void Start()

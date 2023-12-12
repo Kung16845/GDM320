@@ -19,10 +19,8 @@ public class SaveAndLoadScean : MonoBehaviour
     [Header("Saving")]
     [SerializeField] string saveDataObjects;
     public NavMeshSurface navMeshSurface;
-    // void Start()
-    // {
-    //     LoadObjectToStartScean();
-    // }
+    
+    
     public void LoadObjectToStartScean()
     {
         var itemGenerator = FindObjectOfType<RandomItemGenerator>();
