@@ -227,17 +227,17 @@
   {
     "objectID": 46,
     "isNotActiveInSceans": false,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 47,
     "isNotActiveInSceans": false,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 48,
     "isNotActiveInSceans": false,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 49,
@@ -867,7 +867,7 @@
   {
     "objectID": 175,
     "isNotActiveInSceans": false,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 176,
@@ -1042,7 +1042,7 @@
   {
     "objectID": 212,
     "isNotActiveInSceans": false,
-    "isDestroy": false
+    "isDestroy": true
   },
   {
     "objectID": 213,
