@@ -55,7 +55,7 @@ public class Hp : MonoBehaviour
             PlayerMovement.speed = 0f;
 
             isReloading = true;
-            reloadScript.StartReloadScene(); // Call the function in the ReloadSceneOnZeroHP script.
+            reloadScript.DeadUI(); // Call the function in the ReloadSceneOnZeroHP script.
         }
     }
 
@@ -73,9 +73,8 @@ public class Hp : MonoBehaviour
         {
             player.DEAD();
             PlayerMovement.speed = 0f;
-
             // Call the StartReloadScene function when HP reaches 0.
-            reloadScript.StartReloadScene();
+            reloadScript.DeadUI();
         }
     }
 

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.U2D;
-
+using UnityEngine.SceneManagement;
 public class SaveManager : MonoBehaviour
 {
     [Header("DataPlayer")]
@@ -68,6 +68,12 @@ public class SaveManager : MonoBehaviour
         SaveDataInventoryItemsNote();
         SaveDataInventoryItemsChractor();
         saveAndLoadScean.SaveDataObjectINScean();
+    }
+    public void AllLoadDead()
+    {   
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex );  
+        Debug.Log("Load Data SceanDie");
+        Invoke("AllLoad",2f); 
     }
     public void AllLoad()
     {   

@@ -6,38 +6,21 @@ using System.Collections;
 
 public class ReloadSceneOnZeroHP : MonoBehaviour
 {
-    public TextMeshProUGUI countdownText;
-    public float countdownDuration = 5f;
-    private bool isReloading = false;
-
-    private void Start()
+    public NewMovementPlayer PlayerMovement;
+    public SaveManager saveAndLoadScean;
+    public GameObject uIDie;
+    public SaveManager saveManager;
+    void Start()
     {
-        countdownText.text = string.Empty;
+        uIDie.SetActive(false);
     }
-
-    public void StartReloadScene()
+    public void DeadUI()
     {
-        if (!isReloading)
-        {
-            isReloading = true;
-            StartCoroutine(ReloadSceneCoroutine());
-        }
+        uIDie.SetActive(true);
+        Cursor.visible = true;
     }
-
-
-    IEnumerator ReloadSceneCoroutine()
+    public void loadcurrentscene()
     {
-        float timeLeft = countdownDuration;
-
-        while (timeLeft > 0)
-        {
-            countdownText.text = "You Died " + timeLeft.ToString("F0") ;
-            yield return new WaitForSeconds(1f);
-            timeLeft -= 1f;
-        }
-
-        // Reload the scene
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
+        // saveManager.LoadScene(saveManager.GetActiveScene().buildIndex -1); 
     }
 }
