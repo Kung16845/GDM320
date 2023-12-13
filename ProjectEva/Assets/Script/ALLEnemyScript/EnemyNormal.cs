@@ -21,7 +21,9 @@ namespace Enemy_State
             this.hp = this.maxhp;
             this.spriteRenderer = FindObjectOfType<Velo_movement>().GetComponent<SpriteRenderer>();
             this.newMovementPlayer = FindAnyObjectByType<NewMovementPlayer>();
-            RandomPositionSpawns(directorAI);
+            var isLoad = FindObjectOfType<LoadScene>().isLoadScene;
+            if(!isLoad) 
+                RandomPositionSpawns(directorAI);
             state_Listening.isRunState_Listening = true;
             currentState = state_Listening;
             onSoundValuechange = enemyDetectSound.currentsoundValue;

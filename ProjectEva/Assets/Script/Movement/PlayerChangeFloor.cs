@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerTeleport : MonoBehaviour
 {
     private GameObject currentTeleporter;
-
+    public Transform player;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -12,7 +12,7 @@ public class PlayerTeleport : MonoBehaviour
             if (currentTeleporter != null)
             {   
                 var diractorAI = FindAnyObjectByType<DirectorAI>();
-                transform.position = currentTeleporter.GetComponent<ChangeFloor>().GetDestination().position;
+                player.transform.position = currentTeleporter.GetComponent<ChangeFloor>().GetDestination().position;
                 diractorAI.ChangeFloor();
             }
         }

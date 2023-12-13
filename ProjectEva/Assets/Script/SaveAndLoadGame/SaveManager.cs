@@ -42,8 +42,10 @@ public class SaveManager : MonoBehaviour
         
         if(loadScene.isNewScene)
             saveAndLoadScean.LoadObjectToStartScean();
-        else if(loadScene.isLoadScene)
+        else if(loadScene.isLoadScene){
             AllLoad();
+            // LoadDataPlayerAndEnemy();
+        }
         
         saveAndLoadScean.navMeshSurface.UpdateNavMesh(saveAndLoadScean.navMeshSurface.navMeshData);
     }
@@ -72,11 +74,14 @@ public class SaveManager : MonoBehaviour
     public void AllLoad()
     {   
         Debug.Log("Load Data Scean");
-        LoadDataPlayerAndEnemy();
+        
         LoadDataInventoryItemNote();
         LoadDataInventoryItemsChractor();
         saveAndLoadScean.LoadDataObjectINScean();
+        LoadDataPlayerAndEnemy();
+
     }
+
     void ConventUIItemsNoteToDataItemsNotes()
     {
         listDataItemsNotes.Clear();
@@ -438,6 +443,7 @@ public class SaveManager : MonoBehaviour
         var dataJson = File.ReadAllText(targetFilePath);
         dataSaveandLoadPlayerAndEnemy = JsonConvert.DeserializeObject<DataSave>(dataJson);
         LoadDataPlayer();
+        
         LoadDataEnemy();
 
 
@@ -460,7 +466,8 @@ public class SaveManager : MonoBehaviour
     }
 
     public void LoadDataEnemy()
-    {
+    {   
+        Debug.Log("LoadData Enemy");
         var enemyNormal = enemy.GetComponent<EnemyNormal>();
         enemyNormal.hp = dataSaveandLoadPlayerAndEnemy.currentHpEnemy;
 

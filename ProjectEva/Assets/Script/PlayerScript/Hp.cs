@@ -56,7 +56,10 @@ public class Hp : MonoBehaviour
 
             isReloading = true;
             // reloadScript.DeadUI(); // Call the function in the ReloadSceneOnZeroHP script.
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);  
+            var objLoadScene = FindObjectOfType<LoadScene>();
+            DestroyImmediate(objLoadScene.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
         }
     }
 
@@ -76,7 +79,7 @@ public class Hp : MonoBehaviour
             PlayerMovement.speed = 0f;
             // Call the StartReloadScene function when HP reaches 0.
             // reloadScript.DeadUI();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);  
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
 
@@ -85,7 +88,7 @@ public class Hp : MonoBehaviour
         currenthp += healAmount;
         currenthp = Mathf.Clamp(currenthp, 0, maxhp);
     }
-    
+
     void UpdateHealthText()
     {
         healthText.text = "HP: " + currenthp.ToString("F2");
