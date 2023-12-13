@@ -110,7 +110,8 @@ public class NewMovementPlayer : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         Debug.Log("Create Sound");
-        SoundWave.SpawnFromPool("Sound Wave",this.transform.position,Quaternion.identity);
+        var newSound = SoundWave.SpawnFromPool("Sound Wave",this.transform.position,Quaternion.identity);
+        
         // GameObject soundwave = Instantiate(SoundWavePrefeb,gameObject.transform); 
         // soundwave.SetActive(true);        
         isWaittingtime = false;

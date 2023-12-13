@@ -10,15 +10,22 @@ public class InventorySlots : MonoBehaviour, IDropHandler
     public GameObject equipment;
     public InventoryPresentCharactor inventoryPresentCharactor;
     public int numslot;
+    private float timeSinceLastToggle = 0.0f;
+    public float toggleCooldown = 1f;
     private void Start()
     {
         inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
     }
     public void Update()
-    {
+    {   
+        timeSinceLastToggle += Time.deltaTime;
         var slot = GetComponentInChildren<UIItemCharactor>();
-        if (slot != null)
+        
+        if (slot != null && timeSinceLastToggle >= toggleCooldown) 
+        {   
+            timeSinceLastToggle = 0f;
             slot.numslot = numslot;
+        }
     }
     public void OnDrop(PointerEventData eventData)
     {

@@ -39,14 +39,15 @@ public class SaveManager : MonoBehaviour
         saveAndLoadScean = FindObjectOfType<SaveAndLoadScean>();
         loadScene = FindObjectOfType<LoadScene>();
         FindInactiveEnemyNormals();
-        
-        if(loadScene.isNewScene)
+
+        if (loadScene.isNewScene)
             saveAndLoadScean.LoadObjectToStartScean();
-        else if(loadScene.isLoadScene){
+        else if (loadScene.isLoadScene)
+        {
             AllLoad();
             // LoadDataPlayerAndEnemy();
         }
-        
+
         saveAndLoadScean.navMeshSurface.UpdateNavMesh(saveAndLoadScean.navMeshSurface.navMeshData);
     }
     private void FindInactiveEnemyNormals()
@@ -72,9 +73,9 @@ public class SaveManager : MonoBehaviour
         saveAndLoadScean.SaveDataObjectINScean();
     }
     public void AllLoad()
-    {   
+    {
         Debug.Log("Load Data Scean");
-        
+
         LoadDataInventoryItemNote();
         LoadDataInventoryItemsChractor();
         saveAndLoadScean.LoadDataObjectINScean();
@@ -178,6 +179,18 @@ public class SaveManager : MonoBehaviour
     void ConventDataUIItemCharactortoDataItemCharactor()
     {
         listDataItemsCharactors.Clear();
+
+        var boxes = allslot.FirstOrDefault(
+        slot => slot.GetComponent<BoxItemsCharactor>() != null).
+        GetComponent<BoxItemsCharactor>();
+        var allIteminBoxes = boxes.GetComponentsInChildren<UIItemCharactor>();
+
+        foreach (var item in allIteminBoxes)
+        {
+            if (item != null)
+                item.numslot = boxes.numslot;
+        }
+
         var listUIItem = FindAnyObjectByType<InventoryPresentCharactor>().uIItemListCharactor;
         foreach (var dataUI in listUIItem)
         {
@@ -271,55 +284,55 @@ public class SaveManager : MonoBehaviour
             }
         }
     }
-   public void UpLoadAndCreateDataInventoryItemCharactor()
-{
-    var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
-
-    for (int i = 0; i < listDataItemsCharactors.Count; i++)
+    public void UpLoadAndCreateDataInventoryItemCharactor()
     {
-        var itemDataCharactor = listDataItemsCharactors.ElementAt<DataItemCharactor>(i);
+        var inventoryPresentCharactor = FindAnyObjectByType<InventoryPresentCharactor>();
 
-        // Use FirstOrDefault to find the slotItem
-        var slotItem = allslot.FirstOrDefault(
-            slot => slot.GetComponent<InventorySlots>()?.numslot == itemDataCharactor.numslot ||
-                    slot.GetComponent<BoxItemsCharactor>()?.numslot == itemDataCharactor.numslot);
-
-        // Check if slotItem is null before accessing its properties
-        if (slotItem != null)
+        for (int i = 0; i < listDataItemsCharactors.Count; i++)
         {
-            var newItemCharactor = Instantiate(inventoryPresentCharactor.uIItemCharactorPrefeb, slotItem.transform, false);
-            var newItem = newItemCharactor.GetComponent<UIItemCharactor>();
+            var itemDataCharactor = listDataItemsCharactors.ElementAt<DataItemCharactor>(i);
 
-            newItem.nameItem.text = itemDataCharactor.nameItem;
-            newItem.scriptItem = itemDataCharactor.scriptItem;
+            // Use FirstOrDefault to find the slotItem
+            var slotItem = allslot.FirstOrDefault(
+                slot => slot.GetComponent<InventorySlots>()?.numslot == itemDataCharactor.numslot ||
+                        slot.GetComponent<BoxItemsCharactor>()?.numslot == itemDataCharactor.numslot);
 
-            newItem.numslot = itemDataCharactor.numslot;
-            newItem.count = itemDataCharactor.count;
-            newItem.maxCount = itemDataCharactor.maxCount;
-            newItem.RefrehCount();
-
-            newItem.isFlashLight = itemDataCharactor.isFlashLight;
-            newItem.isOnhand = itemDataCharactor.isOnhand;
-            newItem.isLock = itemDataCharactor.isLock;
-
-            if (newItem.isLock)
-                newItem.imageItemLock.gameObject.SetActive(true);
-            else
-                newItem.imageItem.sprite = GetSpriteByName(itemDataCharactor.nameSprite);
-
-            newItem.gameObject.SetActive(true);
-
-            if (newItem.numslot == 12 || newItem.numslot == 13)
+            // Check if slotItem is null before accessing its properties
+            if (slotItem != null)
             {
-                inventoryPresentCharactor.CreateItemCharactorEquipment(newItem.scriptItem, newItem.nameItem.text);
-                Vector3 newScaleequipment = new Vector3(1.65f, 1.65f, 1.65f);
-                newItem.GetComponent<RectTransform>().localScale = newScaleequipment;
-            }
+                var newItemCharactor = Instantiate(inventoryPresentCharactor.uIItemCharactorPrefeb, slotItem.transform, false);
+                var newItem = newItemCharactor.GetComponent<UIItemCharactor>();
 
-            inventoryPresentCharactor.uIItemListCharactor.Add(newItem);
+                newItem.nameItem.text = itemDataCharactor.nameItem;
+                newItem.scriptItem = itemDataCharactor.scriptItem;
+
+                newItem.numslot = itemDataCharactor.numslot;
+                newItem.count = itemDataCharactor.count;
+                newItem.maxCount = itemDataCharactor.maxCount;
+                newItem.RefrehCount();
+
+                newItem.isFlashLight = itemDataCharactor.isFlashLight;
+                newItem.isOnhand = itemDataCharactor.isOnhand;
+                newItem.isLock = itemDataCharactor.isLock;
+
+                if (newItem.isLock)
+                    newItem.imageItemLock.gameObject.SetActive(true);
+                else
+                    newItem.imageItem.sprite = GetSpriteByName(itemDataCharactor.nameSprite);
+
+                newItem.gameObject.SetActive(true);
+
+                if (newItem.numslot == 12 || newItem.numslot == 13)
+                {
+                    inventoryPresentCharactor.CreateItemCharactorEquipment(newItem.scriptItem, newItem.nameItem.text);
+                    Vector3 newScaleequipment = new Vector3(1.65f, 1.65f, 1.65f);
+                    newItem.GetComponent<RectTransform>().localScale = newScaleequipment;
+                }
+
+                inventoryPresentCharactor.uIItemListCharactor.Add(newItem);
+            }
         }
     }
-}
 
     public string CheckReMoveClone(string nameSpriteItem)
     {
@@ -443,7 +456,7 @@ public class SaveManager : MonoBehaviour
         var dataJson = File.ReadAllText(targetFilePath);
         dataSaveandLoadPlayerAndEnemy = JsonConvert.DeserializeObject<DataSave>(dataJson);
         LoadDataPlayer();
-        
+
         LoadDataEnemy();
 
 
@@ -466,7 +479,7 @@ public class SaveManager : MonoBehaviour
     }
 
     public void LoadDataEnemy()
-    {   
+    {
         Debug.Log("LoadData Enemy");
         var enemyNormal = enemy.GetComponent<EnemyNormal>();
         enemyNormal.hp = dataSaveandLoadPlayerAndEnemy.currentHpEnemy;
