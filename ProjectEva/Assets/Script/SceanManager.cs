@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using System.IO;
 
-public class LoadScene : MonoBehaviour
+public class SceanManager : MonoBehaviour
 {
     public bool isNewScene;
     public bool isLoadScene;

@@ -31,13 +31,13 @@ public class SaveManager : MonoBehaviour
     [SerializeField] string saveInventoryItemsNotePath;
 
     public SaveAndLoadScean saveAndLoadScean;
-    public LoadScene loadScene;
+    public SceanManager loadScene;
     // Start is called before the first frame update
     void Start()
     {
         player = FindAnyObjectByType<NewMovementPlayer>().gameObject;
         saveAndLoadScean = FindObjectOfType<SaveAndLoadScean>();
-        loadScene = FindObjectOfType<LoadScene>();
+        loadScene = FindObjectOfType<SceanManager>();
         FindInactiveEnemyNormals();
 
         if (loadScene.isNewScene)

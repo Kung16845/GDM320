@@ -56,7 +56,7 @@ public class Hp : MonoBehaviour
 
             isReloading = true;
             // reloadScript.DeadUI(); // Call the function in the ReloadSceneOnZeroHP script.
-            var objLoadScene = FindObjectOfType<LoadScene>();
+            var objLoadScene = FindObjectOfType<SceanManager>();
             DestroyImmediate(objLoadScene.gameObject);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
